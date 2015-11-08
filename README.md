@@ -10,7 +10,7 @@ Try it at [http://snapp.citilab.eu/](http://snapp.citilab.eu/)
 
 1. Intall [Node.js](https://nodejs.org/en/) and the corresponding [modules](https://github.com/Rydion/Snapp#nodejs-modules).
 
-2. Copy every Snapp*!* file into whatever folder you like (if necessary remeber to link every Node.js module).
+2. Copy every Snapp*!* file into whatever folder you like (if necessary remember to link every Node.js module).
 
 3. Go to **'/web/index/js/index.js'** and change line **2** to point to your own server.
 
