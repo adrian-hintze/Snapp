@@ -6,9 +6,9 @@ Snapp*!* turns [Snap*!*](http://snap.berkeley.edu/) projects into standalone exe
 
 Try it at [http://snapp.citilab.eu/](http://snapp.citilab.eu/)
 
-## Usage
+## Installation
 
-1. Intall [Node.js](https://nodejs.org/en/) and the corresponding [modules](https://github.com/Rydion/Snapp/blob/master/README.md#nodejs-modules).
+1. Intall [Node.js](https://nodejs.org/en/) and the corresponding [modules](https://github.com/Rydion/Snapp#nodejs-modules).
 
 2. Copy every Snapp*!* file into whatever folder you like (if necessary remeber to link every Node.js module).
 
@@ -28,6 +28,11 @@ Snapp*!* requires the following Node.js modules:
 - [stream-to-array](https://www.npmjs.com/package/stream-to-array)
 - [libxmljs](https://www.npmjs.com/package/libxmljs)
 
-To create the executables NW.js binaries are used:
+## Tools used
 
-- [Nw.js](http://nwjs.io/)
+To create the executables Snapp*!* uses:
+
+- [Nw.js binaries](http://nwjs.io/)
+- [Snap*!*'s Source Code](https://github.com/jmoenig/Snap--Build-Your-Own-Blocks)
+
+
