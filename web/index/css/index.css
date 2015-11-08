@@ -1,0 +1,184 @@
+body {
+	min-width: 700px;
+	background-color: #DDD;
+}
+
+.wrapper {
+	position: absolute;
+	top: 5vh;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 820px;
+}
+
+.snapp-container {
+	width: 700px;
+	padding: 50px;
+	border: 10px solid rgba(0, 0, 0, 0);
+	border-radius: 25px;
+	background-color: white;
+	box-shadow: 3px 3px 10px #888;
+	text-align: center;
+}
+
+.about-container {
+	width: 100%;
+	padding-top: 10px;
+	text-align: right;
+}
+
+.about-link {
+	position: relative;
+	right: 25px;
+	text-decoration: none;
+	color: black;
+}
+
+.about-link:hover {
+	font-weight: bold;
+}
+
+.overlay-back {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: black;
+	opacity: 0.6;
+	filter: alpha(opacity=60);
+	z-index: 15;
+	display: none;
+	cursor: auto;
+}
+
+.overlay-about {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 10vh;
+	margin: auto;
+	z-index: 20;
+	display: none;
+	width: 650px;
+	padding: 20px;
+	border: 10px solid rgba(0, 0, 0, 0);
+	border-radius: 25px;
+	background-color: white;
+	cursor: auto;
+	/*box-shadow: 3px 3px 10px #888;*/
+} 
+
+.boxclose:before {
+	content: "×";
+}
+
+a.boxclose{
+	float: right;
+	margin-top: -35px;
+	margin-right: -35px;
+	cursor: pointer;
+	color: white;
+	border: 1px solid #888;
+	background-color: #888;
+	border-radius: 30px;
+	font-size: 31px;
+	font-weight: bold;
+	display: inline-block;
+	line-height: 0px;
+	padding: 15px 7px;
+	text-decoration: none;
+}
+
+.about-title {
+	display: block;
+	font-weight: bold;
+	font-size: 150%;
+}
+
+.linked-institution {
+	text-decoration: none;
+}
+
+.linked-institution:hover {
+	text-decoration: underline;
+}
+
+.linked-name {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.linked-name:hover {
+	text-decoration: underline;
+}
+
+.superscript {
+	position: relative;
+	top: -0.5em;
+	font-size: 50%;
+}
+
+.about-separator {
+	height: 1px;
+	background-color: black;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.logo {
+	width: 300px;
+	height: 150px;
+}
+
+.contents {
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	padding-top: 10%;
+}
+
+.left-contents {
+	text-align: left;
+	float: left;
+}
+
+.right-contents {
+	text-align: left;
+	float: right;
+}
+
+.file-input {
+	margin-bottom: 10px;
+}
+
+.contents-title {
+	display: block;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.os-selector {
+	margin-bottom: 10px;
+}
+
+.reduced-radio {
+	margin-left: 0;
+}
+
+.bottom-contents {
+	padding-top: 20px;
+}
+
+.line-separator{
+	height: 1px;
+	background-color: black;
+	margin-bottom: 20px;
+}
+
+.send-button {
+	min-width: 100px;
+	height: 30px;
+	cursor: pointer;
+}
