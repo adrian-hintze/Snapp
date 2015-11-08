@@ -8,7 +8,7 @@ Try it at [http://snapp.citilab.eu/](http://snapp.citilab.eu/)
 
 ## Usage
 
-1. Intall [Node.js](https://nodejs.org/en/) and the corresponding [modules](https://github.com/Rydion/Snapp#libraries).
+1. Intall [Node.js](https://nodejs.org/en/) and the corresponding [modules](https://github.com/Rydion/Snapp/blob/master/README.md#nodejs-modules).
 
 2. Copy every Snapp*!* file into whatever folder you like (if necessary remeber to link every Node.js module).
 
@@ -30,4 +30,4 @@ Snapp*!* requires the following Node.js modules:
 
 To create the executables NW.js binaries are used:
 
--[Nw.js](http://nwjs.io/)
+- [Nw.js](http://nwjs.io/)
