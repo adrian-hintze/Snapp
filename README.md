@@ -34,6 +34,7 @@ To create the executables Snapp*!* uses:
 
 - [Nw.js binaries](http://nwjs.io/)
 - [Snap*!*'s Source Code](https://github.com/jmoenig/Snap--Build-Your-Own-Blocks)
+- [SnapSubset](https://github.com/Rydion/SnapSubset) to generate the reduced Snap*!* version
 
 ## License 
 
