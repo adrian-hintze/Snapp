@@ -266,7 +266,8 @@ web_server.post(
 					logIndent('user preferences obtained');
 					
 					//zips and their corresponding callbacks
-					var zippedNWPackage = archiver('zip', {});
+					//highWaterMark needed to append big files/strings/streams
+					var zippedNWPackage = archiver('zip', {highWaterMark: 100000000});
 					
 					function finalizeNWPackage() {
 						logIndent('finalizeNWPackage finalized');
@@ -402,8 +403,6 @@ web_server.post(
 								}
 								
 								var contents = data + buildGUI(target_os, file_contents, projectName);
-								//BUG: if file_contents is too big archiver will hang
-								//eventually the browser just receives an error
 								zippedNWPackage.append(contents, {name: 'gui.js'});
 								logIndent('complete gui added');
 									
@@ -429,8 +428,6 @@ web_server.post(
 								}
 								
 								var contents = data + buildGUI(target_os, file_contents, projectName);
-								//BUG: if file_contents is too big archiver will hang
-								//eventually the browser just receives an error
 								zippedNWPackage.append(contents, {name: 'gui.js'});
 								logIndent('reduced gui added');
 									
