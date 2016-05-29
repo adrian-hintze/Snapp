@@ -96,7 +96,7 @@ var file_name = 'Snap';
 
 reader.onloadend = function () {
 	SnapProject = reader.result;
-	SnapProject = SnapProject.replace(/\r?\n|\r/g);
+	SnapProject = SnapProject.replace(/\r?\n|\r/g).replace(/'/g, "\\'"); // remove end of line and escape single quotes
 };
 
 function handleFileSelect(selectedFile) {
