@@ -1,27 +1,27 @@
 /*
 
-	lang-si.js
+    lang-ro.js
 
-	Slovenian translation for SNAP!
+    Romanian translation for SNAP!
 
-	translated by Sasa Divjak
+    written by Jens Mönig & Cristian Macarascu
 
-	Copyright (C) 2012 by Jens Mönig
+    Copyright (C) 2015 by Jens Mönig & Cristian Macarascu
 
-	This file is part of Snap!.
+    This file is part of Snap!.
 
-	Snap! is free software: you can redistribute it and/or modify
-	it under the terms of the GNU Affero General Public License as
-	published by the Free Software Foundation, either version 3 of
-	the License, or (at your option) any later version.
+    Snap! is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU Affero General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
 
-	You should have received a copy of the GNU Affero General Public License
-	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 
@@ -63,7 +63,6 @@
         pt - Portuguese => SnapTranslator.dict.pt = {
         es - Spanish => SnapTranslator.dict.es = {
         el - Greek => => SnapTranslator.dict.el = {
-		si - Slovenian => => SnapTranslator.dict.si = {
 
     etc. (see <http://en.wikipedia.org/wiki/ISO_639-1>)
 
@@ -145,7 +144,6 @@
         pt - Portuguese => lang-pt.js
         es - Spanish => lang-es.js
         el - Greek => => lang-el.js
-		si - Slovenian => => lang-si.js
 
     and send it to me for inclusion in the official Snap! distribution.
     Once your translation has been included, Your name will the shown in the
@@ -168,92 +166,91 @@
 
 /*global SnapTranslator*/
 
-SnapTranslator.dict.si = {
+SnapTranslator.dict.ro = {
 
 /*
     Special characters: (see <http://0xcc.net/jsescape/>)
 
-   Ss ,    \u0160, \u0161
-   Cc     \u010C, \u010D
-   Zz,   \u017D, \u017E
-
+    Ä, ä   \u00c4, \u00e4
+    Ö, ö   \u00d6, \u00f6
+    Ü, ü   \u00dc, \u00fc
+    ß      \u00df
 */
 
     // translations meta information
     'language_name':
-        'Sloven\u0161\u010Dina', // the name as it should appear in the language menu
+        'Romanian', // the name as it should appear in the language menu
     'language_translator':
-        'Sasa Divjak, Gorazd Breskvar', // your name for the Translators tab
+        'Cristian Macarascu', // your name for the Translators tab
     'translator_e-mail':
-        'sasa.divjak@fri.uni-lj.si', // optional
+        '', // optional
     'last_changed':
-        '2016-04-22', // this, too, will appear in the Translators tab
+        '2015-10-24', // this, too, will appear in the Translators tab
 
     // GUI
     // control bar:
     'untitled':
-        'Neimenovan',
+        'fara nume',
     'development mode':
-        'Razvojni na\u010Din',
+        'modul dezvoltare',
 
     // categories:
     'Motion':
-        'Premikanje',
+        'Miscare',
     'Looks':
-        'Izgled',
+        'Infatisare',
     'Sound':
-        'Zvok',
+        'Sunet',
     'Pen':
-        'Svin\u010Dnik',
+        'Scriere',
     'Control':
-        'Krmiljenje',
+        'Control',
     'Sensing':
-        'Zaznavanje',
+        'Interactiune',
     'Operators':
-        'Operatorji',
+        'Operatori',
     'Variables':
-        'Spremenljivke',
+        'Variabile',
     'Lists':
-        'Seznami',
+        'Liste',
     'Other':
-        'Drugo',
+        'Altele',
 
     // editor:
     'draggable':
-        'vle\u010Dljiv',
+        'poate fi mutat',
 
     // tabs:
     'Scripts':
-        'Skripte',
+        'Scripturi',
     'Costumes':
-        'Obleke',
+        'Costume',
     'Sounds':
-        'Zvoki',
+        'Sunete',
 
     // names:
     'Sprite':
-        'Objekt',
+        'Animatie',
     'Stage':
-        'Oder',
+        'Scena',
 
     // rotation styles:
     'don\'t rotate':
-        'ne vrti',
+        'fara rotire',
     'can rotate':
-        'prosto vrtenje',
+        'rotire libera',
     'only face left/right':
-        'lahko obrnemo le levo/desno',
+        'doar stanga/dreapta',
 
     // new sprite button:
     'add a new sprite':
-        'dodaj nov objekt',
+        'adauga o noua animatie',
 
     // tab help
     'costumes tab help':
-        'Slike uvozi\u0161 s povle\u010Denjem iz ene druge\n'
-            + 'spletne strani ali ra\u010Dunalnika',
+        'ajutor pentru costume',
     'import a sound from your computer\nby dragging it into here':
-        'Zvok uvozi\u0161 tako, da ga povle\u010De\u0161 sem',
+        'adauga un sunet tragandu-l aici',
 
     // primitive blocks:
 
@@ -289,915 +286,903 @@ SnapTranslator.dict.si = {
 
     // motion:
     'Stage selected:\nno motion primitives':
-        'Oder je izbran:\nni na voljo gibljivih gradnikov',
+        'Scena selectata:\nfara primitive de miscare',
 
     'move %n steps':
-        'premakni se %n korakov',
+        'inainteaza %n pasi',
     'turn %clockwise %n degrees':
-        'obrni se %clockwise %n stopinj',
+        'roteste %clockwise %n grade',
     'turn %counterclockwise %n degrees':
-        'obrni se %counterclockwise %n stopinj',
+        'roteste %counterclockwise %n grade',
     'point in direction %dir':
-        'obrni se v smeri %dir',
+        'arata spre directia %dir',
     'point towards %dst':
-        'obrni se proti %dst',
+        'arata spre %dst',
     'go to x: %n y: %n':
-        'pojdi na x: %n y: %n',
+        'mergi la x: %n y: %n',
     'go to %dst':
-        'pojdi k %dst',
+        'mergi la %dst',
     'glide %n secs to x: %n y: %n':
-        'drsi %n sekund do x: %n y: %n',
+        'mergi in %n secunde la x: %n y: %n',
     'change x by %n':
-        'spremeni x za %n',
+        'modifica x cu %n',
     'set x to %n':
-        'nastavi x na %n',
+        'schimba x in %n',
     'change y by %n':
-        'spremeni y za %n',
+        'modifica y cu %n',
     'set y to %n':
-        'nastavi y na %n',
+        'schimba y in %n',
     'if on edge, bounce':
-        'odbij se, \u010De si na robu',
+        'daca esti pe margine, sari',
     'x position':
-        'polo\u017Eaj x',
+        'pozitia x',
     'y position':
-        'polo\u017Eaj y',
+        'pozitia y',
     'direction':
-        'smer',
+        'directia',
 
     // looks:
     'switch to costume %cst':
-        'Preklopi na obleko %cst',
+        'schimba-te in costumul %cst',
     'next costume':
-        'naslednja obleka',
+        'urmatorul costum',
     'costume #':
-        '\u0160t.obleke',
+        'costumul nr',
     'say %s for %n secs':
-        'reci %s za %n sekund.',
+        'spune %s pentru %n secunde',
     'say %s':
-        'reci %s',
+        'spune %s',
     'think %s for %n secs':
-        'misli %s za %n sekund',
+        'gandeste %s pentru %n secunde',
     'think %s':
-        'misli %s',
+        'gandeste %s',
     'Hello!':
-        'Halo!',
+        'Salut!',
     'Hmm...':
-        'Hmm...',
+        'Hmmm...',
     'change %eff effect by %n':
-        'spremeni u\u010Dinek %eff za %n',
+        'modifica efectul %eff cu %n',
     'set %eff effect to %n':
-        'nastavi u\u010Dinek %eff na %n',
+        'schimba efectul %eff in %n',
     'clear graphic effects':
-        'zbri\u0161i grafi\u010Dne u\u010Dinke',
+        'anuleaza efectele grafice',
     'change size by %n':
-        'spremeni velikost za %n',
+        'modifica marimea cu %n',
     'set size to %n %':
-        'nastavi velikost na %n %',
+        'schimba marimea la %n %',
     'size':
-        'velikost',
+        'marime',
     'show':
-        'prika\u017Ei',
+        'afiseaza',
     'hide':
-        'skrij',
+        'ascunde',
     'go to front':
-        'prestavi v ospredje',
+        'adu in fata',
     'go back %n layers':
-        'prestavi %n ravnin nazaj',
+        'muta spre spate %n niveluri',
 
     'development mode \ndebugging primitives:':
-        'razvojni na\u010Din \nrazhro\u0161\u010Devanje gradnikov',
+        'Modul dezvoltare \nprimitive de debug:',
     'console log %mult%s':
-        'izpi\u0161i na konzolo: %mult%s',
+        'jurnal consola: %mult%',
     'alert %mult%s':
-        'pozor: %mult%s',
+        'anunta %mult%',
 
     // sound:
     'play sound %snd':
-        'predvajaj zvok %snd',
+        'scoate sunetul %snd',
     'play sound %snd until done':
-        'predvajaj zvok %snd do konca',
+        'scoate sunetul %snd pana termini',
     'stop all sounds':
-        'ustavi vse zvoke',
+        'opreste toate sunetele',
     'rest for %n beats':
-        'po\u010Divaj %n udarcev',
+        'pauza pentru %n masuri',
     'play note %n for %n beats':
-        'predvajaj noto %n za %n udarcev',
+        'canta nota %n pentru %n masuri',
     'change tempo by %n':
-        'spremeni tempo za %n',
+        'modifica tempoul cu %n',
     'set tempo to %n bpm':
-        'nastavi tempo na %n udarcev na minuto.',
+        'schimba tempoul in %n bpm',
     'tempo':
         'tempo',
 
     // pen:
     'clear':
-        'zbri\u0161i',
+        'sterge',
     'pen down':
-        'svin\u010Dnik spu\u0161\u010Den',
+        'stiloul jos',
     'pen up':
-        'svin\u010Dnik dvignjen',
+        'stiloul sus',
     'set pen color to %clr':
-        'nastavi barvo svin\u010Dnika na %clr',
+        'schimba culoarea stiloului in %clr',
     'change pen color by %n':
-        'spremeni barvo svin\u010Dnika za %n',
+        'modifica culoarea stiloului cu %n',
     'set pen color to %n':
-        'nastavi barvo svin\u010Dnika na %n',
+        'schimba culoarea stiloului in  %n',
     'change pen shade by %n':
-        'spremeni senco svin\u010Dnika za %n',
+        'modifica umbra stiloului cu %n',
     'set pen shade to %n':
-        'nastavi senco svin\u010Dnika na %n',
+        'schimba umbra stiloului in %n',
     'change pen size by %n':
-        'spremeni debelino svin\u010Dnika za %n',
+        'modifica grosimea penitei cu %n',
     'set pen size to %n':
-        'nastavi debelino svin\u010Dnika na %n',
+        'schimba grosimea penitei in %n',
     'stamp':
-        '\u0161tampiljka',
+        'stampila',
 
     // control:
     'when %greenflag clicked':
-        'ko kliknemo na %greenflag',
+        'cand se apasa %greenflag',
     'when %keyHat key pressed':
-        'ko pritisnemo na tipko %keyHat ',
+        'cand se apasa tasta %keyHat',
     'when I am %interaction':
-        'Ko je %interaction',
+        'cand sunt %interaction',
     'clicked':
-        'mi\u0161ka kliknjena',
+        'apasat',
     'pressed':
-        'gumb mi\u0161ke pritisnjen',
+        'tinut apasat',
     'dropped':
-        'konec vle\u010Denja',
+        'eliberat',
     'mouse-entered':
-        'mi\u0161ka se dotika',
+        'in contact cu mouse-ul',
     'mouse-departed':
-        'mi\u0161ka se ne dotika ve\u010D',
-    'when %b':
-        'Ko je %b',
+        'indepratat de langa mouse',
     'when I receive %msgHat':
-        'ko sprejmem %msgHat',
+        'cand primesc %msgHat',
     'broadcast %msg':
-        'po\u0161lji %msg vsem',
+        'trimite mesajul %msg tuturor',
     'broadcast %msg and wait':
-        'po\u0161lji vsem %msg in po\u010Dakaj',
+        'trimite mesajul %msg tuturor si asteapta',
     'Message name':
-        'Obvestilo',
+        'Mesaj',
     'message':
-        'sporo\u010Dilo',
+        'mesaj',
     'any message':
-        'poljudno sporo\u010Dilo',
+        'orice mesaj',
     'wait %n secs':
-        '\u010Dakaj %n sekund.',
+        'asteapta %n secunde',
     'wait until %b':
-        '\u010Dakaj, dokler %b',
+        'asteapta pana cand %b',
     'forever %c':
-        'za vedno %c',
+        'la infinit %c',
     'repeat %n %c':
-        'ponovi %n krat %c',
+        'repeta de %n ori %c',
     'repeat until %b %c':
-        'ponavljaj, dokler %b %c',
+        'repeta pana cand %b %c',
     'if %b %c':
-        '\u010De %b %c',
+        'daca %b fa %c',
     'if %b %c else %c':
-        '\u010De %b %c sicer %c',
+        'daca %b fa %c altfel fa %c',
     'report %s':
-        'sporo\u010Di %s',
+        'anunta %s',
     'stop %stopChoices':
-        'ustavi %stopChoices',
+        'opreste %stopChoices',
+    'all':
+        'toate',
     'this script':
-        'to skripto',
+        'acest script',
     'this block':
-        'ta blok',
+        'acest bloc',
     'stop %stopOthersChoices':
-        'ustavi %stopOthersChoices',
+        'opreste %stopOthersChoices',
     'all but this script':
-        'vse razen te skripte',
+        'toate scripturile, mai putin pe acesta',
     'other scripts in sprite':
-        'ostale skripte tega objekta',
+        'toate scripturile din animatie',
     'pause all %pause':
-        'pavziraj vse %pause',
+        'pune pauza pentru %pause',
     'run %cmdRing %inputs':
-        'izvajaj %cmdRing  %inputs',
+        'ruleaza %cmdRing cu %inputs',
     'launch %cmdRing %inputs':
-        'po\u017Eeni %cmdRing %inputs',
+        'porneste %cmdRing cu %inputs',
     'call %repRing %inputs':
-        'pokli\u010Di %repRing  %inputs',
+        'apeleaza %repRing cu %inputs',
     'run %cmdRing w/continuation':
-        'izvajaj %cmdRing z nadaljevanjem',
+        'ruleaza %cmdRing cu Continuation',
     'call %cmdRing w/continuation':
-        'pokli\u010Di %cmdRing z nadaljevanjem',
+        'apeleaza %cmdRing cu Continuation',
     'warp %c':
-        'Warp %c',
+        'warp %c',
     'when I start as a clone':
-        'ko za\u010Dnem kot klon',
+        'cand sunt pornit ca o clona',
     'create a clone of %cln':
-        'kloniraj %cln',
+        'creaza o clona a %cln',
     'myself':
-        'sebe',
+        'eu insumi',
     'delete this clone':
-        'izbri\u0161i ta klon',
+        'sterge aceasta clona',
 
     // sensing:
     'touching %col ?':
-        'se dotika %col ?',
+        'atinge %col ?',
     'touching %clr ?':
-        'se dotika %clr ?',
+        'atinge %clr ?',
     'color %clr is touching %clr ?':
-        'barva %clr se dotika %clr ?',
+        'culoarea %clr atinge %clr ?',
     'ask %s and wait':
-        'vpra\u0161aj %s in \u010Dakaj',
+        'intreaba %s si asteapta',
     'what\'s your name?':
-        'Kako ti je ime?',
+        'care e numele tau?',
     'answer':
-        'odgovor',
+        'raspuns',
     'mouse x':
-        'x polo\u017Eaj mi\u0161ke',
+        'pozitia x a mouseului',
     'mouse y':
-        'y polo\u017Eaj mi\u0161ke',
+        'pozitia y a mouseului',
     'mouse down?':
-        'gumb mi\u0161ke pritisnjen?',
+        'este mouseul apasat?',
     'key %key pressed?':
-        'tipka %key pritisnjena?',
+        'este tasta %key apasata?',
     'distance to %dst':
-        'razdalja do %dst',
+        'distanta pana la %dst',
     'reset timer':
-        'reset \u0161toparice',
+        'restarteaza cronometrul',
     'timer':
-        '\u0161toparica',
+        'cronometrul',
+    '%att of %spr':
+        '%att al %spr',
     'http:// %s':
         'http:// %s',
     'turbo mode?':
-        'hitri na\u010Din?',
+        'modul turbo?',
     'set turbo mode to %b':
-        'nastavi hitri na\u010Din na %b',
-
-    'current %dates':
-        'trenutni %dates',
-    'year':
-        'leto',
-    'month':
-        'mesec',
-    'date':
-        'dan',
-    'day of week':
-        'dan v tednu',
-    'hour':
-        'ura',
-    'minute':
-        'minuta',
-    'second':
-        'sekunda',
-    'time in milliseconds':
-        '\u010Das v tiso\u010Dinkah sekunde',
-
+        'seteaza modul turbo la %b',
 
     'filtered for %clr':
-        'filtriran za %clr',
+        'filtrat pentru %clr',
     'stack size':
-        'velikost sklada',
+        'marimea stivei',
     'frames':
-        'sli\u010Dice',
+        'cadre',
 
     // operators:
     '%n mod %n':
         '%n modulo %n',
     'round %n':
-        'zaokro\u017Eeno %n',
+        '%n rotunjit',
     '%fun of %n':
-        '%fun von %n',
+        '%fun din %n',
     'pick random %n to %n':
-        'naklju\u010Dno \u0161tevilo od %n do %n',
+        'alege aleator de la %n la %n',
     '%b and %b':
-        '%b in %b',
+        '%b si %b',
     '%b or %b':
-        '%b ali %b',
+        '%b sau %b',
     'not %b':
-        'ne %b',
+        'not %b',
     'true':
-        'res',
+        'adevarat',
     'false':
-        'ni res',
+        'fals',
     'join %words':
-        'pove\u017Ei %words',
+        'lipeste %words',
     'split %s by %delim':
-        'razdeli %s z %delim',
+        'desparte %s folosind %delim',
     'hello':
-        'Halo',
+        'salut',
     'world':
-        'Svet',
+        'lume',
     'letter %n of %s':
-        '\u010Drka %n od %s',
+        'litera %n din %s',
     'length of %s':
-        'dol\u017Eina %s',
+        'lungimea lui %s',
     'unicode of %s':
-        'Unicode vrednost od %s',
+        'codul Unicode al %s',
     'unicode %n as letter':
-        'Unicode %n kot \u010Drka',
+        'codul Unicode %n ca litera',
     'is %s a %typ ?':
-        'je %s tipa %typ ?',
+        'este %s un/o %typ ?',
     'is %s identical to %s ?':
-        'je %s identi\u010Den %s ?',
+        'este %s identic cu %s ?',
 
     'type of %s':
-        'Tip od %s',
+        'tipul lui %s',
 
     // variables:
     'Make a variable':
-        'Nova spremenljivka',
+        'creaza o variabila',
     'Variable name':
-        'Ime spremenljivke',
+        'numele variabilei',
+    'Script variable name':
+        'variabila script ',
     'Delete a variable':
-        'Zbri\u0161i spremenljivko',
+        'sterge o variabila',
 
     'set %var to %s':
-        'nastavi %var na %s',
+        'schimba %var in %s',
     'change %var by %n':
-        'spremeni spremenljivko %var za %n',
+        'modifica %var cu %n',
     'show variable %var':
-        'prika\u017Ei spremenljivko %var',
+        'afiseaza variabila %var',
     'hide variable %var':
-        'skrij spremenljivko %var',
+        'ascunde variabila %var',
     'script variables %scriptVars':
-        'spremenljivke programa %scriptVars',
+        'variabilele script %scriptVars',
 
     // lists:
     'list %exp':
-        'Seznam %exp',
+        'lista %exp',
     '%s in front of %l':
-        '%s na za\u010Detku %l',
+        '%s in fata %l',
     'item %idx of %l':
-        'Element %idx od %l',
+        'elementul %idx din %l',
     'all but first of %l':
-        'vsi razen prvega od %l',
+        'toate, mai putin primul din %l',
     'length of %l':
-        'dol\u017Eina %l',
+        'lungimea %l',
     '%l contains %s':
-        '%l vsebuje %s',
+        '%l contine %s',
     'thing':
-        'stvar',
+        'lucru',
     'add %s to %l':
-        'dodaj %s k %l',
+        'adauga %s la %l',
     'delete %ida of %l':
-        'zbri\u0161i %ida iz %l',
+        'sterge %ida din %l',
     'insert %s at %idx of %l':
-        'vstavi %s na mesto %idx v %l',
+        'adauga %s la pozitia %idx in %l',
     'replace item %idx of %l with %s':
-        'zamenjaj element %idx v %l z %s',
+        'inlocuieste elementul %idx din %l cu %s',
 
     // other
     'Make a block':
-        'Nov blok',
+        'creaza bloc',
 
     // menus
     // snap menu
     'About...':
-        'Nekaj o Snap!...',
+        'Despre Snap!...',
     'Reference manual':
-        'Uporabni\u0161ka navodila',
+        'Manual utilizator',
     'Snap! website':
-        'Spletna stran Snap!',
+        'Siteul Snap!',
     'Download source':
-        'Nalo\u017Ei izvorno kodo',
+        'Descarca codul sursa',
     'Switch back to user mode':
-        'Preklop nazaj na uporabni\u0161ki na\u010Din',
+        'Treci in modul utilizator',
     'disable deep-Morphic\ncontext menus\nand show user-friendly ones':
-        'izklop Morfic menujev in prikaz uporabni\u0161ko prijaznih',
+        'Afiseaza meniuri simplificate in locul celor morfice',
     'Switch to dev mode':
-        'preklop na razvojni na\u010Din',
+        'Treci in modul dezvoltator',
     'enable Morphic\ncontext menus\nand inspectors,\nnot user-friendly!':
-        'omogo\u010Di  Morphic menuje in in\u0161pektorje, \ni uporabniku prijazno',
+        'Afiseaza meniuri morfice in locul celor simplificate',
 
     // project menu
     'Project notes...':
-        'Opis projekta...',
+        'Note de proiect...',
     'New':
-        'Nov',
+        'Nou',
     'Open...':
-        'Odpri...',
+        'Deschide...',
     'Save':
-        'Shrani',
+        'Salveaza',
     'Save to disk':
-        'Shrani na disk',
+        'Salveaza pe disc',
     'store this project\nin the downloads folder\n(in supporting browsers)':
-        'shrani v mapo Prenosi\n'
-            + '(ni na voljo v vseh brkljalnika)',
+        'Salveaza proiectul\nin meniul Descarcari\n(functie de browser)',
     'Save As...':
-        'Shrani kot...',
+        'Salveaza sub numele...',
     'Import...':
-        'Uvozi...',
+        'Importa...',
     'file menu import hint':
-        'Nalaganje izvo\u017Eenega projekta,\nknji\u017Enice z '
-            + 'bloki\n'
-            + 'obleko ali zvokom',
+        'indiciu import meniul fisiere',
     'Export project as plain text...':
-        'Izvozi projekt kot navadno besedilo...',
+        'Exporta proiectul ca text...',
     'Export project...':
-        'Izvozi projekt...',
+        'Exporta proiectul...',
     'show project data as XML\nin a new browser window':
-        'Prikaz projekta kot XML\nv novem oknu brkljalnika',
+        'afiseaza continut proiect ca XML\nin fereastra noua de browser',
     'Export blocks...':
-        'Izvozi bloke',
+        'Exporta blocurile...',
     'show global custom block definitions as XML\nin a new browser window':
-        'Prikaz definicij globalnih lastnih blokov kot XML\nv novem oknu brkljalnika',
+        ' afiseaza definitiile blocurilor ca XML\n intr-o fereastra noua de browser',
     'Unused blocks...':
-          'Neuporabljeni bloki...',
+          'Blocuri nefolosite...',
     'find unused global custom blocks\nand remove their definitions':
-        'najdi in odstrani uporabni\u0161ke neuporabljene globalne bloke',
+        'cauta blocuri utilizator nefolosite\nsi sterge-le',
     'Remove unused blocks':
-        'Odstrani neuporabljene bloke',
+        'Sterge blocurile nefolosite',
     'there are currently no unused\nglobal custom blocks in this project':
-        'trenutno ni neuporabljenih globalnih blokov v tem projektu',
+        'nu exista blocuri utilizator nefolosite\nin acest proiect',
     'unused block(s) removed':
-        'neuporabljeni bloki so bili odstranjeni',
+        'blocuri nefolosite eliminate',
     'Export summary...':
-        'Povzetek izvoza...',
+        'Exporta sumarul...',
+    'open a new browser browser window\n with a summary of this project':
+        'Deschide o noua fereastra de browser\ncu sumarul acestui proiect',
+    'Contents':
+        'Continut',
+    'Kind of':
+        'De tipul',
+    'Part of':
+        'Parte din',
+    'Parts':
+        'Parti',
+    'Blocks':
+        'Blocuri',
+    'For all Sprites':
+        'Pentru toate animatiile',
     'Import tools':
-        'Uvozi orodja',
+        'Importa unelte',
     'load the official library of\npowerful blocks':
-        'uvozi uradni modul z naprednimi bloki',
+        'incarca biblioteca oficiala\nde blocuri importante',
     'Libraries...':
-        'Knji\u017Enice...',
+        'Biblioteci...',
     'Import library':
-        'Nalo\u017Ei knji\u017Enico',
+        'Importa biblioteca',
 
     // cloud menu
     'Login...':
-        'Prijava...',
+        'Autentificare...',
     'Signup...':
-        'Registracija...',
-    'Reset Password...':
-        'Pozabljeno geslo...',
+        'Creaza-ti cont...',
 
     // settings menu
     'Language...':
-        'Jezik...',
+        'Selecteaza limba...',
     'Zoom blocks...':
-        'Pove\u010Daj bloke...',
+        'Marimeblocuri...',
     'Stage size...':
-        'Velikost scene...',
+        'Marime scena...',
     'Stage size':
-        'Velikost scene',
+        'Marime scena',
     'Stage width':
-        '\u0160irina scene',
+        'Latime scena',
     'Stage height':
-        'Vi\u0161ina scene',
+        'Inaltime scena',
     'Default':
-        'Normalno',
+        'Implicit',
     'Blurred shadows':
-        'Mehke sence',
+        'Umbre neclare',
     'uncheck to use solid drop\nshadows and highlights':
-        'izklopi za uporabo trdih senc in osvetlitev',
+        'debifeaza pentru a utiliza\numbre clare si evidentieri',
     'check to use blurred drop\nshadows and highlights':
-        'vklopi za mehke sence in osvetlitve',
+        'bifeaza pentru a utiliza\numbre neclare si evidentieri',
     'Zebra coloring':
-        'barvanje kot zebra',
+        'Culoare zebra',
     'check to enable alternating\ncolors for nested blocks':
-        'vklopi izmenjujo\u010De barve vgnezdenih blokov',
+        'bifeaza pentru a folosi culori\nalternative in blocurile imbricate',
     'uncheck to disable alternating\ncolors for nested block':
-        'izklopi izmenjujo\u010De barve gnezdenih blokov',
+        'debifeaza pentru a folosi culori\nobisnuite in blocurile imbricate',
+    'Dynamic input labels':
+        'Etichete intrare dinamice',
+    'uncheck to disable dynamic\nlabels for variadic inputs':
+        'debifeaza pentru a renunta la\netichete dinamice pentru intrari variabile',
+    'check to enable dynamic\nlabels for variadic inputs':
+        'difeaza pentru a folosi etichete\n dinamice pentru intrari variabile',
     'Prefer empty slot drops':
-        'Imejmo raje prazne re\u017Ee',
+        'Foloseste slot drops goale',
     'settings menu prefer empty slots hint':
-        'vklop raje namiga za prazne re\u017Ee'
-            + 'zu bevorzugen',
+        'indicii de slot goale in meniul setari',
     'uncheck to allow dropped\nreporters to kick out others':
-        'razkljukaj za to, da reporterji odrinejo druge',
+        'debifeaza pentru a folosi\nreporteri pentru a elimina altii',
     'Long form input dialog':
-        'Vhodni dialog dolge oblike',
+        'Dialoguri lungi',
+    'Plain prototype labels':
+        'Etichete simple',
+    'uncheck to always show (+) symbols\nin block prototype labels':
+        'debifeaza pentru a folosi (+) \nin blocurile eticheta',
+    'check to hide (+) symbols\nin block prototype labels':
+        'bifeaza pentru a ascunde (+) \nin blocurile eticheta',
     'check to always show slot\ntypes in the input dialog':
-        'odkljukaj za prikaz tipov v vhodnih dialogih',
-    'razkljukaj za uporabo kratke oblike vhodnih dialogov':
-        'razkljukaj za uporabo dialoga kratke oblike',
+        'bifeaza pentru a afisa tipuri slot\N in dialoguri de intrare',
+    'uncheck to use the input\ndialog in short form':
+        'debifeaza pentru a afisa dialoguri\n de intrare in forma scurta',
     'Virtual keyboard':
-        'Virtualna tipkovnicaa',
+        'Tastatura pe ecran',
     'uncheck to disable\nvirtual keyboard support\nfor mobile devices':
-        'razkljukaj za izklop podpore virtualne tipkovnice za mobilne naprave',
+        'debifeaza pentru a ascunde\ntastatura de pe ecranul\nechipamentelor mobile',
     'check to enable\nvirtual keyboard support\nfor mobile devices':
-        'odkljukaj za vklop podpore z virtualni tipkovnico za mobilne naprave',
+        'bifeaza pentru a afisa\ntastatura pe ecranul\nechipamentelor mobile',
     'Input sliders':
-        'Vhodni drsniki',
+        'Slidere pentru intrare',
     'uncheck to disable\ninput sliders for\nentry fields':
-        'razkljukaj za izklop vhodnih drsnikov',
+        'debifeaza pentru a ascunde\nsliderele campurilor de intrare',
     'check to enable\ninput sliders for\nentry fields':
-        'odkljukaj za aktiviranje vhodnih drsnikov',
+        'bifeaza pentru a afisa\nslidere in campurile de intrare',
     'Clicking sound':
-        'Akusti\u010Dno klikanje',
+        'Sunet la apasarea tastelor',
     'uncheck to turn\nblock clicking\nsound off':
-        'razkljukaj za deaktiviranje akusti\u010Dnega klikanja',
+        'debifeaza pentru a opri\nsunete la schimbarea blocurilor',
     'check to turn\nblock clicking\nsound on':
-        'odkljukaj za vklop akusti\u010Dnega klikanja',
+        'bifeaza pentru sunete\n la schimbare blocuri',
     'Animations':
-        'Animacije',
+        'Animatii',
     'uncheck to disable\nIDE animations':
-        'razkljukaj za izklop IDE animacij',
+        'debifeaza pentru a dezactiva\nanimatiile IDE',
     'Turbo mode':
-        'Hitri na\u010Din',
+        'Modul turbo',
     'check to prioritize\nscript execution':
-        'odkljukaj za ve\u010Djo prioriteto izvajanja skript',
+        'bifeaza pentru a da prioritate\nexecutiei scripului',
     'uncheck to run scripts\nat normal speed':
-        'razkljukaj za normalno hitrost izvajanja skript',
+        'debifeaza pentru a rula scripul\nla viteza normala',
     'check to enable\nIDE animations':
-        'odkljukaj za IDE animacije',
+        'bifeaza pentru a activa\nanimatiile IDE',
     'Flat design':
-        'Svetli izgled',
+        'Design cu colturi',
     'Keyboard Editing':
-        'Urejanje s tipkovnico',
-    'Table support':
-        'Podpora za tabele',
-    'Table lines':
-        '\u010Crte med celicami v tabeli',
+        'Editare tastatura',
     'Thread safe scripts':
-        'Varnost niti',
+        'Scripturi thread-safe',
     'uncheck to allow\nscript reentrance':
-        'razkljukaj za dopu\u0161\u010Danje ve\u010Dkraten vstop skript (reentrancy)',
+        'debifeaza pentru a permite\nreentranta in scripturi',
     'check to disallow\nscript reentrance':
-        'odkljukaj za onemogo\u010Danje ve\u010Dkratnega vstopa skript',
+        'bifeaza pentru a interzice\nreentranta in scripturi',
     'Prefer smooth animations':
-        'Gladka animacija',
+        'Animatii fluide',
     'uncheck for greater speed\nat variable frame rates':
-        'razkljukaj za hitrej\u0161e animacije s spremenljivo hitrostjo osve\u017Eevanja',
+        'debifeaza pentru viteza mai mare\nin detrimentul afisarii pe ecran',
     'check for smooth, predictable\nanimations across computers':
-        'odkljukaj za bolj predvidljivo hitrost animacij med razli\u010Dnimi ra\u010Dunalniki',
+        'bifeaza pentru afisare fluida pe ecran\n in detrimentul vitezei',
     'Flat line ends':
-        'Ravni zaklju\u010Dki \u010Drt',
+        'Sfarsit de linii cu colturi',
     'check for flat ends of lines':
-        'odkljukaj za ravne zaklju\u010Dke \u010Drt',
+        'bifeaza pentru sfarsit\nde linii cu colturi',
     'uncheck for round ends of lines':
-        'razkljukaj za zaobljene zaklju\u010Dke \u010Drt',
+        'debifeaza pentru sfarsit\nde linii rotunjite',
     'Inheritance support':
-        'Podpora za dedovanje',
+        'Suport pentru mostenire',
 
     // inputs
     'with inputs':
-        'z vhodi',
+        'cu intrari',
     'input names:':
-        'imena vhodov:',
+        'numele intrarii:',
     'Input Names:':
-        'imena vhodov:',
+        'Numele intrarii:',
     'input list:':
-        'vhodni seznam:',
+        'lista intrare:',
 
     // context menus:
     'help':
-        'Pomo\u010D...',
+        'ajutor',
 
     // palette:
     'hide primitives':
-        'skrij osnovne bloke',
+        'Ascunde primitivele',
     'show primitives':
-        'poka\u017Ei osnovne bloke',
+        'Afiseaza primitivele',
 
     // blocks:
     'help...':
-        'pomo\u010D...',
+        'ajutor...',
     'relabel...':
-        'spremeni tip...',
+        'redenumeste...',
     'duplicate':
-        'podvoji',
+        'duplica',
     'make a copy\nand pick it up':
-        'kopiraj',
+        'fa o copie si selecteaz-o',
     'only duplicate this block':
-        'podvoji ta blok',
+        'duplica doar acest bloc',
     'delete':
-        'bri\u0161i',
+        'sterge',
     'script pic...':
-        'slika skript...',
+        'imagine script...',
     'open a new window\nwith a picture of this script':
-        'odpri novo okno s sliko tega skripta',
+        'deschide fereastra noua\ncu imaginea acestui script',
     'ringify':
-        'Obkro\u017Ei',
+        'ringify',
     'unringify':
-        'odstrani obro\u010D',
-    'transient':
-        'se ne shranjuje',
+        'unringify',
 
     // custom blocks:
     'delete block definition...':
-        'bri\u0161i definicijo bloka',
+        'sterge definitia blocului....',
     'edit...':
-        'uredi...',
+        'modifica...',
 
     // sprites:
     'edit':
-        'uredi',
+        'modifica',
     'move':
-        'premakni',
+        'muta',
     'detach from':
-        'odklopi',
+        'desparte',
     'detach all parts':
-        'odklopi vse dele',
+        'desparte toate bucatile',
     'export...':
-        'izvozi...',
+        'exporta...',
 
     // stage:
     'show all':
-        'prila\u017Ei vse ',
+        'afiseaza tot',
     'pic...':
-        'izvozi sliko...',
+        'imagine...',
     'open a new window\nwith a picture of the stage':
-        'odpri novo okno s sliko te scene',
+        'deschide o imagine a scenei\nintr-o fereastra noua',
 
     // scripting area
     'clean up':
-        'po\u010Disti',
+        'curata',
     'arrange scripts\nvertically':
-        'uredi skripte vertikalno',
+        'Afiseaza scripturile\nvertical',
     'add comment':
-        'dodaj komentar',
+        'adauga comentariu',
     'undrop':
-        'ponovno povle\u010Di',
+        'undrop',
     'undo the last\nblock drop\nin this pane':
-        'prekli\u010Di dodajanje zadnjega bloka v tem okviru',
+        'renunta la ultimul drop\nde block in aceasta fereastra',
     'scripts pic...':
-        'slika skript...',
+        'imagine scripturi...',
     'open a new window\nwith a picture of all scripts':
-        'odpri novo okno s sliko vseh skript',
+        'afiseaza imaginea scripturilor\nintr-o noua fereastra',
     'make a block...':
-        'Gradnja novega bloka...',
+        'creaza bloc...',
 
     // costumes
     'rename':
-        'preimenuj',
+        'redenumeste',
     'export':
-        'izvozi',
+        'exporta',
     'rename costume':
-        'preimenuj izgled',
+        'redenumeste costum',
 
     // sounds
     'Play sound':
-        'Predvajaj zvok',
+        'Ruleaza sunet',
     'Stop sound':
-        'Ustavi zvok',
+        'Opreste sunet',
     'Stop':
-        'Ustavi',
+        'Opreste',
     'Play':
-        'Predvajaj',
+        'Ruleaza',
     'rename sound':
-        'Preimenuj zvok',
-
-    // lists and tables
-    'list view...':
-        'prika\u017Ei kot seznam...',
-    'table view...':
-        'prika\u017Ei kot tabelo',
-    'open in dialog...':
-        'odpri v novem oknu',
-    'items':
-        'elementi',
+        'redenumeste sunet',
 
     // dialogs
     // buttons
     'OK':
-        'V redu',
+        'OK',
     'Ok':
-        'V redu',
+        'OK',
     'Cancel':
-        'Prekli\u010Di',
+        'Renunta',
     'Yes':
         'Da',
     'No':
-        'Ne',
+        'Nu',
 
     // help
     'Help':
-        'Pomo\u010D',
+        'Ajutor',
 
     // zoom blocks
     'Zoom blocks':
-        'Pove\u010Daj blok',
+        'Nivel zoom blocuri',
     'build':
-        'zgradi',
+        'build',
     'your own':
-        'svoj',
+        'al tau',
     'blocks':
-        'blok',
+        'blocuri',
     'normal (1x)':
-        'normalno (1x)',
+        'normal (1x)',
     'demo (1.2x)':
-        'demo (1.2x)',
+        'demonstratie (1.2x)',
     'presentation (1.4x)':
-        'predstavitev(1.4x)',
+        'prezentare (1.4x)',
     'big (2x)':
-        'veliko (2x)',
+        'mare (2x)',
     'huge (4x)':
-        've\u010Dje(4x)',
+        'enorm (4x)',
     'giant (8x)':
-        'ogromno (8x)',
+        'gigant (8x)',
     'monstrous (10x)':
-        'najve\u010Dje(10x)',
+        'monstruos (10x)',
 
     // Project Manager
     'Untitled':
-        'Neimenovano',
+        'fara nume',
     'Open Project':
-        'Odpri projekt',
+        'Deschide proiect',
     '(empty)':
-        '(prazno)',
+        '(gol)',
     'Saved!':
-        'Shranjeno!',
+        'Salvat!',
     'Delete Project':
-        'Zbri\u0161i projekt',
+        'Sterge proiect',
     'Are you sure you want to delete':
-        'Ste prepri\u010Dani da \u017Eelite izbrisati?',
+        'Esti sigur ca vrei sa stergi?',
     'rename...':
-        'preimenuj...',
+        'redenumeste...',
 
     // costume editor
     'Costume Editor':
-        'Urejevalnik oblek',
+        'Modificare costume',
     'click or drag crosshairs to move the rotation center':
-        'Klikni ali povle\u010Di kri\u017Eec za premik centra vrtenja',
+        'apasa mouseul sau trage de cursor pentru a muta centrul de rotatie',
 
     // project notes
     'Project Notes':
-        'Opis projekta',
+        'Note de proiect',
 
     // new project
     'New Project':
-        'Nov projekt',
+        'Proiect nou',
     'Replace the current project with a new one?':
-        'Zamenjam trenutni projekt z novim?',
+        'Inlocuieste proiectul cu un altul?',
 
     // save project
     'Save Project As...':
-        'Shrani projekt kot...',
+        'Salveaza proiectul sub alt nume...',
 
     // export blocks
     'Export blocks':
-        'Izvoz blokov',
+        'Exporta blocurile',
     'Import blocks':
-        'Uvoz blokov',
+        'Importa blocurile',
     'this project doesn\'t have any\ncustom global blocks yet':
-        'ta projekt \u0161e nima lastnih globalnih blokov',
+        'acest proiect nu are\nblocuri globale',
     'select':
-        'izberi',
-    'all':
-        'vse',
+        'selecteaza',
     'none':
-        'ni\u010D',
+        'nici un/o',
 
     // variable dialog
     'for all sprites':
-        'za vse objekte',
+        'pentru toate animatiile',
     'for this sprite only':
-        'le za ta objekt',
+        'doar pentru aceasta animatie',
 
     // block dialog
     'Change block':
-        'Spremeni blok',
+        'Schimba blocul',
     'Command':
-        'Ukaz',
+        'Comanda',
     'Reporter':
-        'Funkcija',
+        'Reporter',
     'Predicate':
-        'Predikat',
+        'Predicat',
 
     // block editor
     'Block Editor':
-        'Urejevalnik blokov',
+        'Editor de blocuri',
     'Apply':
-        'Uporabi',
+        'Aplica actiunea',
 
     // block deletion dialog
     'Delete Custom Block':
-        'Zbri\u0161i latni blok',
+        'Sterge blocul utilizator',
     'block deletion dialog text':
-        'Ali naj res zbri\u0161em ta blok\n' +
-            'z vsemi njegovimi primeri?',
+        'textul pentru stergerea unui bloc',
 
     // input dialog
     'Create input name':
-        'Tvori ime vhoda',
+        'Creaza nume',
     'Edit input name':
-        'Uredi ime vhoda',
+        'Schimba nume',
     'Edit label fragment':
-        'Uredi ime dela',
+        'Schimba eticheta',
     'Title text':
-        'Naslovno besedilo',
+        'Text titlu',
     'Input name':
-        'ime vhoda',
+        'Nume',
     'Delete':
-        'Bri\u0161i',
+        'Sterge',
     'Object':
-        'Objekt',
+        'Obiect',
     'Number':
-        '\u0160tevilo',
+        'Nume',
     'Text':
-        'Tekst',
+        'Text',
     'List':
-        'Seznam',
+        'Lista',
     'Any type':
-        'Poljuben tip',
+        'Orice tip',
     'Boolean (T/F)':
-        'Boolova spr. (W/F)',
+        'Boolean (Adevarat/Fals)',
     'Command\n(inline)':
-        'Ukaz',
+        'Comanda\n(pe acelasi rand)',
     'Command\n(C-shape)':
-        'Ukaz\n(C-oblika)',
+        'Comanda\n(in forma de C)',
     'Any\n(unevaluated)':
-        'Poljuben\n(neovrednoten)',
+        'Orice\n(necalculat)',
     'Boolean\n(unevaluated)':
-        'Boolova spr.\n(neovrednotena)',
+        'Boolean\n(necalculat)',
     'Single input.':
-        'En vnos.',
+        'Intrare.',
     'Default Value:':
-        'Privzeta vrednost:',
+        'Valoare implicita:',
     'Multiple inputs (value is list of inputs)':
-        'Ve\u010D vnosov (kot seznam)',
+        'Intrari multiple (dintr-o lista)',
     'Upvar - make internal variable visible to caller':
-        'interne spremenljivke naj bodo navzven vidne',
+        'Fa variabilele locale vizibile blocului chemator',
 
     // About Snap
     'About Snap':
-        'nekaj o Snap',
+        'Despre Snap',
     'Back...':
-        'Nazaj...',
+        'Inapoi...',
     'License...':
-        'Licenca...',
+        'Licenta...',
     'Modules...':
-        'Komponente...',
+        'Componente...',
     'Credits...':
-        'Sodelujo\u010Di...',
+        'Multumiri...',
     'Translators...':
-        'Prevajalci',
+        'Traducatori',
     'License':
-        'Licenca',
+        'Licenta',
     'current module versions:':
-        'Verzije komponent',
+        'versiuni componente:',
     'Contributors':
-        'Prispevali',
+        'Contribuitori',
     'Translations':
-        'prevodi',
+        'Traduceri',
 
     // variable watchers
     'normal':
-        'normalen',
+        'normal',
     'large':
-        'velik',
+        'mare',
     'slider':
-        'drsnik',
+        'slider',
     'slider min...':
-        'min vrednost...',
+        'slider minim...',
     'slider max...':
-        'maks vrednost...',
+        'slider maxim...',
     'import...':
-        'uvozi...',
+        'importa...',
     'Slider minimum value':
-        'Minimalna vrednost drsnika',
+        'Valoare minima slidere',
     'Slider maximum value':
-        'Maksimalna vrednost drsnika',
+        'Valoare maxima slidere',
 
     // list watchers
     'length: ':
-        'Dol\u017Eina: ',
+        'lungime: ',
 
     // coments
     'add comment here...':
-        'tu vnese\u0161 komentar',
+        'adauga comentariu...',
 
     // drow downs
     // directions
     '(90) right':
-        '(90) desno',
+        '(90) dreapta',
     '(-90) left':
-        '(-90) levo',
+        '(-90) stanga',
     '(0) up':
-        '(0) gor',
-    '(180) right':
-        '(180) dol',
+        '(0) sus',
+    '(180) down':
+        '(180) jos',
 
     // collision detection
     'mouse-pointer':
-        'kazalec mi\u0161ke',
+        'cursor mouse',
     'edge':
-        'rob',
+        'margine',
     'pen trails':
-        'sledi svin\u010Dnika',
+        'urme stilou',
 
     // costumes
     'Turtle':
-        'Kazalec smeri',
+        'Broasca',
     'Empty':
-        'Prazno',
+        'Gol',
 
     // graphical effects
     'brightness':
-        'svetlost',
+        'luminozitate',
     'ghost':
-        'prosojnost',
+        'umbra',
     'negative':
-        'obratno',
+        'negativ',
+    'comic':
+        'glumet',
+    'confetti':
+        'contetti',
+
     // keys
     'space':
-        'presledek',
+        'spatiu',
     'up arrow':
-        'pu\u0161\u010Dica gor',
+        'sageata sus',
     'down arrow':
-        'pu\u0161\u010Dica dol',
+        'sageata jos',
     'right arrow':
-        'pu\u0161\u010Dica desno',
+        'sageata dreapta',
     'left arrow':
-        'pu\u0161\u010Dica levo',
-    'any key':
-        'poljuden',
+        'sageata stanga',
     'a':
         'a',
     'b':
@@ -1273,17 +1258,17 @@ SnapTranslator.dict.si = {
 
     // messages
     'new...':
-        'nov...',
+        'nou...',
 
     // math functions
     'abs':
-        'abs',
+        'val absoluta',
     'ceiling':
-        'zaokro\u017Eevanje navzgor',
+        'rotunjire in sus',
     'floor':
-        'zaokro\u017Eevanje navzdol',
+        'rotunjire in jos',
     'sqrt':
-        'koren',
+        'radical',
     'sin':
         'sin',
     'cos':
@@ -1303,33 +1288,35 @@ SnapTranslator.dict.si = {
 
     // delimiters
     'letter':
-        '\u010Drke',
+        'litera',
     'whitespace':
-        'presledki',
+        'spatiu',
     'line':
-        'vrstica',
+        'linie',
     'tab':
         'tab',
+    'cr':
+        'enter',
 
     // data types
     'number':
-        '\u0161tevilo',
+        'numar',
     'text':
-        'Tekst',
+        'test',
     'Boolean':
-        'logi\u010Dna spr.',
+        'boolean',
     'list':
-        'seznam',
+        'lista',
     'command':
-        'ukaz',
+        'comanda',
     'reporter':
-        'funkcijski blok',
+        'reporter',
     'predicate':
-        'Predikat',
+        'predicat',
 
     // list indices
     'last':
-        'zadnji',
+        'ultimul',
     'any':
-        'poljuben'
+        'oricare'
 };

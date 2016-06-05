@@ -8,8 +8,9 @@ function List(array) {
 	this.lastChanged = Date.now();
 }
 
+List.prototype.enableTables = false;
 List.prototype.toString = function () {
-	return 'a List [' + this.asArray() + ']';
+	return 'a List [' + this.length + ' elements]';
 };
 
 List.prototype.changed = function () {
@@ -115,8 +116,107 @@ List.prototype.contains = function (element) {
 	});
 };
 
+List.prototype.isTable = function () {
+	return this.enableTables && (this.length() > 100 || this.cols() > 1);
+};
+
+List.prototype.get = function (col, row) {
+	var r,
+		len,
+		cols;
+	if (!col) {
+		if (!row) {
+			return [this.length()];
+		}
+		if (row > this.rows()) {
+			return null;
+		}
+		return this.rowName(row);
+	}
+	else if (!row) {
+		if (this.cols() === 1) {
+			return localize('items');
+		}
+		return this.colName(col);
+	}
+	r = this.at(row);
+	if (r instanceof List) {
+		len = r.length();
+		cols = this.cols();
+		if (col > len) {
+			return null;
+		}
+		else if (cols === 1 && len > 1) {
+			return [r];
+		}
+		else if (col >= cols && len > cols) {
+			return new Variable(r.at(col));
+		}
+		return r.at(col);
+	}
+	if (col === 1 && row <= this.rows()) {
+		return [r];
+	}
+	return null;
+};
+
+List.prototype.rows = function () {
+	return this.length();
+};
+
+List.prototype.cols = function () {
+	var r = (this.at(1));
+	return r instanceof List ? r.length() : 1;
+};
+
+List.prototype.colName = function (col) {
+	if (col > this.cols()) {
+		return null;
+	}
+	return String.fromCharCode(64 + ((col % 26) || 26)).repeat(Math.floor((col - 1) / 26) + 1);
+};
+
+List.prototype.rowName = function (row) {
+	return row;
+};
+
+List.prototype.columnNames = function () {
+	return [];
+};
+
+List.prototype.version = function (startRow, rows) {
+	var l = Math.min(startRow + rows, this.length()),
+		v = this.lastChanged,
+		r,
+		i;
+	for (i = startRow; i <= l; i += 1) {
+		r = this.at(i);
+		v = Math.max(v, r.lastChanged ? r.lastChanged : 0);
+	}
+	return v;
+};
+
 List.prototype.asArray = function () {
 	this.becomeArray();
+	return this.contents;
+};
+
+List.prototype.itemsArray = function () {
+	if (this.isLinked) {
+		var next = this,
+			result = [],
+			i;
+		while (next && next.isLinked) {
+			result.push(next.first);
+			next = next.rest;
+		}
+		if (next) {
+			for (i = 1; i <= next.contents.length; i += 1) {
+				result.push(next.at(i));
+			}
+		}
+		return result;
+	}
 	return this.contents;
 };
 
@@ -153,18 +253,7 @@ List.prototype.asText = function () {
 
 List.prototype.becomeArray = function () {
 	if (this.isLinked) {
-		var next = this,
-			i;
-		this.contents = [];
-		while (next && next.isLinked) {
-			this.contents.push(next.first);
-			next = next.rest;
-		}
-		if (next) {
-			for (i = 1; i <= next.contents.length; i += 1) {
-				this.contents.push(next.at(i));
-			}
-		}
+		this.contents = this.itemsArray();
 		this.isLinked = false;
 		this.first = null;
 		this.rest = null;
@@ -274,7 +363,7 @@ ListWatcherMorph.prototype.init = function (list, parentCell) {
 	this.plusButton.fixLayout();
 	ListWatcherMorph.uber.init.call(this, SyntaxElementMorph.prototype.rounding, 1.000001, new Color(120, 120, 120));
 	this.color = new Color(220, 220, 220);
-	this.isDraggable = true;
+	this.isDraggable = false;
 	this.setExtent(new Point(80, 70).multiplyBy(SyntaxElementMorph.prototype.scale));
 	this.add(this.label);
 	this.add(this.frame);
@@ -298,8 +387,13 @@ ListWatcherMorph.prototype.update = function (anyway) {
 		starttime,
 		maxtime = 1000;
 	this.frame.contents.children.forEach(function (m) {
-		if (m instanceof CellMorph && m.contentsMorph instanceof ListWatcherMorph) {
-			m.contentsMorph.update();
+		if (m instanceof CellMorph) {
+			if (m.contentsMorph instanceof ListWatcherMorph) {
+				m.contentsMorph.update();
+			}
+			else if (isSnapObject(m.contents)) {
+				m.update();
+			}
 		}
 	});
 	if (this.lastUpdated === this.list.lastChanged && !anyway) {
@@ -458,6 +552,47 @@ ListWatcherMorph.prototype.arrangeCells = function () {
 		lastCell = cell;
 	}
 	this.frame.contents.adjustBounds();
+};
+
+ListWatcherMorph.prototype.expand = function (maxExtent) {
+	var fe = this.frame.contents.extent(),
+		ext = new Point(fe.x + 6, fe.y + this.label.height() + 6);
+	if (maxExtent) {
+		ext = ext.min(maxExtent);
+	}
+	this.setExtent(ext);
+	this.handle.setRight(this.right() - 3);
+	this.handle.setBottom(this.bottom() - 3);
+};
+
+ListWatcherMorph.prototype.showTableView = function () {
+	var view = this.parentThatIsAnyOf([SpriteBubbleMorph, SpeechBubbleMorph, CellMorph]);
+	if (!view) {
+		return;
+	}
+	if (view instanceof SpriteBubbleMorph) {
+		view.changed();
+		view.drawNew(true);
+	}
+	else if (view instanceof SpeechBubbleMorph) {
+		view.contents = new TableFrameMorph(new TableMorph(this.list, 10));
+		view.contents.expand(this.extent());
+		view.drawNew(true);
+	}
+	else {
+		view.drawNew(true, 'table');
+		view.contentsMorph.expand(this.extent());
+	}
+	view.fixLayout();
+};
+
+ListWatcherMorph.prototype.mouseDoubleClick = function (pos) {
+	if (List.prototype.enableTables) {
+		new TableDialogMorph(this.list).popUp(this.world());
+	}
+	else {
+		this.escalateEvent('mouseDoubleClick', pos);
+	}
 };
 
 ListWatcherMorph.prototype.show = function () {

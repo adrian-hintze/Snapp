@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Snap! Build Your Own Blocks</title>
 		<script type="text/javascript" src="morphic.js"></script>
 		<script type="text/javascript" src="widgets.js"></script>
 		<script type="text/javascript" src="blocks.js"></script>
@@ -10,20 +11,21 @@
 		<script type="text/javascript" src="gui.js"></script>
 		<script type="text/javascript" src="lists.js"></script>
 		<script type="text/javascript" src="byob.js"></script>
+		<script type="text/javascript" src="tables.js"></script>
 		<script type="text/javascript" src="xml.js"></script>
 		<script type="text/javascript" src="store.js"></script>
-		
 		<script type="text/javascript">
 			var world;
+			function loop() {
+				requestAnimationFrame(loop);
+				world.doOneCycle();
+			}
 			window.onload = function () {
 				world = new WorldMorph(document.getElementById('world'));
                 world.worldCanvas.focus();
 				new IDE_Morph().openIn(world);
-				setInterval(loop, 1);
+				loop();
 			};
-			function loop() {
-				world.doOneCycle();
-			}
 		</script>
 	</head>
 	<body style="margin: 0;">

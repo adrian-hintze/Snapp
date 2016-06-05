@@ -6,7 +6,7 @@
 
     written by Jens Mönig
 
-    Copyright (C) 2015 by Jens Mönig
+    Copyright (C) 2016 by Jens Mönig
 
     This file is part of Snap!.
 
@@ -42,7 +42,7 @@
 
 /*global modules, contains*/
 
-modules.locale = '2015-August-06';
+modules.locale = '2016-May-10';
 
 // Global stuff
 
@@ -123,7 +123,11 @@ SnapTranslator.dict.en = {
     'translator_e-mail':
         'jens@moenig.org',
     'last_changed':
-        '2012-10-16',
+        '2015-12-22',
+
+    // rewordings in English avoiding having to adjust all other translations
+    'any':
+        'random',
 
     // long strings look-up only
     'file menu import hint':
@@ -137,11 +141,18 @@ SnapTranslator.dict.en = {
             + 'a file on your computer by dropping it here\n',
     'block deletion dialog text':
         'Are you sure you want to delete this\n'
-            + 'custom block and all its instances?'
+            + 'custom block and all its instances?',
+    'download to disk text':
+        'This item could not be opened in a new tab.\n' +
+        'It has been saved to your browser\'s downloads folder.',
+    'unable to export text':
+        'This item could not be exported from Snap!.\n' +
+        'It\'s likely that your project may contain a lot of media ' +
+        '(sounds and images) or that you are using an older browser.' +
+        'Please try using a recent version of Chrome, Firefox, or Safari.'
 };
 
 SnapTranslator.dict.de = {
-    // meta information
     'language_name':
         'Deutsch',
     'language_translator':
@@ -149,23 +160,21 @@ SnapTranslator.dict.de = {
     'translator_e-mail':
         'jens@moenig.org',
     'last_changed':
-        '2015-08-06'
+        '2016-05-02'
 };
 
 SnapTranslator.dict.it = {
-    // meta information
     'language_name':
         'Italiano',
     'language_translator':
-        'Stefano Federici, Alberto Firpo',
+        'Stefano Federici, Alberto Firpo, Massimo Ghisalberti',
     'translator_e-mail':
-        's_federici@yahoo.com, albertofirpo12@gmail.com',
+        's_federici@yahoo.com, albertofirpo12@gmail.com, zairik@gmail.com',
     'last_changed':
-        '2015-01-12'
+        '2016-05-10'
 };
 
 SnapTranslator.dict.ja = {
-    // meta information
     'language_name':
         '日本語',
     'language_translator':
@@ -177,7 +186,6 @@ SnapTranslator.dict.ja = {
 };
 
 SnapTranslator.dict.ja_HIRA = {
-    // meta information
     'language_name':
         'にほんご',
     'language_translator':
@@ -189,7 +197,6 @@ SnapTranslator.dict.ja_HIRA = {
 };
 
 SnapTranslator.dict.ko = {
-    // meta information
     'language_name':
         '한국어',
     'language_translator':
@@ -201,7 +208,6 @@ SnapTranslator.dict.ko = {
 };
 
 SnapTranslator.dict.pt = {
-    // meta information
     'language_name':
         'Português',
     'language_translator':
@@ -209,35 +215,32 @@ SnapTranslator.dict.pt = {
     'translator_e-mail':
         'mmsequeira@gmail.com',
     'last_changed':
-        '2015-08-02'
+        '2016-01-08'
 };
 
 SnapTranslator.dict.cs = {
-    // meta information
     'language_name':
         'Česky',
     'language_translator':
-        'Michal Moc',
+        'Michal Moc, Jan Tomsa',
     'translator_e-mail':
-        'info@iguru.eu',
+        'info@iguru.eu, jan.tomsa.1976@gmail.com',
     'last_changed':
-        '2013-03-11'
+        '2015-11-16'
 };
 
 SnapTranslator.dict.zh = {
-    // meta information
     'language_name':
         '简体中文',
     'language_translator':
-        '邓江华',
+        '五百刀/邓江华',
     'translator_e-mail':
-        'djh@rhjxx.cn',
+        'ubertao@qq.com/djh@rhjxx.cn',
     'last_changed':
-        '2013-03-25'
+        '2016-05-09'
 };
 
 SnapTranslator.dict.eo = {
-    // meta information
     'language_name':
         'Esperanto',
     'language_translator':
@@ -249,31 +252,28 @@ SnapTranslator.dict.eo = {
 };
 
 SnapTranslator.dict.fr = {
-    // meta information
     'language_name':
         'Fran\u00E7ais',
     'language_translator':
-        'Jean-Jacques Valliet, Mark Rafter, Martin Quinson',
+        'Jean-Jacques Valliet, Mark Rafter, Martin Quinson, Damien Caselli',
     'translator_e-mail':
         'i.scool@mac.com',
     'last_changed':
-        '2015-06-25'
+        '2016-02-24'
 };
 
 SnapTranslator.dict.si = {
-    // meta information
     'language_name':
         'Sloven\u0161\u010Dina',
     'language_translator':
-        'Sasa Divjak',
+        'Sasa Divjak, Gorazd Breskvar',
     'translator_e-mail':
         'sasa.divjak@fri.uni-lj.si',
     'last_changed':
-        '2013-01-07'
+        '2016-04-22'
 };
 
 SnapTranslator.dict.ru = {
-    // meta information
     'language_name':
         'Русский',
     'language_translator':
@@ -285,7 +285,6 @@ SnapTranslator.dict.ru = {
 };
 
 SnapTranslator.dict.es = {
-    // meta information
     'language_name':
         'Espa\u00F1ol',
     'language_translator':
@@ -297,7 +296,6 @@ SnapTranslator.dict.es = {
 };
 
 SnapTranslator.dict.nl = {
-    // meta information
     'language_name':
         'Nederlands',
     'language_translator':
@@ -305,11 +303,10 @@ SnapTranslator.dict.nl = {
     'translator_e-mail':
         'frank.sierens@telenet.be, sjoerddirk@fromScratchEd.nl',
     'last_changed':
-        '2013-08-12'
+        '2015-12-15'
 };
 
 SnapTranslator.dict.pl = {
-    // meta information
     'language_name':
         'Polski',
     'language_translator':
@@ -317,11 +314,10 @@ SnapTranslator.dict.pl = {
     'translator_e-mail':
         'witek@oeiizk.waw.pl',
     'last_changed':
-        '2015-08-06'
+        '2015-09-23'
 };
 
 SnapTranslator.dict.tw = {
-    // meta information
     'language_name':
         '繁體中文',
     'language_translator':
@@ -333,7 +329,6 @@ SnapTranslator.dict.tw = {
 };
 
 SnapTranslator.dict.no = {
-    // meta information
     'language_name':
         'Norsk',
     'language_translator':
@@ -345,7 +340,6 @@ SnapTranslator.dict.no = {
 };
 
 SnapTranslator.dict.dk = {
-    // meta information
     'language_name':
         'Dansk',
     'language_translator':
@@ -357,7 +351,6 @@ SnapTranslator.dict.dk = {
 };
 
 SnapTranslator.dict.el = {
-    // meta information
     'language_name':
         'Ελληνικά',
     'language_translator':
@@ -369,7 +362,6 @@ SnapTranslator.dict.el = {
 };
 
 SnapTranslator.dict.ca = {
-    // meta information
     'language_name':
         'Català',
     'language_translator':
@@ -377,11 +369,10 @@ SnapTranslator.dict.ca = {
     'translator_e-mail':
         'bromagosa@citilab.eu',
     'last_changed':
-        '2015-01-21'
+        '2016-02-24'
 };
 
 SnapTranslator.dict.fi = {
-    // meta information
     'language_name':
         'suomi',
     'language_translator':
@@ -393,7 +384,6 @@ SnapTranslator.dict.fi = {
 };
 
 SnapTranslator.dict.sv = {
-    // meta information
     'language_name':
         'svenska',
     'language_translator':
@@ -405,7 +395,6 @@ SnapTranslator.dict.sv = {
 };
 
 SnapTranslator.dict.pt_BR = {
-    // meta information
     'language_name':
         'Português do Brasil',
     'language_translator':
@@ -417,7 +406,6 @@ SnapTranslator.dict.pt_BR = {
 };
 
 SnapTranslator.dict.bn = {
-    // meta information
     'language_name':
         'বাংলা',
     'language_translator':
@@ -429,7 +417,6 @@ SnapTranslator.dict.bn = {
 };
 
 SnapTranslator.dict.kn = {
-    // translations meta information
     'language_name':
         '\u0C95\u0CA8\u0CCD\u0CA8\u0CA1',
     'language_translator':
@@ -441,7 +428,6 @@ SnapTranslator.dict.kn = {
 };
 
 SnapTranslator.dict.ml = {
-    // translations meta information
     'language_name':
         'Malayalam',
     'language_translator':
@@ -453,7 +439,6 @@ SnapTranslator.dict.ml = {
 };
 
 SnapTranslator.dict.ta = {
-    // translations meta information
     'language_name':
         'Tamil',
     'language_translator':
@@ -465,7 +450,6 @@ SnapTranslator.dict.ta = {
 };
 
 SnapTranslator.dict.te = {
-    // translations meta information
     'language_name':
         'Telagu', // the name as it should appear in the language menu
     'language_translator':
@@ -477,7 +461,6 @@ SnapTranslator.dict.te = {
 };
 
 SnapTranslator.dict.tr = {
-    // translations meta information
     'language_name':
         'Türkçe',
     'language_translator':
@@ -489,7 +472,6 @@ SnapTranslator.dict.tr = {
 };
 
 SnapTranslator.dict.hu = {
-    // translations meta information
     'language_name':
         'Magyar',
     'language_translator':
@@ -501,7 +483,6 @@ SnapTranslator.dict.hu = {
 };
 
 SnapTranslator.dict.ia = {
-    // translations meta information
     'language_name':
         'Interlingua',
     'language_translator':
@@ -510,4 +491,70 @@ SnapTranslator.dict.ia = {
         'Ken.Dickey@whidbey.com',
     'last_changed':
         '2015-08-09'
+};
+
+SnapTranslator.dict.hr = {
+    'language_name':
+        'Hrvatski',
+    'language_translator':
+        '\u017Deljko Hrvoj',
+    'translator_e-mail':
+        'zeljko.hrvoj@zg.t-com.hr',
+    'last_changed':
+        '2015-09-15'
+};
+
+SnapTranslator.dict.bg = {
+    'language_name':
+        'Български',
+    'language_translator':
+        'Ivan Savov',
+    'translator_e-mail':
+        'ivan.savov@gmail.com',
+    'last_changed':
+        '2015-11-16'
+};
+
+SnapTranslator.dict.ro = {
+    'language_name':
+        'Român',
+    'language_translator':
+        'Cristian Macarascu',
+    'translator_e-mail':
+        '',
+    'last_changed':
+        '2015-10-24'
+};
+
+SnapTranslator.dict.ar = {
+    'language_name':
+        'العربية', // the name as it should appear in the language menu
+    'language_translator':
+        'طارق جلال', // your name for the Translators tab
+    'translator_e-mail':
+        'tarekgalal46@hotmail.com', // optional
+    'last_changed':
+        '2016-02-24'
+};
+
+SnapTranslator.dict.id = {
+    'language_name':
+        'Bahasa Indonesia',
+    'language_translator':
+        'Alexander Raphael Liu',
+    'translator_e-mail':
+        'raphaxander@gmail.com',
+    'last_changed':
+        '2016-5-2'
+};
+
+SnapTranslator.dict.et = {
+    'language_name':
+        'Eesti',
+    'language_translator':
+        'Hasso Tepper',
+    'translator_e-mail':
+        'hasso.tepper@gmail.com',
+    'last_changed':
+        '2016-05-03'
 };

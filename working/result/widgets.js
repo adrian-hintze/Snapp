@@ -712,6 +712,7 @@ DialogBoxMorph.prototype.fixLayout = function () {
 	if (this.buttons && (this.buttons.children.length > 0)) {
 		this.buttons.fixLayout();
 		this.silentSetHeight(this.height() + this.buttons.height() + this.padding);
+		this.silentSetWidth(Math.max(this.width(), this.buttons.width() + (2 * this.padding)));
 		this.buttons.setCenter(this.center());
 		this.buttons.setBottom(this.bottom() - this.padding);
 	}
@@ -944,6 +945,7 @@ AlignmentMorph.prototype.fixLayout = function () {
 				else {
 					c.setPosition(lfb.bottomLeft().add(new Point(myself.alignment === 'center' ? (lfb.width() - cfb.width()) / 2 : 0, myself.padding)));
 				}
+				cfb = c.fullBounds();
 			}
 			else {
 				newBounds = cfb;

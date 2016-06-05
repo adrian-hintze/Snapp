@@ -9,10 +9,12 @@ function CustomBlockDefinition(spec, receiver) {
 	this.type = 'command';
 	this.spec = spec || '';
 	this.declarations = {};
+	this.variableNames = [];
 	this.comment = null;
 	this.codeMapping = null;
 	this.codeHeader = null;
 	this.receiver = receiver || null;
+	this.editorDimensions = null;
 }
 
 CustomBlockDefinition.prototype.copyAndBindTo = function (sprite) {
@@ -125,15 +127,23 @@ function CustomCommandBlockMorph(definition, isProto) {
 CustomCommandBlockMorph.prototype.init = function (definition, isProto) {
 	this.definition = definition;
 	this.isPrototype = isProto || false;
-	CustomCommandBlockMorph.uber.init.call(this);
+	CustomCommandBlockMorph.uber.init.call(this, true);
 	this.category = definition.category;
 	this.selector = 'evaluateCustomBlock';
+	this.initializeVariables();
 	if (definition) {
 		this.refresh();
 	}
 };
 
-CustomCommandBlockMorph.prototype.refresh = function () {
+CustomCommandBlockMorph.prototype.initializeVariables = function (oldVars) {
+	var myself = this;
+	this.definition.variableNames.forEach(function (name) {
+		var v = oldVars ? oldVars[name] : null;
+	});
+};
+
+CustomCommandBlockMorph.prototype.refresh = function (silently) {
 	var def = this.definition,
 		newSpec = this.isPrototype ? def.spec : def.blockSpec(),
 		oldInputs;
@@ -146,7 +156,7 @@ CustomCommandBlockMorph.prototype.refresh = function () {
 		else {
 			this.fixBlockColor();
 		}
-		this.setSpec(newSpec);
+		this.setSpec(newSpec, silently);
 		this.fixLabelColor();
 		this.restoreInputs(oldInputs);
 	}
@@ -158,6 +168,9 @@ CustomCommandBlockMorph.prototype.refresh = function () {
 		});
 	}
 	this.cachedInputs = null;
+	this.forceNormalColoring();
+	this.drawNew();
+	this.fixBlockColor(null, true);
 };
 
 CustomCommandBlockMorph.prototype.upvarFragmentNames = function () {
@@ -216,6 +229,11 @@ CustomCommandBlockMorph.prototype.attachTargets = function () {
 	return CustomCommandBlockMorph.uber.attachTargets.call(this);
 };
 
+CustomCommandBlockMorph.prototype.isInUse = function () {
+	var def = this.definition,
+		ide = this.receiver().parentThatIsA(IDE_Morph);
+};
+
 CustomReporterBlockMorph.prototype = new ReporterBlockMorph();
 CustomReporterBlockMorph.prototype.constructor = CustomReporterBlockMorph;
 CustomReporterBlockMorph.uber = ReporterBlockMorph.prototype;
@@ -226,16 +244,18 @@ function CustomReporterBlockMorph(definition, isPredicate, isProto) {
 CustomReporterBlockMorph.prototype.init = function (definition, isPredicate, isProto) {
 	this.definition = definition;
 	this.isPrototype = isProto || false;
-	CustomReporterBlockMorph.uber.init.call(this, isPredicate);
+	CustomReporterBlockMorph.uber.init.call(this, isPredicate, true);
 	this.category = definition.category;
+	this.initializeVariables();
 	this.selector = 'evaluateCustomBlock';
 	if (definition) {
 		this.refresh();
 	}
 };
 
+CustomReporterBlockMorph.prototype.initializeVariables = CustomCommandBlockMorph.prototype.initializeVariables;
 CustomReporterBlockMorph.prototype.refresh = function () {
-	CustomCommandBlockMorph.prototype.refresh.call(this);
+	CustomCommandBlockMorph.prototype.refresh.call(this, true);
 	if (!this.isPrototype) {
 		this.isPredicate = (this.definition.type === 'predicate');
 	}

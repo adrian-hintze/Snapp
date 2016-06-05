@@ -8,7 +8,7 @@
     written by Jens Mönig
     jens@moenig.org
 
-    Copyright (C) 2015 by Jens Mönig
+    Copyright (C) 2016 by Jens Mönig
 
     This file is part of Snap!.
 
@@ -54,7 +54,8 @@
         (6) development and user modes
         (7) turtle graphics
         (8) damage list housekeeping
-        (9) minifying morphic.js
+        (9) supporting high-resolution "retina" screens
+        (10) minifying morphic.js
     VIII. acknowledgements
     IX. contributors
 
@@ -147,12 +148,14 @@
     III. yet to implement
     ---------------------
     - keyboard support for scroll frames and lists
+    - full keyboard support for menus (partial support exists)
     - virtual keyboard support for Android and IE
 
 
     IV. open issues
     ----------------
-    - blurry shadows don't work well in Chrome
+    - clipboard support (copy & paste) for non-textual data
+    - native (unscaled) high-resolution display support
 
 
     V. browser compatibility
@@ -163,12 +166,15 @@
 
     - Firefox for Windows
     - Firefox for Mac
-    - Chrome for Windows (blurry shadows have some issues)
+    - Firefox for Android
+    - Chrome for Windows
     - Chrome for Mac
-    - Safari for Windows
+    - Chrome for Android
+    - Safari for Windows (deprecated)
     - safari for Mac
     - Safari for iOS (mobile)
     - IE for Windows
+    - Edge for Windows
     - Opera for Windows
     - Opera for Mac
 
@@ -258,10 +264,11 @@
                 window.onload = function () {
                     world = new WorldMorph(
                         document.getElementById('world'));
-                    setInterval(loop, 50);
+                    loop();
                 };
 
                 function loop() {
+                    requestAnimationFrame(loop);
                     world.doOneCycle();
                 }
             </script>
@@ -305,10 +312,11 @@
                         document.getElementById('world1'), false);
                     world2 = new WorldMorph(
                         document.getElementById('world2'), false);
-                    setInterval(loop, 50);
+                    loop();
                 };
 
                 function loop() {
+                    requestAnimationFrame(loop);
                     world1.doOneCycle();
                     world2.doOneCycle();
                 }
@@ -330,7 +338,7 @@
     (c) an application
     -------------------
     Of course, most of the time you don't want to just plain use the
-    standard Morhic World "as is" out of the box, but write your own
+    standard Morphic World "as is" out of the box, but write your own
     application (something like Scratch!) in it. For such an
     application you'll create your own morph prototypes, perhaps
     assemble your own "window frame" and bring it all to life in a
@@ -373,10 +381,11 @@
                         x = 0;
                         y += 1;
                     }
-                    setInterval(loop, 50);
+                    loop();
                 };
 
                 function loop() {
+                    requestAnimationFrame(loop);
                     world.doOneCycle();
                 }
             </script>
@@ -966,7 +975,7 @@
     single submorph's changes tremendous performance improvements can be
     achieved by setting the trackChanges flag to false before propagating
     the layout changes, setting it to true again and then storing the full
-    bounds of the surrounding morph. An an example refer to the
+    bounds of the surrounding morph. As an example refer to the
 
         moveBy()
 
@@ -982,8 +991,54 @@
     methods of SyntaxElementMorph in the Snap application.
 
 
-    (9) minifying morphic.js
-    ------------------------
+    (9) supporting high-resolution "retina" screens
+    -----------------------------------------------
+    By default retina support gets installed when Morphic.js loads. There
+    are two global functions that let you test for retina availability:
+
+        isRetinaSupported() - Bool, answers if retina support is available
+        isRetinaEnabled()   - Bool, answers if currently in retina mode
+
+    and two more functions that let you control retina support if it is
+    available:
+
+        enableRetinaSupport()
+        disableRetinaSupport()
+
+    Both of these internally test whether retina is available, so they are
+    safe to call directly. For an example how to make retina support
+    user-specifiable refer to
+
+        Snap! >> guis.js >> toggleRetina()
+
+    Even when in retina mode it often makes sense to use normal-resolution
+    canvasses for simple shapes in order to save system resources and
+    optimize performance. Examples are costumes and backgrounds in Snap.
+    In Morphic you can create new canvas elements using
+    
+        newCanvas(extentPoint [, nonRetinaFlag])
+
+    If retina support is enabled such new canvasses will automatically be
+    high-resolution canvasses, unless the newCanvas() function is given an
+    otherwise optional second Boolean <true> argument that explicitly makes
+    it a non-retina canvas.
+
+    Not the whole canvas API is supported by Morphic's retina utilities.
+    Especially if your code uses putImageData() you will want to "downgrade"
+    a target high-resolution canvas to a normal-resolution ("non-retina")
+    one before using
+
+        normalizeCanvas(aCanvas [, copyFlag])
+
+    This will change the target canvas' resolution in place (!). If you
+    pass in the optional second Boolean <true> flag the function returns
+    a non-retina copy and leaves the target canvas unchanged. An example
+    of this normalize mechanism is converting the penTrails layer of Snap's
+    stage (high-resolution) into a sprite-costume (normal resolution).
+
+
+    (10) minifying morphic.js
+    -------------------------
     Coming from Smalltalk and being a Squeaker at heart I am a huge fan
     of browsing the code itself to make sense of it. Therefore I have
     included this documentation and (too little) inline comments so all
@@ -1028,7 +1083,8 @@
     I have originally written morphic.js in Florian Balmer's Notepad2
     editor for Windows, later switched to Apple's Dashcode and later
     still to Apple's Xcode. I've also come to depend on both Douglas
-    Crockford's JSLint, Mozilla's Firebug and Google's Chrome to get
+    Crockford's JSLint and later the JSHint project, as well as on
+    Mozilla's Firebug and Google's Chrome to get
     it right.
 
 
@@ -1039,16 +1095,17 @@
     background texture handling, countless bug fixes and optimizations.
     Ian Reynolds contributed backspace key handling for Chrome.
     Davide Della Casa contributed performance optimizations for Firefox.
+    Jason N (@cyderize) contributed native copy & paste for text editing.
+    Bartosz Leper contributed retina display support.
 
     - Jens Mönig
 */
 
 // Global settings /////////////////////////////////////////////////////
 
-/*global window, HTMLCanvasElement, getMinimumFontHeight, FileReader, Audio,
-FileList, getBlurredShadowSupport*/
+/*global window, HTMLCanvasElement, FileReader, Audio, FileList*/
 
-var morphicVersion = '2015-July-28';
+var morphicVersion = '2016-May-11';
 var modules = {}; // keep track of additional loaded modules
 var useBlurredShadows = getBlurredShadowSupport(); // check for Chrome-bug
 
@@ -1068,7 +1125,8 @@ var standardSettings = {
     useVirtualKeyboard: true,
     isTouchDevice: false, // turned on by touch events, don't set
     rasterizeSVGs: false,
-    isFlat: false
+    isFlat: false,
+    grabThreshold: 5
 };
 
 var touchScreenSettings = {
@@ -1087,10 +1145,39 @@ var touchScreenSettings = {
     useVirtualKeyboard: true,
     isTouchDevice: false,
     rasterizeSVGs: false,
-    isFlat: false
+    isFlat: false,
+    grabThreshold: 5
 };
 
 var MorphicPreferences = standardSettings;
+
+// first, try enabling support for retina displays - can be turned off later
+
+/*
+    Support for retina displays has been pioneered and contributed by
+    Bartosz Leper.
+
+    NOTE: this will make changes to the HTMLCanvasElement that - mostly -
+    make Morphic usable on retina displays in very high resolution mode
+    with crisp fonts and clear fine lines without you (the programmer)
+    needing to know any specifics, provided both the display and the browser
+    support these (Safari currently doesn't), otherwise these utilities will
+    not be installed.
+    If you don't want your Morphic application to support retina resolutions
+    you don't have to edit this morphic.js file to comment out the next line
+    of code, instead you can simply call
+
+        disableRetinaSupport();
+
+    before you create your World(s) in the html page. Disabling retina
+    support also will simply do nothing if retina support is not possible
+    or already disabled, so it's equally safe to call.
+
+    For an example how to make retina support user-specifiable refer to
+    Snap! >> guis.js >> toggleRetina()
+*/
+
+enableRetinaSupport();
 
 // Global Functions ////////////////////////////////////////////////////
 
@@ -1160,13 +1247,18 @@ function fontHeight(height) {
     return minHeight * 1.2; // assuming 1/5 font size for ascenders
 }
 
-function newCanvas(extentPoint) {
+function newCanvas(extentPoint, nonRetina) {
     // answer a new empty instance of Canvas, don't display anywhere
+    // nonRetina - optional Boolean "false"
+    // by default retina support is automatic
     var canvas, ext;
     ext = extentPoint || {x: 0, y: 0};
     canvas = document.createElement('canvas');
     canvas.width = ext.x;
     canvas.height = ext.y;
+    if (nonRetina && canvas.isRetinaEnabled) {
+        canvas.isRetinaEnabled = false;
+    }
     return canvas;
 }
 
@@ -1269,6 +1361,354 @@ function copy(target) {
         }
     }
     return c;
+}
+
+// Retina Display Support //////////////////////////////////////////////
+
+/*
+    By default retina support gets installed when Morphic.js loads. There
+    are two global functions that let you test for retina availability:
+
+        isRetinaSupported() - Boolean, whether retina support is available
+        isRetinaEnabled()   - Boolean, whether currently in retina mode
+
+    and two more functions that let you control retina support if it is
+    available:
+
+        enableRetinaSupport()
+        disableRetinaSupport()
+
+    Both of these internally test whether retina is available, so they are
+    safe to call directly.
+
+    Even when in retina mode it often makes sense to use non-high-resolution
+    canvasses for simple shapes in order to save system resources and
+    optimize performance. Examples are costumes and backgrounds in Snap.
+    In Morphic you can create new canvas elements using
+    
+        newCanvas(extentPoint [, nonRetinaFlag])
+
+    If retina support is enabled such new canvasses will automatically be
+    high-resolution canvasses, unless the newCanvas() function is given an
+    otherwise optional second Boolean <true> argument that explicitly makes
+    it a non-retina canvas.
+
+    Not the whole canvas API is supported by Morphic's retina utilities.
+    Especially if your code uses putImageData() you will want to "downgrade"
+    a target high-resolution canvas to a normal-resolution ("non-retina")
+    one before using
+
+        normalizeCanvas(aCanvas [, copyFlag])
+
+    This will change the target canvas' resolution in place (!). If you
+    pass in the optional second Boolean <true> flag the function returns
+    a non-retina copy and leaves the target canvas unchanged. An example
+    of this normalize mechanism is converting the penTrails layer of Snap's
+    stage (high-resolution) into a sprite-costume (normal resolution).
+*/
+
+function enableRetinaSupport() {
+/*
+    === contributed by Bartosz Leper ===
+
+    This installs a series of utilities that allow using Canvas the same way
+    on retina and non-retina displays. If the display is a retina one, the
+    underlying dimensions of the Canvas elements are doubled, but this will
+    be transparent to the code that uses Canvas. All dimensions read or
+    written to the Canvas element will be scaled appropriately.
+
+    NOTE: This implementation is not exhaustive; it only implements what is
+    needed by the Snap! UI.
+    
+    [Jens]: like all other retina screen support implementations I've seen
+    Bartosz's patch also does not address putImageData() compatibility when
+    mixing retina-enabled and non-retina canvasses. If you need to manipulate
+    pixels in such mixed canvasses, make sure to "downgrade" them all using
+    normalizeCanvas() below.
+*/
+
+    // Get the window's pixel ratio for canvas elements.
+    // See: http://www.html5rocks.com/en/tutorials/canvas/hidpi/
+    var ctx = document.createElement("canvas").getContext("2d"),
+        backingStorePixelRatio = ctx.webkitBackingStorePixelRatio ||
+            ctx.mozBackingStorePixelRatio ||
+            ctx.msBackingStorePixelRatio ||
+            ctx.oBackingStorePixelRatio ||
+            ctx.backingStorePixelRatio || 1,
+
+    // Unfortunately, it's really hard to make this work well when changing
+    // zoom level, so let's leave it like this right now, and stick to
+    // whatever the ratio was in the beginning.
+        originalDevicePixelRatio = window.devicePixelRatio,
+
+        canvasProto = HTMLCanvasElement.prototype,
+        contextProto = CanvasRenderingContext2D.prototype,
+
+    // [Jens]: keep track of original properties in a dictionary
+    // so they can be iterated over and restored
+        uber = {
+            drawImage: contextProto.drawImage,
+            getImageData: contextProto.getImageData,
+
+            width: Object.getOwnPropertyDescriptor(
+                canvasProto,
+                'width'
+            ),
+            height: Object.getOwnPropertyDescriptor(
+                canvasProto,
+                'height'
+            ),
+            shadowOffsetX: Object.getOwnPropertyDescriptor(
+                contextProto,
+                'shadowOffsetX'
+            ),
+            shadowOffsetY: Object.getOwnPropertyDescriptor(
+                contextProto,
+                'shadowOffsetY'
+            ),
+            shadowBlur: Object.getOwnPropertyDescriptor(
+                contextProto,
+                'shadowBlur'
+            )
+        };
+
+    // [Jens]: only install retina utilities if the display supports them
+    if (backingStorePixelRatio === originalDevicePixelRatio) {return; }
+    // [Jens]: check whether properties can be overridden, needed for Safari
+    if (Object.keys(uber).some(function (any) {
+        var prop = uber[any];
+        return prop.hasOwnProperty('configurable') && (!prop.configurable);
+    })) {return; }
+
+    function getPixelRatio(imageSource) {
+        return imageSource.isRetinaEnabled ?
+            (originalDevicePixelRatio || 1) / backingStorePixelRatio : 1;
+    }
+
+    canvasProto._isRetinaEnabled = true;
+    // [Jens]: remember the original non-retina properties,
+    // so they can be restored again
+    canvasProto._bak = uber;
+
+    Object.defineProperty(canvasProto, 'isRetinaEnabled', {
+        get: function() {
+            return this._isRetinaEnabled;
+        },
+        set: function(enabled) {
+            var prevPixelRatio = getPixelRatio(this);
+            var prevWidth = this.width;
+            var prevHeight = this.height;
+
+            this._isRetinaEnabled = enabled;
+            if (getPixelRatio(this) != prevPixelRatio) {
+                this.width = prevWidth;
+                this.height = prevHeight;
+            }
+        },
+        configurable: true // [Jens]: allow to be deleted an reconfigured
+    });
+
+    Object.defineProperty(canvasProto, 'width', {
+        get: function() {
+            return uber.width.get.call(this) / getPixelRatio(this);
+        },
+        set: function(width) {
+            var pixelRatio = getPixelRatio(this);
+            uber.width.set.call(this, width * pixelRatio);
+            var context = this.getContext('2d');
+            context.restore();
+            context.save();
+            context.scale(pixelRatio, pixelRatio);
+        }
+    });
+
+    Object.defineProperty(canvasProto, 'height', {
+        get: function() {
+            return uber.height.get.call(this) / getPixelRatio(this);
+        },
+        set: function(height) {
+            var pixelRatio = getPixelRatio(this);
+            uber.height.set.call(this, height * pixelRatio);
+            var context = this.getContext('2d');
+            context.restore();
+            context.save();
+            context.scale(pixelRatio, pixelRatio);
+        }
+    });
+
+    contextProto.drawImage = function(image) {
+        var pixelRatio = getPixelRatio(image),
+            sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight;
+        
+        // Different signatures of drawImage() method have different
+        // parameter assignments.
+        switch (arguments.length) {
+            case 9:
+                sx = arguments[1];
+                sy = arguments[2];
+                sWidth = arguments[3];
+                sHeight = arguments[4];
+                dx = arguments[5];
+                dy = arguments[6];
+                dWidth = arguments[7];
+                dHeight = arguments[8];
+                break;
+
+            case 5:
+                sx = 0;
+                sy = 0;
+                sWidth = image.width;
+                sHeight = image.height;
+                dx = arguments[1];
+                dy = arguments[2];
+                dWidth = arguments[3];
+                dHeight = arguments[4];
+                break;
+
+            case 3:
+                sx = 0;
+                sy = 0;
+                sWidth = image.width;
+                sHeight = image.height;
+                dx = arguments[1];
+                dy = arguments[2];
+                dWidth = image.width;
+                dHeight = image.height;
+                break;
+
+            default:
+                throw Error('Called drawImage() with ' + arguments.length +
+                        ' arguments');
+        }
+        uber.drawImage.call(
+                this, image,
+                sx * pixelRatio, sy * pixelRatio,
+                sWidth * pixelRatio, sHeight * pixelRatio,
+                dx, dy,
+                dWidth, dHeight);
+    };
+
+    contextProto.getImageData = function(sx, sy, sw, sh) {
+        var pixelRatio = getPixelRatio(this.canvas);
+        return uber.getImageData.call(
+                this,
+                sx * pixelRatio, sy * pixelRatio,
+                sw * pixelRatio, sh * pixelRatio);
+    };
+
+    Object.defineProperty(contextProto, 'shadowOffsetX', {
+        get: function() {
+            return uber.shadowOffsetX.get.call(this) /
+                getPixelRatio(this.canvas);
+        },
+        set: function(offset) {
+            var pixelRatio = getPixelRatio(this.canvas);
+            uber.shadowOffsetX.set.call(this, offset * pixelRatio);
+        }
+    });
+
+    Object.defineProperty(contextProto, 'shadowOffsetY', {
+        get: function() {
+            return uber.shadowOffsetY.get.call(this) /
+                getPixelRatio(this.canvas);
+        },
+        set: function(offset) {
+            var pixelRatio = getPixelRatio(this.canvas);
+            uber.shadowOffsetY.set.call(this, offset * pixelRatio);
+        }
+    });
+
+    Object.defineProperty(contextProto, 'shadowBlur', {
+        get: function() {
+            return uber.shadowBlur.get.call(this) /
+                getPixelRatio(this.canvas);
+        },
+        set: function(blur) {
+            var pixelRatio = getPixelRatio(this.canvas);
+            uber.shadowBlur.set.call(this, blur * pixelRatio);
+        }
+    });
+}
+
+function isRetinaSupported () {
+    var ctx = document.createElement("canvas").getContext("2d"),
+        backingStorePixelRatio = ctx.webkitBackingStorePixelRatio ||
+            ctx.mozBackingStorePixelRatio ||
+            ctx.msBackingStorePixelRatio ||
+            ctx.oBackingStorePixelRatio ||
+            ctx.backingStorePixelRatio || 1,
+        canvasProto = HTMLCanvasElement.prototype,
+        contextProto = CanvasRenderingContext2D.prototype,
+        uber = {
+            drawImage: contextProto.drawImage,
+            getImageData: contextProto.getImageData,
+
+            width: Object.getOwnPropertyDescriptor(
+                canvasProto,
+                'width'
+            ),
+            height: Object.getOwnPropertyDescriptor(
+                canvasProto,
+                'height'
+            ),
+            shadowOffsetX: Object.getOwnPropertyDescriptor(
+                contextProto,
+                'shadowOffsetX'
+            ),
+            shadowOffsetY: Object.getOwnPropertyDescriptor(
+                contextProto,
+                'shadowOffsetY'
+            ),
+            shadowBlur: Object.getOwnPropertyDescriptor(
+                contextProto,
+                'shadowBlur'
+            )
+        };
+    return backingStorePixelRatio !== window.devicePixelRatio &&
+        !(Object.keys(uber).some(function (any) {
+            var prop = uber[any];
+            return prop.hasOwnProperty('configurable') && (!prop.configurable);
+        })
+    );
+}
+
+function isRetinaEnabled () {
+    return HTMLCanvasElement.prototype.hasOwnProperty('_isRetinaEnabled');
+}
+
+function disableRetinaSupport() {
+    // uninstalls Retina utilities. Make sure to re-create every Canvas
+    // element afterwards
+    var canvasProto, contextProto, uber;
+    if (!isRetinaEnabled()) {return; }
+    canvasProto = HTMLCanvasElement.prototype;
+    contextProto = CanvasRenderingContext2D.prototype;
+    uber = canvasProto._bak;
+    Object.defineProperty(canvasProto, 'width', uber.width);
+    Object.defineProperty(canvasProto, 'height', uber.height);
+    contextProto.drawImage = uber.drawImage;
+    contextProto.getImageData = uber.getImageData;
+    Object.defineProperty(contextProto, 'shadowOffsetX', uber.shadowOffsetX);
+    Object.defineProperty(contextProto, 'shadowOffsetY', uber.shadowOffsetY);
+    Object.defineProperty(contextProto, 'shadowBlur', uber.shadowBlur);
+    delete canvasProto._isRetinaEnabled;
+    delete canvasProto.isRetinaEnabled;
+    delete canvasProto._bak;
+}
+
+function normalizeCanvas(aCanvas, getCopy) {
+    // make sure aCanvas is non-retina, otherwise convert it in place (!)
+    // or answer a normalized copy if the "getCopy" flag is <true>
+    var cpy;
+    if (!aCanvas.isRetinaEnabled) {return aCanvas; }
+    cpy = newCanvas(new Point(aCanvas.width, aCanvas.height), true);
+    cpy.getContext('2d').drawImage(aCanvas, 0, 0);
+    if (getCopy) {return cpy; }
+    aCanvas.isRetinaEnabled = false;
+    aCanvas.width = cpy.width;
+    aCanvas.height = cpy.height;
+    aCanvas.getContext('2d').drawImage(cpy, 0, 0);
+    return aCanvas;
 }
 
 // Colors //////////////////////////////////////////////////////////////
@@ -1927,7 +2367,7 @@ Rectangle.prototype.round = function () {
 Rectangle.prototype.spread = function () {
     // round me by applying floor() to my origin and ceil() to my corner
     // expand by 1 to be on the safe side, this eliminates rounding
-    // artefacts caused by Safari's auto-scaling on retina displays
+    // artifacts caused by Safari's auto-scaling on retina displays
     return this.origin.floor().corner(this.corner.ceil()).expandBy(1);
 };
 
@@ -2079,6 +2519,20 @@ Node.prototype.forAllChildren = function (aFunction) {
     aFunction.call(null, this);
 };
 
+Node.prototype.anyChild = function (aPredicate) {
+    // includes myself
+    var i;
+    if (aPredicate.call(null, this)) {
+        return true;
+    }
+    for (i = 0; i < this.children.length; i += 1) {
+        if (this.children[i].anyChild(aPredicate)) {
+            return true;
+        }
+    }
+    return false;
+};
+
 Node.prototype.allLeafs = function () {
     var result = [];
     this.allChildren().forEach(function (element) {
@@ -2177,7 +2631,7 @@ Morph.uber = Node.prototype;
     single submorph's changes tremendous performance improvements can be
     achieved by setting the trackChanges flag to false before propagating
     the layout changes, setting it to true again and then storing the full
-    bounds of the surrounding morph. An an example refer to the
+    bounds of the surrounding morph. As an example refer to the
 
         fixLayout()
 
@@ -2203,7 +2657,10 @@ function Morph() {
 Morph.prototype.init = function (noDraw) {
     Morph.uber.init.call(this);
     this.isMorph = true;
+    this.image = null;
     this.bounds = new Rectangle(0, 0, 50, 40);
+    this.cachedFullImage = null;
+    this.cachedFullBounds = null;
     this.color = new Color(80, 80, 80);
     this.texture = null; // optional url of a fill-image
     this.cachedTexture = null; // internal cache of actual bg image
@@ -2280,9 +2737,7 @@ Morph.prototype.nextSteps = function (arrayOfFunctions) {
     }
 };
 
-Morph.prototype.step = function () {
-    nop();
-};
+Morph.prototype.step = nop;
 
 // Morph accessing - geometry getting:
 
@@ -2408,6 +2863,9 @@ Morph.prototype.silentMoveBy = function (delta) {
     var children = this.children,
         i = children.length;
     this.bounds = this.bounds.translateBy(delta);
+    if (this.cachedFullBounds) {
+        this.cachedFullBounds = this.cachedFullBounds.translateBy(delta);
+    }
     // ugly optimization avoiding forEach()
     for (i; i > 0; i -= 1) {
         children[i - 1].silentMoveBy(delta);
@@ -2529,7 +2987,12 @@ Morph.prototype.scrollIntoView = function () {
 
 // Morph accessing - dimensional changes requiring a complete redraw
 
-Morph.prototype.setExtent = function (aPoint) {
+Morph.prototype.setExtent = function (aPoint, silently) {
+    // silently avoids redrawing the receiver
+    if (silently) {
+        this.silentSetExtent(aPoint);
+        return;
+    }
     if (!aPoint.eq(this.extent())) {
         this.changed();
         this.silentSetExtent(aPoint);
@@ -2636,31 +3099,33 @@ Morph.prototype.drawCachedTexture = function () {
 */
 
 Morph.prototype.drawOn = function (aCanvas, aRect) {
-    var rectangle, area, delta, src, context, w, h, sl, st;
+    var rectangle, area, delta, src, context, w, h, sl, st,
+        pic = this.cachedFullImage || this.image,
+        bounds = this.cachedFullBounds || this.bounds;
     if (!this.isVisible) {
         return null;
     }
-    rectangle = aRect || this.bounds();
-    area = rectangle.intersect(this.bounds).round();
+    rectangle = aRect || bounds;
+    area = rectangle.intersect(bounds);
     if (area.extent().gt(new Point(0, 0))) {
-        delta = this.position().neg();
-        src = area.copy().translateBy(delta).round();
+        delta = bounds.position().neg();
+        src = area.copy().translateBy(delta);
         context = aCanvas.getContext('2d');
         context.globalAlpha = this.alpha;
 
         sl = src.left();
         st = src.top();
-        w = Math.min(src.width(), this.image.width - sl);
-        h = Math.min(src.height(), this.image.height - st);
+        w = Math.min(src.width(), pic.width - sl);
+        h = Math.min(src.height(), pic.height - st);
 
         if (w < 1 || h < 1) {
             return null;
         }
 
         context.drawImage(
-            this.image,
-            src.left(),
-            src.top(),
+            pic,
+            sl,
+            st,
             w,
             h,
             area.left(),
@@ -2668,42 +3133,6 @@ Morph.prototype.drawOn = function (aCanvas, aRect) {
             w,
             h
         );
-
-    /* "for debugging purposes:"
-
-        try {
-            context.drawImage(
-                this.image,
-                src.left(),
-                src.top(),
-                w,
-                h,
-                area.left(),
-                area.top(),
-                w,
-                h
-            );
-        } catch (err) {
-            alert('internal error\n\n' + err
-                + '\n ---'
-                + '\n canvas: ' + aCanvas
-                + '\n canvas.width: ' + aCanvas.width
-                + '\n canvas.height: ' + aCanvas.height
-                + '\n ---'
-                + '\n image: ' + this.image
-                + '\n image.width: ' + this.image.width
-                + '\n image.height: ' + this.image.height
-                + '\n ---'
-                + '\n w: ' + w
-                + '\n h: ' + h
-                + '\n sl: ' + sl
-                + '\n st: ' + st
-                + '\n area.left: ' + area.left()
-                + '\n area.top ' + area.top()
-                );
-        }
-    */
-
     }
 };
 
@@ -2712,8 +3141,9 @@ Morph.prototype.fullDrawOn = function (aCanvas, aRect) {
     if (!this.isVisible) {
         return null;
     }
-    rectangle = aRect || this.fullBounds();
+    rectangle = aRect || this.cachedFullBounds || this.fullBounds();
     this.drawOn(aCanvas, rectangle);
+    if (this.cachedFullImage) {return; }
     this.children.forEach(function (child) {
         child.fullDrawOn(aCanvas, rectangle);
     });
@@ -2746,11 +3176,10 @@ Morph.prototype.toggleVisibility = function () {
 // Morph full image:
 
 Morph.prototype.fullImageClassic = function () {
-    // why doesn't this work for all Morphs?
-    var fb = this.fullBounds(),
+    var fb = this.cachedFullBounds || this.fullBounds(), // use the cache since fullDrawOn() will
         img = newCanvas(fb.extent()),
         ctx = img.getContext('2d');
-    ctx.translate(-this.bounds.origin.x, -this.bounds.origin.y);
+    ctx.translate(-fb.origin.x, -fb.origin.y);
     this.fullDrawOn(img, fb);
     img.globalAlpha = this.alpha;
     return img;
@@ -2907,7 +3336,9 @@ Morph.prototype.fullChanged = function () {
     if (this.trackChanges) {
         var w = this.root();
         if (w instanceof WorldMorph) {
-            w.broken.push(this.fullBounds().spread());
+            w.broken.push(
+                (this.cachedFullBounds || this.fullBounds()).spread()
+            );
         }
     }
 };
@@ -4512,6 +4943,60 @@ CursorMorph.prototype.init = function (aStringOrTextMorph) {
         this.target.setAlignmentToLeft();
     }
     this.gotoSlot(this.slot);
+    this.initializeClipboardHandler();
+};
+
+CursorMorph.prototype.initializeClipboardHandler = function () {
+    // Add hidden text box for copying and pasting
+    var myself = this;
+
+    this.clipboardHandler = document.createElement('textarea');
+    this.clipboardHandler.style.position = 'absolute';
+    this.clipboardHandler.style.right = '101%'; // placed just out of view
+
+    document.body.appendChild(this.clipboardHandler);
+
+    this.clipboardHandler.value = this.target.selection();
+    this.clipboardHandler.focus();
+    this.clipboardHandler.select();
+
+    this.clipboardHandler.addEventListener(
+        'keypress',
+        function (event) {
+            myself.processKeyPress(event);
+            this.value = myself.target.selection();
+            this.select();
+        },
+        false
+    );
+
+    this.clipboardHandler.addEventListener(
+        'keydown',
+        function (event) {
+            myself.processKeyDown(event);
+            this.value = myself.target.selection();
+            this.select();
+            
+            // Make sure tab prevents default
+            if (event.keyIdentifier === 'U+0009' ||
+                    event.keyIdentifier === 'Tab') {
+                myself.processKeyPress(event);
+                event.preventDefault();
+            }
+        },
+        false
+    );
+    
+    this.clipboardHandler.addEventListener(
+        'input',
+        function (event) {
+            if (this.value === '') {
+                myself.gotoSlot(myself.target.selectionStartSlot());
+                myself.target.deleteSelection();
+            }
+        },
+        false
+    );
 };
 
 // CursorMorph event processing:
@@ -4531,7 +5016,7 @@ CursorMorph.prototype.processKeyPress = function (event) {
         return null;
     }
     if (event.keyCode) { // Opera doesn't support charCode
-        if (event.ctrlKey) {
+        if (event.ctrlKey && (!event.altKey)) {
             this.ctrl(event.keyCode, event.shiftKey);
         } else if (event.metaKey) {
             this.cmd(event.keyCode, event.shiftKey);
@@ -4542,7 +5027,7 @@ CursorMorph.prototype.processKeyPress = function (event) {
             );
         }
     } else if (event.charCode) { // all other browsers
-        if (event.ctrlKey) {
+        if (event.ctrlKey && (!event.altKey)) {
             this.ctrl(event.charCode, event.shiftKey);
         } else if (event.metaKey) {
             this.cmd(event.charCode, event.shiftKey);
@@ -4561,7 +5046,7 @@ CursorMorph.prototype.processKeyDown = function (event) {
     // this.inspectKeyEvent(event);
     var shift = event.shiftKey;
     this.keyDownEventUsed = false;
-    if (event.ctrlKey) {
+    if (event.ctrlKey && (!event.altKey)) {
         this.ctrl(event.keyCode, event.shiftKey);
         // notify target's parent of key event
         this.target.escalateEvent('reactToKeystroke', event);
@@ -4865,7 +5350,23 @@ CursorMorph.prototype.destroy = function () {
         this.target.drawNew();
         this.target.changed();
     }
+    this.destroyClipboardHandler();
     CursorMorph.uber.destroy.call(this);
+};
+
+CursorMorph.prototype.destroyClipboardHandler = function () {
+    var nodes = document.body.children,
+        each,
+        i;
+    if (this.clipboardHandler) {
+        for (i = 0; i < nodes.length; i += 1) {
+            each = nodes[i];
+            if (each === this.clipboardHandler) {
+                document.body.removeChild(this.clipboardHandler);
+                this.clipboardHandler = null;
+            }
+        }
+    }
 };
 
 // CursorMorph utilities:
@@ -8912,6 +9413,7 @@ ScrollFrameMorph.prototype.mouseDownLeft = function (pos) {
         return null;
     }
     var world = this.root(),
+        hand = world.hand,
         oldPos = pos,
         myself = this,
         deltaX = 0,
@@ -8920,10 +9422,18 @@ ScrollFrameMorph.prototype.mouseDownLeft = function (pos) {
 
     this.step = function () {
         var newPos;
-        if (world.hand.mouseButton &&
-                (world.hand.children.length === 0) &&
-                (myself.bounds.containsPoint(world.hand.position()))) {
-            newPos = world.hand.bounds.origin;
+        if (hand.mouseButton &&
+                (hand.children.length === 0) &&
+                (myself.bounds.containsPoint(hand.bounds.origin))) {
+
+            if (hand.grabPosition &&
+                (hand.grabPosition.distanceTo(hand.position()) <=
+                    MorphicPreferences.grabThreshold)) {
+                // still within the grab threshold
+                return null;
+            }
+
+            newPos = hand.bounds.origin;
             deltaX = newPos.x - oldPos.x;
             if (deltaX !== 0) {
                 myself.scrollX(deltaX);
@@ -9444,7 +9954,7 @@ function HandMorph(aWorld) {
 // HandMorph initialization:
 
 HandMorph.prototype.init = function (aWorld) {
-    HandMorph.uber.init.call(this);
+    HandMorph.uber.init.call(this, true);
     this.bounds = new Rectangle();
 
     // additional properties:
@@ -9452,6 +9962,7 @@ HandMorph.prototype.init = function (aWorld) {
     this.mouseButton = null;
     this.mouseOverList = [];
     this.morphToGrab = null;
+    this.grabPosition = null;
     this.grabOrigin = null;
     this.temporaries = [];
     this.touchHoldTimeout = null;
@@ -9516,6 +10027,8 @@ HandMorph.prototype.grab = function (aMorph) {
         if (aMorph.prepareToBeGrabbed) {
             aMorph.prepareToBeGrabbed(this);
         }
+        aMorph.cachedFullImage = aMorph.fullImageClassic();
+        aMorph.cachedFullBounds = aMorph.fullBounds();
         this.add(aMorph);
         this.changed();
         if (oldParent && oldParent.reactToGrabOf) {
@@ -9531,6 +10044,8 @@ HandMorph.prototype.drop = function () {
         target = this.dropTargetFor(morphToDrop);
         this.changed();
         target.add(morphToDrop);
+        morphToDrop.cachedFullImage = null;
+        morphToDrop.cachedFullBounds = null;
         morphToDrop.changed();
         morphToDrop.removeShadow();
         this.children = [];
@@ -9541,7 +10056,6 @@ HandMorph.prototype.drop = function () {
         if (target.reactToDropOf) {
             target.reactToDropOf(morphToDrop, this);
         }
-        this.dragOrigin = null;
     }
 };
 
@@ -9568,6 +10082,7 @@ HandMorph.prototype.processMouseDown = function (event) {
     this.destroyTemporaries();
     this.contextMenuEnabled = true;
     this.morphToGrab = null;
+    this.grabPosition = null;
     if (this.children.length !== 0) {
         this.drop();
         this.mouseButton = null;
@@ -9595,6 +10110,7 @@ HandMorph.prototype.processMouseDown = function (event) {
         }
         if (!morph.mouseMove) {
             this.morphToGrab = morph.rootForGrab();
+            this.grabPosition = this.bounds.origin.copy();
         }
         if (event.button === 2 || event.ctrlKey) {
             this.mouseButton = 'right';
@@ -9704,8 +10220,7 @@ HandMorph.prototype.processMouseMove = function (event) {
         mouseOverNew,
         myself = this,
         morph,
-        topMorph,
-        fb;
+        topMorph;
 
     pos = new Point(
         event.pageX - posInDocument.x,
@@ -9729,7 +10244,11 @@ HandMorph.prototype.processMouseMove = function (event) {
         }
 
         // if a morph is marked for grabbing, just grab it
-        if (this.mouseButton === 'left' && this.morphToGrab) {
+        if (this.mouseButton === 'left' &&
+                this.morphToGrab &&
+                (this.grabPosition.distanceTo(this.bounds.origin) >
+                    MorphicPreferences.grabThreshold)) {
+            this.setPosition(this.grabPosition);
             if (this.morphToGrab.isDraggable) {
                 morph = this.morphToGrab;
                 this.grab(morph);
@@ -9743,16 +10262,7 @@ HandMorph.prototype.processMouseMove = function (event) {
                 this.grab(morph);
                 this.grabOrigin = this.morphToGrab.situation();
             }
-            if (morph) {
-                // if the mouse has left its fullBounds, allow to center it
-                fb = morph.fullBounds();
-                if (!fb.containsPoint(pos) &&
-                        morph.isCorrectingOutsideDrag()) {
-                    this.bounds.origin = fb.center();
-                    this.grab(morph);
-                    this.setPosition(pos);
-                }
-            }
+            this.setPosition(pos);
         }
     }
 
@@ -9867,7 +10377,7 @@ HandMorph.prototype.processDrop = function (event) {
             target = target.parent;
         }
         pic.onload = function () {
-            canvas = newCanvas(new Point(pic.width, pic.height));
+            canvas = newCanvas(new Point(pic.width, pic.height), true);
             canvas.getContext('2d').drawImage(pic, 0, 0);
             target.droppedImage(canvas, aFile.name);
         };
@@ -9958,7 +10468,7 @@ HandMorph.prototype.processDrop = function (event) {
             }
             img = new Image();
             img.onload = function () {
-                canvas = newCanvas(new Point(img.width, img.height));
+                canvas = newCanvas(new Point(img.width, img.height), true);
                 canvas.getContext('2d').drawImage(img, 0, 0);
                 target.droppedImage(canvas);
             };
@@ -9970,7 +10480,7 @@ HandMorph.prototype.processDrop = function (event) {
         }
         img = new Image();
         img.onload = function () {
-            canvas = newCanvas(new Point(img.width, img.height));
+            canvas = newCanvas(new Point(img.width, img.height), true);
             canvas.getContext('2d').drawImage(img, 0, 0);
             target.droppedImage(canvas);
         };
@@ -10110,22 +10620,16 @@ WorldMorph.prototype.doOneCycle = function () {
 };
 
 WorldMorph.prototype.fillPage = function () {
-    var pos = getDocumentPositionOf(this.worldCanvas),
-        clientHeight = window.innerHeight,
+    var clientHeight = window.innerHeight,
         clientWidth = window.innerWidth,
         myself = this;
 
+    this.worldCanvas.style.position = "absolute";
+    this.worldCanvas.style.left = "0px";
+    this.worldCanvas.style.right = "0px";
+    this.worldCanvas.style.width = "100%";
+    this.worldCanvas.style.height = "100%";
 
-    if (pos.x > 0) {
-        this.worldCanvas.style.position = "absolute";
-        this.worldCanvas.style.left = "0px";
-        pos.x = 0;
-    }
-    if (pos.y > 0) {
-        this.worldCanvas.style.position = "absolute";
-        this.worldCanvas.style.top = "0px";
-        pos.y = 0;
-    }
     if (document.documentElement.scrollTop) {
         // scrolled down b/c of viewport scaling
         clientHeight = document.documentElement.clientHeight;
@@ -10220,14 +10724,12 @@ WorldMorph.prototype.initVirtualKeyboard = function () {
                 myself.keyboardReceiver.processKeyDown(event);
             }
             // supress backspace override
-            if (event.keyIdentifier === 'U+0008' ||
-                    event.keyIdentifier === 'Backspace') {
+            if (event.keyCode === 8) {
                 event.preventDefault();
             }
             // supress tab override and make sure tab gets
             // received by all browsers
-            if (event.keyIdentifier === 'U+0009' ||
-                    event.keyIdentifier === 'Tab') {
+            if (event.keyCode === 9) {
                 if (myself.keyboardReceiver) {
                     myself.keyboardReceiver.processKeyPress(event);
                 }
@@ -10352,21 +10854,19 @@ WorldMorph.prototype.initEventListeners = function () {
                 myself.keyboardReceiver.processKeyDown(event);
             }
             // supress backspace override
-            if (event.keyIdentifier === 'U+0008' ||
-                    event.keyIdentifier === 'Backspace') {
+            if (event.keyCode === 8) {
                 event.preventDefault();
             }
             // supress tab override and make sure tab gets
             // received by all browsers
-            if (event.keyIdentifier === 'U+0009' ||
-                    event.keyIdentifier === 'Tab') {
+            if (event.keyCode === 9) {
                 if (myself.keyboardReceiver) {
                     myself.keyboardReceiver.processKeyPress(event);
                 }
                 event.preventDefault();
             }
-            if ((event.ctrlKey || event.metaKey) &&
-                    (event.keyIdentifier !== 'U+0056')) { // allow pasting-in
+            if ((event.ctrlKey && (!event.altKey) || event.metaKey) &&
+                    (event.keyCode !== 86)) { // allow pasting-in
                 event.preventDefault();
             }
         },

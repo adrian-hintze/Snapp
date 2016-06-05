@@ -24,7 +24,7 @@ IDE_Morph.prototype.init = function (isAutoFill) {
 	this.serializer = new SnapSerializer();
 	this.globalVariables = new VariableFrame();
 	this.stage = null;
-	this.isAutoFill = isAutoFill || true;
+	this.isAutoFill = isAutoFill === undefined ? true : isAutoFill;
 	this.isAppMode = false;
 	this.isSmallStage = false;
 	this.isAnimating = true;
@@ -140,7 +140,9 @@ IDE_Morph.prototype.applySavedSettings = function () {
 		longform = this.getSetting('longform'),
 		longurls = this.getSetting('longurls'),
 		plainprototype = this.getSetting('plainprototype'),
-		keyboard = this.getSetting('keyboard');
+		keyboard = this.getSetting('keyboard'),
+		tables = this.getSetting('tables'),
+		tableLines = this.getSetting('tableLines');
 	if (!(design === 'flat')) {
 		this.setDefaultDesign();
 	}
@@ -150,6 +152,18 @@ IDE_Morph.prototype.applySavedSettings = function () {
 	}
 	if (click && !BlockMorph.prototype.snapSound) {
 		BlockMorph.prototype.toggleSnapSound();
+	}
+	if (tables) {
+		List.prototype.enableTables = true;
+	}
+	else {
+		List.prototype.enableTables = false;
+	}
+	if (tableLines) {
+		TableMorph.prototype.highContrast = true;
+	}
+	else {
+		TableMorph.prototype.highContrast = false;
 	}
 };
 
@@ -187,7 +201,7 @@ IDE_Morph.prototype.toggleZebraColoring = function () {
 		BlockMorph.prototype.zebraContrast = 0;
 	}
 	this.stage.children.concat(this.stage).forEach(function (morph) {
-		if (morph instanceof SpriteMorph || morph instanceof StageMorph) {
+		if (isSnapObject(morph)) {
 			scripts = scripts.concat(morph.scripts.children.filter(function (morph) {
 				return morph instanceof BlockMorph;
 			}));

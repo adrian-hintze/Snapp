@@ -249,12 +249,16 @@ SnapSerializer.prototype.loadSounds = function (object, model) {
 SnapSerializer.prototype.loadVariables = function (varFrame, element) {
 	var myself = this;
 	element.children.forEach(function (child) {
-		var value;
+		var v,
+value;
 		if (child.tag !== 'variable') {
 			return;
 		}
 		value = child.children[0];
-		varFrame.vars[child.attributes.name] = new Variable(value ? myself.loadValue(value) : 0);
+		v = new Variable();
+		v.isTransient = (child.attributes.transient === 'true');
+		v.value = (v.isTransient || !value) ? 0 : myself.loadValue(value);
+		varFrame.vars[child.attributes.name] = v;
 	});
 };
 
@@ -264,6 +268,7 @@ SnapSerializer.prototype.loadCustomBlocks = function (object, element, isGlobal)
 		var definition,
 			names,
 			inputs,
+			vars,
 			header,
 			code,
 			comment,
@@ -299,6 +304,7 @@ SnapSerializer.prototype.loadCustomBlocks = function (object, element, isGlobal)
 				definition.declarations[names[i]] = [child.attributes.type, child.contents, options ? options.contents : undefined, child.attributes.readonly === 'true'];
 			});
 		}
+		vars = child.childNamed('variables');
 		header = child.childNamed('header');
 		if (header) {
 			definition.codeHeader = header.contents;
@@ -395,7 +401,12 @@ SnapSerializer.prototype.loadScript = function (model) {
 			return;
 		}
 		if (block) {
-			block.nextBlock(nextBlock);
+			if (block.nextBlock && (nextBlock instanceof CommandBlockMorph)) {
+				block.nextBlock(nextBlock);
+			}
+			else {
+				return topBlock;
+			}
 		}
 		else {
 			topBlock = nextBlock;
@@ -454,7 +465,7 @@ SnapSerializer.prototype.loadBlock = function (model, isReporter) {
 	block.isDraggable = true;
 	inputs = block.inputs();
 	model.children.forEach(function (child, i) {
-		if (!(child.tag === 'comment')) if (child.tag === 'receiver') {
+		if (!(child.tag === 'variables')) if (!(child.tag === 'comment')) if (child.tag === 'receiver') {
 			nop();
 		}
 		else {
@@ -467,7 +478,7 @@ SnapSerializer.prototype.loadBlock = function (model, isReporter) {
 
 SnapSerializer.prototype.obsoleteBlock = function (isReporter) {
 	var block = isReporter ? new ReporterBlockMorph() : new CommandBlockMorph();
-	block.selector = 'nop';
+	block.selector = 'errorObsolete';
 	block.color = new Color(200, 0, 20);
 	block.setSpec('Obsolete!');
 	block.isDraggable = true;
@@ -518,6 +529,7 @@ SnapSerializer.prototype.loadInput = function (model, input, block) {
 
 SnapSerializer.prototype.loadValue = function (model) {
 	var v,
+		lst,
 		items,
 		el,
 		center,
@@ -550,30 +562,30 @@ SnapSerializer.prototype.loadValue = function (model) {
 			return model.contents === 'true';
 		case 'list':
 			if (model.attributes.hasOwnProperty('linked')) {
+				v = new List();
+				v.isLinked = true;
+				record();
+				lst = v;
 				items = model.childrenNamed('item');
-				if (items.length === 0) {
-					v = new List();
-					record();
-					return v;
-				}
 				items.forEach(function (item) {
 					var value = item.children[0];
-					if (v === undefined) {
-						v = new List();
-						record();
-					}
-					else {
-						v = v.rest = new List();
-					}
-					v.isLinked = true;
 					if (!value) {
 						v.first = 0;
 					}
 					else {
 						v.first = myself.loadValue(value);
 					}
+					var tail = model.childNamed('list') || model.childNamed('ref');
+					if (tail) {
+						v.rest = myself.loadValue(tail);
+					}
+					else {
+						v.rest = new List();
+						v = v.rest;
+						v.isLinked = true;
+					}
 				});
-				return v;
+				return lst;
 			}
 			v = new List();
 			record();
@@ -688,7 +700,7 @@ SnapSerializer.prototype.loadValue = function (model) {
 				else {
 					v = new Costume(null, name, center);
 					image.onload = function () {
-						var canvas = newCanvas(new Point(image.width, image.height)),
+						var canvas = newCanvas(new Point(image.width, image.height), true),
 							context = canvas.getContext('2d');
 						context.drawImage(image, 0, 0);
 						v.contents = canvas;

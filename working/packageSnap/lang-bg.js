@@ -1,6 +1,8 @@
 /*
 
-    lang-nl.js
+    lang-bg.js
+
+    Bulgarian translation for SNAP!
 
     This file is part of Snap!.
 
@@ -160,91 +162,92 @@
 
 /*global SnapTranslator*/
 
-SnapTranslator.dict.nl = {
+SnapTranslator.dict.bg = {
 
 /*
     Special characters: (see <http://0xcc.net/jsescape/>)
 
-    Ä, ä   \u00c4, \u00e4
-    Ö, ö   \u00d6, \u00f6
-    Ü, ü   \u00dc, \u00fc
-    ß      \u00df
+    ,    \u00c4, \u00e4
+
+,    \u00d6, \u00f6
+    ,    \u00dc, \u00fc
+    §      \u00df
 */
 
     // translations meta information
     'language_name':
-        'Nederlands', // the name as it should appear in the language menu
+        'Български', // the name as it should appear in the language menu
     'language_translator':
-        'Sjoerd Dirk Meijer, Frank Sierens', // your name for the Translators tab
+        'Иван Савов', // your name for the Translators tab
     'translator_e-mail':
-        'sjoerddirk@fromScratchEd.nl, frank.sierens@telenet.be', // optional
+        'ivan.savov@gmail.com', // optional
     'last_changed':
-        '2015-12-15', // this, too, will appear in the Translators tab
+        '2015-11-02', // this, too, will appear in the Translators tab
 
     // GUI
     // control bar:
     'untitled':
-        'zonder titel',
+        'Без име',
     'development mode':
-        'ontwikkelmodus',
+        'Режим за програмисти',
 
     // categories:
     'Motion':
-        'Bewegen',
+        'Движение',
     'Looks':
-        'Uiterlijk',
+        'Външност',
     'Sound':
-        'Geluid',
+        'Звуци',
     'Pen':
-        'Pen',
+        'Молив',
     'Control':
-        'Besturen',
+        'Управление',
     'Sensing':
-        'Waarnemen',
+        'Сензори',
     'Operators':
-        'Functies',
+        'Оператори',
     'Variables':
-        'Variabelen',
+        'Променливи',
     'Lists':
-        'Lijsten',
+        'Списъци',
     'Other':
-        'Overig',
+        'Други',
 
     // editor:
     'draggable':
-        'versleepbaar',
+        'движимо',
 
     // tabs:
     'Scripts':
-        'Scripts',
+        'Скриптове',
     'Costumes':
-        'Uiterlijken',
+        'Костюми',
     'Sounds':
-        'Geluiden',
+        'Звуци',
 
     // names:
     'Sprite':
-        'Sprite',
+        'Спрайт',
     'Stage':
-        'Speelveld',
+        'Сцена',
 
     // rotation styles:
     'don\'t rotate':
-        'niet draaibaar',
+        'не се върти',
     'can rotate':
-        'draaibaar',
+        'върти се',
     'only face left/right':
-        'alleen links/rechts draaibaar',
+        'само ляво-дясно ориентация',
 
     // new sprite button:
     'add a new sprite':
-        'een nieuwe sprite toevoegen',
+        'Добави нов спрайт',
 
     // tab help
     'costumes tab help':
-        'help uiterlijkentab',
+        'импортирай изображения от друг уеб-сайт\nили от твоя компютър пускайки ги тук',
     'import a sound from your computer\nby dragging it into here':
-        'importeer een geluid vanaf je computer\ndoor deze hierin te slepen',
+        'добави звуци от твоя компютър\nпускайки ги тук ',
 
     // primitive blocks:
 
@@ -280,566 +283,497 @@ SnapTranslator.dict.nl = {
 
     // motion:
     'Stage selected:\nno motion primitives':
-        'Toneel geselecteerd: geen standaardbeweging mogelijk',
+        'Избрана сцена:\nняма блокове с движение',
 
     'move %n steps':
-        'neem %n stappen',
+        'напред с %n стъпки',
     'turn %clockwise %n degrees':
-        'draai %clockwise %n graden',
+        ' %clockwise с %n градуса',
     'turn %counterclockwise %n degrees':
-        'draai %counterclockwise %n graden',
+        'завърти %counterclockwise с %n градуса',
     'point in direction %dir':
-        'wijs naar richting %dir',
+        'обърни се в посока %dir',
     'point towards %dst':
-        'richt naar %dst',
+        'обърни се към %dst',
     'go to x: %n y: %n':
-        'ga naar x: %n y: %n',
+        'премини към x %n y %n',
     'go to %dst':
-        'ga naar %dst',
+        'премини в точка %dst',
     'glide %n secs to x: %n y: %n':
-        'glijd in %n sec. naar x: %n y: %n',
+        'плъзгане %n сек до x %n y %n',
     'change x by %n':
-        'verander x met %n',
+        'промени х с %n',
     'set x to %n':
-        'maak x %n',
+        'настрой х на %n',
     'change y by %n':
-        'verander y met %n',
+        'промени y с %n',
     'set y to %n':
-        'maak y %n',
+        'настрой y на %n',
     'if on edge, bounce':
-        'aan de rand, keer om',
+        'ако е в края, отблъсни се',
     'x position':
-        'x-positie',
+        'x позиция',
     'y position':
-        'y-positie',
+        'y позиция',
     'direction':
-        'richting',
+        'посока',
 
     // looks:
     'switch to costume %cst':
-        'wissel naar uiterlijk %cst',
+        'смени костюм с %cst',
     'next costume':
-        'volgende uiterlijk',
+        'следващия костюм',
     'costume #':
-        'uiterlijk #',
+        'костюм №',
     'say %s for %n secs':
-        'zeg %s gedurende %n sec.',
+        'кажи %s за %n сек',
     'say %s':
-        'zeg %s',
+        'кажи %s',
     'think %s for %n secs':
-        'denk %s gedurende %n sec.',
+        'мисли %s за %n сек',
     'think %s':
-        'denk %s',
+        'мисли %s',
     'Hello!':
-        'Hallo!',
+        'Здрасти!',
     'Hmm...':
-        'Hmm...',
+        'Хмм...',
     'change %eff effect by %n':
-        'verander %eff -effect met %n',
+        'смени %eff ефект с %n',
     'set %eff effect to %n':
-        'maak %eff -effect %n',
+        'настрой ефект %eff на %n',
     'clear graphic effects':
-        'zet grafische effecten uit',
+        'махни ефектите',
     'change size by %n':
-        'verander grootte met %n',
+        'промени размера с %n',
     'set size to %n %':
-        'maak grootte %n %',
+        'настрой размера на %n',
     'size':
-        'grootte',
+        'размер',
     'show':
-        'verschijn',
+        'покажи',
     'hide':
-        'verdwijn',
+        'скрий',
     'go to front':
-        'ga naar voorgrond',
+        'премини най-отпред',
     'go back %n layers':
-        'ga %n lagen terug',
+        'премини с %n слоя назад',
 
     'development mode \ndebugging primitives:':
-        'ontwikkelmodus \ndebugging basisblokken',
+        'Режим за програмисти \nпримитиви за дебъгиране:',
     'console log %mult%s':
-        'console log %mult%s',
+        'напиши в конзолата %mult%s',
     'alert %mult%s':
-        'waarschuwing %mult%s',
+        'предупреждение %mult%s',
 
     // sound:
     'play sound %snd':
-        'start geluid %snd',
+        'пусни звук %snd',
     'play sound %snd until done':
-        'start geluid %snd en wacht',
+        'пусни звук %snd до край',
     'stop all sounds':
-        'stop alle geluiden',
+        'спри всички звуци',
     'rest for %n beats':
-        'pauzeer %n tellen',
+        'пауза за %n такта',
     'play note %n for %n beats':
-        'speel noot %n %n tellen',
+        'пусни нота %n за %n такта',
     'change tempo by %n':
-        'verander tempo met %n',
+        'промени темпото с %n',
     'set tempo to %n bpm':
-        'maak tempo %n bpm',
+        'настрой темпо %n удара в мин.',
     'tempo':
-        'tempo',
+        'темпо',
 
     // pen:
     'clear':
-        'wissen',
+        'изчисти всичко',
     'pen down':
-        'pen neer',
+        'натисни молива',
     'pen up':
-        'pen omhoog',
+        'вдигни молива',
     'set pen color to %clr':
-        'maak penkleur %clr',
+        'избери молив с цвят %clr',
     'change pen color by %n':
-        'verander penkleur met %n',
+        'промени цвята на молива с %n',
     'set pen color to %n':
-        'maak penkleur %n',
+        'избери цвят %n',
     'change pen shade by %n':
-        'verander penschaduw met %n',
+        'промени яркостта с %n',
     'set pen shade to %n':
-        'maak penschaduw %n',
+        'настрой яркостта на %n',
     'change pen size by %n':
-        'verander pengrootte met %n',
+        'промени размера с %n',
     'set pen size to %n':
-        'maak pengrootte %n',
+        'ибери молив с размер %n',
     'stamp':
-        'stempel',
+        'печатче',
 
     // control:
     'when %greenflag clicked':
-        'wanneer %greenflag wordt aangeklikt',
+        'когато %greenflag е кликнат',
     'when %keyHat key pressed':
-        'wanneer %keyHat wordt ingedrukt',
+        'когато бутон %keyHat е натиснат',
     'when I am clicked':
-        'wanneer er op mij wordt geklikt',
+        'когато кликнеш върху мен',
     'when I receive %msgHat':
-        'wanneer ik %msgHat ontvang',
+        'когато получа %msgHat',
     'broadcast %msg':
-        'zend signaal %msg',
+        'изпрати %msg към всички',
     'broadcast %msg and wait':
-        'zend signaal %msg en wacht',
+        'изпрати %msg към всички и изчакай',
     'Message name':
-        'signaalnaam',
-    'message':
-        'signaal',
-    'any message':
-        'elk signaal',
+        'Име на съобщение',
     'wait %n secs':
-        'wacht %n sec.',
+        'изчакай %n сек',
     'wait until %b':
-        'wacht tot %b',
+        'изчакай до %b',
     'forever %c':
-        'herhaal %c',
+        'завинаги %c',
     'repeat %n %c':
-        'herhaal %n keer %c',
+        'повтори %n %c',
     'repeat until %b %c':
-        'herhaal tot %b %c',
+        'повтори докато %b %c',
     'if %b %c':
-        'als %b %c',
+        'ако %b %c',
     'if %b %c else %c':
-        'als %b %c anders %c',
+        'ако %b %c иначе %c',
     'report %s':
-        'rapporteer %s',
+        'резултат %s',
     'stop block':
-        'stop blok',
+        'спри блока',
     'stop script':
-        'stop script',
+        'спри скрипта',
     'stop all %stop':
-        'stop alle %stop',
-    'pause all %pause':
-        'pauzeer alles %pause',
+        'спри всичко %stop',
     'run %cmdRing %inputs':
-        'voer %cmdRing uit %inputs',
+        'изпълни %cmdRing %inputs',
     'launch %cmdRing %inputs':
-        'start %cmdRing %inputs',
+        'пусни %cmdRing %inputs',
     'call %repRing %inputs':
-        'roep %repRing aan %inputs',
+        'извикай %repRing %inputs',
     'run %cmdRing w/continuation':
-        'voer %cmdRing uit en ga door',
+        'изпълни %cmdRing с продължение',
     'call %cmdRing w/continuation':
-        'roep %cmdRing aan en ga door',
+        'извикай %cmdRing с продължение',
     'warp %c':
         'warp %c',
-    'when I start as a clone':
-        'wanneer ik als kloon start',
-    'create a clone of %cln':
-        'maak kloon van %cln',
-    'myself':
-        'mijzelf',
-    'delete this clone':
-        'verwijder deze kloon',
 
     // sensing:
     'touching %col ?':
-        'raak ik %col ?',
+        'допира ли %col ?',
     'touching %clr ?':
-        'raak ik kleur %clr ?',
+        'допира ли %clr ?',
     'color %clr is touching %clr ?':
-        'kleur %clr raakt %clr ?',
+        'цвят %clr допира ли %clr ?',
     'ask %s and wait':
-        'vraag %s en wacht',
+        'попитай %s и изчакай',
     'what\'s your name?':
-        'Hoe heet je?',
+        'как се казваш?',
     'answer':
-        'antwoord',
+        'отговор',
     'mouse x':
-        'muis x',
+        'мишка x-позиция',
     'mouse y':
-        'muis y',
+        'мишка y-позиция',
     'mouse down?':
-        'muis ingedrukt?',
+        'натиснат бутон на мишката?',
     'key %key pressed?':
-        'toets %key ingedrukt?',
+        'бутон %key натиснат?',
     'distance to %dst':
-        'afstand tot %dst',
+        'растояние до %dst',
     'reset timer':
-        'zet tijd op nul',
+        'нулирай таймер',
     'timer':
-        'tijd',
-    '%att of %spr':
-        '%att van %spr',
+        'таймер',
     'http:// %s':
         'http:// %s',
-    'turbo mode?':
-        'turbomodus?',
-    'set turbo mode to %b':
-        'zet turbomodus op %b',
 
     'filtered for %clr':
-        'gefilterd op %clr',
+        'филтър за %clr',
     'stack size':
-        'stapelgrootte',
+        'размер на стека',
     'frames':
-        'beelden',
+        'рамки',
 
     // operators:
     '%n mod %n':
-        '%n modulo %n',
+        '%n модул %n',
     'round %n':
-        'afgerond %n',
+        'закръгли %n',
     '%fun of %n':
-        '%fun van %n',
+        '%fun от %n',
     'pick random %n to %n':
-        'willekeurig getal tussen %n en %n',
+        'произволно число между %n и %n',
     '%b and %b':
-        '%b en %b',
+        '%b и %b',
     '%b or %b':
-        '%b of %b',
+        '%b или %b',
     'not %b':
-        'niet %b',
+        'не %b',
     'true':
-        'waar',
+        'true',
     'false':
-        'onwaar',
+        'false',
     'join %words':
-        'voeg %words samen',
+        'съедини %words',
     'hello':
-        'hallo',
+        'здравейте',
     'world':
-        'wereld',
+        'хора',
     'letter %n of %s':
-        'letter %n van %s',
+        'буква %n от %s',
     'length of %s':
-        'lengte van %s',
+        'дължина на %s',
     'unicode of %s':
-        'unicode waarde van %s',
+        'Unicode на %s',
     'unicode %n as letter':
-        'unicode %n als letter',
+        'буква с Unicode %n',
     'is %s a %typ ?':
-        'is %s een %typ ?',
+        '%s от тип %typ ли е ?',
     'is %s identical to %s ?':
-        'is %s gelijk aan %s ?',
+        '%s идентичен с %s ?',
+
     'type of %s':
-        'type van %s',
+        'тип на %s',
 
     // variables:
     'Make a variable':
-        'Maak een variabele',
+        'Направи променлива',
     'Variable name':
-        'Variabelenaam',
-    'Script variable name':
-        'Scriptvariabelenaam',
+        'Име на променливата',
     'Delete a variable':
-        'Variabele wissen',
+        'Изтрий променлива',
 
     'set %var to %s':
-        'maak %var %s',
+        'настрой %var на стойност %s',
     'change %var by %n':
-        'verander %var met %n',
+        'промени %var с %n',
     'show variable %var':
-        'toon variabele %var',
+        'покажи променлива %var',
     'hide variable %var':
-        'verberg variabele %var',
+        'скрий променлива %var',
     'script variables %scriptVars':
-        'scriptvariabelen %scriptVars',
+        'променливи на скрипта %scriptVars',
 
     // lists:
     'list %exp':
-        'lijst %exp',
+        'списък %exp',
     '%s in front of %l':
-        '%s voor %l',
+        '%s пред %l',
     'item %idx of %l':
-        'item %idx van %l',
+        'елемент %idx от %l',
     'all but first of %l':
-        'alles, behalve de eerste van %l',
+        'всичко осрен първия от %l',
     'length of %l':
-        'lengte van %l',
+        'дължина на %l',
     '%l contains %s':
-        '%l bevat %s',
+        '%l съдържа %s',
     'thing':
-        'ding',
+        'нещо',
     'add %s to %l':
-        'voeg %s in op %l',
+        'добави %s към %l',
     'delete %ida of %l':
-        'verwijder %ida van %l',
+        'изтрий %ida от %l',
     'insert %s at %idx of %l':
-        'voeg %s op %idx aan %l toe',
+        'вмъкни %s на позиция %idx в %l',
     'replace item %idx of %l with %s':
-        'vervang item %idx van %l door %s',
+        'замести елемент %idx в %l с %s',
 
     // other
     'Make a block':
-        'Maak een blok',
+        'Нов блок',
 
     // menus
     // snap menu
     'About...':
-        'Over...',
-    'Reference manual':
-        'Handleiding',
+        'За Snap!',
     'Snap! website':
-        'Snap!-website',
+        'Уебсайт на Snap!',
     'Download source':
-        'Broncode downloaden',
+        'Издърпай програмния код',
     'Switch back to user mode':
-        'Terug naar gebruikersmodus',
+        'Премини към режим на потребителя',
     'disable deep-Morphic\ncontext menus\nand show user-friendly ones':
-        'verlaat Morphic',
+        'изключи deep-Morphic\nконтекст меню',
     'Switch to dev mode':
-        'Naar ontwikkelmodus wisselen',
+        'Премини към режим за порграмисти',
     'enable Morphic\ncontext menus\nand inspectors,\nnot user-friendly!':
-        'gebruik Morphic\nniet gebruikersvriendelijk!',
+        'включи Morphic\nконтекст менюта\nи инспектори,\nмното сложно!',
 
     // project menu
     'Project notes...':
-        'Notities...',
+        'Записки по проекта...',
     'New':
-        'Nieuw',
+        'Нов проект',
     'Open...':
-        'Openen...',
+        'Отвори...',
     'Save':
-        'opslaan',
+        'Запиши',
     'Save As...':
-        'Opslaan als...',
+        'Запиши като...',
     'Import...':
-        'Importeren...',
+        'Импорт...',
     'file menu import hint':
-        'importeer een project,\neen bibliotheek met blokken,\neen uiterlijk of een geluid',
+        'Зареди проект,\nблокова библиотека,\nспрайт или звук',
     'Export project as plain text...':
-        'Project exporteren als tekst...',
+        'Експорт проекта како текст файл...',
     'Export project...':
-        'Project exporteren...',
+        'Експорт на проект...',
     'show project data as XML\nin a new browser window':
-        'Toon projectdata als XML\nin een nieuw browservenster',
+        'Покажи XML данните на проекта\nв нов прозорец на браузъра',
     'Export blocks...':
-        'Blokken exporteren...',
+        'Експорт на блокове...',
     'show global custom block definitions as XML\nin a new browser window':
-        'toon globale aangepaste blokdefinities\nals XML in browser',
+        'Покажи XML дефинициите на custom блокове\nв нов прозорец на браузъра',
     'Import tools':
-        'Importeer tools',
+        'Импорт опции',
     'load the official library of\npowerful blocks':
-        'laad de officiele bibliotheek\nmet krachtige blokken',
-    'Libraries...':
-        'Bibliotheken...',
-    'Import library':
-        'Importeer bibliotheek',
-
-    // cloud menu
-    'Login...':
-        'Inloggen...',
-    'Signup...':
-        'Registeren...',
+        'Зареди официалната библиотеката от мощните блокове',
 
     // settings menu
     'Language...':
-        'Taal...',
-    'Zoom blocks...':
-        'Blokken inzoomen...',
+        'Език...',
     'Blurred shadows':
-        'Onscherpe schaduwen',
+        'Размити сенки',
     'uncheck to use solid drop\nshadows and highlights':
-        'uitvinken om scherpe schaduwen\nen uitlichtingen te krijgen',
+        'откажи за да използваш плътни\nсенки и очертания',
     'check to use blurred drop\nshadows and highlights':
-        'aanvinken om onscherpe schaduwen\nen uitlichtingen te krijgen',
+        'избери за да използваш плътни\nсенки и очертания',
     'Zebra coloring':
-        'Zebrakleuren',
+        'Зеброви цветове',
     'check to enable alternating\ncolors for nested blocks':
-        'afwisselende kleuren voor\ngeneste blokken aanzetten',
+        'избери за да включиш\nалтениращи цветове за блоковете',
     'uncheck to disable alternating\ncolors for nested block':
-        'afwisselende kleuren voor\ngeneste blokken uitzetten',
+        'откажи за да изключиш\nалтениращи цветове за блоковете',
     'Dynamic input labels':
-        'Dynamische inputlabels',
+        'Динамични входни етикети',
     'uncheck to disable dynamic\nlabels for variadic inputs':
-        'dynamische labels voor\nmeervaksinvoer uitzetten',
+        'откажи за да изключиш динамични входни етикети\nза входни с множество стйности',
     'check to enable dynamic\nlabels for variadic inputs':
-        'dynamische labels voor\nmeervaksinvoer aanzetten',
+        'избери за да използваш динамични входни етикети\nза входни с множество стйности',
     'Prefer empty slot drops':
-        'Voorkeur voor lege plaatshouders',
+        'Предпочиай несвързани блокове',
     'settings menu prefer empty slots hint':
-        'lege plaatshouders in instellingenmenu',
+        'избери и новите блокове ще\nотместват старите',
     'uncheck to allow dropped\nreporters to kick out others':
-        'uitschakelen om lege functies\n anderen uit te sluiten',
+        'откажи за да позволиш новите блокове\nда изместват старите',
     'Long form input dialog':
-        'Lang formulier-invoerscherm',
+        'Дълга форма за входни',
     'check to always show slot\ntypes in the input dialog':
-        'aanvinken om data type in\ninvoerscherm te zien',
+        'избери за да са покаже типът\nна всички входните',
     'uncheck to use the input\ndialog in short form':
-        'uitvinken voor verkort invoerscherm',
+        'откажи за да използвап кратка форма\nза входни променливи',
     'Virtual keyboard':
-        'Virtueel toetsenbord',
+        'Виртуална клавиатура',
     'uncheck to disable\nvirtual keyboard support\nfor mobile devices':
-        'uitvinken om het virtueel\ntoetsenbord uit te schakelen\nvoor mobiele toestellen',
+        'откажи за да изключиш виртуалната клавиатура',
     'check to enable\nvirtual keyboard support\nfor mobile devices':
-        'aanvinken om het virtueel\ntoetsenbord in te schakelen\nvoor mobiele toestellen',
+        'избери за да изпозваш виртуална\nклавиатура за мобилни устройства',
     'Input sliders':
-        'Invoer schuifbalk',
+        'Слайдери',
     'uncheck to disable\ninput sliders for\nentry fields':
-        'uitvinken om\nschuifbalken voor invoer\nuit te schakelen',
+        'откажи за да изключиш слайдерите\nза входни полета',
     'check to enable\ninput sliders for\nentry fields':
-        'aanvinken om\nschuifbalken voor invoer\nin te schakelen',
+        'избери за да изпозваш слайдери\nза входни полета',
     'Clicking sound':
-        'Klikgeluid',
+        'Звук на клик',
     'uncheck to turn\nblock clicking\nsound off':
-        'uitvinken om\nklikgeluiden uit te\nschakelen',
+        'откажи за да изключиш звука\nпри кликване върху блок',
     'check to turn\nblock clicking\nsound on':
-        'aanvinken om\nklikgeluid in te\nschakelen',
+        'избери за да включиш звука\nпри кликване върху блок',
     'Animations':
-        'Animaties',
+        'Aнимации',
     'uncheck to disable\nIDE animations':
-        'IDE-animaties\nuitschakelen',
-    'Turbo mode':
-        'Turbomodus',
-    'check to prioritize\nscript execution':
-        'aanvinken om scriptuitvoering\nprioriteit te geven',
-    'uncheck to run scripts\nat normal speed':
-        'uitvinken voor scripuitvoering\nop normale snelheid',
+        'откажи за да изключиш\nIDE aнимациите',
     'check to enable\nIDE animations':
-        'aanvinken om IDE-animaties\ntoe te laten',
+        'избери за да включиш\nIDE aнимациите',
     'Thread safe scripts':
-        'Thread-veilige scripts',
-    'uncheck to allow\nscript reentrance':
-        'uitvinken om niet-\nafgewerkte scripts opnieuw\nte starten',
-    'check to disallow\nscript reentrance':
-        'aanvinken om niet-\nafgewerkte scripts niet opnieuw\n te starten',
-    'Prefer smooth animations':
-        'Voorkeur voor vloeiende animatie',
-    'uncheck for greater speed\nat variable frame rates':
-        'uitvinken voor hogere snelheid\nbij variabele framerates',
-    'check for smooth, predictable\nanimations across computers':
-        'aanvinken voor vloeiende,\nvoorspelbare animaties tussen computers',
+        'Thread safe скриптове',
+    'uncheck to allow\nscript reentrancy':
+        'откажи за да изключиш\nthread safe скриптове',
+    'check to disallow\nscript reentrancy':
+        'избери за да включиш\nthread safe скриптове',
 
     // inputs
     'with inputs':
-        'met invoer',
+        'с вход на данни',
     'input names:':
-        'invoernamen:',
+        'имена на входните данни:',
     'Input Names:':
-        'Invoernamen:',
+        'Имена на входните данни:',
     'input list:':
-        'invoerlijst:',
+        'Вход на списък:',
 
     // context menus:
     'help':
-        'help',
-
-    // palette:
-    'hide primitives':
-        'basisblokken verbergen',
-    'show primitives':
-        'basisblokken tonen',
+        'помощ',
 
     // blocks:
     'help...':
-        'help...',
+        'помощ...',
     'relabel...':
-        'label hernoemen...',
+        'смени етикета...',
     'duplicate':
-        'kopieer',
+        'дупликация',
     'make a copy\nand pick it up':
-        'maak een kopie\nen gebruikt het',
+        'копирай\nи вземи',
     'only duplicate this block':
-        'alleen dit blok kopi\u00EBren',
+        'копирай само този блок',
     'delete':
-        'verwijder',
+        'изтрий',
     'script pic...':
-        'scriptafbeelding...',
+        'изображение на скрипта...',
     'open a new window\nwith a picture of this script':
-        'open een nieuw venster\nmet de afbeelding van dit script',
+        'отвори нов екран\n с изображение на скрипта',
     'ringify':
-        'omringen',
+        'ringify',
     'unringify':
-        'niet omringen',
+        'unringify',
 
     // custom blocks:
     'delete block definition...':
-        'verwijder blokdefinitie',
+        'изтрий дефиницията на блока',
     'edit...':
-        'bewerken...',
+        'редактирай...',
 
     // sprites:
     'edit':
-        'bewerken',
-    'detach from':
-        'losmaken van',
-    'detach all parts':
-        'alle onderdelen losmaken',
+        'редактирай',
     'export...':
-        'exporteren...',
+        'експорт...',
 
     // stage:
     'show all':
-        'toon alles',
-    'pic...':
-        'afbeelding...',
-    'open a new window\nwith a picture of the stage':
-        'open een nieuw\nbrowservenster met een\nafbeelding van het\nspeelveld',
+        'почажи всичко',
 
     // scripting area
     'clean up':
-        'opruimen',
+        'разчисти',
     'arrange scripts\nvertically':
-        'scripts verticaal\nordenen',
+        'вертикално подреждане на скриптовере',
     'add comment':
-        'opmerking toevoegen',
-    'undrop':
-        'ongedaan maken',
-    'undo the last\nblock drop\nin this pane':
-        'de laatste blokbeweging\nongedaan maken',
-    'scripts pic...':
-        'scripts-afbeelding...',
-    'open a new window\nwith a picture of all scripts':
-        'open een nieuw venster\nmet een afbeelding\nvan alle scripts',
+        'добави коментар',
     'make a block...':
-        'maak een blok...',
+        'нов блок...',
 
     // costumes
     'rename':
-        'hernoemen',
+        'Преименуване',
     'export':
-        'exporteren',
+        'Експорт',
     'rename costume':
-        'uiterlijk hernoemen',
+        'Преименуване на костюм',
 
     // sounds
     'Play sound':
-        'Geluid afspelen',
+        'Пусни звука',
     'Stop sound':
-        'Geluid stoppen',
+        'Спри звука',
     'Stop':
-        'Stop',
+        'Стоп',
     'Play':
-        'Speel',
+        'Пусни',
     'rename sound':
-        'geluid hernoemen',
+        'Преименувай звука',
 
     // dialogs
     // buttons
@@ -848,248 +782,222 @@ SnapTranslator.dict.nl = {
     'Ok':
         'Ok',
     'Cancel':
-        'Annuleren',
+        'Отмени',
     'Yes':
-        'Ja',
+        'Да',
     'No':
-        'Nee',
+        'Не',
 
     // help
     'Help':
-        'Help',
-
-    // zoom blocks
-    'Zoom blocks':
-        'Blokken inzoomen',
-    'build':
-        'bouw',
-    'your own':
-        'je eigen',
-    'blocks':
-        'blokken',
-    'normal (1x)':
-        'normaal (1x)',
-    'demo (1.2x)':
-        'demo (1.2x)',
-    'presentation (1.4x)':
-        'presentatie (1.4x)',
-    'big (2x)':
-        'groot (2x)',
-    'huge (4x)':
-        'enorm (4x)',
-    'giant (8x)':
-        'gigantisch (8x)',
-    'monstrous (10x)':
-        'monsterlijk (10x)',
+        'Помощ',
 
     // Project Manager
     'Untitled':
-        'Zonder titel',
+        'Без име',
     'Open Project':
-        'Project openen',
+        'Отвори Проект',
     '(empty)':
-        '(leeg)',
+        '(празно)',
     'Saved!':
-        'Opgeslagen!',
+        'Записан!',
     'Delete Project':
-        'Projekt verwijderen',
+        'Изтрий Проект',
     'Are you sure you want to delete':
-        'Weet je zeker dat je wilt verwijderen?',
+        'Сирурен ли си че искаш да изтриеш?',
     'rename...':
-        'hernoemen...',
+        'Преименуване...',
 
     // costume editor
     'Costume Editor':
-        'Uiterlijk bewerken',
+        'Редактор на Костюми',
     'click or drag crosshairs to move the rotation center':
-        'Klik of sleep de kruisdraden om het rotatiecentrum te verplaatsen',
+        'кликни за да преместиш центра на ротацията',
 
     // project notes
     'Project Notes':
-        'Projectnotities',
+        'Записки по проекта',
 
     // new project
     'New Project':
-        'Nieuw project',
+        'Нов Проект',
     'Replace the current project with a new one?':
-        'Vervang het huidige project door een nieuwe?',
+        'Замени проекта с нов?',
 
     // save project
     'Save Project As...':
-        'Project opslaan als...',
+        'Запиши проекта като...',
 
     // export blocks
     'Export blocks':
-        'Exporteer blokkken',
+        'Експорт на блокове',
     'Import blocks':
-        'Importeer blokken',
+        'Импорт на блокове',
     'this project doesn\'t have any\ncustom global blocks yet':
-        'dit project\nbevat nog geen \nglobale blokken',
+        'Този проект не съдъжа\nглобални custom\nблокове',
     'select':
-        'selecteer',
+        'избери',
     'all':
-        'alle',
+        'всичко',
     'none':
-        'niets',
+        'нищо',
 
     // variable dialog
     'for all sprites':
-        'voor alle sprite',
+        'за вскички спрайтове',
     'for this sprite only':
-        'alleen voor deze sprite',
+        'само за този спрайт',
 
     // block dialog
     'Change block':
-        'Blok veranderen',
+        'Замени блок',
     'Command':
-        'Commando',
+        'Команда',
     'Reporter':
-        'Functie',
+        'Репортер',
     'Predicate':
-        'Predicaat',
+        'Предикат',
 
     // block editor
     'Block Editor':
-        'Blok bewerken',
+        'Редактор на блокове',
     'Apply':
-        'Toepassen',
+        'Приложи',
 
     // block deletion dialog
     'Delete Custom Block':
-        'Verwijder aangepast blok',
+        'Изтрий custom блок',
     'block deletion dialog text':
-        'Moet dit blok met al zijn\ninstanties verwijderd worden?',
+        'Сигурен ли си че искаш да изтиреш този блок?',
 
     // input dialog
     'Create input name':
-        'Maak invoernaam',
+        'Направи нов вход с име',
     'Edit input name':
-        'Invoernaam bewerken',
+        'Редактирай име на вход',
     'Edit label fragment':
-        'Labelfragment bewerken',
+        'Редактирай текста етикет',
     'Title text':
-        'Titel',
+        'Текст заглавие',
     'Input name':
-        'Invoernaam',
+        'Име на входа на данни',
     'Delete':
-        'Verwijder',
+        'Изтрий',
     'Object':
-        'Object',
+        'Обект',
     'Number':
-        'Getal',
+        'Число',
     'Text':
-        'Tekst',
+        'Tекст',
     'List':
-        'Lijst',
+        'Списък',
     'Any type':
-        'Elk type',
+        'Произволен тип',
     'Boolean (T/F)':
-        'Booleaans (waar/niet waar)',
+        'Булев (Т/F)',
     'Command\n(inline)':
-        'Opdracht\n(inline)',
+        'Команда\n(inline)',
     'Command\n(C-shape)':
-        'Opdracht\n(C-vorm)',
+        'Команда\n(С-форма)',
     'Any\n(unevaluated)':
-        'Willekeurig\n(onge\u00EBvalueerd)',
+        'Произволен\n(unevaluated)',
     'Boolean\n(unevaluated)':
-        'Booleaans\n(onge\u00EBvalueerd)',
+        'Булев\n(unevaluated)',
     'Single input.':
-        'Enkelvoudige invoer.',
+        'Единичен вход',
     'Default Value:':
-        'Standaardwaarde:',
+        'Default стойност:',
     'Multiple inputs (value is list of inputs)':
-        'Meervoudige invoer (als lijst)',
+        'Множество входни (спиък от данни)',
     'Upvar - make internal variable visible to caller':
-        'Upvar - maak interne variabele zichtbaar voor aanroeper',
+        'Upvar - направи вътрешна променлива видима от извиквача',
 
     // About Snap
     'About Snap':
-        'Over Snap',
+        'За Snap!',
     'Back...':
-        'Vorige...',
+        'Назад...',
     'License...':
-        'Licentie...',
+        'Лиценз...',
     'Modules...':
-        'Module...',
+        'Модули...',
     'Credits...':
-        'Credits...',
+        'Кредити...',
     'Translators...':
-        'Vertalers...',
+        'Преводачи',
     'License':
-        'Licentie',
+        'Лиценз',
     'current module versions:':
-        'huidige moduleversies',
+        'Версии на модулие',
     'Contributors':
-        'Bijdragers',
+        'Участници',
     'Translations':
-        'Vertalingen',
+        'Преводи',
 
     // variable watchers
     'normal':
-        'normaal',
+        'нормален',
     'large':
-        'groot',
+        'голям',
     'slider':
-        'schuifbalk',
+        'слайдер',
     'slider min...':
-        'schuif min...',
+        'слайдер min...',
     'slider max...':
-        'schuif max...',
+        'слайдер max...',
     'import...':
-        'importeren...',
+        'импорт...',
     'Slider minimum value':
-        'Minimumwaarde van schuifbalk',
+        'Слайдер с min стойност',
     'Slider maximum value':
-        'Maximumwaarde van schuifbalk',
+        'Слайдер с max стойност',
 
     // list watchers
     'length: ':
-        'lengte: ',
+        'дължина: ',
 
     // coments
     'add comment here...':
-        'hier commentaar invoegen',
+        'добави коментар тук...',
 
     // drow downs
     // directions
     '(90) right':
-        '(90) rechts',
+        '(90) надясно',
     '(-90) left':
-        '(-90) links',
+        '(-90) наляво',
     '(0) up':
-        '(0) omhoog',
+        '(0) нагоре',
     '(180) down':
-        '(180) omlaag',
+        '(180) надолу',
 
     // collision detection
     'mouse-pointer':
-        'muisaanwijzer',
+        'курсор на мишката',
     'edge':
-        'rand',
+        'край',
     'pen trails':
-        'penspoor',
+        'линии след молива',
 
     // costumes
     'Turtle':
-        'Schildpad',
-    'Empty':
-        'Leeg',
+        'Костенурка',
 
     // graphical effects
     'ghost':
-        'geest',
+        'прозрачност',
 
     // keys
     'space':
-        'spatiebalk',
+        'интервал',
     'up arrow':
-        'pijltje omhoog',
+        'стрелка нагоре',
     'down arrow':
-        'pijltje omlaag',
+        'стрелка надолу',
     'right arrow':
-        'pijltje naar rechts',
+        'стрелка надясно',
     'left arrow':
-        'pijltje naar links',
+        'стрелка наляво',
     'a':
         'a',
     'b':
@@ -1165,15 +1073,13 @@ SnapTranslator.dict.nl = {
 
     // messages
     'new...':
-        'nieuw...',
+        'нов...',
 
     // math functions
     'abs':
-        'abs',
-    'floor':
-        'afgerond',
+        'абсолютна стойност',
     'sqrt':
-        'wortel',
+        'корен квадратен',
     'sin':
         'sin',
     'cos':
@@ -1193,24 +1099,27 @@ SnapTranslator.dict.nl = {
 
     // data types
     'number':
-        'getal',
+        'число',
     'text':
-        'tekst',
+        'текст',
     'Boolean':
-        'booleaans',
+        'булев',
     'list':
-        'lijst',
+        'списък',
     'command':
-        'commando',
+        'команда',
     'reporter':
-        'functie',
+        'репортер',
     'predicate':
-        'predicaat',
+        'предикат',
 
     // list indices
     'last':
-        'laatste',
+        'последен',
     'any':
-        'willekeurig'
+        'някой',
+    'now connected':
+        'конектиран',
+    'undo':
+        'въстанови'
 };
-

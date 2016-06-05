@@ -1,27 +1,27 @@
 /*
 
-	lang-si.js
+    lang-hr.js
 
-	Slovenian translation for SNAP!
+    Croatian translation for SNAP!
 
-	translated by Sasa Divjak
+    written by Jens Mönig
 
-	Copyright (C) 2012 by Jens Mönig
+    Copyright (C) 2014 by Jens Mönig
 
-	This file is part of Snap!.
+    This file is part of Snap!.
 
-	Snap! is free software: you can redistribute it and/or modify
-	it under the terms of the GNU Affero General Public License as
-	published by the Free Software Foundation, either version 3 of
-	the License, or (at your option) any later version.
+    Snap! is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU Affero General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
 
-	You should have received a copy of the GNU Affero General Public License
-	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 
@@ -63,7 +63,6 @@
         pt - Portuguese => SnapTranslator.dict.pt = {
         es - Spanish => SnapTranslator.dict.es = {
         el - Greek => => SnapTranslator.dict.el = {
-		si - Slovenian => => SnapTranslator.dict.si = {
 
     etc. (see <http://en.wikipedia.org/wiki/ISO_639-1>)
 
@@ -145,7 +144,6 @@
         pt - Portuguese => lang-pt.js
         es - Spanish => lang-es.js
         el - Greek => => lang-el.js
-		si - Slovenian => => lang-si.js
 
     and send it to me for inclusion in the official Snap! distribution.
     Once your translation has been included, Your name will the shown in the
@@ -168,92 +166,92 @@
 
 /*global SnapTranslator*/
 
-SnapTranslator.dict.si = {
+SnapTranslator.dict.hr = {
 
 /*
     Special characters: (see <http://0xcc.net/jsescape/>)
 
-   Ss ,    \u0160, \u0161
-   Cc     \u010C, \u010D
-   Zz,   \u017D, \u017E
-
+    Ä, ä   \u00c4, \u00e4
+    Ö, ö   \u00d6, \u00f6
+    Ü, ü   \u00dc, \u00fc
+    ß      \u00df
 */
 
-    // translations meta information
+    // translations meta information 4.0.2.IMA NOVA VERZIJA
     'language_name':
-        'Sloven\u0161\u010Dina', // the name as it should appear in the language menu
+        'Hrvatski', // the name as it should appear in the language menu
     'language_translator':
-        'Sasa Divjak, Gorazd Breskvar', // your name for the Translators tab
+        '\u017Deljko Hrvoj', // your name for the Translators tab
     'translator_e-mail':
-        'sasa.divjak@fri.uni-lj.si', // optional
+        'zeljko.hrvoj@zg.t-com.hr', // optional
     'last_changed':
-        '2016-04-22', // this, too, will appear in the Translators tab
+        '2015-09-15', // this, too, will appear in the Translators tab
 
     // GUI
     // control bar:
     'untitled':
-        'Neimenovan',
+        'bez imena',
     'development mode':
-        'Razvojni na\u010Din',
+        'razvojni na\u010Din',
 
     // categories:
     'Motion':
-        'Premikanje',
+        'Kretanje',
     'Looks':
         'Izgled',
     'Sound':
-        'Zvok',
+        'Zvuk',
     'Pen':
-        'Svin\u010Dnik',
+        'Olovka',
     'Control':
-        'Krmiljenje',
+        'Upravljanje',
     'Sensing':
-        'Zaznavanje',
+        'Osjetila',
     'Operators':
-        'Operatorji',
+        'Operatori',
     'Variables':
-        'Spremenljivke',
+        'Varijable',
     'Lists':
-        'Seznami',
+        'Popisi',
     'Other':
-        'Drugo',
+        'Ostalo',
 
     // editor:
     'draggable':
-        'vle\u010Dljiv',
+        'povla\u010Div',
 
     // tabs:
     'Scripts':
         'Skripte',
     'Costumes':
-        'Obleke',
+        'Kostimi',
     'Sounds':
-        'Zvoki',
+        'Zvukovi',
 
     // names:
     'Sprite':
         'Objekt',
     'Stage':
-        'Oder',
+        'Scena',
 
     // rotation styles:
     'don\'t rotate':
-        'ne vrti',
+        'ne rotiraj',
     'can rotate':
-        'prosto vrtenje',
+        'mo\u017Ee se rotirati',
     'only face left/right':
-        'lahko obrnemo le levo/desno',
+        'gledaj samo lijevo-desno',
 
     // new sprite button:
     'add a new sprite':
-        'dodaj nov objekt',
+        'dodaj novi objekt',
 
     // tab help
     'costumes tab help':
-        'Slike uvozi\u0161 s povle\u010Denjem iz ene druge\n'
-            + 'spletne strani ali ra\u010Dunalnika',
+        'Slike uvozi\u0161 povla\u010Denjem s jedne druge\n'
+            + 'web stranice ili ra\u010Dunala',
     'import a sound from your computer\nby dragging it into here':
-        'Zvok uvozi\u0161 tako, da ga povle\u010De\u0161 sem',
+        'Zvuk uvozi\u0161 tako, da ga povu\u010De\u0161 ovdje',
 
     // primitive blocks:
 
@@ -289,589 +287,566 @@ SnapTranslator.dict.si = {
 
     // motion:
     'Stage selected:\nno motion primitives':
-        'Oder je izbran:\nni na voljo gibljivih gradnikov',
+        'Scena je izabrana, ali je\njo\u0161 bez blokova '
+            + 'kretanja',
 
     'move %n steps':
-        'premakni se %n korakov',
+        'pomakni se %n koraka',
     'turn %clockwise %n degrees':
-        'obrni se %clockwise %n stopinj',
+        'okreni se %clockwise %n stupnjeva',
     'turn %counterclockwise %n degrees':
-        'obrni se %counterclockwise %n stopinj',
+        'okreni se %counterclockwise %n stupnjeva',
     'point in direction %dir':
-        'obrni se v smeri %dir',
+        'okreni se u smjeru %dir',
     'point towards %dst':
-        'obrni se proti %dst',
+        'okreni se prema %dst',
     'go to x: %n y: %n':
-        'pojdi na x: %n y: %n',
+        'kreni prema x: %n y: %n',
     'go to %dst':
-        'pojdi k %dst',
+        'kreni prema %dst',
     'glide %n secs to x: %n y: %n':
-        'drsi %n sekund do x: %n y: %n',
+        'kli\u017Ei %n s do x: %n y: %n',
     'change x by %n':
-        'spremeni x za %n',
+        'promijeni x za %n',
     'set x to %n':
-        'nastavi x na %n',
+        'postavi x na %n',
     'change y by %n':
-        'spremeni y za %n',
+        'promijeni y za %n',
     'set y to %n':
-        'nastavi y na %n',
+        'postavi y na %n',
     'if on edge, bounce':
-        'odbij se, \u010De si na robu',
+        'kad bude\u0161 na rubu, odbij se',
     'x position':
         'polo\u017Eaj x',
     'y position':
         'polo\u017Eaj y',
     'direction':
-        'smer',
+        'smjer',
 
     // looks:
     'switch to costume %cst':
-        'Preklopi na obleko %cst',
+        'prebaci na kostim %cst',
     'next costume':
-        'naslednja obleka',
+        'idu\u0107i kostim',
     'costume #':
-        '\u0160t.obleke',
+        'kostim br.',
     'say %s for %n secs':
-        'reci %s za %n sekund.',
+        'reci %s tokom %n s',
     'say %s':
         'reci %s',
     'think %s for %n secs':
-        'misli %s za %n sekund',
+        'razmi\u0161ljaj %s tokom %n s',
     'think %s':
-        'misli %s',
+        'razmi\u0161ljaj %s',
     'Hello!':
-        'Halo!',
+        'Pozdrav!',
     'Hmm...':
         'Hmm...',
     'change %eff effect by %n':
-        'spremeni u\u010Dinek %eff za %n',
+        'promijeni efekt %eff za %n',
     'set %eff effect to %n':
-        'nastavi u\u010Dinek %eff na %n',
+        'postavi efekt %eff na %n',
     'clear graphic effects':
-        'zbri\u0161i grafi\u010Dne u\u010Dinke',
+        'isklju\u010Di grafi\u010Dke efekte',
     'change size by %n':
-        'spremeni velikost za %n',
+        'promijeni veli\u010Dinu za %n',
     'set size to %n %':
-        'nastavi velikost na %n %',
+        'postavi veli\u010Dinu na %n %',
     'size':
-        'velikost',
+        'veli\u010Dina',
     'show':
-        'prika\u017Ei',
+        'pogledaj',
     'hide':
-        'skrij',
+        'sakrij',
     'go to front':
-        'prestavi v ospredje',
+        'prebaci u prednji plan',
     'go back %n layers':
-        'prestavi %n ravnin nazaj',
+        'idi natrag %n slojeva',
 
     'development mode \ndebugging primitives:':
-        'razvojni na\u010Din \nrazhro\u0161\u010Devanje gradnikov',
+        'razvojni na\u010Din \ndebagiranje osnovnih blokova',
     'console log %mult%s':
-        'izpi\u0161i na konzolo: %mult%s',
+        'ispi\u0161i na konzolu %mult%s',
     'alert %mult%s':
-        'pozor: %mult%s',
+        'upozorenje: %mult%s',
 
     // sound:
     'play sound %snd':
-        'predvajaj zvok %snd',
+        'odsviraj zvuk %snd',
     'play sound %snd until done':
-        'predvajaj zvok %snd do konca',
+        'odsviraj zvuk %snd do kraja',
     'stop all sounds':
-        'ustavi vse zvoke',
+        'zaustavi sve zvukove',
     'rest for %n beats':
-        'po\u010Divaj %n udarcev',
+        'sviraj pauzu tokom %n udaraca',
     'play note %n for %n beats':
-        'predvajaj noto %n za %n udarcev',
+        'sviraj notu %n tokom %n udaraca',
     'change tempo by %n':
-        'spremeni tempo za %n',
+        'promijeni tempo za %n',
     'set tempo to %n bpm':
-        'nastavi tempo na %n udarcev na minuto.',
+        'postavi tempo na %n udar./min.',
     'tempo':
-        'tempo',
+        'Tempo',
 
     // pen:
     'clear':
-        'zbri\u0161i',
+        'obri\u0161i',
     'pen down':
-        'svin\u010Dnik spu\u0161\u010Den',
+        'olovku pritisni',
     'pen up':
-        'svin\u010Dnik dvignjen',
+        'olovku digni',
     'set pen color to %clr':
-        'nastavi barvo svin\u010Dnika na %clr',
+        'postavi boju olovke na %clr',
     'change pen color by %n':
-        'spremeni barvo svin\u010Dnika za %n',
+        'promijeni boju olovke za %n',
     'set pen color to %n':
-        'nastavi barvo svin\u010Dnika na %n',
+        'postavi boju olovke na %n',
     'change pen shade by %n':
-        'spremeni senco svin\u010Dnika za %n',
+        'promijeni sjenu olovke za %n',
     'set pen shade to %n':
-        'nastavi senco svin\u010Dnika na %n',
+        'postavi sjenu olovke na %n',
     'change pen size by %n':
-        'spremeni debelino svin\u010Dnika za %n',
+        'promijeni veli\u010Dinu olovke za %n',
     'set pen size to %n':
-        'nastavi debelino svin\u010Dnika na %n',
+        'postavi veli\u010Dinu olovke na %n',
     'stamp':
-        '\u0161tampiljka',
+        'pe\u010Dat',
 
     // control:
     'when %greenflag clicked':
-        'ko kliknemo na %greenflag',
+        'kad kliknem na %greenflag',
     'when %keyHat key pressed':
-        'ko pritisnemo na tipko %keyHat ',
+        'kad pritisnem tipku %keyHat',
     'when I am %interaction':
-        'Ko je %interaction',
+        'kad me %interaction',
     'clicked':
-        'mi\u0161ka kliknjena',
+        'klikne\u0161',
     'pressed':
-        'gumb mi\u0161ke pritisnjen',
+        'pritisne\u0161',
     'dropped':
-        'konec vle\u010Denja',
+        'ispusti\u0161',
     'mouse-entered':
-        'mi\u0161ka se dotika',
+        'mi\u0161 posjeti',
     'mouse-departed':
-        'mi\u0161ka se ne dotika ve\u010D',
-    'when %b':
-        'Ko je %b',
+        'mi\u0161 napusti',
     'when I receive %msgHat':
-        'ko sprejmem %msgHat',
+        'kad \u010Dujem %msgHat',
     'broadcast %msg':
-        'po\u0161lji %msg vsem',
+        'razglasi %msg',
     'broadcast %msg and wait':
-        'po\u0161lji vsem %msg in po\u010Dakaj',
+        'razglasi %msg i \u010Dekaj odg.',
     'Message name':
-        'Obvestilo',
+        'Ime poruke',
     'message':
-        'sporo\u010Dilo',
+        'poruka',
     'any message':
-        'poljudno sporo\u010Dilo',
+        'bilo koja poruka',
     'wait %n secs':
-        '\u010Dakaj %n sekund.',
+        '\u010Dekaj %n s',
     'wait until %b':
-        '\u010Dakaj, dokler %b',
+        '\u010Dekaj dok je %b',
     'forever %c':
-        'za vedno %c',
+        'zauvijek %c',
     'repeat %n %c':
-        'ponovi %n krat %c',
+        'ponavljaj %n %c',
     'repeat until %b %c':
-        'ponavljaj, dokler %b %c',
+        'ponavljaj dok ne bude %b %c',
     'if %b %c':
-        '\u010De %b %c',
+        'ako %b %c',
     'if %b %c else %c':
-        '\u010De %b %c sicer %c',
+        'ako %b %c ina\u010De %c',
     'report %s':
-        'sporo\u010Di %s',
+        'izvje\u0161\u0107e %s',
     'stop %stopChoices':
-        'ustavi %stopChoices',
+        'zaustavi %stopChoices',
+    'all':
+        'sve',
     'this script':
-        'to skripto',
+        'ovu skriptu',
     'this block':
-        'ta blok',
+        'ovaj blok',
     'stop %stopOthersChoices':
-        'ustavi %stopOthersChoices',
+        'zaustavi %stopOthersChoices',
     'all but this script':
-        'vse razen te skripte',
+        'sve osim ove skripte',
     'other scripts in sprite':
-        'ostale skripte tega objekta',
+        'ostale skripte objekta',
     'pause all %pause':
-        'pavziraj vse %pause',
+        'pauziraj sve %pause',
     'run %cmdRing %inputs':
-        'izvajaj %cmdRing  %inputs',
+        'pokreni %cmdRing  %inputs',
     'launch %cmdRing %inputs':
-        'po\u017Eeni %cmdRing %inputs',
+        'startaj %cmdRing %inputs',
     'call %repRing %inputs':
-        'pokli\u010Di %repRing  %inputs',
+        'pozovi %repRing  %inputs',
     'run %cmdRing w/continuation':
-        'izvajaj %cmdRing z nadaljevanjem',
+        'pokreni %cmdRing s nastavkom',
     'call %cmdRing w/continuation':
-        'pokli\u010Di %cmdRing z nadaljevanjem',
+        'pozovi %cmdRing s nastavkom',
     'warp %c':
-        'Warp %c',
+        'warp %c',
     'when I start as a clone':
-        'ko za\u010Dnem kot klon',
+        'kad startam kao klon',
     'create a clone of %cln':
-        'kloniraj %cln',
+        'stvori klona od %cln',
     'myself':
-        'sebe',
+        'mene',
     'delete this clone':
-        'izbri\u0161i ta klon',
+        'obri\u0161i ovog klona',
 
     // sensing:
     'touching %col ?':
-        'se dotika %col ?',
+        'dodiruje %col ?',
     'touching %clr ?':
-        'se dotika %clr ?',
+        'dodiruje %clr ?',
     'color %clr is touching %clr ?':
-        'barva %clr se dotika %clr ?',
+        'boja %clr dodiruje %clr ?',
     'ask %s and wait':
-        'vpra\u0161aj %s in \u010Dakaj',
+        'pitaj %s i \u010Dekaj',
     'what\'s your name?':
-        'Kako ti je ime?',
+        'kako ti je ime?',
     'answer':
         'odgovor',
     'mouse x':
-        'x polo\u017Eaj mi\u0161ke',
+        'x polo\u017Eaj mi\u0161a',
     'mouse y':
-        'y polo\u017Eaj mi\u0161ke',
+        'y polo\u017Eaj mi\u0161a',
     'mouse down?':
-        'gumb mi\u0161ke pritisnjen?',
+        'gumb mi\u0161a pritisnut?',
     'key %key pressed?':
-        'tipka %key pritisnjena?',
+        'tipka %key pritisnuta?',
     'distance to %dst':
-        'razdalja do %dst',
+        'udaljenost do %dst',
     'reset timer':
-        'reset \u0161toparice',
+        'resetiraj timer',
     'timer':
-        '\u0161toparica',
+        'timer',
+    '%att of %spr':
+        '%att od %spr',
     'http:// %s':
         'http:// %s',
     'turbo mode?':
-        'hitri na\u010Din?',
+        'turbo na\u010Din?',
     'set turbo mode to %b':
-        'nastavi hitri na\u010Din na %b',
-
-    'current %dates':
-        'trenutni %dates',
-    'year':
-        'leto',
-    'month':
-        'mesec',
-    'date':
-        'dan',
-    'day of week':
-        'dan v tednu',
-    'hour':
-        'ura',
-    'minute':
-        'minuta',
-    'second':
-        'sekunda',
-    'time in milliseconds':
-        '\u010Das v tiso\u010Dinkah sekunde',
-
+        'postavi turbo na\u010Din na %b',
 
     'filtered for %clr':
-        'filtriran za %clr',
+        'filtrirano za %clr',
     'stack size':
-        'velikost sklada',
+        'veli\u010Dina stoga',
     'frames':
         'sli\u010Dice',
 
     // operators:
     '%n mod %n':
-        '%n modulo %n',
+        '%n modul %n',
     'round %n':
-        'zaokro\u017Eeno %n',
+        'round %n',
     '%fun of %n':
-        '%fun von %n',
+        '%fun od %n',
     'pick random %n to %n':
-        'naklju\u010Dno \u0161tevilo od %n do %n',
+        'slu\u010Dajni broj od %n do %n',
     '%b and %b':
-        '%b in %b',
+        '%b i %b',
     '%b or %b':
-        '%b ali %b',
+        '%b ili %b',
     'not %b':
         'ne %b',
     'true':
-        'res',
+        'istina',
     'false':
-        'ni res',
+        'la\u017E',
     'join %words':
-        'pove\u017Ei %words',
+        'spoji %words',
     'split %s by %delim':
-        'razdeli %s z %delim',
+        'razdvoji %s kod %delim',
     'hello':
-        'Halo',
+        'pozdrav',
     'world':
-        'Svet',
+        'svijet',
     'letter %n of %s':
-        '\u010Drka %n od %s',
+        'slovo %n od %s',
     'length of %s':
-        'dol\u017Eina %s',
+        'duljina od %s',
     'unicode of %s':
-        'Unicode vrednost od %s',
+        'unicode vrijednost od %s',
     'unicode %n as letter':
-        'Unicode %n kot \u010Drka',
+        'unicode %n kao znak',
     'is %s a %typ ?':
-        'je %s tipa %typ ?',
+        'da li je %s tipa %typ ?',
     'is %s identical to %s ?':
-        'je %s identi\u010Den %s ?',
+        'da li je %s isti kao %s ?',
 
     'type of %s':
-        'Tip od %s',
+        'tip od %s',
 
     // variables:
     'Make a variable':
-        'Nova spremenljivka',
+        'Napravi varijablu',
     'Variable name':
-        'Ime spremenljivke',
+        'Ime varijable',
+    'Script variable name':
+        'Ime skriptne varijable',
     'Delete a variable':
-        'Zbri\u0161i spremenljivko',
+        'Obri\u0161i varijablu',
 
     'set %var to %s':
-        'nastavi %var na %s',
+        'postavi %var na %s',
     'change %var by %n':
-        'spremeni spremenljivko %var za %n',
+        'promijeni varijablu %var za %n',
     'show variable %var':
-        'prika\u017Ei spremenljivko %var',
+        'prika\u017Ei varijablu %var',
     'hide variable %var':
-        'skrij spremenljivko %var',
+        'sakrij varijablu %var',
     'script variables %scriptVars':
-        'spremenljivke programa %scriptVars',
+        'skriptne varijable %scriptVars',
 
     // lists:
     'list %exp':
-        'Seznam %exp',
+        'popis %exp',
     '%s in front of %l':
-        '%s na za\u010Detku %l',
+        '%s ispred %l',
     'item %idx of %l':
-        'Element %idx od %l',
+        'element %idx od %l',
     'all but first of %l':
-        'vsi razen prvega od %l',
+        'svi osim prvog od %l',
     'length of %l':
-        'dol\u017Eina %l',
+        'duljina od %l',
     '%l contains %s':
-        '%l vsebuje %s',
+        '%l sadr\u017Ei %s',
     'thing':
         'stvar',
     'add %s to %l':
-        'dodaj %s k %l',
+        'dodaj %s na %l',
     'delete %ida of %l':
-        'zbri\u0161i %ida iz %l',
+        'obri\u0161i %ida od %l',
     'insert %s at %idx of %l':
-        'vstavi %s na mesto %idx v %l',
+        'ubaci %s na mjesto %idx od %l',
     'replace item %idx of %l with %s':
-        'zamenjaj element %idx v %l z %s',
+        'zamijeni element %idx od %l sa %s',
 
     // other
     'Make a block':
-        'Nov blok',
+        'Napravi blok',
 
     // menus
     // snap menu
     'About...':
-        'Nekaj o Snap!...',
+        'O programu...',
     'Reference manual':
-        'Uporabni\u0161ka navodila',
+        'Korisni\u010Dki priru\u010Dnik',
     'Snap! website':
-        'Spletna stran Snap!',
+        'Snap! web stranica',
     'Download source':
-        'Nalo\u017Ei izvorno kodo',
+        'Skini izvorni kod',
     'Switch back to user mode':
-        'Preklop nazaj na uporabni\u0161ki na\u010Din',
+        'Prebaci natrag na korisni\u0161ki na\u010Din',
     'disable deep-Morphic\ncontext menus\nand show user-friendly ones':
-        'izklop Morfic menujev in prikaz uporabni\u0161ko prijaznih',
+        'onemogu\u0107i deep-Morphic\nkontekstne menije\ni koristi user-friendly menije',
     'Switch to dev mode':
-        'preklop na razvojni na\u010Din',
+        'Prebaci na razvojni na\u010Din',
     'enable Morphic\ncontext menus\nand inspectors,\nnot user-friendly!':
-        'omogo\u010Di  Morphic menuje in in\u0161pektorje, \ni uporabniku prijazno',
+        'omogu\u0107i Morphic\nkontekstne menije\ni inspektore,\nnisu ba\u0161 user-friendly',
 
     // project menu
     'Project notes...':
-        'Opis projekta...',
+        'Napomene o projektu...',
     'New':
-        'Nov',
+        'Novi',
     'Open...':
-        'Odpri...',
+        'Otvori...',
     'Save':
-        'Shrani',
+        'Spremi',
     'Save to disk':
-        'Shrani na disk',
+        'Spremi na disk',
     'store this project\nin the downloads folder\n(in supporting browsers)':
-        'shrani v mapo Prenosi\n'
-            + '(ni na voljo v vseh brkljalnika)',
+        'spremi ovaj projekt u Download mapu'
+            + '(nije podr\u017Eano ba\u0161 kod svih preglednika)',
     'Save As...':
-        'Shrani kot...',
+        'Spremi kao...',
     'Import...':
-        'Uvozi...',
+        'Uvezi...',
     'file menu import hint':
-        'Nalaganje izvo\u017Eenega projekta,\nknji\u017Enice z '
-            + 'bloki\n'
-            + 'obleko ali zvokom',
+        'uvoz izvezenog projekta tj.\nbiblioteke s '
+            + 'blokovima, '
+            + 'kostimima i/ili zvukovima',
     'Export project as plain text...':
-        'Izvozi projekt kot navadno besedilo...',
+        'Izvezi projekt kao obi\u010Dni tekst...',
     'Export project...':
-        'Izvozi projekt...',
+        'Izvoz projekta...',
     'show project data as XML\nin a new browser window':
-        'Prikaz projekta kot XML\nv novem oknu brkljalnika',
+        'prikaz projekta u XML obliku\nu novom prozoru preglednika',
     'Export blocks...':
-        'Izvozi bloke',
+        'Izvoz blokova',
     'show global custom block definitions as XML\nin a new browser window':
-        'Prikaz definicij globalnih lastnih blokov kot XML\nv novem oknu brkljalnika',
-    'Unused blocks...':
-          'Neuporabljeni bloki...',
-    'find unused global custom blocks\nand remove their definitions':
-        'najdi in odstrani uporabni\u0161ke neuporabljene globalne bloke',
-    'Remove unused blocks':
-        'Odstrani neuporabljene bloke',
-    'there are currently no unused\nglobal custom blocks in this project':
-        'trenutno ni neuporabljenih globalnih blokov v tem projektu',
-    'unused block(s) removed':
-        'neuporabljeni bloki so bili odstranjeni',
-    'Export summary...':
-        'Povzetek izvoza...',
+        'prikaz globalnih definicija korisni\u010Dkih blokova u XML obliku\nu novom prozoru preglednika',
     'Import tools':
-        'Uvozi orodja',
+        'Uvezi alate',
     'load the official library of\npowerful blocks':
-        'uvozi uradni modul z naprednimi bloki',
+        'u\u010Ditaj slu\u017Ebenu biblioteku\ns naprednim blokovima',
     'Libraries...':
-        'Knji\u017Enice...',
+        'Biblioteke...',
     'Import library':
-        'Nalo\u017Ei knji\u017Enico',
+        'Uvezi bibloteku',
 
     // cloud menu
     'Login...':
         'Prijava...',
     'Signup...':
-        'Registracija...',
-    'Reset Password...':
-        'Pozabljeno geslo...',
+        'Registracija ra\u010Duna...',
 
     // settings menu
     'Language...':
         'Jezik...',
     'Zoom blocks...':
-        'Pove\u010Daj bloke...',
+        'Zumiraj blokove...',
     'Stage size...':
-        'Velikost scene...',
+        'Veli\u010Dina scene...',
     'Stage size':
-        'Velikost scene',
+        'Veli\u010Dina scene',
     'Stage width':
         '\u0160irina scene',
     'Stage height':
-        'Vi\u0161ina scene',
+        'Visina scene',
     'Default':
-        'Normalno',
+        'Default',
     'Blurred shadows':
-        'Mehke sence',
+        'Zamagljene sjene',
     'uncheck to use solid drop\nshadows and highlights':
-        'izklopi za uporabo trdih senc in osvetlitev',
+        'odzna\u010Di za \u010Dvrste\nsjene i osvjetljenja',
     'check to use blurred drop\nshadows and highlights':
-        'vklopi za mehke sence in osvetlitve',
+        'ozna\u010Di za zamagljene\nsjene i osvjetljenja',
     'Zebra coloring':
-        'barvanje kot zebra',
+        'Zebra boje',
     'check to enable alternating\ncolors for nested blocks':
-        'vklopi izmenjujo\u010De barve vgnezdenih blokov',
+        'ozna\u010Di za nijansiranje\nboja ugnje\u017E\u0111enih blokova',
     'uncheck to disable alternating\ncolors for nested block':
-        'izklopi izmenjujo\u010De barve gnezdenih blokov',
+        'odzna\u010Di da ne nijansiram\nboje ugnje\u017E\u0111enih blokova',
+    'Dynamic input labels':
+        'Dinami\u010Dke oznake parametara',
+    'uncheck to disable dynamic\nlabels for variadic inputs':
+        'odzna\u010Di za isklju\u010Diti\ndinami\u010Dke oznake',
+    'check to enable dynamic\nlabels for variadic inputs':
+        'ozna\u010Di za omogu\u0107iti \ndinami\u010Dke oznake',
     'Prefer empty slot drops':
-        'Imejmo raje prazne re\u017Ee',
+        'Preferiraj spu\u0161tanje u prazne utore',
     'settings menu prefer empty slots hint':
-        'vklop raje namiga za prazne re\u017Ee'
-            + 'zu bevorzugen',
+        'uklju\u010Di da se blokovi radije\nspu\u0161taju na slobodna mjesta pri '
+            + 'postavljanju',
     'uncheck to allow dropped\nreporters to kick out others':
-        'razkljukaj za to, da reporterji odrinejo druge',
+        'odzna\u010Di za to da ispu\u0161tene\nvrijednosti izbacuju druge',
     'Long form input dialog':
-        'Vhodni dialog dolge oblike',
+        'Du\u017Ei dijalog parametara',
+    'Plain prototype labels':
+        'Ozna\u010Davanje blokova',
+    'uncheck to always show (+) symbols\nin block prototype labels':
+        'odzna\u010Di za uvijek prikazati (+) simbol\nu oznakama novih blokova',
+    'check to hide (+) symbols\nin block prototype labels':
+        'ozna\u010Di za sakriti (+) simbol\nu oznakama novih blokova',
     'check to always show slot\ntypes in the input dialog':
-        'odkljukaj za prikaz tipov v vhodnih dialogih',
-    'razkljukaj za uporabo kratke oblike vhodnih dialogov':
-        'razkljukaj za uporabo dialoga kratke oblike',
+        'ozna\u010Di da bi uvijek pokazao\nsve opcije u dijalogu\nparametara',
+    'uncheck to use the input\ndialog in short form':
+        'odzna\u010Di za kratke dijaloge parametara',
     'Virtual keyboard':
-        'Virtualna tipkovnicaa',
+        'Virtualna tipkovnica',
     'uncheck to disable\nvirtual keyboard support\nfor mobile devices':
-        'razkljukaj za izklop podpore virtualne tipkovnice za mobilne naprave',
+        'odzna\u010Di da se\nne koristi virtualna\ntipkovnica za mobilne ure\u0111aje',
     'check to enable\nvirtual keyboard support\nfor mobile devices':
-        'odkljukaj za vklop podpore z virtualni tipkovnico za mobilne naprave',
+        'ozna\u010Di da se\nmo\u017Ee koristiti virtualna\ntipkovnica za mobilne ure\u0111aje',
     'Input sliders':
-        'Vhodni drsniki',
+        'Kliza\u010Di za parametre',
     'uncheck to disable\ninput sliders for\nentry fields':
-        'razkljukaj za izklop vhodnih drsnikov',
+        'odzna\u010Di da isklju\u010Di\u0161\nkliza\u010De vrijednosti\nkod parametara',
     'check to enable\ninput sliders for\nentry fields':
-        'odkljukaj za aktiviranje vhodnih drsnikov',
+        'ozna\u010Di da uklju\u010Di\u0161\nkliza\u010De vrijednosti\n kod parametara',
     'Clicking sound':
-        'Akusti\u010Dno klikanje',
+        'Zvuk klikanja',
     'uncheck to turn\nblock clicking\nsound off':
-        'razkljukaj za deaktiviranje akusti\u010Dnega klikanja',
+        'odzna\u010Di da\nisklju\u010Di\u0161 zvuk\nklikanja bloka',
     'check to turn\nblock clicking\nsound on':
-        'odkljukaj za vklop akusti\u010Dnega klikanja',
+        'ozna\u010Di da\nuklju\u010Di\u0161 zvuk\nklikanja bloka',
     'Animations':
         'Animacije',
     'uncheck to disable\nIDE animations':
-        'razkljukaj za izklop IDE animacij',
+        'odzna\u010Di da onemogu\u0107i\u0161 IDE-\nanimacije',
     'Turbo mode':
-        'Hitri na\u010Din',
+        'Turbo na\u010Din',
     'check to prioritize\nscript execution':
-        'odkljukaj za ve\u010Djo prioriteto izvajanja skript',
+        'ozna\u010Di da da\u0161 prioritet izvr\u0161avanju skripti',
     'uncheck to run scripts\nat normal speed':
-        'razkljukaj za normalno hitrost izvajanja skript',
+        'odzna\u010Di za normalni prioritet izvr\u0161avanja skripti',
     'check to enable\nIDE animations':
-        'odkljukaj za IDE animacije',
+        'ozna\u010Di da se omogu\u0107i\u0161 IDE-\nanimacije',
     'Flat design':
-        'Svetli izgled',
+        'Flat design',
     'Keyboard Editing':
-        'Urejanje s tipkovnico',
-    'Table support':
-        'Podpora za tabele',
-    'Table lines':
-        '\u010Crte med celicami v tabeli',
+        'Ure\u0111ivanje tipkovnicom',
     'Thread safe scripts':
-        'Varnost niti',
+        'Skripte - vi\u0161estrukost',
     'uncheck to allow\nscript reentrance':
-        'razkljukaj za dopu\u0161\u010Danje ve\u010Dkraten vstop skript (reentrancy)',
+        'odzna\u010Di da dopusti\u0161\nvi\u0161ekratni poziv skripti',
     'check to disallow\nscript reentrance':
-        'odkljukaj za onemogo\u010Danje ve\u010Dkratnega vstopa skript',
+        'ozna\u010Di da zabrani\u0161\nvi\u0161ekratni poziv skripti',
     'Prefer smooth animations':
-        'Gladka animacija',
+        'Preferiraj glatke animacije',
     'uncheck for greater speed\nat variable frame rates':
-        'razkljukaj za hitrej\u0161e animacije s spremenljivo hitrostjo osve\u017Eevanja',
+        'odzna\u010Di za ve\u0107u brzinu kod\npromjenljive frekvencije osvje\u017Eavanja',
     'check for smooth, predictable\nanimations across computers':
-        'odkljukaj za bolj predvidljivo hitrost animacij med razli\u010Dnimi ra\u010Dunalniki',
+        'ozna\u010Di za glatke, predvidive animacije na raznim ra\u010Dunalima',
     'Flat line ends':
-        'Ravni zaklju\u010Dki \u010Drt',
+        'Ravni zavr\u0161eci linija',
     'check for flat ends of lines':
-        'odkljukaj za ravne zaklju\u010Dke \u010Drt',
+        'ozna\u010Di za ravne zavr\u0161etke linija',
     'uncheck for round ends of lines':
-        'razkljukaj za zaobljene zaklju\u010Dke \u010Drt',
+        'odzna\u010Di za zaobljene zavr\u0161etke linija',
     'Inheritance support':
-        'Podpora za dedovanje',
+        'Podr\u017Ei naslje\u0111ivanje',
 
     // inputs
     'with inputs':
-        'z vhodi',
+        's parametrima',
     'input names:':
-        'imena vhodov:',
+        'imena parametara:',
     'Input Names:':
-        'imena vhodov:',
+        'Imena parametara:',
     'input list:':
-        'vhodni seznam:',
+        'popis parametara:',
 
     // context menus:
     'help':
-        'Pomo\u010D...',
+        'Pomo\u0107',
 
     // palette:
     'hide primitives':
-        'skrij osnovne bloke',
+        'sakrij osnovne blokove',
     'show primitives':
-        'poka\u017Ei osnovne bloke',
+        'poka\u017Ei osnovne blokove',
 
     // blocks:
     'help...':
-        'pomo\u010D...',
+        'pomo\u0107...',
     'relabel...':
-        'spremeni tip...',
+        'promijeni tip...',
     'duplicate':
-        'podvoji',
+        'dupliciraj',
     'make a copy\nand pick it up':
-        'kopiraj',
+        'napravi kopiju\ni pokupi',
     'only duplicate this block':
-        'podvoji ta blok',
+        'dupliciraj samo taj blok',
     'delete':
-        'bri\u0161i',
+        'izbri\u0161i',
     'script pic...':
-        'slika skript...',
+        'slikaj skriptu...',
     'open a new window\nwith a picture of this script':
-        'odpri novo okno s sliko tega skripta',
+        'otvori novi prozor\nsa slikom te skripte',
     'ringify':
-        'Obkro\u017Ei',
+        'opkru\u017Ei',
     'unringify':
-        'odstrani obro\u010D',
-    'transient':
-        'se ne shranjuje',
+        'odstrani obru\u010D',
 
     // custom blocks:
     'delete block definition...':
-        'bri\u0161i definicijo bloka',
+        'obri\u0161i definiciju bloka',
     'edit...':
         'uredi...',
 
@@ -879,78 +854,68 @@ SnapTranslator.dict.si = {
     'edit':
         'uredi',
     'move':
-        'premakni',
+        'pomakni',
     'detach from':
-        'odklopi',
+        'odlijepi od',
     'detach all parts':
-        'odklopi vse dele',
+        'odlijepi sve dijelove',
     'export...':
-        'izvozi...',
+        'izvezi...',
 
     // stage:
     'show all':
-        'prila\u017Ei vse ',
+        'poka\u017Ei sve',
     'pic...':
-        'izvozi sliko...',
+        'slikaj...',
     'open a new window\nwith a picture of the stage':
-        'odpri novo okno s sliko te scene',
+        'otvori novi prozor\nsa slikom scene',
 
     // scripting area
     'clean up':
-        'po\u010Disti',
+        'poslo\u017Ei',
     'arrange scripts\nvertically':
-        'uredi skripte vertikalno',
+        'poslo\u017Ei skripte\nokomito',
     'add comment':
         'dodaj komentar',
     'undrop':
-        'ponovno povle\u010Di',
+        'poni\u0161ti ispu\u0161tanje',
     'undo the last\nblock drop\nin this pane':
-        'prekli\u010Di dodajanje zadnjega bloka v tem okviru',
+        'poni\u0161ti zadnje ispu\u0161tanje\nbloka u tom okviru',
     'scripts pic...':
-        'slika skript...',
+        'slikaj skriptu...',
     'open a new window\nwith a picture of all scripts':
-        'odpri novo okno s sliko vseh skript',
+        'otvori novi prozor\nsa slikom svih skripti',
     'make a block...':
-        'Gradnja novega bloka...',
+        'napravi blok...',
 
     // costumes
     'rename':
         'preimenuj',
     'export':
-        'izvozi',
+        'izvezi',
     'rename costume':
-        'preimenuj izgled',
+        'preimenuj kostim',
 
     // sounds
     'Play sound':
-        'Predvajaj zvok',
+        'Sviraj zvuk',
     'Stop sound':
-        'Ustavi zvok',
+        'Zaustavi zvuk',
     'Stop':
-        'Ustavi',
+        'Zaustavi',
     'Play':
-        'Predvajaj',
+        'Sviraj',
     'rename sound':
-        'Preimenuj zvok',
-
-    // lists and tables
-    'list view...':
-        'prika\u017Ei kot seznam...',
-    'table view...':
-        'prika\u017Ei kot tabelo',
-    'open in dialog...':
-        'odpri v novem oknu',
-    'items':
-        'elementi',
+        'preimenuj zvuk',
 
     // dialogs
     // buttons
     'OK':
-        'V redu',
+        'OK',
     'Ok':
-        'V redu',
+        'Ok',
     'Cancel':
-        'Prekli\u010Di',
+        'Odustani',
     'Yes':
         'Da',
     'No':
@@ -958,246 +923,247 @@ SnapTranslator.dict.si = {
 
     // help
     'Help':
-        'Pomo\u010D',
+        'Pomo\u0107',
 
     // zoom blocks
     'Zoom blocks':
-        'Pove\u010Daj blok',
+        'Zumiraj blok',
     'build':
-        'zgradi',
+        'napravi',
     'your own':
-        'svoj',
+        'svoje vlastite',
     'blocks':
-        'blok',
+        'blokove',
     'normal (1x)':
-        'normalno (1x)',
+        'normal (1x)',
     'demo (1.2x)':
         'demo (1.2x)',
     'presentation (1.4x)':
-        'predstavitev(1.4x)',
+        'prezentacija (1.4x)',
     'big (2x)':
-        'veliko (2x)',
+        'velik (2x)',
     'huge (4x)':
-        've\u010Dje(4x)',
+        'ogroman (4x)',
     'giant (8x)':
-        'ogromno (8x)',
+        'gigantski (8x)',
     'monstrous (10x)':
-        'najve\u010Dje(10x)',
+        'monstruozni (10x)',
 
     // Project Manager
     'Untitled':
-        'Neimenovano',
+        'Bez imena',
     'Open Project':
-        'Odpri projekt',
+        'Otvori projekt',
     '(empty)':
         '(prazno)',
     'Saved!':
-        'Shranjeno!',
+        'Spremljeno!',
     'Delete Project':
-        'Zbri\u0161i projekt',
+        'Izbrisati projekt',
     'Are you sure you want to delete':
-        'Ste prepri\u010Dani da \u017Eelite izbrisati?',
+        'Jesi siguran da \u017Eeli\u0161 izbrisati?',
     'rename...':
         'preimenuj...',
 
     // costume editor
     'Costume Editor':
-        'Urejevalnik oblek',
+        'Ure\u0111iva\u010D kostima',
     'click or drag crosshairs to move the rotation center':
-        'Klikni ali povle\u010Di kri\u017Eec za premik centra vrtenja',
+        'Klikni ili povuci kri\u017Ei\u0107 za promjenu centra rotacije',
 
     // project notes
     'Project Notes':
-        'Opis projekta',
+        'Napomene o projektu',
 
     // new project
     'New Project':
-        'Nov projekt',
+        'Novi projekt',
     'Replace the current project with a new one?':
-        'Zamenjam trenutni projekt z novim?',
+        'Zamijeniti trenutni projekt s novim?',
 
     // save project
     'Save Project As...':
-        'Shrani projekt kot...',
+        'Spremi projekt kao...',
 
     // export blocks
     'Export blocks':
-        'Izvoz blokov',
+        'Izvezi blokove',
     'Import blocks':
-        'Uvoz blokov',
+        'Uvezi blokove',
     'this project doesn\'t have any\ncustom global blocks yet':
-        'ta projekt \u0161e nima lastnih globalnih blokov',
+        'ovaj projekt nema jo\u0161 nijedan korisni\u010Dki globalni blok',
     'select':
-        'izberi',
-    'all':
-        'vse',
+        'izaberi',
     'none':
-        'ni\u010D',
+        'nijedan',
 
     // variable dialog
     'for all sprites':
-        'za vse objekte',
+        'za sve objekte',
     'for this sprite only':
-        'le za ta objekt',
+        'samo za taj objekt',
 
     // block dialog
     'Change block':
-        'Spremeni blok',
+        'Promijeni blok',
     'Command':
-        'Ukaz',
+        'Naredba',
     'Reporter':
-        'Funkcija',
+        'Vrijednost',
     'Predicate':
-        'Predikat',
+        'Tvrdnja',
 
     // block editor
     'Block Editor':
-        'Urejevalnik blokov',
+        'Ure\u0111iva\u010D blokova',
     'Apply':
-        'Uporabi',
+        'Primijeni',
 
     // block deletion dialog
     'Delete Custom Block':
-        'Zbri\u0161i latni blok',
+        'Obri\u0161i korisni\u010Dki blok',
     'block deletion dialog text':
-        'Ali naj res zbri\u0161em ta blok\n' +
-            'z vsemi njegovimi primeri?',
+        'Da li da obri\u0161em taj blok\n' +
+            'sa svim primjerima?',
 
     // input dialog
     'Create input name':
-        'Tvori ime vhoda',
+        'Kreiraj ime parametra',
     'Edit input name':
-        'Uredi ime vhoda',
+        'Uredi ime parametra',
     'Edit label fragment':
-        'Uredi ime dela',
+        'Uredi oznaku',
     'Title text':
-        'Naslovno besedilo',
+        'Tekst naslova',
     'Input name':
-        'ime vhoda',
+        'Ime parametra',
     'Delete':
-        'Bri\u0161i',
+        'Obri\u0161i',
     'Object':
         'Objekt',
     'Number':
-        '\u0160tevilo',
+        'Broj',
     'Text':
         'Tekst',
     'List':
-        'Seznam',
+        'Popis',
     'Any type':
-        'Poljuben tip',
+        'Bilo koji tip',
     'Boolean (T/F)':
-        'Boolova spr. (W/F)',
+        'Logi\u010Dki (T/F)',
     'Command\n(inline)':
-        'Ukaz',
+        'Naredba\n(u liniji)',
     'Command\n(C-shape)':
-        'Ukaz\n(C-oblika)',
+        'Naredba\n(C-oblika)',
     'Any\n(unevaluated)':
-        'Poljuben\n(neovrednoten)',
+        'Bilo koji\n(neizra\u010Dunat)',
     'Boolean\n(unevaluated)':
-        'Boolova spr.\n(neovrednotena)',
+        'Logi\u010Dki\n(neizra\u010Dunat)',
     'Single input.':
-        'En vnos.',
+        'Jedan parametar.',
     'Default Value:':
-        'Privzeta vrednost:',
+        'Default vrijednost:',
     'Multiple inputs (value is list of inputs)':
-        'Ve\u010D vnosov (kot seznam)',
+        'Vi\u0161e parametara (vrijednost je popis parametara)',
     'Upvar - make internal variable visible to caller':
-        'interne spremenljivke naj bodo navzven vidne',
+        'Interna varijabla vidljiva pozivaocu',
 
     // About Snap
     'About Snap':
-        'nekaj o Snap',
+        'O Snap-u',
     'Back...':
-        'Nazaj...',
+        'Natrag...',
     'License...':
         'Licenca...',
     'Modules...':
-        'Komponente...',
+        'Moduli...',
     'Credits...':
-        'Sodelujo\u010Di...',
+        'Suradnici...',
     'Translators...':
-        'Prevajalci',
+        'Prevoditelji',
     'License':
         'Licenca',
     'current module versions:':
-        'Verzije komponent',
+        'Verzije u\u010Ditanih modula:',
     'Contributors':
-        'Prispevali',
+        'Doprinosioci',
     'Translations':
-        'prevodi',
+        'Prijevodi',
 
     // variable watchers
     'normal':
-        'normalen',
+        'normalno',
     'large':
-        'velik',
+        'veliko',
     'slider':
-        'drsnik',
+        'kliza\u010D',
     'slider min...':
-        'min vrednost...',
+        'kliza\u010D min...',
     'slider max...':
-        'maks vrednost...',
+        'kliza\u010D max...',
     'import...':
-        'uvozi...',
+        'uvezi...',
     'Slider minimum value':
-        'Minimalna vrednost drsnika',
+        'Minimalna vrijednost kliza\u010Da',
     'Slider maximum value':
-        'Maksimalna vrednost drsnika',
+        'Maksimalna vrijednost kliza\u010Da',
 
     // list watchers
     'length: ':
-        'Dol\u017Eina: ',
+        'duljina: ',
 
     // coments
     'add comment here...':
-        'tu vnese\u0161 komentar',
+        'ovdje dodaj komentar...',
 
     // drow downs
     // directions
     '(90) right':
         '(90) desno',
     '(-90) left':
-        '(-90) levo',
+        '(-90) lijevo',
     '(0) up':
-        '(0) gor',
-    '(180) right':
-        '(180) dol',
+        '(0) gore',
+    '(180) down':
+        '(180) dolje',
 
     // collision detection
     'mouse-pointer':
-        'kazalec mi\u0161ke',
+        'strelica mi\u0161a',
     'edge':
-        'rob',
+        'rub',
     'pen trails':
-        'sledi svin\u010Dnika',
+        'tragovi olovke',
 
     // costumes
     'Turtle':
-        'Kazalec smeri',
+        'Kostim zero',
     'Empty':
         'Prazno',
 
     // graphical effects
     'brightness':
-        'svetlost',
+        'svjetlina',
     'ghost':
-        'prosojnost',
+        'prozirnost',
     'negative':
-        'obratno',
+        'negativ',
+    'comic':
+        'komi\u010Dno',
+    'confetti':
+        '\u0161areno',
+
     // keys
     'space':
-        'presledek',
+        'razmaknica',
     'up arrow':
-        'pu\u0161\u010Dica gor',
+        'strelica gore',
     'down arrow':
-        'pu\u0161\u010Dica dol',
+        'strelica dolje',
     'right arrow':
-        'pu\u0161\u010Dica desno',
+        'strelica desno',
     'left arrow':
-        'pu\u0161\u010Dica levo',
-    'any key':
-        'poljuden',
+        'strelica lijevo',
     'a':
         'a',
     'b':
@@ -1273,17 +1239,15 @@ SnapTranslator.dict.si = {
 
     // messages
     'new...':
-        'nov...',
+        'novo...',
 
     // math functions
     'abs':
         'abs',
-    'ceiling':
-        'zaokro\u017Eevanje navzgor',
     'floor':
-        'zaokro\u017Eevanje navzdol',
+        'floor',
     'sqrt':
-        'koren',
+        'sqrt',
     'sin':
         'sin',
     'cos':
@@ -1303,33 +1267,35 @@ SnapTranslator.dict.si = {
 
     // delimiters
     'letter':
-        '\u010Drke',
+        'slovo',
     'whitespace':
-        'presledki',
+        'razmak',
     'line':
-        'vrstica',
+        'linija',
     'tab':
-        'tab',
+        'tabulator',
+    'cr':
+        'novi red',
 
     // data types
     'number':
-        '\u0161tevilo',
+        'brojka',
     'text':
-        'Tekst',
+        'tekst',
     'Boolean':
-        'logi\u010Dna spr.',
+        'logi\u010Dki',
     'list':
-        'seznam',
+        'popis',
     'command':
-        'ukaz',
+        'naredba',
     'reporter':
-        'funkcijski blok',
+        'vrijednost',
     'predicate':
-        'Predikat',
+        'tvrdnja',
 
     // list indices
     'last':
         'zadnji',
     'any':
-        'poljuben'
+        'bilo koji'
 };

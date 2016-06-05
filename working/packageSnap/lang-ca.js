@@ -6,7 +6,7 @@
 
     written by Jens Mönig
 
-    Copyright (C) 2014 by Jens Mönig
+    Copyright (C) 2016 by Jens Mönig
 
     This file is part of Snap!.
 
@@ -185,7 +185,7 @@ SnapTranslator.dict.ca = {
     'translator_e-mail':
         'bromagosa@citilab.eu', // optional
     'last_changed':
-        '2015-01-21', // this, too, will appear in the Translators tab
+        '2015-09-17', // this, too, will appear in the Translators tab
 
     // GUI
     // control bar:
@@ -411,14 +411,28 @@ SnapTranslator.dict.ca = {
         'fixa la mida del llapis en %n',
     'stamp':
         'estampa',
+    'fill':
+        'omple',
 
     // control:
     'when %greenflag clicked':
         'Quan la %greenflag es premi',
     'when %keyHat key pressed':
         'Quan la tecla %keyHat es premi',
-    'when I am clicked':
-        'Quan es cliqui aquest personatge',
+    'when I am %interaction':
+        'Quan %interaction aquest personatge',
+    'clicked':
+        'es cliqui',
+    'pressed':
+        'es premi',
+    'dropped':
+        'es deixi anar',
+    'mouse-entered':
+        'el ratolí toqui',
+    'mouse-departed':
+        'el ratolí surti d\'',
+    'when %b':
+        'quan %b',
     'when I receive %msgHat':
         'Quan rebi %msgHat',
     'broadcast %msg':
@@ -483,7 +497,6 @@ SnapTranslator.dict.ca = {
         'mi mateix',
     'delete this clone':
         'esborra aquest clon',
-
 
     // sensing:
     'touching %col ?':
@@ -648,6 +661,11 @@ SnapTranslator.dict.ca = {
         'Obrir...',
     'Save':
         'Desar',
+    'Save to disk':
+        'Desar a disc',
+    'store this project\nin the downloads folder\n(in supporting browsers)':
+        'desa aquest projecte\na la carpeta de descàrregues\n'
+            + '(en navegadors que ho suportin)',
     'Save As...':
         'Desar com...',
     'Import...':
@@ -664,6 +682,32 @@ SnapTranslator.dict.ca = {
         'Exportar blocs...',
     'show global custom block definitions as XML\nin a new browser window':
         'mostrar definicions de blocs personalitzats\nen format XML en una altra finestra del\nnavegador',
+    'Unused blocks...':
+        'Blocs no utilitzats...',
+    'find unused global custom blocks\nand remove their definitions':
+        'busca blocs personalitzats globals\nno utilitzats i esborra\'ls',
+    'Remove unused blocks':
+        'Esborra blocs no utilitzats',
+    'there are currently no unused\nglobal custom blocks in this project':
+        'no hi ha cap bloc\npersonalitzat no utilitzat\nen aquest projecte',
+    'unused block(s) removed':
+        'bloc(s) personalitzats no utilitzats esborrats',
+    'Export summary...':
+        'Exportar resum...',
+    'open a new browser browser window\n with a summary of this project':
+        'obre una finestra nova del navegador\namb un resum d\'aquest projecte',
+    'Contents':
+        'Continguts',
+    'Kind of':
+        'Espècie de',
+    'Part of':
+        'Part de',
+    'Parts':
+        'Parts',
+    'Blocks':
+        'Blocs',
+    'For all Sprites':
+        'Per a tots els objectes', 
     'Import tools':
         'Importar eines',
     'load the official library of\npowerful blocks':
@@ -707,11 +751,11 @@ SnapTranslator.dict.ca = {
     'uncheck to disable alternating\ncolors for nested block':
         'desmarca\'m per deshabilitar la coloració\nalternada per a blocs imbricats',
     'Dynamic input labels':
-        'Etiquetes d\'entrada dinàmiques',
+        'Etiquetes de camps d\'entrada dinàmics',
     'uncheck to disable dynamic\nlabels for variadic inputs':
-        'desmarca\'m per inhabilitar les\netiquetes dinàmiques d\'entrada de variables',
+        'marca\'m per desactivar les\netiquetes dinàmiques en camps\namb aritat variable',
     'check to enable dynamic\nlabels for variadic inputs':
-        'marca\'m per habilitar les\netiquetes dinàmiques d\'entrada de variables',
+        'marca\'m per habilitar les\netiquetes dinàmiques en camps\namb aritat variable',
     'Prefer empty slot drops':
         'Dóna preferència a les ranures buides',
     'settings menu prefer empty slots hint':
@@ -720,7 +764,7 @@ SnapTranslator.dict.ca = {
         'marca\'m per a fer que les ranures\nbuides tinguin la mateixa preferència que les\nplenes a l\'hora de deixar-hi caure peces',
     'Long form input dialog':
         'Forçar diàleg de selecció de tipus',
-	'Plain prototype labels':
+    'Plain prototype labels':
         'Etiquetes de prototip simples',
     'uncheck to always show (+) symbols\nin block prototype labels':
         'desmarca\'m per mostrar sempre el\nsímbol (+) en les etiquetes de prototip\nde bloc (a l\'editor de blocs)',
@@ -760,6 +804,10 @@ SnapTranslator.dict.ca = {
         'desmarca\'m per executar\nels programes a la velocitat\nnormal',
     'check to enable\nIDE animations':
         'marca\'m per habilitar\nles animacions de la interfície',
+    'Flat design':
+        'Disseny pla',
+    'Keyboard Editing':
+        'Edició per teclat',
     'Thread safe scripts':
         'Fil d\'execució segur',
     'uncheck to allow\nscript reentrance':
@@ -778,6 +826,8 @@ SnapTranslator.dict.ca = {
         'marca\'m per fer que els\nextrems de les línies del\nllapis siguin rectes',
     'uncheck for round ends of lines':
         'desmarca\'m per fer que\nels extrems de les línies\ndel llapis siguin arrodonits',
+    'Inheritance support':
+        'Suport per a herència',
 
     // inputs
     'with inputs':
@@ -803,7 +853,7 @@ SnapTranslator.dict.ca = {
     'help...':
         'ajuda...',
     'relabel...':
-        'canvia\'m el nom...',
+        'blocs similars...',
     'duplicate':
         'duplica\'m',
     'make a copy\nand pick it up':
@@ -1060,7 +1110,7 @@ SnapTranslator.dict.ca = {
     'License':
         'Llicència',
     'current module versions:':
-        'versions del mòdul actual',
+        'versions actuals dels mòduls',
     'Contributors':
         'Contribuïdors',
     'Translations':
@@ -1132,6 +1182,8 @@ SnapTranslator.dict.ca = {
     // keys
     'space':
         'espai',
+    'any key':
+        'qualsevol tecla',
     'up arrow':
         'fletxa amunt',
     'down arrow':
@@ -1220,6 +1272,8 @@ SnapTranslator.dict.ca = {
     // math functions
     'abs':
         'valor absolut',
+    'ceiling':
+        'sostre',
     'floor':
         'part entera',
     'sqrt':
