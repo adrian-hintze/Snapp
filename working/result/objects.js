@@ -2427,6 +2427,25 @@ SpriteMorph.prototype.allEditorBlockInstances = function (definition) {
 	return inBlockEditors;
 };
 
+SpriteMorph.prototype.inheritedVariableNames = function (shadowedOnly) {
+    var names = [],
+        own = this.variables.names(),
+        current = this.variables.parentFrame;
+
+    function test(each) {
+        return shadowedOnly ? contains(own, each) : !contains(own, each);
+    }
+
+    while (current.owner instanceof SpriteMorph) {
+        names.push.apply(
+            names,
+            current.names().filter(test)
+        );
+        current = current.parentFrame;
+    }
+    return names;
+};
+
 SpriteMorph.prototype.thumbnail = function (extentPoint) {
 	var src = this.image,
 		scale = Math.min((extentPoint.x / src.width), (extentPoint.y / src.height)),
@@ -3187,6 +3206,10 @@ StageMorph.prototype.mouseClickLeft = SpriteMorph.prototype.mouseClickLeft;
 StageMorph.prototype.mouseEnter = SpriteMorph.prototype.mouseEnter;
 StageMorph.prototype.mouseDownLeft = SpriteMorph.prototype.mouseDownLeft;
 StageMorph.prototype.receiveUserInteraction = SpriteMorph.prototype.receiveUserInteraction;
+StageMorph.prototype.inheritedVariableNames = function () {
+    return [];
+};
+
 SpriteBubbleMorph.prototype = new SpeechBubbleMorph();
 SpriteBubbleMorph.prototype.constructor = SpriteBubbleMorph;
 SpriteBubbleMorph.uber = SpeechBubbleMorph.prototype;
