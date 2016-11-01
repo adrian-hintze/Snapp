@@ -1,9 +1,11 @@
 {
     "name": "snapp",
-    "version": "0.0.1a",
-    "description": "Snapp",
+    "version": "2.0.0b",
+    "description": "Snapp!",
     "author": {
-        "name": "Rydion"
+        "name": "Adrian Hintze",
+        "email": "hintze.adrian@gmail.com",
+        "url": ""
     },
     "private": true,
 
@@ -11,8 +13,7 @@
         "run": "node .\\build\\snapp\\Snapp.js",
         "build": "npm run build-server && npm run build-client",
         "build-server": "rimraf build/snapp && tsc -p .\\server-tsconfig.json",
-        "build-client": "rimraf build/WebContent && webpack --config conf/webpack.prod.js --progress --profile --bail",
-        "postinstall": ""
+        "build-client": "rimraf build/WebContent && webpack --config conf/webpack.prod.js --progress --profile --bail"
     },
 
     "engines": {
