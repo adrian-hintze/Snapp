@@ -1,0 +1,36 @@
+﻿<!-- Let HTML5 validate the form -->
+<form (ngSubmit)="onSubmit()" class="snapp-project-submit-form">
+    <div [ngBusy]="busy"></div>
+    <div class="snapp-input-area">
+        <div>
+            <div>
+                <label for="project">Select your exported Snap<i>!</i> project</label>
+                <input type="file" id="project" name="project" required accept=".xml" (change)="onSelectFile($event)">
+            </div>
+            <div>
+                <label for="resolution">App window size</label>
+                <select id="resolution" name="resolution" required [(ngModel)]="formData.resolution">
+                    <option [ngValue]="res" *ngFor="let res of resolutions">{{res}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <label for="os">Target OS</label>
+                <select id="os" name="os" required [(ngModel)]="formData.os">
+                    <option [ngValue]="os.value" *ngFor="let os of operatingSystems">{{os.label}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="codeAccessible">Misc. options</label>
+                <input type="checkbox" id="codeAccessible" name="codeAccessible" [(ngModel)]="formData.useCompleteSnap">
+                <span>Code accessible</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="snapp-horizontal-separator"></div>
+
+    <button type="submit" class="snapp-submit-button">Build my app<i>!</i></button>
+</form>

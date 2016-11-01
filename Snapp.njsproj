@@ -1,0 +1,526 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>Snapp</Name>
+    <RootNamespace>Snapp</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>07980bde-da28-4d71-9a3b-894cf8282a85</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <NodejsPort>1337</NodejsPort>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <EnableTypeScript>true</EnableTypeScript>
+    <StartWebBrowser>true</StartWebBrowser>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="build\resources\icons\lambda.icns" />
+    <Content Include="build\resources\icons\lambda.ico" />
+    <Content Include="build\resources\icons\lambda.png" />
+    <Content Include="build\resources\nw\lin32\bin\nw" />
+    <Content Include="build\resources\nw\lin32\lib\credits.html" />
+    <Content Include="build\resources\nw\lin32\lib\icudtl.dat" />
+    <Content Include="build\resources\nw\lin32\lib\libffmpegsumo.so" />
+    <Content Include="build\resources\nw\lin32\lib\locales\am.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\ar.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\bg.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\bn.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\ca.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\cs.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\da.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\de.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\el.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\en-GB.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\en-US.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\es-419.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\es.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\et.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\fa.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\fi.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\fil.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\fr.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\gu.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\hi.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\hr.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\hu.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\id.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\it.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\iw.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\ja.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\kn.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\ko.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\lt.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\lv.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\ml.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\mr.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\ms.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\nl.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\no.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\pl.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\pt-BR.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\pt-PT.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\ro.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\ru.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\sk.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\sl.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\sr.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\sv.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\sw.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\ta.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\te.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\th.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\tr.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\uk.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\vi.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\zh-CN.pak" />
+    <Content Include="build\resources\nw\lin32\lib\locales\zh-TW.pak" />
+    <Content Include="build\resources\nw\lin32\lib\nw.pak" />
+    <Content Include="build\resources\nw\lin64\bin\nw" />
+    <Content Include="build\resources\nw\lin64\lib\icudtl.dat" />
+    <Content Include="build\resources\nw\lin64\lib\libffmpegsumo.so" />
+    <Content Include="build\resources\nw\lin64\lib\nw.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\crash_inspector" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Libraries\ffmpegsumo.so" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\nwjs Framework" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\AHEM____.TTF" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\am.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\ar.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\bg.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\bn.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\ca.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\ChromiumAATTest.ttf" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\cs.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\da.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\de.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\el.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\en-GB.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\en-US.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\English.lproj\HttpAuth.nib" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\es-419.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\es.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\et.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\fa.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\fi.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\fil.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\fr.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\gu.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\hi.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\hr.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\hu.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\icudtl.dat" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\id.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\it.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\iw.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\ja.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\kn.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\ko.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\lt.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\lv.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\missingImage.png" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\ml.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\mr.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\ms.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\nl.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\no.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\nw.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\pl.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\pt-BR.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\pt-PT.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\ro.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\ru.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\sk.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\sl.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\sr.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\sv.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\sw.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\ta.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\te.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\textAreaResizeCorner.png" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\th.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\tr.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\uk.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\vi.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\zh-CN.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\zh-TW.pak" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper EH.app\Contents\Info.plist" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper EH.app\Contents\MacOS\nwjs Helper EH" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper EH.app\Contents\PkgInfo" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper NP.app\Contents\Info.plist" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper NP.app\Contents\MacOS\nwjs Helper NP" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper NP.app\Contents\PkgInfo" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper.app\Contents\Info.plist" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper.app\Contents\MacOS\nwjs Helper" />
+    <Content Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper.app\Contents\PkgInfo" />
+    <Content Include="build\resources\nw\mac32\Contents\MacOS\nwjs" />
+    <Content Include="build\resources\nw\mac32\Contents\PkgInfo" />
+    <Content Include="build\resources\nw\mac32\Contents\Resources\AHEM____.TTF" />
+    <Content Include="build\resources\nw\mac32\Contents\Resources\ChromiumAATTest.ttf" />
+    <Content Include="build\resources\nw\mac32\Contents\Resources\missingImage.png" />
+    <Content Include="build\resources\nw\mac32\Contents\Resources\textAreaResizeCorner.png" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\crash_inspector" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Libraries\ffmpegsumo.so" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\nwjs Framework" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\AHEM____.TTF" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\am.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\ar.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\bg.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\bn.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\ca.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\ChromiumAATTest.ttf" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\cs.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\da.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\de.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\el.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\en-GB.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\en-US.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\English.lproj\HttpAuth.nib" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\es-419.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\es.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\et.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\fa.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\fi.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\fil.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\fr.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\gu.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\hi.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\hr.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\hu.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\icudtl.dat" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\id.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\it.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\iw.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\ja.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\kn.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\ko.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\lt.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\lv.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\missingImage.png" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\ml.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\mr.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\ms.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\nl.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\no.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\nw.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\pl.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\pt-BR.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\pt-PT.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\ro.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\ru.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\sk.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\sl.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\sr.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\sv.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\sw.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\ta.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\te.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\textAreaResizeCorner.png" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\th.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\tr.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\uk.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\vi.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\zh-CN.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\zh-TW.pak" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper EH.app\Contents\Info.plist" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper EH.app\Contents\MacOS\nwjs Helper EH" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper EH.app\Contents\PkgInfo" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper NP.app\Contents\Info.plist" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper NP.app\Contents\MacOS\nwjs Helper NP" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper NP.app\Contents\PkgInfo" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper.app\Contents\Info.plist" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper.app\Contents\MacOS\nwjs Helper" />
+    <Content Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper.app\Contents\PkgInfo" />
+    <Content Include="build\resources\nw\mac64\Contents\MacOS\nwjs" />
+    <Content Include="build\resources\nw\mac64\Contents\PkgInfo" />
+    <Content Include="build\resources\nw\mac64\Contents\Resources\AHEM____.TTF" />
+    <Content Include="build\resources\nw\mac64\Contents\Resources\ChromiumAATTest.ttf" />
+    <Content Include="build\resources\nw\mac64\Contents\Resources\missingImage.png" />
+    <Content Include="build\resources\nw\mac64\Contents\Resources\textAreaResizeCorner.png" />
+    <Content Include="build\resources\nw\win32\dll\ffmpegsumo.dll" />
+    <Content Include="build\resources\nw\win32\dll\icudtl.dat" />
+    <Content Include="build\resources\nw\win32\dll\nw.pak" />
+    <Content Include="build\resources\nw\win32\exe\nw.exe" />
+    <Content Include="build\resources\nw\win64\dll\ffmpegsumo.dll" />
+    <Content Include="build\resources\nw\win64\dll\icudtl.dat" />
+    <Content Include="build\resources\nw\win64\dll\nw.pak" />
+    <Content Include="build\resources\nw\win64\exe\nw.exe" />
+    <Content Include="build\resources\conf\linux\app.desktop" />
+    <Content Include="build\resources\conf\linux\launcher.sh" />
+    <Content Include="build\resources\conf\mac32\Info.plist" />
+    <Content Include="build\resources\conf\mac64\Info.plist" />
+    <Content Include="build\resources\snap\full\files\agpl.txt" />
+    <Content Include="build\resources\snap\full\files\click.wav" />
+    <Content Include="build\resources\snap\full\files\contributing to BYOB4.txt" />
+    <Content Include="build\resources\snap\full\files\favicon.ico" />
+    <Content Include="build\resources\snap\full\files\history.txt" />
+    <Content Include="build\resources\snap\full\files\index.html" />
+    <Content Include="build\resources\snap\full\files\manifest.mf" />
+    <Content Include="build\resources\snap\full\files\morphic.txt" />
+    <Content Include="build\resources\snap\full\files\README.md" />
+    <Content Include="build\resources\snap\full\files\readme.txt" />
+    <Content Include="build\resources\snap\full\files\Snap! Connectivity Strategy.pdf" />
+    <Content Include="build\resources\snap\full\files\snap.html" />
+    <Content Include="build\resources\snap\full\files\snap_fast.html" />
+    <Content Include="build\resources\snap\full\files\snap_logo_sm.png" />
+    <Content Include="build\resources\snap\full\files\tools.xml" />
+    <Content Include="build\resources\snap\full\files\translating Snap.txt" />
+    <Content Include="build\resources\snap\reduced\files\snap.html" />
+    <Content Include="build\snapp_conf.json" />
+    <Content Include="commands.txt" />
+    <Content Include="LICENSE.md" />
+    <Content Include="client-tsconfig.json" />
+    <Content Include="src\client\components\main-component\main.component.css" />
+    <Content Include="src\client\components\main-component\main.component.html" />
+    <Content Include="src\client\components\main-component\resources\imgs\snapp-logo.png" />
+    <Content Include="src\client\components\snap-project-submit-form-component\snap-project-submit-form.component.html" />
+    <Content Include="src\client\components\snap-project-submit-form-component\snap-project-submit-form.component.css" />
+    <Content Include="src\client\app.css" />
+    <Content Include="src\client\favicon.ico" />
+    <Content Include="tsconfig.json" />
+    <Content Include="src\client\components\test\test.html" />
+    <Content Include="server-tsconfig.json" />
+    <Content Include="typings\client\typings.json" />
+    <Content Include="typings\server\typings.json" />
+    <TypeScriptCompile Include="src\client\components\main-component\main.component.ts" />
+    <TypeScriptCompile Include="src\client\components\snap-project-submit-form-component\snap-project-submit-form.component.ts" />
+    <TypeScriptCompile Include="src\client\polyfills.ts" />
+    <TypeScriptCompile Include="src\client\vendor.ts" />
+    <TypeScriptCompile Include="src\server\GenerateExecutableHandler.ts" />
+    <TypeScriptCompile Include="src\server\Snapp.ts" />
+    <Content Include="package.json" />
+    <Content Include="README.md" />
+    <Content Include="src\client\app.html" />
+    <TypeScriptCompile Include="src\client\components\test\test.ts" />
+    <TypeScriptCompile Include="src\client\modules\main.module.ts" />
+    <TypeScriptCompile Include="src\client\app.ts" />
+    <TypeScriptCompile Include="src\server\utils\FileSystem.ts" />
+    <TypeScriptCompile Include="src\server\utils\Validation.ts" />
+    <TypeScriptCompile Include="src\server\Xml.ts" />
+    <TypeScriptCompile Include="src\server\Zip.ts" />
+    <TypeScriptCompile Include="typings\server\typings\node.d.ts" />
+    <TypeScriptCompile Include="typings\server\typings\rydion\archiver.d.ts" />
+    <TypeScriptCompile Include="typings\server\typings\rydion\multer.d.ts" />
+    <TypeScriptCompile Include="typings\server\typings\rydion\node.d.ts" />
+    <TypeScriptCompile Include="typings\server\typings\rydion\stream-to-array.d.ts" />
+    <TypeScriptCompile Include="typings\server\typings\rydion\winston-daily-rotate-file.d.ts" />
+    <TypeScriptCompile Include="typings\server\typings\rydion\winston.d.ts" />
+    <TypeScriptCompile Include="typings\server\typings\rydion\xmldoc.d.ts" />
+    <TypeScriptCompile Include="typings\server\typings\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="build\" />
+    <Folder Include="build\resources\" />
+    <Folder Include="build\resources\icons\" />
+    <Folder Include="build\resources\nw\" />
+    <Folder Include="build\resources\nw\lin32\" />
+    <Folder Include="build\resources\nw\lin32\bin\" />
+    <Folder Include="build\resources\nw\lin32\lib\" />
+    <Folder Include="build\resources\nw\lin32\lib\locales\" />
+    <Folder Include="build\resources\nw\lin64\" />
+    <Folder Include="build\resources\nw\lin64\bin\" />
+    <Folder Include="build\resources\nw\lin64\lib\" />
+    <Folder Include="build\resources\nw\mac32\" />
+    <Folder Include="build\resources\nw\mac32\Contents\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Libraries\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Framework.framework\Resources\English.lproj\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper EH.app\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper EH.app\Contents\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper EH.app\Contents\MacOS\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper NP.app\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper NP.app\Contents\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper NP.app\Contents\MacOS\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper.app\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper.app\Contents\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Frameworks\nwjs Helper.app\Contents\MacOS\" />
+    <Folder Include="build\resources\nw\mac32\Contents\MacOS\" />
+    <Folder Include="build\resources\nw\mac32\Contents\Resources\" />
+    <Folder Include="build\resources\nw\mac64\" />
+    <Folder Include="build\resources\nw\mac64\Contents\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Libraries\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Framework.framework\Resources\English.lproj\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper EH.app\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper EH.app\Contents\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper EH.app\Contents\MacOS\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper NP.app\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper NP.app\Contents\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper NP.app\Contents\MacOS\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper.app\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper.app\Contents\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Frameworks\nwjs Helper.app\Contents\MacOS\" />
+    <Folder Include="build\resources\nw\mac64\Contents\MacOS\" />
+    <Folder Include="build\resources\nw\mac64\Contents\Resources\" />
+    <Folder Include="build\resources\nw\win32\" />
+    <Folder Include="build\resources\nw\win32\dll\" />
+    <Folder Include="build\resources\nw\win32\exe\" />
+    <Folder Include="build\resources\nw\win64\" />
+    <Folder Include="build\resources\nw\win64\dll\" />
+    <Folder Include="build\resources\nw\win64\exe\" />
+    <Folder Include="build\resources\conf\" />
+    <Folder Include="build\resources\conf\linux\" />
+    <Folder Include="build\resources\conf\mac32\" />
+    <Folder Include="build\resources\conf\mac64\" />
+    <Folder Include="build\resources\snap\" />
+    <Folder Include="build\resources\snap\full\" />
+    <Folder Include="build\resources\snap\full\files\" />
+    <Folder Include="build\resources\snap\full\gui\" />
+    <Folder Include="build\resources\snap\reduced\" />
+    <Folder Include="build\resources\snap\reduced\gui\" />
+    <Folder Include="build\resources\snap\reduced\files\" />
+    <Folder Include="conf\" />
+    <Folder Include="src\" />
+    <Folder Include="src\client\" />
+    <Folder Include="src\client\components\main-component\" />
+    <Folder Include="src\client\components\main-component\resources\imgs\" />
+    <Folder Include="src\client\components\main-component\resources\" />
+    <Folder Include="src\client\components\snap-project-submit-form-component\" />
+    <Folder Include="src\client\components\test\" />
+    <Folder Include="src\server\" />
+    <Folder Include="src\client\components\" />
+    <Folder Include="src\client\modules\" />
+    <Folder Include="src\server\log\" />
+    <Folder Include="src\server\utils\" />
+    <Folder Include="typings\" />
+    <Folder Include="typings\client\" />
+    <Folder Include="typings\server\" />
+    <Folder Include="typings\server\typings\rydion\" />
+    <Folder Include="typings\server\typings\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="build\resources\snap\full\files\blocks.js" />
+    <Compile Include="build\resources\snap\full\files\byob.js" />
+    <Compile Include="build\resources\snap\full\files\cloud.js" />
+    <Compile Include="build\resources\snap\full\files\FileSaver.min.js" />
+    <Compile Include="build\resources\snap\full\gui\gui.js" />
+    <Compile Include="build\resources\snap\full\files\lang-ar.js" />
+    <Compile Include="build\resources\snap\full\files\lang-bg.js" />
+    <Compile Include="build\resources\snap\full\files\lang-bn.js" />
+    <Compile Include="build\resources\snap\full\files\lang-ca.js" />
+    <Compile Include="build\resources\snap\full\files\lang-cs.js" />
+    <Compile Include="build\resources\snap\full\files\lang-de.js" />
+    <Compile Include="build\resources\snap\full\files\lang-dk.js" />
+    <Compile Include="build\resources\snap\full\files\lang-el.js" />
+    <Compile Include="build\resources\snap\full\files\lang-eo.js" />
+    <Compile Include="build\resources\snap\full\files\lang-es.js" />
+    <Compile Include="build\resources\snap\full\files\lang-et.js" />
+    <Compile Include="build\resources\snap\full\files\lang-fi.js" />
+    <Compile Include="build\resources\snap\full\files\lang-fr.js" />
+    <Compile Include="build\resources\snap\full\files\lang-hr.js" />
+    <Compile Include="build\resources\snap\full\files\lang-hu.js" />
+    <Compile Include="build\resources\snap\full\files\lang-ia.js" />
+    <Compile Include="build\resources\snap\full\files\lang-id.js" />
+    <Compile Include="build\resources\snap\full\files\lang-it.js" />
+    <Compile Include="build\resources\snap\full\files\lang-ja.js" />
+    <Compile Include="build\resources\snap\full\files\lang-ja_HIRA.js" />
+    <Compile Include="build\resources\snap\full\files\lang-kn.js" />
+    <Compile Include="build\resources\snap\full\files\lang-ko.js" />
+    <Compile Include="build\resources\snap\full\files\lang-ml.js" />
+    <Compile Include="build\resources\snap\full\files\lang-nl.js" />
+    <Compile Include="build\resources\snap\full\files\lang-no.js" />
+    <Compile Include="build\resources\snap\full\files\lang-pl.js" />
+    <Compile Include="build\resources\snap\full\files\lang-pt.js" />
+    <Compile Include="build\resources\snap\full\files\lang-pt_BR.js" />
+    <Compile Include="build\resources\snap\full\files\lang-ro.js" />
+    <Compile Include="build\resources\snap\full\files\lang-ru.js" />
+    <Compile Include="build\resources\snap\full\files\lang-si.js" />
+    <Compile Include="build\resources\snap\full\files\lang-sv.js" />
+    <Compile Include="build\resources\snap\full\files\lang-ta.js" />
+    <Compile Include="build\resources\snap\full\files\lang-te.js" />
+    <Compile Include="build\resources\snap\full\files\lang-tr.js" />
+    <Compile Include="build\resources\snap\full\files\lang-tw.js" />
+    <Compile Include="build\resources\snap\full\files\lang-zh.js" />
+    <Compile Include="build\resources\snap\full\files\lists.js" />
+    <Compile Include="build\resources\snap\full\files\locale.js" />
+    <Compile Include="build\resources\snap\full\files\morphic.js" />
+    <Compile Include="build\resources\snap\full\files\objects.js" />
+    <Compile Include="build\resources\snap\full\files\paint.js" />
+    <Compile Include="build\resources\snap\full\files\sha512.js" />
+    <Compile Include="build\resources\snap\full\files\store.js" />
+    <Compile Include="build\resources\snap\full\files\tables.js" />
+    <Compile Include="build\resources\snap\full\files\threads.js" />
+    <Compile Include="build\resources\snap\full\files\widgets.js" />
+    <Compile Include="build\resources\snap\full\files\xml.js" />
+    <Compile Include="build\resources\snap\full\files\ypr.js" />
+    <Compile Include="build\resources\snap\reduced\files\blocks.js" />
+    <Compile Include="build\resources\snap\reduced\files\byob.js" />
+    <Compile Include="build\resources\snap\reduced\gui\gui.js" />
+    <Compile Include="build\resources\snap\reduced\files\lists.js" />
+    <Compile Include="build\resources\snap\reduced\files\morphic.js" />
+    <Compile Include="build\resources\snap\reduced\files\objects.js" />
+    <Compile Include="build\resources\snap\reduced\files\store.js" />
+    <Compile Include="build\resources\snap\reduced\files\tables.js" />
+    <Compile Include="build\resources\snap\reduced\files\threads.js" />
+    <Compile Include="build\resources\snap\reduced\files\widgets.js" />
+    <Compile Include="build\resources\snap\reduced\files\xml.js" />
+    <Compile Include="conf\webpack.common.js" />
+    <Compile Include="conf\webpack.prod.js" />
+    <Compile Include="conf\helpers.js" />
+    <Compile Include="src\server\log\Log.ts" />
+    <Compile Include="webpack.config.js" />
+  </ItemGroup>
+  <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

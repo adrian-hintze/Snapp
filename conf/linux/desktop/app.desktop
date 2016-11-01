@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Version=1.0
-Icon=
-Exec=sh -c '"$(dirname "$1")"/<file_name>.snapp/launcher.sh' dummy %k
-Name=

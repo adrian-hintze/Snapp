@@ -1,0 +1,75 @@
+{
+    "name": "snapp",
+    "version": "0.0.1a",
+    "description": "Snapp",
+    "author": {
+        "name": "Rydion"
+    },
+    "private": true,
+
+    "scripts": {
+        "run": "node .\\build\\snapp\\Snapp.js",
+        "build": "npm run build-server && npm run build-client",
+        "build-server": "rimraf build/snapp && tsc -p .\\server-tsconfig.json",
+        "build-client": "rimraf build/WebContent && webpack --config conf/webpack.prod.js --progress --profile --bail",
+        "postinstall": ""
+    },
+
+    "engines": {
+        "node": ">=6.0.0",
+        "npm": ">=3.0.0"
+    },
+
+    "dependencies": {
+        "express": "^4.14.0",
+        "body-parser": "^1.15.2",
+        "multer": "^1.2.0",
+        "xmldoc": "^0.5.1",
+        "archiver": "^1.1.0",
+        "winston": "^2.2.0",
+        "winston-daily-rotate-file": "^1.3.1",
+        "mkdirp": "^0.5.1",
+        "stream-to-array": "^2.3.0",
+
+
+        "@angular/common": "^2.0.2",
+        "@angular/compiler": "^2.0.2",
+        "@angular/core": "^2.0.2",
+        "@angular/forms": "^2.0.2",
+        "@angular/http": "^2.0.2",
+        "@angular/platform-browser": "^2.0.2",
+        "@angular/platform-browser-dynamic": "^2.0.2",
+        "@angular/router": "^3.0.1",
+        "@angular/upgrade": "^2.0.1",
+
+        "core-js": "^2.4.1",
+        "zone.js": "^0.6.23",
+        "file-saver": "^1.3.3",
+
+        "angular2-busy": "^1.0.2"
+    },
+
+    "devDependencies": {
+        "typescript": "^2.0.3",
+        "typings": "^1.4.0",
+
+        "concurrently": "^3.1.0",
+        "rimraf": "^2.5.2",
+
+        "webpack": "^1.13.2",
+        "webpack-merge": "^0.15.0",
+
+        "angular2-template-loader": "^0.6.0",
+        "awesome-typescript-loader": "^2.2.4",
+        "css-loader": "^0.25.0",
+        "file-loader": "^0.9.0",
+        "html-loader": "^0.4.3",
+        "null-loader": "^0.1.1",
+        "raw-loader": "^0.5.1",
+        "style-loader": "^0.13.1",
+        "to-string-loader": "^1.1.5",
+
+        "extract-text-webpack-plugin": "^1.0.1",
+        "html-webpack-plugin": "^2.15.0"
+    }
+}
