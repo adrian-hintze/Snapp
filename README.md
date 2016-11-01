@@ -29,10 +29,6 @@ This version is a full rewrite of Snapp*!* that tries to address all of the issu
 
 * [Node.js](https://nodejs.org/en/) >= v6.0.0
 * npm >= v3.0.0
-* [Typings](https://github.com/typings/typings)
-* [Typescript](https://github.com/Microsoft/TypeScript) 2.0
-* [webpack](https://github.com/webpack/webpack)
-* [rimraf](https://github.com/isaacs/rimraf)
 
 ## Building
 
