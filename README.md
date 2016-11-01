@@ -34,9 +34,9 @@ This version is a full rewrite of Snapp*!* that tries to address all of the issu
 
 1. Install the latest version of Node.js which in turn will install the latest version of npm.
 
-2. Download the necessary declaration files using typings.
+2. Install all devDependencies and dependencies using npm: **npm install**.
 
-3. Install all dependencies using npm.
+3. Download the necessary declaration files using typings: **typings install**. Notice that there are two typings.json located in **/typings/client** and **/typings/server/** respectively. Both need to be installed.
 
 4. Build the application by running the following command: **npm run build**
 
