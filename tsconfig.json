@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "moduleResolution": "node",
+        "newLine": "LF",
+
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "noImplicitReturns": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "strictNullChecks":  false
+    },
+    "files": [
+        "typings/server/typings/node.d.ts"
+    ],
+    "include": [
+        "src/server/**/*",
+        "src/client/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

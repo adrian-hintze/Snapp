@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "build/WebContent",
+        "newLine": "LF",
+        "removeComments": false,
+
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "noImplicitReturns": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "strictNullChecks":  false
+    },
+    "files": [
+        "typings/client/typings/index.d.ts"
+    ],
+    "include": [
+        "src/client/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

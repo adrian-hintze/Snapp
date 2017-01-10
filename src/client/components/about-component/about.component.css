@@ -1,0 +1,10 @@
+﻿.snapp-about-link {
+	position: relative;
+	right: 25px;
+	text-decoration: none;
+	color: black;
+}
+
+.snapp-about-link:hover {
+	font-weight: bold;
+}

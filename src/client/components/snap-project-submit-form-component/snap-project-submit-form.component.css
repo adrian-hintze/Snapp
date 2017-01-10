@@ -1,0 +1,42 @@
+﻿.snapp-project-submit-form {
+	padding-top: 10%;
+}
+
+.snapp-input-area {
+    display: flex;
+    justify-content: space-between;
+}
+
+.snapp-input-area > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.snapp-input-area > div:nth-child(2) {
+    margin-right: 20%;
+}
+
+.snapp-input-area > div > div:first-child {
+    margin-bottom: 20px;
+}
+
+.snapp-input-area label {
+    display: block;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.snapp-horizontal-separator {
+    height: 1px;
+	background-color: black;
+	margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.snapp-submit-button {
+	min-width: 100px;
+	height: 30px;
+	cursor: pointer;
+}

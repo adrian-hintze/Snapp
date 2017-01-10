@@ -1,0 +1,13 @@
+// Typings
+
+npm install typings -g
+typings install dt~module --global --save
+typings install
+
+// Npm upgrade windows
+
+Run PowerShell as Administrator
+
+Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
+npm install -g npm-windows-upgrade
+npm-windows-upgrade

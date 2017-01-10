@@ -1,0 +1,10 @@
+﻿node_modules/
+typings/client/typings
+typings/server/typings/globals
+build/logs/
+build/snapp/
+build/upload/
+build/WebContent/
+Snapp.njsproj
+commands.txt
+tsconfig.json
