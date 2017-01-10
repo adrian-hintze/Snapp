@@ -18,6 +18,8 @@ import * as mime from 'mime';
 
 import generateExecutable from './GenerateExecutableHandler';
 
+import * as fileSystemUtils from './utils/FileSystem';
+
 import logModule from './log/Log';
 
 global.conf = require(path.join(global.rootDir, '..', 'snapp_conf.json'));
@@ -84,7 +86,7 @@ express()
     params.filename = filename;
     params.useCompleteSnap = params.useCompleteSnap === 'true';
 
-    generateExecutable(projectPath, request.body)
+    generateExecutable(projectPath, params)
     .then((zip: NodeJS.ReadableStream) => {
         const attachmentFilename = `${filename}.zip`;
         const mimeType = mime.lookup(attachmentFilename);
@@ -97,7 +99,11 @@ express()
     .catch((error: NodeJS.ErrnoException | Error | any) => {
         log.error({ moduleName, message: 'Error ocurred while generating executable.', meta: { error: error.error || error } });
         response.status(error.status || 500).end();
-    });
+    })
+    .then(() => {
+        fileSystemUtils.rmDir(projectPath);
+    })
+    .catch(error => log.error({ moduleName, message: 'Unable to delete the project file.', meta: { projectPath, error } }));
 })
 
 .listen(port, () => log.info({ moduleName, message: `Snapp listening on port ${port}` })); 

@@ -125,3 +125,15 @@ export function readDir(path: string): Promise<NodeJS.ErrnoException | string[]>
 export function readDirSync(path: string): string[] {
     return fs.readdirSync(path);
 }
+
+export function rmDir(path: string): Promise<any | void> {
+    return new Promise((resolve, reject) => {
+        fs.unlink(path, (error) => {
+            if (error) {
+                reject(error);
+                return;
+            }
+            resolve();
+        });
+    });
+}

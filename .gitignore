@@ -5,3 +5,6 @@ build/logs/
 build/snapp/
 build/upload/
 build/WebContent/
+Snapp.njsproj
+commands.txt
+tsconfig.json

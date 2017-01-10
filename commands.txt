@@ -4,4 +4,10 @@ npm install typings -g
 typings install dt~module --global --save
 typings install
 
-typings install dt~core-js dt~node dt~express dt~mime dt~serve-static dt~express-serve-static-core dt~body-parser dt~winston dt~mkdirp dt~stream-to-array --global --save
+// Npm upgrade windows
+
+Run PowerShell as Administrator
+
+Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
+npm install -g npm-windows-upgrade
+npm-windows-upgrade

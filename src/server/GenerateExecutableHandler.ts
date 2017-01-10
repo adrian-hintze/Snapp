@@ -325,7 +325,7 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<Error | Nod
 }
 
 function loadProject(projectPath: string): Promise<NodeJS.ErrnoException | string> {
-    // remove end of line and escape single quotes
+    // Remove end of line and escape single quotes
     return fileSystemUtils.readTextFile(projectPath).then((project: string) => project.replace(/\r?\n|\r/g, '').replace(/'/g, "\\'"));
 }
 

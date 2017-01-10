@@ -8,7 +8,6 @@
 }
 
 .snapp-form-wrapper {
-	width: 700px;
 	padding: 50px;
 	border: 10px solid rgba(0, 0, 0, 0);
 	border-radius: 25px;
@@ -21,17 +20,6 @@
 	width: 100%;
 	padding-top: 10px;
 	text-align: right;
-}
-
-.snapp-about-link {
-	position: relative;
-	right: 25px;
-	text-decoration: none;
-	color: black;
-}
-
-.snapp-about-link:hover {
-	font-weight: bold;
 }
 
 .snapp-logo {
