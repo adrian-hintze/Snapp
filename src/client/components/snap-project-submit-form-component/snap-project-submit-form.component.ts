@@ -32,6 +32,29 @@ export default class SnapProjectSubmitFormComponent {
             os: 'win64',
             useCompleteSnap: false
         };
+
+        // TODO -normal- Move to a service
+        function detectOs() {
+            // Detect operating system
+            let osName = 'win';
+            if (navigator.userAgent.indexOf('Mac') !== -1) {
+                osName = 'mac';
+            }
+            if (navigator.userAgent.indexOf('Linux') !== -1) {
+                osName = 'lin';
+            }
+
+            // Try to detect if it's a 64 or 32 bit machine
+            // Most of the time this doesn't work so well
+            let is64bit =
+                navigator.platform === 'Win64' || navigator.platform === 'Linux x86_64' || // If this are set just trust them
+                navigator.appVersion.indexOf('WOW64') > -1 || navigator.appVersion.indexOf('x86_64') > -1 || // In case the fields above aren't set correctly
+                navigator.userAgent.indexOf('WOW64') > -1 || navigator.userAgent.indexOf('x86_64') > -1; // Firefox's appVersion field is kinda lacking
+
+            return is64bit ? osName + '64' : osName + '32';
+        }
+
+        this.formData.os = detectOs();
     }
 
     public onSelectFile(event: any): void {

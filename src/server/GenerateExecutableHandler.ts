@@ -211,19 +211,20 @@ function buildFinalPackage(finalPackage: Zip, os: string, projectName: string, f
         case 'mac32': {
             const rootDir = projectName + '.app';
 
-            finalPackage.directory(path.join(resourcesDir, 'nw', os), rootDir);
+            finalPackage.directory(path.join(resourcesDir, 'nw', os, 'Contents'), path.join(rootDir, 'Contents'));
+            finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs'), { name: path.join(rootDir, 'Contents', 'MacOS', 'nwjs'), mode: unixExecutablePermissions });
             finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.icns'), { name: path.join(rootDir, 'Contents', 'Resources', 'nw.icns') });
 
             return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'Info.plist'))
-                   .then((plist: string) => {
-                       plist = plist.replace('<filename>', filename).replace('<short_filename>', filename.length < 16 ? filename : 'Snapp!');
-                       finalPackage.append(plist, { name: path.join(rootDir, 'Contents', 'Info.plist') });
-                       return;
-                   })
-                   .catch((error: NodeJS.ErrnoException) => {
-                       log.error({ moduleName, message: 'Unable to read mac Info.plist.', meta: { os } });
-                       throw error;
-                   });
+            .then((plist: string) => {
+                plist = plist.replace('<filename>', filename).replace('<short_filename>', filename.length < 16 ? filename : 'Snapp!');
+                finalPackage.append(plist, { name: path.join(rootDir, 'Contents', 'Info.plist') });
+                return;
+            })
+            .catch((error: NodeJS.ErrnoException) => {
+                log.error({ moduleName, message: 'Unable to read mac Info.plist.', meta: { os } });
+                throw error;
+            });
         }
         case 'lin64':
         case 'lin32': {
@@ -280,15 +281,17 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<Error | Nod
                 switch (os) {
                     case 'mac64':
                     case 'mac32':
-                        finalPackage.append(buffer, { name: path.join(projectName + '.app', 'Contents', 'Resources', 'app.nw'), mode: unixExecutablePermissions })
-                                    .finalize();
+                        finalPackage
+                        .append(buffer, { name: path.join(projectName + '.app', 'Contents', 'Resources', 'app.nw'), mode: unixExecutablePermissions })
+                        .finalize();
                         break;
                     case 'lin64':
                     case 'lin32':
                         fileSystemUtils.readFile(path.join(resourcesDir, 'nw', os, 'bin', 'nw'))
                         .then((file: Buffer) => {
-                            finalPackage.append(Buffer.concat([file, buffer]), { name: path.join(projectName + '.snapp', filename), mode: unixExecutablePermissions })
-                                        .finalize();
+                            finalPackage
+                            .append(Buffer.concat([file, buffer]), { name: path.join(projectName + '.snapp', filename), mode: unixExecutablePermissions })
+                            .finalize();
                             return;
                         })
                         .catch((error: NodeJS.ErrnoException) => reject(error));
@@ -297,8 +300,9 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<Error | Nod
                     case 'win32':
                         fileSystemUtils.readFile(path.join(resourcesDir, 'nw', os, 'exe', 'nw.exe'))
                         .then((file: Buffer) => {
-                            finalPackage.append(Buffer.concat([file, buffer]), { name: path.join(filename, filename + '.exe') })
-                                        .finalize();
+                            finalPackage
+                            .append(Buffer.concat([file, buffer]), { name: path.join(filename, filename + '.exe') })
+                            .finalize();
                             return;
                         })
                         .catch((error: NodeJS.ErrnoException) => reject(error));

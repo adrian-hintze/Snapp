@@ -18,8 +18,8 @@ export class FileDownloadService {
             const xhr = new XMLHttpRequest();
             const url = '/gen-exec';
 
-            xhr.responseType = 'blob';
             xhr.open('POST', url, true);
+            xhr.responseType = 'blob';
 
             // xhr.onreadystatechange
             xhr.addEventListener('load', function () {
@@ -30,7 +30,6 @@ export class FileDownloadService {
                         const filename = filenamePattern.exec(header)[1];
                         const blob = new Blob([this.response], { type: 'application/zip' });
                         fileSaver.saveAs(blob, filename);
-     
                     }
                     resolve(xhr.status);
                 }
