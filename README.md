@@ -14,7 +14,7 @@ Snapp!
 
 http://snapp.citilab.eu/
 
-written by Adrian Hintze adrian.hintze AT est.fib.upc.edu
+written by Adrian Hintze hintze.adrian AT gmail DOT com
 
 Copyright (C) 2015 by Adrian Hintze
 
