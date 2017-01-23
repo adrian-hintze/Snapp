@@ -505,10 +505,10 @@ IDE_Morph.prototype.openIn = function (world) {
 			var allCostumesLoaded = true;
 			if (child.costumes) {
 				child.costumes.contents.forEach(function (costume) {
-					if (typeof costume.loaded === "function") { allCostumesLoaded = false; }
+					if (typeof costume.loaded === 'function') { allCostumesLoaded = false; }
 				});
 			}
-			if (!allCostumesLoaded || (child.costumes && child.costumes.length > 0 && !child.costume)) {
+			if (!allCostumesLoaded || (child.costumes && !child.costume)) {
 				allSpritesDone = false;
 			}
 		});
