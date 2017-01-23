@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
 
-import { FileDownloadService } from '../../services/file-download.service';
+import { FileDownloadService, FileDownloadServiceResponse } from '../../services/file-download.service';
 
 interface SnapProjectSubmitFormData {
     project: File;
@@ -46,7 +46,7 @@ export default class SnapProjectSubmitFormComponent {
 
             // Try to detect if it's a 64 or 32 bit machine
             // Most of the time this doesn't work so well
-            let is64bit =
+            const is64bit =
                 navigator.platform === 'Win64' || navigator.platform === 'Linux x86_64' || // If this are set just trust them
                 navigator.appVersion.indexOf('WOW64') > -1 || navigator.appVersion.indexOf('x86_64') > -1 || // In case the fields above aren't set correctly
                 navigator.userAgent.indexOf('WOW64') > -1 || navigator.userAgent.indexOf('x86_64') > -1; // Firefox's appVersion field is kinda lacking
@@ -71,18 +71,38 @@ export default class SnapProjectSubmitFormComponent {
 
         const url = '/gen-exec';
         this.busy = new FileDownloadService().post(url, formData)
-                                             .then((status) => {
-                                                 if (status === 400) {
-                                                     alert('Client error. Please make sure that your xml file is correct.');
-                                                 }
-                                                 else if (status === 413) {
-                                                     alert('Sorry, but this online version of Snapp! only accepts projects up to 10 MB.');
-                                                 }
-                                                 else if (status === 500) {
-                                                     alert('Whoops! Something went wrong server-side. Please try again later. If the problem persists open a new issue on GitHub.');
-                                                 }
-                                             })
-                                             .catch(error => console.log(error));
+        .then((response: FileDownloadServiceResponse) => {
+            const { status } = response;
+            if (status === 413) {
+                alert('Sorry, but this online version of Snapp! only accepts projects up to 10 MB.');
+            }
+            else if (status === 500) {
+                alert('Whoops! Something went wrong server-side. Please try again later. If the problem persists open a new issue on GitHub.');
+            }
+            else if (status === 400) {
+                const { errorResponse } = response;
+                const unknownErrorResponse = 'Unknown client error. Please reload the page and try again. If the problem persists open a new issue on GitHub.';
+                console.log(errorResponse)
+                if (!errorResponse) {
+                    alert(unknownErrorResponse);
+                    return;
+                }
+
+                switch (errorResponse.code) {
+                    case 'REJECTED_FILE_EXTENSION':
+                        alert('Please upload only XML files (myproject.xml). Other file types will not be processed.');
+                        break;
+                    case 'XML_PROPERTY_MISSING':
+                    case 'XML_VALIDATION_ERROR':
+                        alert('There seems to be an error with your exported Snap! project. Please make sure that it has been saved correctly.');
+                        break;
+                    default:
+                        alert(unknownErrorResponse);
+                        break;
+                };               
+            }
+        })
+        .catch(error => console.log(error));
     }
 
     public resolutions: Array<string> = ['1280x960', '1152x864', '1024x768', '800x600', '600x450'];

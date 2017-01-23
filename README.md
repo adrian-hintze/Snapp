@@ -1,6 +1,6 @@
 # Snapp
 
-Snapp*!* turns [Snap*!*](http://snap.berkeley.edu/) projects into standalone executables! 
+Snapp*!* turns [Snap*!*](http://snap.berkeley.edu/) projects into standalone executables!
 
 ## Demo
 
@@ -8,7 +8,7 @@ Try it at [http://snapp.citilab.eu/](http://snapp.citilab.eu/)
 
 ##TODO - Update Readme
 
-## License 
+## License
 
 Snapp!
 

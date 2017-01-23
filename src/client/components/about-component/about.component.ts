@@ -19,15 +19,16 @@ export default class AboutComponent {
         .size('lg')
         .title('About')
         .body(`
-            <b>Snapp<i>!</i></b> was developed in 2015 by <b>Adrian Hintze</b> as his end of course project under the supervision
-			of <a href="https://www.cs.upc.edu/~jdelgado/" target="_blank"  class="linked-name"><b>Jordi Delgado</b></a>
-			(<a href="http://www.fib.upc.edu/en.html" target="_blank" class="linked-institution">FIB</a>-<a href="http://www.upc.edu/?set_language=en" target="_blank" class="linked-institution">UPC</a>) and
-			<a href="https://github.com/bromagosa" target="_blank" class="linked-name">Bernat Romagosa</a>
-			(<a href="http://edutec.citilab.eu/" target="_blank" class="linked-institution">Edutec</a>-<a href="http://citilab.eu/en" target="_blank" class="linked-institution">Citilab</a>)
+            <b>Snapp<i>!</i></b> was developed in 2015 by <a href="https://github.com/Rydion" target="_blank"><b>Adrian Hintze</b></a>.
 			<br><br>
-			<b>Snapp<i>!</i></b> is open source and is available at <a href="https://github.com/Rydion/Snapp" target="_blank" class="linked-institution">GitHub</a>
+            Original idea by <a href="https://github.com/bromagosa" target="_blank" class="linked-name">Bernat Romagosa</a>
+            (<a href="http://edutec.citilab.eu/" target="_blank" class="linked-institution">Edutec</a>-<a href="http://citilab.eu/en" target="_blank" class="linked-institution">Citilab</a>).
 			<br><br>
-			If you have any suggestions or find any issues with the application you can contact the author at <b>hintze.adrian AT gmail DOT com</b>
+			<b>Snapp<i>!</i></b> is open source and available at <a href="https://github.com/Rydion/Snapp" target="_blank" class="linked-institution">GitHub</a>.
+			<br><br>
+			If you have any suggestions or find any issues with the application contact the author at <b>hintze.adrian AT gmail DOT com</b> or open a new GitHub issue.
+            <br><br>
+            Version 2.0.0-RC2
         `)
         .open();
     }

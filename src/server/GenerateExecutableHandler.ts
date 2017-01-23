@@ -12,7 +12,7 @@ import * as path from 'path';
 
 import streamToArray = require('stream-to-array');
 
-import Xml from './Xml';
+import { Xml } from './Xml';
 import Zip from './Zip';
 
 import * as fileSystemUtils from './utils/FileSystem';
@@ -65,7 +65,8 @@ win.on('blur', function () {
 `;
 
 interface ErrorFeedback {
-    message: string;
+    message?: string;
+    code?: string;
 }
 
 function validateFilename(filename: string): ErrorFeedback | undefined {
@@ -79,16 +80,17 @@ function validateFileContents(fileContents: string): ErrorFeedback | undefined {
         return { message: 'validateFileContents1' };
     }
     
-    if (!Xml.isValidString(fileContents)) {
-        return { message: 'validateFileContents2' };
+    try {
+        const xml = Xml.fromString(fileContents);
+        if (!xml.hasProperty('name')) {
+            return { message: 'XML_PROPERTY_MISSING' };
+        }
+        if (!xml.getProperty('name')) {
+            return { message: 'XML_PROPERTY_MISSING' };
+        }
     }
-
-    const xml = Xml.fromString(fileContents);
-    if (!xml.hasProperty('name')) {
-        return { message: 'validateFileContents3' };
-    }
-    if (!xml.getProperty('name')) {
-        return { message: 'validateFileContents4' };
+    catch (error) {
+        return { code: 'XML_VALIDATION_ERROR' };
     }
 }
 
@@ -104,6 +106,7 @@ class Resolution {
         if (resolution.indexOf('x') < 0) {
             throw new Error('');
         }
+
         const dimensions = resolution.split('x');
         if (dimensions.length !== 2) {
             throw new Error('');
@@ -339,8 +342,10 @@ export default function handleExecGeneration(projectPath: string, params: ExecGe
 
         const validationError = validateParams(params);
         if (validationError) {
-            const errorMessage = `Error validating parameters: ${validationError.message}`;
+            const { message = '', code = '' } = validationError;
+            const errorMessage = `Error validating parameters: ${message}.`;
             throw {
+                code,
                 error: new Error(errorMessage),
                 status: 400
             };

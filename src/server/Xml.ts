@@ -10,7 +10,7 @@
 
 import { XmlDocument } from 'xmldoc';
 
-export default class Xml {
+export class Xml {
     static isValidString(xml: string): boolean {
         try {
             new XmlDocument(xml);

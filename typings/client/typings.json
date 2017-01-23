@@ -2,6 +2,7 @@
     "globalDependencies": {
         "core-js": "registry:dt/core-js#0.0.0+20160914114559",
         "filesaver": "registry:dt/filesaver#0.0.0+20160622185141",
-        "node": "registry:dt/node#6.0.0+20160928143418"
+        "node": "registry:dt/node#6.0.0+20160928143418",
+        "text-encoding": "registry:dt/text-encoding#0.0.0+20160727010356"
     }
 }

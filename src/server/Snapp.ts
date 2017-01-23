@@ -1,4 +1,4 @@
-/*
+/**
  * Snapp.ts
  *
  * Created on: 2016-09-27
@@ -26,34 +26,52 @@ global.conf = require(path.join(global.rootDir, '..', 'snapp_conf.json'));
 
 const log = logModule({  });
 
+
 const moduleName = path.basename(__filename);
 const defaultPort = 80;
 const port = global.conf.port || defaultPort;
-const fileSize = global.conf.uploadFileSizeLimit || 10000000; // bytes
-
 const uploadFolder = path.join(__dirname, '..', 'upload', 'projects');
-const storage = multer.diskStorage({
-    destination: uploadFolder,
-    filename (request, file, cb) {
-        const currentDate = new Date().toISOString().split(':').join('');
-        cb(null, `${currentDate} - ${file.originalname}`);
+const fileSizeLimit = global.conf.uploadFileSizeLimit || 10000000; // bytes
+
+
+const limits = { fileSize: fileSizeLimit }; // Workaround for some error in the multer Typings file
+const upload = multer({
+    limits,
+    storage: multer.diskStorage({
+        destination: uploadFolder,
+        filename(request, file, callback) {
+            const currentDate = new Date().toISOString().split(':').join('');
+            callback(null, `${currentDate} - ${file.originalname}`);
+        }
+    }),
+    fileFilter(request, file, callback) {
+        const allowedExtension = '.xml';
+        const fileExtension = path.extname(file.originalname);
+
+        if (fileExtension !== allowedExtension) {
+            const error: any = new Error(`Unallowed file extension ${fileExtension}.`);
+            error.code = 'REJECTED_FILE_EXTENSION';
+            return callback(error, false);
+        }
+
+        callback(null, true);
     }
 });
-const limits = { fileSize };
-const upload = multer({ storage, limits });
+
 const snapProjectUpload = upload.single('project');
-const snapProjectUploadMiddleware = function (request: any, response: any, next: Function) {
+const snapProjectUploadMiddleware = function (request: express.Request, response: express.Response, next: express.NextFunction) {
     snapProjectUpload(request, response, (error: null | any) => {
         if (error) {
             log.error({ moduleName, message: 'Error ocurred while uploading project xml.', meta: { error } });
-            if (error.code === 'LIMIT_FILE_SIZE') {
-                response.status(413).end();
-            }
-            else {
-                response.status(500).end();
+            const { code = '' } = error;
+            switch (error.code) {
+                case 'LIMIT_FILE_SIZE':             response.status(413).json({ code }); break;
+                case 'REJECTED_FILE_EXTENSION':     response.status(400).json({ code }); break;
+                default:                            response.status(500).json({ code });
             }
             return;
         }
+
         next();
     });
 }
@@ -61,32 +79,26 @@ const snapProjectUploadMiddleware = function (request: any, response: any, next:
 
 express()
 
-.use(bodyParser.json({ limit: '100mb' }))
+.use(bodyParser.json({ limit: '5mb' }))
 
 .use('/', express.static(path.join(global.rootDir, '..', 'WebContent')))
 
-.get('/', (request, response) => response.sendFile(path.join(global.rootDir, '..', 'WebContent', 'snapp.html')))
+.get('/', (request: express.Request, response: express.Response) => response.sendFile(path.join(global.rootDir, '..', 'WebContent', 'snapp.html')))
 
-.post('/gen-exec', snapProjectUploadMiddleware, (request, response) => {
+.post('/gen-exec', snapProjectUploadMiddleware, (request: express.Request & bodyParser.ParsedAsJson & Express.Request, response: express.Response) => {
     if (!request.file) {
-        response.status(400).end();
+        response.status(400).json({ code: 'FILE_MISSING' });
         return;
     }
 
     const { path: projectPath, originalname } = request.file;
-
     const extname = path.extname(originalname);
-    if (extname !== '.xml') {
-        response.status(400).end();
-        return;
-    }
-
-    const params = request.body;
     const filename = path.basename(originalname, extname);
-    params.filename = filename;
-    params.useCompleteSnap = params.useCompleteSnap === 'true';
+    const body = request.body;
+    body.filename = filename;
+    body.useCompleteSnap = (typeof body.useCompleteSnap === 'string') ? body.useCompleteSnap === 'true' : !!body.useCompleteSnap;
 
-    generateExecutable(projectPath, params)
+    generateExecutable(projectPath, body)
     .then((zip: NodeJS.ReadableStream) => {
         const attachmentFilename = `${filename}.zip`;
         const mimeType = mime.lookup(attachmentFilename);
@@ -97,13 +109,12 @@ express()
         zip.pipe(response);
     })
     .catch((error: NodeJS.ErrnoException | Error | any) => {
-        log.error({ moduleName, message: 'Error ocurred while generating executable.', meta: { error: error.error || error } });
-        response.status(error.status || 500).end();
+        log.error({ moduleName, message: 'Error ocurred while generating executable.', meta: { error } });
+        const { code } = error;
+        response.status(error.status || 500).json({ code });
     })
-    .then(() => {
-        fileSystemUtils.rmDir(projectPath);
-    })
+    .then(() => fileSystemUtils.rmDir(projectPath))
     .catch(error => log.error({ moduleName, message: 'Unable to delete the project file.', meta: { projectPath, error } }));
 })
 
-.listen(port, () => log.info({ moduleName, message: `Snapp listening on port ${port}` })); 
+.listen(port, () => log.info({ moduleName, message: `Snapp listening on port ${port}.` })); 

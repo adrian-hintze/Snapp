@@ -11,27 +11,47 @@ import { Injectable } from '@angular/core';
 const fileSaver = require('file-saver');
 
 
+export interface FileDownloadServiceResponse {
+    status: number;
+    errorResponse?: any;
+}
+
+function arrayBufferToString(arrayBuffer: ArrayBuffer): string {
+    return String.fromCharCode.apply(null, new Uint8Array(arrayBuffer));
+}
+
 @Injectable()
 export class FileDownloadService {
     public post(url: string, body: Object | FormData) {
-        return new Promise<number | Error>((resolve, reject) => {
+        return new Promise<FileDownloadServiceResponse | Error>((resolve, reject) => {
             const xhr = new XMLHttpRequest();
             const url = '/gen-exec';
 
             xhr.open('POST', url, true);
-            xhr.responseType = 'blob';
+            xhr.responseType = 'arraybuffer';
 
-            // xhr.onreadystatechange
             xhr.addEventListener('load', function () {
                 if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        const header = this.getResponseHeader('content-disposition');
+                    const { status } = xhr;
+                    if (status === 200) {
+                        const contentDisposition = this.getResponseHeader('content-disposition');
                         const filenamePattern = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-                        const filename = filenamePattern.exec(header)[1];
-                        const blob = new Blob([this.response], { type: 'application/zip' });
+                        const filename = filenamePattern.exec(contentDisposition)[1];
+                        const contentType = this.getResponseHeader('content-type');
+                        const blob = new Blob([this.response], { type: contentType });
                         fileSaver.saveAs(blob, filename);
+                        resolve({ status });
+                        return;
                     }
-                    resolve(xhr.status);
+
+                    try {
+                        const textResponse = arrayBufferToString(xhr.response);
+                        const jsonResponse = JSON.parse(textResponse);
+                        resolve({ status, errorResponse: jsonResponse });
+                    }
+                    catch (error) {
+                        resolve({ status });
+                    }
                 }
             });
 
