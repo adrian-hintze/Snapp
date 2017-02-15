@@ -1,6 +1,8 @@
 const webpack = require('webpack');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const helpers = require('./helpers.js');
 
 module.exports = {
@@ -11,44 +13,62 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['', '.js', '.ts']
+        extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html']
     },
 
     module: {
-        loaders: [{
+        rules: [{
             test: /\.ts$/,
-            loaders: [
-                `awesome-typescript-loader?configFileName=${helpers.root('client-tsconfig.json')}`,
-                'angular2-template-loader'
-            ]
+            use: [{
+                loader: 'angular2-template-loader',
+            }, {
+                 loader: 'awesome-typescript-loader',
+                 options: {
+                     configFileName: helpers.root('client-tsconfig.json')
+                 }
+            }],
+            exclude: [/\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
         }, {
             test: /\.html$/,
-            loader: 'html'
+            loader: 'html-loader',
+            options: {
+                minimize: false
+            }
         }, {
             test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-            loader: 'file?name=resources/imgs/[name].[hash].[ext]'
+            loader: 'file-loader',
+            options: {
+                name: 'resources/imgs/[name].[hash].[ext]'
+            }
         }, {
             test: /\.css$/,
             exclude: [
-                helpers.root('src', 'client', 'components'),
-                helpers.root('src', 'client', 'modules')
+                helpers.root('src', 'client')
             ],
-            loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap')
+            loader: ExtractTextPlugin.extract({
+                use: [{
+                    loader: 'css-loader',
+                    options: {
+                        minimize: true
+                    }
+                }],
+                fallback: 'style-loader'
+            })
         }, {
             test: /\.css$/,
             include: [
-                helpers.root('src', 'client', 'components'),
-                helpers.root('src', 'client', 'modules')
+                helpers.root('src', 'client')
             ],
-            loader: 'raw'
+            use: [
+                'raw-loader'
+            ]
         }]
     },
 
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['app', 'vendor', 'polyfills']
+            names: ['app', 'vendor', 'polyfills']
         }),
-
         new HtmlWebpackPlugin({
             template: helpers.root('src', 'client', 'app.html'),
             filename: 'snapp.html',

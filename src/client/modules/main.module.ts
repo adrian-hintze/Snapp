@@ -15,6 +15,7 @@ import AboutComponent from '../components/about-component/about.component';
 
 import '../../../node_modules/angular2-busy/build/style/busy.css';
 
+
 @NgModule({
     imports: [
         BrowserModule,

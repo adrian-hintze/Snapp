@@ -216,6 +216,9 @@ function buildFinalPackage(finalPackage: Zip, os: string, projectName: string, f
 
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'Contents'), path.join(rootDir, 'Contents'));
             finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs'), { name: path.join(rootDir, 'Contents', 'MacOS', 'nwjs'), mode: unixExecutablePermissions });
+            finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs Helper'), { name: path.join(rootDir, 'Contents', 'Frameworks', 'nwjs Helper.app', 'Contents', 'MacOS', 'nwjs Helper'), mode: unixExecutablePermissions });
+            finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs Helper EH'), { name: path.join(rootDir, 'Contents', 'Frameworks', 'nwjs Helper EH.app', 'Contents', 'MacOS', 'nwjs Helper EH'), mode: unixExecutablePermissions });
+            finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs Helper NP'), { name: path.join(rootDir, 'Contents', 'Frameworks', 'nwjs Helper NP.app', 'Contents', 'MacOS', 'nwjs Helper NP'), mode: unixExecutablePermissions });
             finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.icns'), { name: path.join(rootDir, 'Contents', 'Resources', 'nw.icns') });
 
             return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'Info.plist'))
@@ -261,7 +264,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, projectName: string, f
         }
         case 'win64':
         case 'win32':
-            finalPackage.directory(path.join(resourcesDir, 'nw', os, 'dll'), filename);
+            finalPackage.directory(path.join(resourcesDir, 'nw', os, 'lib'), filename);
             return Promise.resolve();
         default:
             log.error({ moduleName, message: 'Invalid os.', meta: { os } });
@@ -300,16 +303,17 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<Error | Nod
                         .catch((error: NodeJS.ErrnoException) => reject(error));
                         break;
                     case 'win64':
-                    case 'win32':
+                    case 'win32': {
                         fileSystemUtils.readFile(path.join(resourcesDir, 'nw', os, 'exe', 'nw.exe'))
                         .then((file: Buffer) => {
                             finalPackage
-                            .append(Buffer.concat([file, buffer]), { name: path.join(filename, filename + '.exe') })
-                            .finalize();
+                                .append(Buffer.concat([file, buffer]), { name: path.join(filename, `${filename}.exe`) })
+                                .finalize();
                             return;
                         })
                         .catch((error: NodeJS.ErrnoException) => reject(error));
                         break;
+                    }
                     default:
                         log.error({ moduleName, message: 'Invalid os.', meta: { os } });
                         reject(new Error('Invalid os.'));

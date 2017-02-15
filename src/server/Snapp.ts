@@ -15,6 +15,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as multer from 'multer';
 import * as mime from 'mime';
+import * as compression from 'compression';
 
 import generateExecutable from './GenerateExecutableHandler';
 
@@ -76,9 +77,11 @@ const snapProjectUploadMiddleware = function (request: express.Request, response
     });
 }
 
+const snapp = express();
 
-express()
+snapp
 
+.use(compression())
 .use(bodyParser.json({ limit: '5mb' }))
 
 .use('/', express.static(path.join(global.rootDir, '..', 'WebContent')))
