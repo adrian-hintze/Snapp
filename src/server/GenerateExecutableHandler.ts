@@ -64,6 +64,17 @@ win.on('blur', function () {
 });
 `;
 
+const winFullscreenCode =
+`
+var gui = require('nw.gui');
+var win = gui.Window.get();
+var fullscreenShortcut = new gui.Shortcut({
+    key: 'F11',
+    active: function () { win.toggleFullscreen(); }
+});
+gui.App.registerGlobalHotKey(fullscreenShortcut);
+`;
+
 interface ErrorFeedback {
     message?: string;
     code?: string;
@@ -166,11 +177,15 @@ function getProjectName(fileContents: string): string {
     return Xml.fromString(fileContents).getProperty('name');
 }
 
+function needsNodeMode(os: string): boolean {
+    return os === 'mac32' || os === 'mac64' || os === 'win32' || os === 'win64';
+}
+
 function buildPackageJson(os: string, projectName: string, resolution: Resolution): string {
     return JSON.stringify({
         name: 'snapapp',
         main: 'snap.html',
-        nodejs: os === 'mac32' || os === 'mac64',
+        nodejs: needsNodeMode(os),
         'single-instance': true,
         window: {
             icon: 'lambda.png',
@@ -187,6 +202,9 @@ function buildGui(gui: string, project: string, os: string, projectName: string)
     let result = gui + '\n';
     if (os === 'mac32' || os === 'mac64') {
         result += macToolbarCode.replace('<project_name>', projectName) + '\n';
+    }
+    if (os === 'win32' || os === 'win64') {
+        result += winFullscreenCode + '\n';
     }
     return result + `IDE_Morph.prototype.snapproject = '${project}';`
 }
