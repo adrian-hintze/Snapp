@@ -8,7 +8,6 @@ import { Modal } from 'angular2-modal/plugins/bootstrap';
     styleUrls: ['./about.component.css'],
     providers: [Modal]
 })
-
 export default class AboutComponent {
     constructor(public modal: Modal) {
 

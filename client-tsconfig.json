@@ -1,29 +1,33 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
         "target": "es5",
+        "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "outDir": "build/WebContent",
+        "outDir": "./build",
         "newLine": "LF",
-        "removeComments": false,
+        "removeComments": true,
 
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "lib": [ "es2015", "dom" ],
         "noImplicitAny": true,
         "suppressImplicitAnyIndexErrors": true,
         "noImplicitReturns": false,
         "noUnusedLocals": true,
         "noUnusedParameters": false,
-        "strictNullChecks":  false
+        "strictNullChecks": false,
+
+        "typeRoots": [
+            "./node_modules/@types"
+        ]
     },
-    "files": [
-        "typings/client/typings/index.d.ts"
-    ],
+
     "include": [
-        "src/client/**/*"
+        "./src/client/**/*"
     ],
+
     "exclude": [
-        "node_modules"
+        "./node_modules"
     ]
 }

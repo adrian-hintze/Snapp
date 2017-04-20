@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
+        "target": "es2016",
         "module": "commonjs",
-        "target": "ES6",
         "moduleResolution": "node",
         "sourceMap": true,
-        "outDir": "build/snapp",
+        "outDir": "./build/snapp",
         "newLine": "LF",
         "removeComments": false,
 
@@ -15,15 +15,23 @@
         "noImplicitReturns": false,
         "noUnusedLocals": true,
         "noUnusedParameters": false,
-        "strictNullChecks":  true
+        "strictNullChecks": true,
+
+        "typeRoots": [
+            "./node_modules/@types"
+        ]
     },
+
     "files": [
-        "typings/server/typings/node.d.ts"
+        "./typings/index.d.ts"
     ],
+
     "include": [
-        "src/server/**/*"
+        "./src/server/**/*",
+        "./typings/server/typings/index.d.ts"
     ],
+
     "exclude": [
-        "node_modules"
+        "./node_modules"
     ]
 }

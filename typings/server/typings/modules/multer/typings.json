@@ -1,8 +1,0 @@
-{
-  "resolution": "main",
-  "tree": {
-    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/28ef3d201b4271f3bb6c417b01a98d5706dd62a5/multer/index.d.ts",
-    "raw": "registry:dt/multer#0.0.0+20160916155957",
-    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/28ef3d201b4271f3bb6c417b01a98d5706dd62a5/multer/index.d.ts"
-  }
-}

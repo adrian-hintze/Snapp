@@ -35,7 +35,7 @@ const uploadFolder = path.join(__dirname, '..', 'upload', 'projects');
 const fileSizeLimit = global.conf.uploadFileSizeLimit || 10000000; // bytes
 
 
-const limits = { fileSize: fileSizeLimit }; // Workaround for some error in the multer Typings file
+const limits = { fileSize: fileSizeLimit }; // Workaround for an error in @Types/multer
 const upload = multer({
     limits,
     storage: multer.diskStorage({
@@ -55,7 +55,8 @@ const upload = multer({
             return callback(error, false);
         }
 
-        callback(null, true);
+        const error: any = null; // Workaround for an error in @Types/multer
+        callback(error, true);
     }
 });
 
@@ -88,7 +89,7 @@ snapp
 
 .get('/', (request: express.Request, response: express.Response) => response.sendFile(path.join(global.rootDir, '..', 'WebContent', 'snapp.html')))
 
-.post('/gen-exec', snapProjectUploadMiddleware, (request: express.Request & bodyParser.ParsedAsJson & Express.Request, response: express.Response) => {
+.post('/gen-exec', snapProjectUploadMiddleware, (request: express.Request, response: express.Response) => {
     if (!request.file) {
         response.status(400).json({ code: 'FILE_MISSING' });
         return;

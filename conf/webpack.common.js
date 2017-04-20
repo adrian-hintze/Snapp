@@ -1,8 +1,6 @@
 const webpack = require('webpack');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 const helpers = require('./helpers.js');
 
 module.exports = {
@@ -13,27 +11,24 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html']
+        extensions: ['.ts', '.js']
     },
 
     module: {
         rules: [{
             test: /\.ts$/,
             use: [{
-                loader: 'angular2-template-loader',
+                loader: 'awesome-typescript-loader',
+                options: {
+                    configFileName: helpers.root('client-tsconfig.json')
+                }
             }, {
-                 loader: 'awesome-typescript-loader',
-                 options: {
-                     configFileName: helpers.root('client-tsconfig.json')
-                 }
+                loader: 'angular2-template-loader'
             }],
-            exclude: [/\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
+            exclude: [/\.(spec|e2e)\.ts$/]
         }, {
             test: /\.html$/,
-            loader: 'html-loader',
-            options: {
-                minimize: false
-            }
+            use: { loader: 'html-loader' }
         }, {
             test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
             loader: 'file-loader',
