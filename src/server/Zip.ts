@@ -8,14 +8,13 @@
 
 'use strict';
 
-import * as archiver from 'archiver';
-import { Archiver } from 'archiver';
+import { create as getNewArchiver, Archiver } from 'archiver';
 
 const defaultHighWaterMark = 100000000;
 
 export default class Zip {
     public constructor(onError: Function, onFinish: Function) {
-        this.zip = archiver.create('zip', { highWaterMark: defaultHighWaterMark });
+        this.zip = getNewArchiver('zip', { highWaterMark: defaultHighWaterMark });
         this.zip.on('error', onError);
         this.zip.on('finish', onFinish);
     }

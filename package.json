@@ -19,8 +19,8 @@
     },
 
     "engines": {
-        "node": ">=7.8.0",
-        "npm": ">=4.2.0"
+        "node": ">=7.9.0",
+        "npm": ">=4.5.0"
     },
 
     "dependencies": {
@@ -75,19 +75,19 @@
         "extract-text-webpack-plugin": "2.1.0",
         "html-webpack-plugin": "2.28.0",
 
-        "@angular/animations": "4.0.2",
-        "@angular/common": "4.0.2",
-        "@angular/compiler": "4.0.2",
-        "@angular/core": "4.0.2",
-        "@angular/forms": "4.0.2",
-        "@angular/http": "4.0.2",
-        "@angular/platform-browser": "4.0.2",
-        "@angular/platform-browser-dynamic": "4.0.2",
-        "@angular/router": "4.0.2",
+        "@angular/animations": "4.0.3",
+        "@angular/common": "4.0.3",
+        "@angular/compiler": "4.0.3",
+        "@angular/core": "4.0.3",
+        "@angular/forms": "4.0.3",
+        "@angular/http": "4.0.3",
+        "@angular/platform-browser": "4.0.3",
+        "@angular/platform-browser-dynamic": "4.0.3",
+        "@angular/router": "4.0.3",
 
         "core-js": "2.4.1",
         "rxjs": "5.3.0",
-        "zone.js": "0.8.5",
+        "zone.js": "0.8.8",
 
         "angular2-busy": "2.0.4",
         "angular2-modal": "2.0.3",
