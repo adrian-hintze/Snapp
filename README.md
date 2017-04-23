@@ -1,6 +1,6 @@
 # Snapp
 
-Snapp* ! * turns [Snap*!*](http://snap.berkeley.edu/) projects into standalone executables!
+Snapp_!_ turns [Snap*!*](http://snap.berkeley.edu/) projects into standalone executables!
 
 ## Demo
 
