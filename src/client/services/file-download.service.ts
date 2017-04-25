@@ -8,12 +8,12 @@
 
 import { Injectable } from '@angular/core';
 
-const fileSaver = require('file-saver');
-
+import { saveAs } from 'file-saver';
 
 export interface FileDownloadServiceResponse {
     status: number;
     errorResponse?: any;
+    fileSizeLimit?: any;
 }
 
 function arrayBufferToString(arrayBuffer: ArrayBuffer): string {
@@ -24,8 +24,8 @@ function arrayBufferToString(arrayBuffer: ArrayBuffer): string {
 export class FileDownloadService {
     public post(url: string, body: Object | FormData) {
         return new Promise<FileDownloadServiceResponse | Error>((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-            const url = '/gen-exec';
+            const xhr: XMLHttpRequest = new XMLHttpRequest();
+            const url: string = '/gen-exec';
 
             xhr.open('POST', url, true);
             xhr.responseType = 'arraybuffer';
@@ -35,11 +35,13 @@ export class FileDownloadService {
                     const { status } = xhr;
                     if (status === 200) {
                         const contentDisposition = this.getResponseHeader('content-disposition');
-                        const filenamePattern = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-                        const filename = filenamePattern.exec(contentDisposition)[1];
+                        const filenamePattern: RegExp = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                        const filename: string = filenamePattern.exec(contentDisposition)[1];
+
                         const contentType = this.getResponseHeader('content-type');
-                        const blob = new Blob([this.response], { type: contentType });
-                        fileSaver.saveAs(blob, filename);
+                        const blob: Blob = new Blob([this.response], { type: contentType });
+
+                        saveAs(blob, filename);
                         resolve({ status });
                         return;
                     }

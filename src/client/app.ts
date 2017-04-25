@@ -4,7 +4,6 @@ import { enableProdMode } from '@angular/core';
 import MainModule from './modules/main.module';
 
 import './app.css';
-import 'bootstrap/dist/css/bootstrap.css';
 
 if (process.env.ENV === 'production') {
     enableProdMode();

@@ -1,4 +1,12 @@
-﻿import { NgModule } from '@angular/core';
+﻿/**
+ * main.module.ts
+ *
+ * Created on: 2016-11-01
+ *     Author: Adrian Hintze @Rydion
+ *
+ */
+
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -12,10 +20,6 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import MainComponent from '../components/main-component/main.component';
 import SnapProjectSubmitFormComponent from '../components/snap-project-submit-form-component/snap-project-submit-form.component';
 import AboutComponent from '../components/about-component/about.component';
-
-
-import '../../../node_modules/angular2-busy/build/style/busy.css';
-
 
 @NgModule({
     imports: [
@@ -36,5 +40,4 @@ import '../../../node_modules/angular2-busy/build/style/busy.css';
         MainComponent
     ]
 })
-
 export default class MainModule { }

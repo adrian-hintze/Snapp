@@ -1,4 +1,12 @@
-﻿import { Component } from '@angular/core';
+﻿/**
+ * main.component.ts
+ *
+ * Created on: 2016-11-01
+ *     Author: Adrian Hintze @Rydion
+ *
+ */
+
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'snapp',

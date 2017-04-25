@@ -10,6 +10,7 @@
 
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "lib": [ "es2016", "dom" ],
         "noImplicitAny": true,
         "suppressImplicitAnyIndexErrors": true,
         "noImplicitReturns": false,
@@ -27,8 +28,7 @@
     ],
 
     "include": [
-        "./src/server/**/*",
-        "./typings/server/typings/index.d.ts"
+        "./src/server/**/*"
     ],
 
     "exclude": [

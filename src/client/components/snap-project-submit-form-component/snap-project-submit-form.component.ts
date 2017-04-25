@@ -1,9 +1,17 @@
-﻿import { Component } from '@angular/core';
+﻿/**
+ * snap-project-submit-form.component.ts
+ *
+ * Created on: 2016-11-01
+ *     Author: Adrian Hintze @Rydion
+ *
+ */
+
+import { Component } from '@angular/core';
 
 import { FileDownloadService, FileDownloadServiceResponse } from '../../services/file-download.service';
 
 interface SnapProjectSubmitFormData {
-    project: File;
+    project: File | null;
     resolution: string;
     os: string;
     useCompleteSnap: boolean;
@@ -14,16 +22,11 @@ interface SelectOption {
     value: any;
 }
 
-
 @Component({
     selector: 'snap-project-submit-form',
     templateUrl: './snap-project-submit-form.component.html',
-    styleUrls: [
-        './snap-project-submit-form.component.css'
-    ]
+    styleUrls: ['./snap-project-submit-form.component.css']
 })
-
-
 export default class SnapProjectSubmitFormComponent {
     constructor() {
         this.formData = {
@@ -51,7 +54,7 @@ export default class SnapProjectSubmitFormComponent {
                 navigator.appVersion.indexOf('WOW64') > -1 || navigator.appVersion.indexOf('x86_64') > -1 || // In case the fields above aren't set correctly
                 navigator.userAgent.indexOf('WOW64') > -1 || navigator.userAgent.indexOf('x86_64') > -1; // Firefox's appVersion field is kinda lacking
 
-            return is64bit ? osName + '64' : osName + '32';
+            return osName + (is64bit ? '64' : '32');
         }
 
         this.formData.os = detectOs();
@@ -59,7 +62,9 @@ export default class SnapProjectSubmitFormComponent {
 
     public onSelectFile(event: any): void {
         const input: HTMLInputElement = event.target;
-        this.formData.project = input.files.item(0);
+        if (input && input.files) {
+            this.formData.project = input.files.item(0);
+        }
     }
 
     public onSubmit(): void {
@@ -69,26 +74,32 @@ export default class SnapProjectSubmitFormComponent {
         formData.append('os', this.formData.os);
         formData.append('useCompleteSnap', this.formData.useCompleteSnap);
 
-        const url = '/gen-exec';
+        const url: string = '/gen-exec';
         this.busy = new FileDownloadService().post(url, formData)
         .then((response: FileDownloadServiceResponse) => {
-            const { status } = response;
+            const unknownErrorResponse = 'Unknown client error. Please reload the page and try again. If the problem persists open a new GitHub issue (link in about section).';
+            const { status, errorResponse } = response;
+
             if (status === 413) {
-                alert('Sorry, but this online version of Snapp! only accepts projects up to 10 MB.');
-            }
-            else if (status === 500) {
-                alert('Whoops! Something went wrong server-side. Please try again later. If the problem persists open a new issue on GitHub.');
-            }
-            else if (status === 400) {
-                const { errorResponse } = response;
-                const unknownErrorResponse = 'Unknown client error. Please reload the page and try again. If the problem persists open a new issue on GitHub.';
-                console.log(errorResponse)
                 if (!errorResponse) {
                     alert(unknownErrorResponse);
                     return;
                 }
 
-                switch (errorResponse.code) {
+                const { fileSizeLimit } = errorResponse;
+                alert(`Sorry, but this online version of Snapp! only accepts projects up to ${fileSizeLimit / 1000000} MB.`);
+            }
+            else if (status === 500) {
+                alert('Whoops! Something went wrong server-side. Please try again later. If the problem persists open a new issue on GitHub.');
+            }
+            else if (status === 400) {
+                if (!errorResponse) {
+                    alert(unknownErrorResponse);
+                    return;
+                }
+
+                const { code } = errorResponse;
+                switch (code) {
                     case 'REJECTED_FILE_EXTENSION':
                         alert('Please upload only XML files (myproject.xml). Other file types will not be processed.');
                         break;
@@ -116,5 +127,5 @@ export default class SnapProjectSubmitFormComponent {
     ];
 
     public formData: SnapProjectSubmitFormData;
-    public busy: Promise<void | any>;
+    public busy: Promise<any>;
 }

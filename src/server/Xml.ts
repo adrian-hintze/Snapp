@@ -8,7 +8,43 @@
 
 'use strict';
 
+import { parser as createSaxParser, SAXParser, Tag, QualifiedTag } from 'sax';
+
+export default class SaxParser {
+    public constructor() {
+        const strict = true;
+        this.parser = createSaxParser(strict, {});
+    }
+
+    public onTag(callback: (tag: Tag | QualifiedTag) => void) {
+        this.parser.onopentag = callback;
+    }
+
+    public onError(callback: (e: Error) => void) {
+        this.parser.onerror = callback;
+    }
+
+    public onEnd(callback: () => void) {
+        this.parser.onend = callback;
+    }
+
+    public parse(xml: string) {
+        try {
+            this.parser.write(xml).close();
+        }
+        catch (error) { }
+    }
+
+    private parser: SAXParser;
+}
+
+/*
+
+
+'use strict';
+
 import { XmlDocument } from 'xmldoc';
+import { createStream, SAXStream } from 'sax';
 
 export class Xml {
     static isValidString(xml: string): boolean {
@@ -49,3 +85,25 @@ export class Xml {
         this.xml = xml;
     }
 }
+
+
+export class SaxParser {
+    public constructor() {
+        const strict = true;
+        this.parser = createStream(strict, {});
+    }
+
+    public onEnd(callback: () => void) {
+        this.parser.on('end', callback);
+    }
+
+    public parse(filePath: string) {
+        const fs = require('fs');
+        fs.createReadStream(filePath).pipe(this.parser);
+    }
+
+    private parser: SAXStream;
+}
+
+
+*/

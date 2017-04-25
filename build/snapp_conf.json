@@ -1,4 +1,4 @@
 {
     "port": 80,
-    "uploadFileSizeLimit":  10000000
+    "uploadFileSizeLimit":  100000000
 }

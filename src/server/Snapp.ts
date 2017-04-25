@@ -23,16 +23,17 @@ import * as fileSystemUtils from './utils/FileSystem';
 
 import logModule from './log/Log';
 
+
 global.conf = require(path.join(global.rootDir, '..', 'snapp_conf.json'));
 
+
 const log = logModule({  });
-
-
 const moduleName = path.basename(__filename);
 const defaultPort = 80;
 const port = global.conf.port || defaultPort;
 const uploadFolder = path.join(__dirname, '..', 'upload', 'projects');
-const fileSizeLimit = global.conf.uploadFileSizeLimit || 10000000; // bytes
+const defaultFileSizeLimit = 10000000; // 10 MB
+const fileSizeLimit = global.conf.uploadFileSizeLimit || defaultFileSizeLimit; // bytes
 
 
 const limits = { fileSize: fileSizeLimit }; // Workaround for an error in @Types/multer
@@ -67,7 +68,7 @@ const snapProjectUploadMiddleware = function (request: express.Request, response
             log.error({ moduleName, message: 'Error ocurred while uploading project xml.', meta: { error } });
             const { code = '' } = error;
             switch (error.code) {
-                case 'LIMIT_FILE_SIZE':             response.status(413).json({ code }); break;
+                case 'LIMIT_FILE_SIZE':             response.status(413).json({ code, fileSizeLimit }); break;
                 case 'REJECTED_FILE_EXTENSION':     response.status(400).json({ code }); break;
                 default:                            response.status(500).json({ code });
             }
@@ -83,7 +84,7 @@ const snapp = express();
 snapp
 
 .use(compression())
-.use(bodyParser.json({ limit: '5mb' }))
+.use(bodyParser.json())
 
 .use('/', express.static(path.join(global.rootDir, '..', 'WebContent')))
 
