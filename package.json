@@ -13,9 +13,12 @@
 
     "scripts": {
         "run": "node .\\build\\snapp\\Snapp.js",
-        "build": "npm run build-server && npm run build-client",
+        "build": "npm run build-server && npm run build-client && npm run copy-snap",
         "build-server": "rimraf build/snapp && tsc -p .\\server-tsconfig.json",
-        "build-client": "rimraf build/WebContent && webpack --config conf/webpack.prod.js --progress --profile"
+        "build-client": "rimraf build/WebContent && webpack --config conf/webpack.prod.js --progress --profile",
+        "copy-snap": "npm run copy-snap-full && npm run copy-snap-reduced",
+        "copy-snap-full": "copyfiles -u 2 -e \"./node_modules/snap-4-snapp-full/gui.js\" \"./node_modules/snap-4-snapp-full/**/*\" \"./build/resources/snap/full/files\" && copyfiles -u 2 \"./node_modules/snap-4-snapp-full/gui.js\" \"./build/resources/snap/full/gui\"",
+        "copy-snap-reduced": "copyfiles -u 2 -e \"./node_modules/snap-4-snapp-reduced/gui.js\" \"./node_modules/snap-4-snapp-reduced/**/*\" \"./build/resources/snap/reduced/files\" && copyfiles -u 2 \"./node_modules/snap-4-snapp-reduced/gui.js\" \"./build/resources/snap/reduced/gui\""
     },
 
     "engines": {
@@ -60,6 +63,7 @@
 
         "concurrently": "3.4.0",
         "rimraf": "2.6.1",
+        "copyfiles": "1.2.0",
 
         "webpack": "2.4.1",
         "webpack-merge": "4.1.0",
