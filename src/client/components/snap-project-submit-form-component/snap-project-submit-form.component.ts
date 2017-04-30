@@ -72,7 +72,7 @@ export default class SnapProjectSubmitFormComponent {
         formData.append('project', this.formData.project);
         formData.append('resolution', this.formData.resolution);
         formData.append('os', this.formData.os);
-        formData.append('useCompleteSnap', this.formData.useCompleteSnap);
+        formData.append('useCompleteSnap', this.formData.useCompleteSnap.toString());
 
         const url: string = '/gen-exec';
         this.busy = new FileDownloadService().post(url, formData)

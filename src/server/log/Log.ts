@@ -54,13 +54,15 @@ interface LogFunctions {
     info: LogFunction;
     warn: LogFunction;
     error: LogFunction;
+    destructureError: (error: any) => { message: string, stack: string };
 }
 
 const logFunctions: LogFunctions = {
     debug: (params: LogParameters) => winston.debug(formatLogMessage(params), params.meta || { }),
     info: (params: LogParameters) => winston.info(formatLogMessage(params), params.meta || { }),
     warn: (params: LogParameters) => winston.warn(formatLogMessage(params), params.meta || { }),
-    error: (params: LogParameters) => winston.error(formatLogMessage(params), params.meta || { })
+    error: (params: LogParameters) => winston.error(formatLogMessage(params), params.meta || { }),
+    destructureError: (error: any) => ({ message: error.message, stack: error.stack })
 };
 
 interface LogInitParameters {

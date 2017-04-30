@@ -268,7 +268,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, projectName: string, f
                 finalPackage.append(plist, { name: path.join(rootDir, 'Contents', 'Info.plist') });
             })
             .catch((error: NodeJS.ErrnoException) => {
-                log.error({ moduleName, message: 'Unable to read mac Info.plist.', meta: { os } });
+                log.error({ moduleName, message: 'Unable to read mac Info.plist.', meta: { os, errorCode: error.code } });
                 throw error;
             });
         }
@@ -286,7 +286,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, projectName: string, f
                     finalPackage.append(launcher, { name: path.join(rootDir, 'launcher.sh'), mode: unixExecutablePermissions });
                 })
                 .catch((error: NodeJS.ErrnoException) => {
-                    log.error({ moduleName, message: 'Unable to read linux launcher.sh.', meta: { os } });
+                    log.error({ moduleName, message: 'Unable to read linux launcher.sh.', meta: { os, errorCode: error.code } });
                     throw error;
                 }),
                 fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', 'linux', 'app.desktop'))
@@ -295,7 +295,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, projectName: string, f
                     finalPackage.append(launcher, { name: `${filename}.desktop`, mode: unixExecutablePermissions });
                 })
                 .catch((error: NodeJS.ErrnoException) => {
-                    log.error({ moduleName, message: 'Unable to read linux app.desktop.', meta: { os } });
+                    log.error({ moduleName, message: 'Unable to read linux app.desktop.', meta: { os, errorCode: error.code } });
                 })
             ];
 
@@ -361,7 +361,7 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<Error | Nod
                     }
                 })
                 .catch((error: Error) => {
-                    log.error({ moduleName, message: 'Error arraying nwPackage.', meta: { error } });
+                    log.error({ moduleName, message: 'Error arraying nwPackage.', meta: { error: log.destructureError(error) } });
                     reject(error);
                 });
             });

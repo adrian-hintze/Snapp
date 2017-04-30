@@ -34,18 +34,25 @@ export class FileDownloadService {
                 if (xhr.readyState === 4) {
                     const { status } = xhr;
                     if (status === 200) {
-                        const contentDisposition = this.getResponseHeader('content-disposition');
-                        const filenamePattern: RegExp = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-                        const filename: string = filenamePattern.exec(contentDisposition)[1];
+                        const contentDisposition: string = this.getResponseHeader('content-disposition');
+                        const contentType: string = this.getResponseHeader('content-type');
 
-                        const contentType = this.getResponseHeader('content-type');
-                        const blob: Blob = new Blob([this.response], { type: contentType });
+                        if (contentDisposition && contentType) {
+                            const filenamePattern: RegExp = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                            const filename: string = filenamePattern.exec(contentDisposition)[1];
+                            const blob: Blob = new Blob([this.response], { type: contentType });
 
-                        saveAs(blob, filename);
-                        resolve({ status });
+                            saveAs(blob, filename);
+                            resolve({ status });
+                            return;
+                        }
+
+                        // If any of the headers is missing we suppose a server error
+                        resolve({ status: 500 });
                         return;
                     }
 
+                    // Error
                     try {
                         const textResponse = arrayBufferToString(xhr.response);
                         const jsonResponse = JSON.parse(textResponse);

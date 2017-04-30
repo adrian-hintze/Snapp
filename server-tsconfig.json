@@ -11,12 +11,9 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "lib": [ "es2016", "dom" ],
-        "noImplicitAny": true,
+        "strict": true,
         "suppressImplicitAnyIndexErrors": true,
-        "noImplicitReturns": false,
         "noUnusedLocals": true,
-        "noUnusedParameters": false,
-        "strictNullChecks": true,
 
         "typeRoots": [
             "./node_modules/@types"

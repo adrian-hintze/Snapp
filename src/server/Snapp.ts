@@ -63,9 +63,9 @@ const upload = multer({
 
 const snapProjectUpload = upload.single('project');
 const snapProjectUploadMiddleware = function (request: express.Request, response: express.Response, next: express.NextFunction) {
-    snapProjectUpload(request, response, (error: null | any) => {
+    snapProjectUpload(request, response, (error: any) => {
         if (error) {
-            log.error({ moduleName, message: 'Error ocurred while uploading project xml.', meta: { error } });
+            log.error({ moduleName, message: 'Error ocurred while uploading project xml.', meta: { error: log.destructureError(error) } });
             const { code = '' } = error;
             switch (error.code) {
                 case 'LIMIT_FILE_SIZE':             response.status(413).json({ code, fileSizeLimit }); break;
@@ -114,12 +114,12 @@ snapp
         zip.pipe(response);
     })
     .catch((error: NodeJS.ErrnoException | Error | any) => {
-        log.error({ moduleName, message: 'Error ocurred while generating executable.', meta: { error } });
+        log.error({ moduleName, message: 'Error ocurred while generating executable.', meta: { error: log.destructureError(error) } });
         const { code } = error;
         response.status(error.status || 500).json({ code });
     })
     .then(() => fileSystemUtils.rmDir(projectPath))
-    .catch(error => log.error({ moduleName, message: 'Unable to delete the project file.', meta: { projectPath, error } }));
+    .catch(error => log.error({ moduleName, message: 'Unable to delete the project file.', meta: { projectPath, error: log.destructureError(error) } }));
 })
 
 .listen(port, () => log.info({ moduleName, message: `Snapp listening on port ${port}.` })); 
