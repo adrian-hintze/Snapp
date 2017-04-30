@@ -17,8 +17,8 @@
         "build-server": "rimraf build/snapp && tsc -p .\\server-tsconfig.json",
         "build-client": "rimraf build/WebContent && webpack --config conf/webpack.prod.js --progress --profile",
         "copy-snap": "npm run copy-snap-full && npm run copy-snap-reduced",
-        "copy-snap-full": "copyfiles -u 2 -e \"./node_modules/snap-4-snapp-full/gui.js\" \"./node_modules/snap-4-snapp-full/**/*\" \"./build/resources/snap/full/files\" && copyfiles -u 2 \"./node_modules/snap-4-snapp-full/gui.js\" \"./build/resources/snap/full/gui\"",
-        "copy-snap-reduced": "copyfiles -u 2 -e \"./node_modules/snap-4-snapp-reduced/gui.js\" \"./node_modules/snap-4-snapp-reduced/**/*\" \"./build/resources/snap/reduced/files\" && copyfiles -u 2 \"./node_modules/snap-4-snapp-reduced/gui.js\" \"./build/resources/snap/reduced/gui\""
+        "copy-snap-full": "rimraf build/resources/snap/full && copyfiles -u 2 \"./node_modules/snap-4-snapp-full/**/*\" \"./build/resources/snap/full/files\" && rimraf build/resources/snap/full/files/gui.js && rimraf build/resources/snap/full/files/package.json && copyfiles -u 2 \"./node_modules/snap-4-snapp-full/gui.js\" \"./build/resources/snap/full/gui\"",
+        "copy-snap-reduced": "rimraf build/resources/snap/reduced && copyfiles -u 2 \"./node_modules/snap-4-snapp-reduced/**/*\" \"./build/resources/snap/reduced/files\" && rimraf build/resources/snap/reduced/files/gui.js && rimraf build/resources/snap/reduced/files/package.json && copyfiles -u 2 \"./node_modules/snap-4-snapp-reduced/gui.js\" \"./build/resources/snap/reduced/gui\""
     },
 
     "engines": {

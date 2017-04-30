@@ -107,6 +107,9 @@ export default class SnapProjectSubmitFormComponent {
                     case 'XML_VALIDATION_ERROR':
                         alert('There seems to be an error with your exported Snap! project. Please make sure that it has been saved correctly.');
                         break;
+                    case 'FILE_MISSING':
+                        alert('Please submit a Snap! project file.');
+                        break;
                     default:
                         alert(unknownErrorResponse);
                         break;

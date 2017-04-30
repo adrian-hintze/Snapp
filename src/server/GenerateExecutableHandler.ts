@@ -249,11 +249,11 @@ function buildProjectPackage(projectPackage: Zip, project: string, os: string, p
     });
 }
 
-function buildFinalPackage(finalPackage: Zip, os: string, projectName: string, filename: string): Promise<Error | void> {
+function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Promise<Error | void> {
     switch (os) {
         case 'mac64':
         case 'mac32': {
-            const rootDir = `${projectName}.app`;
+            const rootDir = `${filename}.app`;
 
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'Contents'), path.join(rootDir, 'Contents'));
             finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs'), { name: path.join(rootDir, 'Contents', 'MacOS', 'nwjs'), mode: unixExecutablePermissions });
@@ -274,7 +274,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, projectName: string, f
         }
         case 'lin64':
         case 'lin32': {
-            const rootDir = `${projectName}.snapp`;
+            const rootDir = `${filename}.snapp`;
 
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'lib'), rootDir);
             finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.png'), { name: path.join(rootDir, 'lambda.png') });
@@ -331,7 +331,7 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<Error | Nod
                         case 'mac64':
                         case 'mac32':
                             finalPackage
-                            .append(buffer, { name: path.join(`${projectName}.app`, 'Contents', 'Resources', 'app.nw'), mode: unixExecutablePermissions })
+                            .append(buffer, { name: path.join(`${filename}.app`, 'Contents', 'Resources', 'app.nw'), mode: unixExecutablePermissions })
                             .finalize();
                             break;
                         case 'lin64':
@@ -339,7 +339,7 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<Error | Nod
                             fileSystemUtils.readFile(path.join(resourcesDir, 'nw', os, 'bin', 'nw'))
                             .then((file: Buffer) => {
                                 finalPackage
-                                .append(Buffer.concat([file, buffer]), { name: path.join(`${projectName}.snapp`, filename), mode: unixExecutablePermissions })
+                                .append(Buffer.concat([file, buffer]), { name: path.join(`${filename}.snapp`, filename), mode: unixExecutablePermissions })
                                 .finalize();
                             })
                             .catch((error: NodeJS.ErrnoException) => reject(error));
@@ -367,7 +367,7 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<Error | Nod
             });
 
             buildProjectPackage(nwPackage, project, os, projectName, resolution, useCompleteSnap)
-            .then(() => buildFinalPackage(finalPackage, os, projectName, filename))
+            .then(() => buildFinalPackage(finalPackage, os, filename))
             .then(() => {
                 nwPackage.finalize();
                 resolve(finalPackage.getStream());
