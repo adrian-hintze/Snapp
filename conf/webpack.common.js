@@ -28,13 +28,17 @@ module.exports = {
             exclude: [/\.(spec|e2e)\.ts$/]
         }, {
             test: /\.html$/,
-            use: { loader: 'html-loader' }
+            use: [{
+                loader: 'html-loader'
+            }]
         }, {
             test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-            loader: 'file-loader',
-            options: {
-                name: 'resources/imgs/[name].[hash].[ext]'
-            }
+            use: [{
+                loader: 'file-loader',
+                options: {
+                    name: 'resources/imgs/[name].[hash].[ext]'
+                }
+            }]
         }, {
             test: /\.css$/,
             exclude: [
@@ -54,9 +58,9 @@ module.exports = {
             include: [
                 helpers.root('src', 'client')
             ],
-            use: [
-                'raw-loader'
-            ]
+            use: [{
+                loader: 'raw-loader'
+            }]
         }]
     },
 
