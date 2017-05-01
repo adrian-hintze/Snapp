@@ -36,13 +36,14 @@ const defaultFileSizeLimit = 10000000; // 10 MB
 const fileSizeLimit = global.conf.uploadFileSizeLimit || defaultFileSizeLimit; // bytes
 
 
-const limits = { fileSize: fileSizeLimit }; // Workaround for an error in @Types/multer
 const upload = multer({
-    limits,
+    limits: {
+        fileSize: fileSizeLimit
+    },
     storage: multer.diskStorage({
         destination: uploadFolder,
         filename(request, file, callback) {
-            const currentDate = new Date().toISOString().split(':').join('');
+            const currentDate = new Date().toISOString().split(':').join(''); // TODO -low- Move to some Utils file
             callback(null, `${currentDate} - ${file.originalname}`);
         }
     }),
@@ -63,10 +64,10 @@ const upload = multer({
 
 const snapProjectUpload = upload.single('project');
 const snapProjectUploadMiddleware = function (request: express.Request, response: express.Response, next: express.NextFunction) {
-    snapProjectUpload(request, response, (error: any) => {
+    snapProjectUpload(request, response, (error) => {
         if (error) {
             log.error({ moduleName, message: 'Error ocurred while uploading project xml.', meta: { error: log.destructureError(error) } });
-            const { code = '' } = error;
+            const { code } = error;
             switch (error.code) {
                 case 'LIMIT_FILE_SIZE':             response.status(413).json({ code, fileSizeLimit }); break;
                 case 'REJECTED_FILE_EXTENSION':     response.status(400).json({ code }); break;
@@ -97,14 +98,14 @@ snapp
     }
 
     const { path: projectPath, originalname } = request.file;
-    const extname = path.extname(originalname);
-    const filename = path.basename(originalname, extname);
-    const body = request.body;
+    const extname: string = path.extname(originalname);
+    const filename: string = path.basename(originalname, extname);
+    const body: any = request.body;
     body.filename = filename;
     body.useCompleteSnap = (typeof body.useCompleteSnap === 'string') ? body.useCompleteSnap === 'true' : !!body.useCompleteSnap;
 
     generateExecutable(projectPath, body)
-    .then((zip: NodeJS.ReadableStream) => {
+    .then((zip) => {
         const attachmentFilename = `${filename}.zip`;
         const mimeType = mime.lookup(attachmentFilename);
 
@@ -113,7 +114,7 @@ snapp
 
         zip.pipe(response);
     })
-    .catch((error: NodeJS.ErrnoException | Error | any) => {
+    .catch((error: NodeJS.ErrnoException | any) => {
         log.error({ moduleName, message: 'Error ocurred while generating executable.', meta: { error: log.destructureError(error) } });
         const { code } = error;
         response.status(error.status || 500).json({ code });

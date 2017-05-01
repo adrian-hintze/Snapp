@@ -1,5 +1,5 @@
 /**
- * Log.js
+ * Log.ts
  *
  * Created on: 2016-28-09
  *     Author: Adrian Hintze @Rydion
@@ -79,18 +79,26 @@ export default function (params?: LogInitParameters): LogFunctions {
 
     logLocale = locale;
 
-    // TODO -normal- Catch and handle the possible exception
-    fileSystemUtils.makeDirSync(logPath);
+    try {
+        fileSystemUtils.makeDirSync(logPath);
+    }
+    catch (error) {
+        console.error(`Unable to create logs directory: ${logPath}.`);
+        process.exit(1);
+    }
 
     winston.remove(winston.transports.Console);
 
-    winston.add(winston.transports.Console, {
-        formatter,
-        timestamp: timeStamper,
-        level: 'silly',
-        handleExceptions: false,
-        exitOnError: true
-    });
+    if (process.env.NODE_ENV !== 'production') {
+        winston.add(winston.transports.Console, {
+            formatter,
+            timestamp: timeStamper,
+            level: 'silly',
+            handleExceptions: false,
+            exitOnError: true
+        });
+    }
+
     winston.add(winstonDailyRotator, {
         formatter,
         name: 'SnappProductionLog',

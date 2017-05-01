@@ -11,7 +11,7 @@ if (process.env.ENV === 'production') {
 
 platformBrowserDynamic()
 .bootstrapModule(MainModule)
-.catch((error) => {
+.catch((error: Error) => {
     console.log(error);
     alert('Unable to load Snapp!');
 });

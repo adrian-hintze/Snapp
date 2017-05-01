@@ -21,11 +21,11 @@ import * as validationUtils from './utils/Validation';
 
 import logModule from './log/Log';
 
-const moduleName = path.basename(__filename);
+const moduleName: string = path.basename(__filename);
 const log = logModule();
-const resourcesDir = path.join(global.rootDir, '..', 'resources');
-const unixExecutablePermissions = 0o0755;
-const macToolbarCode =
+const resourcesDir: string = path.join(global.rootDir, '..', 'resources');
+const unixExecutablePermissions: number = 0o0755;
+const macToolbarCode: string =
 `
 var gui = require('nw.gui');
 var win = gui.Window.get();
@@ -64,7 +64,7 @@ win.on('blur', function () {
     gui.App.unregisterGlobalHotKey(minimizeShortcut);
 });
 `;
-const winFullscreenCode =
+const winFullscreenCode: string =
 `
 var gui = require('nw.gui');
 var win = gui.Window.get();
@@ -88,7 +88,7 @@ interface ExecGenerationRequestParams {
     useCompleteSnap: boolean;
 }
 
-function validateFilename(filename: string): Promise<ErrorFeedback | void> {
+function validateFilename(filename: string): Promise<undefined> {
     if (validationUtils.validateString(filename, false)) {
         return Promise.reject({ message: 'validateFilename1' });
     }
@@ -96,24 +96,24 @@ function validateFilename(filename: string): Promise<ErrorFeedback | void> {
     return Promise.resolve();
 }
 
-function validateFileContents(fileContents: string): Promise<ErrorFeedback | void> {
+function validateFileContents(fileContents: string): Promise<undefined> {
     if (validationUtils.validateString(fileContents, false)) {
         return Promise.reject({ message: 'validateFileContents1' });
     }
 
-    let hasProjectName: Boolean = false;
-    const saxParser = new SaxParser();
+    let hasProjectName: boolean = false;
+    const saxParser: SaxParser = new SaxParser();
 
-    const returnPromise = new Promise((resolve, reject) => {
-        saxParser.onError((error: Error) => reject({
+    const returnPromise = new Promise<undefined>((resolve, reject) => {
+        saxParser.onError((error) => reject({
             message: error.message,
             code: 'XML_VALIDATION_ERROR'
         }));
 
-        saxParser.onTag((tag: any) => {
+        saxParser.onTag((tag) => {
             const mainTagName = 'project';
-            const nameAttributeName = 'name';
             if (tag.name === mainTagName) {
+                const nameAttributeName = 'name';
                 hasProjectName = !!tag.attributes[nameAttributeName];
             }
         });
@@ -136,8 +136,8 @@ function validateFileContents(fileContents: string): Promise<ErrorFeedback | voi
     return returnPromise;
 }
 
-function validateOs(os: string): Promise<ErrorFeedback | void> {
-    const validOsValues = ['mac32', 'mac64', 'lin32', 'lin64', 'win32', 'win64'];
+function validateOs(os: string): Promise<undefined> {
+    const validOsValues: Array<string> = ['mac32', 'mac64', 'lin32', 'lin64', 'win32', 'win64'];
     if (validationUtils.validateString(os, false, validOsValues)) {
         return Promise.reject({ message: 'validateOs1' });
     }
@@ -145,7 +145,7 @@ function validateOs(os: string): Promise<ErrorFeedback | void> {
     return Promise.resolve();
 }
 
-function validateResolution(resolution: string): Promise<ErrorFeedback | void> {
+function validateResolution(resolution: string): Promise<undefined> {
     if (validationUtils.validateString(resolution, false)) {
         return Promise.reject({ message: 'validateResolution1' });
     }
@@ -159,7 +159,7 @@ function validateResolution(resolution: string): Promise<ErrorFeedback | void> {
     }
 }
 
-function validateUseCompleteSnap(useCompleteSnap: boolean): Promise<ErrorFeedback | void> {
+function validateUseCompleteSnap(useCompleteSnap: boolean): Promise<undefined> {
     if (validationUtils.validateBoolean(useCompleteSnap)) {
         return Promise.reject({ message: 'validateUseCompleteSnap1' });
     }
@@ -167,7 +167,7 @@ function validateUseCompleteSnap(useCompleteSnap: boolean): Promise<ErrorFeedbac
     return Promise.resolve();
 }
 
-function validateParams({ filename, project, os, resolution, useCompleteSnap }: ExecGenerationRequestParams): Promise<ErrorFeedback | void> {
+function validateParams({ filename, project, os, resolution, useCompleteSnap }: ExecGenerationRequestParams): Promise<undefined> {
     const validationPromises = [
         validateFilename(filename),
         validateFileContents(project),
@@ -176,29 +176,7 @@ function validateParams({ filename, project, os, resolution, useCompleteSnap }: 
         validateUseCompleteSnap(useCompleteSnap)
     ];
 
-    return Promise.all(validationPromises);
-}
-
-function getProjectName(fileContents: string): Promise<Error | string> {
-    const saxParser = new SaxParser();
-
-    const returnPromise = new Promise((resolve, reject) => {
-        saxParser.onError((error: Error) => reject(error));
-
-        saxParser.onTag((tag: any) => {
-            const mainTagName = 'project';
-            const nameAttributeName = 'name';
-            if (tag.name === mainTagName) {
-                resolve(tag.attributes[nameAttributeName]);
-            }
-        });
-
-        saxParser.onEnd(() => resolve());
-    });
-
-    saxParser.parse(fileContents);
-
-    return returnPromise;
+    return Promise.all(validationPromises).then(() => { return; });
 }
 
 function needsNodeMode(os: string): boolean {
@@ -222,8 +200,8 @@ function buildPackageJson(os: string, projectName: string, resolution: Resolutio
     });
 }
 
-function buildGui(gui: string, project: string, os: string, projectName: string) {
-    let result = gui + '\n';
+function buildGui(gui: string, project: string, os: string, projectName: string): string {
+    let result: string = gui + '\n';
     if (os === 'mac32' || os === 'mac64') {
         result += macToolbarCode.replace('<project_name>', projectName) + '\n';
     }
@@ -233,14 +211,14 @@ function buildGui(gui: string, project: string, os: string, projectName: string)
     return result + `IDE_Morph.prototype.snapproject = '${project}';`
 }
 
-function buildProjectPackage(projectPackage: Zip, project: string, os: string, projectName: string, resolution: Resolution, useCompleteSnap: boolean): Promise<Error | void> {
-    const version = useCompleteSnap ? 'full' : 'reduced';
+function buildProjectPackage(projectPackage: Zip, project: string, os: string, projectName: string, resolution: Resolution, useCompleteSnap: boolean): Promise<undefined> {
+    const version: string = useCompleteSnap ? 'full' : 'reduced';
 
     projectPackage.append(buildPackageJson(os, projectName, resolution), { name: 'package.json' });
     projectPackage.directory(path.join(resourcesDir, 'snap', version, 'files'), '');
 
     return fileSystemUtils.readTextFile(path.join(resourcesDir, 'snap', version, 'gui', 'gui.js'))
-    .then((gui: string) => {
+    .then((gui) => {
         projectPackage.append(buildGui(gui, project, os, projectName), { name: 'gui.js' });
     })
     .catch((error: NodeJS.ErrnoException) => {
@@ -249,11 +227,11 @@ function buildProjectPackage(projectPackage: Zip, project: string, os: string, p
     });
 }
 
-function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Promise<Error | void> {
+function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Promise<undefined> {
     switch (os) {
         case 'mac64':
         case 'mac32': {
-            const rootDir = `${filename}.app`;
+            const rootDir: string = `${filename}.app`;
 
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'Contents'), path.join(rootDir, 'Contents'));
             finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs'), { name: path.join(rootDir, 'Contents', 'MacOS', 'nwjs'), mode: unixExecutablePermissions });
@@ -263,7 +241,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
             finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.icns'), { name: path.join(rootDir, 'Contents', 'Resources', 'nw.icns') });
 
             return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'Info.plist'))
-            .then((plistTemplate: string) => {
+            .then((plistTemplate) => {
                 const plist = plistTemplate.replace('<filename>', filename).replace('<short_filename>', filename.length < 16 ? filename : 'Snapp!');
                 finalPackage.append(plist, { name: path.join(rootDir, 'Contents', 'Info.plist') });
             })
@@ -274,15 +252,15 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
         }
         case 'lin64':
         case 'lin32': {
-            const rootDir = `${filename}.snapp`;
+            const rootDir: string = `${filename}.snapp`;
 
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'lib'), rootDir);
             finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.png'), { name: path.join(rootDir, 'lambda.png') });
 
-            const readFilesPromises: Array<Promise<Error | void>> = [
+            const readFilesPromises: Array<Promise<undefined>> = [
                 fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', 'linux', 'launcher.sh'))
                 .then((launcherTemplate: string) => {
-                    const launcher = launcherTemplate.replace('<filename>', filename);
+                    const launcher: string = launcherTemplate.replace('<filename>', filename);
                     finalPackage.append(launcher, { name: path.join(rootDir, 'launcher.sh'), mode: unixExecutablePermissions });
                 })
                 .catch((error: NodeJS.ErrnoException) => {
@@ -291,11 +269,12 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
                 }),
                 fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', 'linux', 'app.desktop'))
                 .then((launcherTemplate: string) => {
-                    const launcher = launcherTemplate.replace('<filename>', filename);
+                    const launcher: string = launcherTemplate.replace('<filename>', filename);
                     finalPackage.append(launcher, { name: `${filename}.desktop`, mode: unixExecutablePermissions });
                 })
                 .catch((error: NodeJS.ErrnoException) => {
                     log.error({ moduleName, message: 'Unable to read linux app.desktop.', meta: { os, errorCode: error.code } });
+                    throw error;
                 })
             ];
 
@@ -311,15 +290,37 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
     }
 }
 
-function buildPackages(params: ExecGenerationRequestParams): Promise<Error | NodeJS.ReadableStream> {
+function getProjectName(fileContents: string): Promise<string> {
+    const saxParser: SaxParser = new SaxParser();
+
+    const returnPromise = new Promise<string>((resolve, reject) => {
+        saxParser.onError(error => reject(error));
+
+        saxParser.onTag((tag: any) => {
+            const mainTagName = 'project';
+            if (tag.name === mainTagName) {
+                const nameAttributeName = 'name';
+                resolve(tag.attributes[nameAttributeName]);
+            }
+        });
+
+        saxParser.onEnd(() => resolve());
+    });
+
+    saxParser.parse(fileContents);
+
+    return returnPromise;
+}
+
+function buildPackages(params: ExecGenerationRequestParams): Promise<NodeJS.ReadableStream> {
     const { project, os, resolution: res, useCompleteSnap, filename } = params;
-    const resolution = Resolution.fromString(res);
+    const resolution: Resolution = Resolution.fromString(res);
 
     return getProjectName(project)
-    .then((projectName: string) => {
-        return new Promise<Error | NodeJS.ReadableStream>((resolve, reject) => {
+    .then((projectName) => {
+        return new Promise<NodeJS.ReadableStream>((resolve, reject) => {
             const finalPackage: Zip = new Zip(
-                (error: Error) => reject(error),
+                (error: any) => reject(error),
                 () => log.info({ moduleName, message: 'Final package finished.' })
             );
 
@@ -337,7 +338,7 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<Error | Nod
                         case 'lin64':
                         case 'lin32':
                             fileSystemUtils.readFile(path.join(resourcesDir, 'nw', os, 'bin', 'nw'))
-                            .then((file: Buffer) => {
+                            .then((file) => {
                                 finalPackage
                                 .append(Buffer.concat([file, buffer]), { name: path.join(`${filename}.snapp`, filename), mode: unixExecutablePermissions })
                                 .finalize();
@@ -347,7 +348,7 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<Error | Nod
                         case 'win64':
                         case 'win32': {
                             fileSystemUtils.readFile(path.join(resourcesDir, 'nw', os, 'exe', 'nw.exe'))
-                            .then((file: Buffer) => {
+                            .then((file) => {
                                 finalPackage
                                 .append(Buffer.concat([file, buffer]), { name: path.join(filename, `${filename}.exe`) })
                                 .finalize();
@@ -372,24 +373,24 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<Error | Nod
                 nwPackage.finalize();
                 resolve(finalPackage.getStream());
             })
-            .catch((error: Error) => reject(error));
+            .catch(error => reject(error));
         });
     });
 }
 
-function loadProject(projectPath: string): Promise<NodeJS.ErrnoException | string> {
+function loadProject(projectPath: string): Promise<string> {
     return fileSystemUtils
     .readTextFile(projectPath)
-    .then((project: string) => project.replace(/\r?\n|\r/g, '').replace(/'/g, "\\'")); // Remove end of line and escape single quotes
+    .then((project) => project.replace(/\r?\n|\r/g, '').replace(/'/g, "\\'")); // Remove end of line and escape single quotes
 }
 
-export default function handleExecGeneration(projectPath: string, params: ExecGenerationRequestParams): Promise<NodeJS.ErrnoException | Error | NodeJS.ReadableStream> {
+export default function handleExecGeneration(projectPath: string, params: ExecGenerationRequestParams): Promise<NodeJS.ReadableStream> {
     return loadProject(projectPath)
     .then((project: string) => {
         params.project = project;
-
+    })
+    .then(() => {
         return validateParams(params)
-        .then(() => buildPackages(params))
         .catch((validationError: ErrorFeedback) => {
             const { message = '', code = '' } = validationError;
             const errorMessage = `Error validating parameters: ${message}.`;
@@ -399,5 +400,6 @@ export default function handleExecGeneration(projectPath: string, params: ExecGe
                 status: 400
             };
         });
-    });
+    })
+    .then(() => buildPackages(params));
 }

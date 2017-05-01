@@ -19,17 +19,17 @@ export default class Zip {
         this.zip.on('finish', onFinish);
     }
 
-    public directory(srcPath: string, dstPath: string): Zip {
+    public directory(srcPath: string, dstPath: string): this {
         this.zip.directory(srcPath, dstPath);
         return this;
     }
 
-    public file(path: string, options: any): Zip {
+    public file(path: string, options: any): this {
         this.zip.file(path, options);
         return this;
     }
 
-    public append(contents: NodeBuffer | string, options: any): Zip {
+    public append(contents: NodeBuffer | string, options: any): this {
         this.zip.append(contents, options);
         return this;
     }

@@ -23,7 +23,7 @@ function arrayBufferToString(arrayBuffer: ArrayBuffer): string {
 @Injectable()
 export class FileDownloadService {
     public post(url: string, body: Object | FormData) {
-        return new Promise<FileDownloadServiceResponse | Error>((resolve, reject) => {
+        return new Promise<FileDownloadServiceResponse>((resolve, reject) => {
             const xhr: XMLHttpRequest = new XMLHttpRequest();
             const url: string = '/gen-exec';
 

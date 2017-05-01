@@ -21,7 +21,7 @@ export default class AboutComponent {
 
     }
 
-    onClick() {
+    public onClick(): void {
         this.modal.alert()
         .size('lg')
         .title('About Snapp!')

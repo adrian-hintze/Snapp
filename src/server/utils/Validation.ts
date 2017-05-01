@@ -9,28 +9,30 @@
 'use strict';
 
 interface ValidationError {
-    // TODO -high- Have like validation error codes or something
+    // TODO -normal- Have like validation error codes or something
 }
 
 export function validateString(parameter: string, canBeEmpty: boolean, validValues?: Array<string>): ValidationError | undefined {
     if (typeof parameter !== 'string') {
-        return {};
+        return { };
     }
+
     if (!canBeEmpty && !parameter) {
-        return {};
+        return { };
     }
+
     if (validValues) {
         if (canBeEmpty) {
             validValues.push('');
         }
         if (!validValues.some(v => v === parameter)) {
-            return {};
+            return { };
         }
     }
 }
 
 export function validateBoolean(parameter: boolean): ValidationError | undefined {
     if (typeof parameter !== 'boolean') {
-        return {};
+        return { };
     }
 }

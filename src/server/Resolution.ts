@@ -9,12 +9,12 @@
 'use strict';
 
 export default class Resolution {
-    static fromString(resolution: string) {
+    public static fromString(resolution: string) {
         if (resolution.indexOf('x') < 0) {
             throw new Error('');
         }
 
-        const dimensions = resolution.split('x');
+        const dimensions: Array<string> = resolution.split('x');
         if (dimensions.length !== 2) {
             throw new Error('');
         }
@@ -25,11 +25,11 @@ export default class Resolution {
         return new Resolution(parseInt(dimensions[0]), parseInt(dimensions[1]));
     }
 
-    public getWidth() {
+    public getWidth(): number {
         return this.width;
     }
 
-    public getHeight() {
+    public getHeight(): number {
         return this.height;
     }
 

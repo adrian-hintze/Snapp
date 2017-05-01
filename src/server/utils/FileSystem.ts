@@ -1,5 +1,5 @@
 /**
- * FileSystem.js
+ * FileSystem.ts
  *
  * Created on: 2016-09-28
  *     Author: Adrian Hintze @Rydion
@@ -12,13 +12,14 @@ import * as fs from 'fs';
 
 import * as mkdirp from 'mkdirp';
 
-export function isDir(path: string): Promise<NodeJS.ErrnoException | boolean> {
-    return new Promise((resolve, reject) => {
-        fs.stat(path, (error, stat) => {
+export function isDir(path: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+        fs.stat(path, (error: NodeJS.ErrnoException, stat: fs.Stats) => {
             if (error) {
                 reject(error);
                 return;
             }
+
             resolve(stat.isDirectory());
         });
     });
@@ -28,15 +29,16 @@ export function isDirSync(path: string): boolean {
     return fs.statSync(path).isDirectory();
 }
 
-export function dirExists(path: string): Promise<NodeJS.ErrnoException | boolean> {
+export function dirExists(path: string): Promise<boolean> {
     return isDir(path)
-           .then(result => result)
-           .catch((error) => {
-               if (error.code === 'ENOENT') {
-                   return false;
-               }
-               throw error;
-           });
+    .then(result => result)
+    .catch((error: NodeJS.ErrnoException) => {
+        if (error.code === 'ENOENT') {
+            return false;
+        }
+
+        throw error;
+    });
 }
 
 export function dirExistsSync(path: string): boolean {
@@ -47,28 +49,28 @@ export function dirExistsSync(path: string): boolean {
         if (error.code === 'ENOENT') {
             return false;
         }
+
         throw error;
     }
 }
 
-export function makeDir(path: string): Promise<any | undefined> {
-    return new Promise((resolve, reject) => {
-        dirExists(path)
-        .then((exists) => {
-            if (exists) {
-                resolve();
-                return;
-            }
+export function makeDir(path: string): Promise<undefined> {
+    return dirExists(path)
+    .then((exists: boolean) => {
+        if (exists) {
+            return;
+        }
 
-            mkdirp(path, (error) => {
+        return new Promise<undefined>((resolve, reject) => {
+            mkdirp(path, (error: any) => {
                 if (error) {
                     reject(error);
                     return;
                 }
+
                 resolve();
             });
-        })
-        .catch(error => reject(error));
+        });
     });
 }
 
@@ -78,13 +80,14 @@ export function makeDirSync(path: string): void {
     }
 }
 
-export function readFile(path: string): Promise<NodeJS.ErrnoException | Buffer> {
-    return new Promise((resolve, reject) => {
-        fs.readFile(path, (error, buffer) => {
+export function readFile(path: string): Promise<Buffer> {
+    return new Promise<Buffer>((resolve, reject) => {
+        fs.readFile(path, (error: NodeJS.ErrnoException, buffer: Buffer) => {
             if (error) {
                 reject(error);
                 return;
             }
+
             resolve(buffer);
         });
     });
@@ -94,13 +97,14 @@ export function readFileSync(path: string): Buffer {
     return fs.readFileSync(path);
 }
 
-export function readTextFile(path: string, encoding: string = 'utf8'): Promise<NodeJS.ErrnoException | string> {
-    return new Promise((resolve, reject) => {
-        fs.readFile(path, encoding, (error, text) => {
+export function readTextFile(path: string, encoding: string = 'utf8'): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+        fs.readFile(path, encoding, (error: NodeJS.ErrnoException, text: string) => {
             if (error) {
                 reject(error);
                 return;
             }
+
             resolve(text);
         });
     });
@@ -110,13 +114,14 @@ export function readTextFileSync(path: string, encoding: string = 'utf8'): strin
     return fs.readFileSync(path, encoding);
 }
 
-export function readDir(path: string): Promise<NodeJS.ErrnoException | string[]> {
-    return new Promise((resolve, reject) => {
-        fs.readdir(path, (error, contents) => {
+export function readDir(path: string): Promise<string[]> {
+    return new Promise<string[]>((resolve, reject) => {
+        fs.readdir(path, (error: NodeJS.ErrnoException, contents: string[]) => {
             if (error) {
                 reject(error);
                 return;
             }
+
             resolve(contents);
         });
     });
@@ -126,13 +131,14 @@ export function readDirSync(path: string): string[] {
     return fs.readdirSync(path);
 }
 
-export function rmDir(path: string): Promise<any | void> {
-    return new Promise((resolve, reject) => {
-        fs.unlink(path, (error) => {
+export function rmDir(path: string): Promise<undefined> {
+    return new Promise<undefined>((resolve, reject) => {
+        fs.unlink(path, (error: NodeJS.ErrnoException) => {
             if (error) {
                 reject(error);
                 return;
             }
+
             resolve();
         });
     });
