@@ -24,10 +24,10 @@
 
         "copy-snap": "npm run copy-snap-full && npm run copy-snap-reduced",
         "precopy-snap-full": "rimraf build/resources/snap/full",
-        "copy-snap-full": "copyfiles -u 2 \"./node_modules/snap-4-snapp-full/**/*\" \"./build/resources/snap/full/files\" && copyfiles -u 2 \"./node_modules/snap-4-snapp-full/gui.js\" \"./build/resources/snap/full/gui\"",
+        "copy-snap-full": "copyfiles -u 2 \"node_modules/snap-4-snapp-full/**/*\" \"build/resources/snap/full/files\" && copyfiles -u 2 \"node_modules/snap-4-snapp-full/gui.js\" \"build/resources/snap/full/gui\"",
         "postcopy-snap-full": "rimraf build/resources/snap/full/files/gui.js && rimraf build/resources/snap/full/files/package.json",
         "precopy-snap-reduced": "rimraf build/resources/snap/reduced",
-        "copy-snap-reduced": "rimraf build/resources/snap/reduced && copyfiles -u 2 \"./node_modules/snap-4-snapp-reduced/**/*\" \"./build/resources/snap/reduced/files\" && copyfiles -u 2 \"./node_modules/snap-4-snapp-reduced/gui.js\" \"./build/resources/snap/reduced/gui\"",
+        "copy-snap-reduced": "rimraf build/resources/snap/reduced && copyfiles -u 2 \"node_modules/snap-4-snapp-reduced/**/*\" \"build/resources/snap/reduced/files\" && copyfiles -u 2 \"node_modules/snap-4-snapp-reduced/gui.js\" \"build/resources/snap/reduced/gui\"",
         "postcopy-snap-reduced": "rimraf build/resources/snap/reduced/files/gui.js && rimraf build/resources/snap/reduced/files/package.json",
 
         "precopy-nw": "rimraf build/resources/nw",
