@@ -5,5 +5,6 @@ build/snapp/
 build/upload/
 build/WebContent/
 build/resources/snap/
+build/resources/nw/
 Snapp.njsproj
 tsconfig.json
