@@ -1,6 +1,6 @@
 # Snapp
 
-![Snapp](https://raw.githubusercontent.com/Rydion/Snapp/master/github/snapp_logo.png)
+![Snapp](https://raw.githubusercontent.com/Rydion/Snapp/master/github/snapp_logo_700x138.png)
 
 Snapp! turns [Snap!](http://snap.berkeley.edu/) projects into standalone executables!  
   
