@@ -28,12 +28,14 @@ global.conf = require(path.join(global.rootDir, '..', 'snapp_conf.json'));
 
 
 const log = logModule({  });
-const moduleName = path.basename(__filename);
-const defaultPort = 80;
-const port = global.conf.port || defaultPort;
-const uploadFolder = path.join(__dirname, '..', 'upload', 'projects');
-const defaultFileSizeLimit = 10000000; // 10 MB
-const fileSizeLimit = global.conf.uploadFileSizeLimit || defaultFileSizeLimit; // bytes
+const moduleName: string = path.basename(__filename);
+const defaultPort: number = 80;
+const port: number = global.conf.port || defaultPort;
+const uploadFolder: string = path.join(__dirname, '..', 'upload', 'projects');
+const defaultFileSizeLimit: number = 10000000; // 10 MB
+const fileSizeLimit: number = global.conf.uploadFileSizeLimit || defaultFileSizeLimit; // bytes
+const compressStaticFilesDefault: boolean = true;
+const compressStaticFiles: boolean = typeof global.conf.compressStaticFiles === 'boolean' ? global.conf.compressStaticFiles : compressStaticFilesDefault;
 
 
 const upload = multer({
@@ -82,9 +84,12 @@ const snapProjectUploadMiddleware = function (request: express.Request, response
 
 const snapp = express();
 
+if (compressStaticFiles) {
+    snapp.use(compression());
+}
+
 snapp
 
-.use(compression())
 .use(bodyParser.json())
 
 .use('/', express.static(path.join(global.rootDir, '..', 'WebContent')))

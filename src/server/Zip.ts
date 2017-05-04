@@ -10,7 +10,7 @@
 
 import { create as getNewArchiver, Archiver } from 'archiver';
 
-const defaultHighWaterMark = 100000000;
+const defaultHighWaterMark = 100000000; // TODO -normal- Why does this value work and lower ones not?
 
 export default class Zip {
     public constructor(onError: Function, onFinish: Function) {
