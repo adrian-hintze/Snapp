@@ -14,13 +14,13 @@
     "scripts": {
         "run": "node build/snapp/Snapp.js",
 
-        "build": "npm run build-server && npm run build-client && npm run copy-resources",
+        "build": "npm run build-server && npm run build-client && npm run copy-resources && npm run create-conf-file",
         "prebuild-server": "rimraf build/snapp",
         "build-server": "tsc -p server-tsconfig.json",
         "prebuild-client": "rimraf build/WebContent",
         "build-client": "webpack --progress --profile",
 
-        "copt-resources": "npm run copy-snap && npm run copy-nw",
+        "copy-resources": "npm run copy-snap && npm run copy-nw && npm run copy-icons && npm run copy-conf",
 
         "copy-snap": "npm run copy-snap-full && npm run copy-snap-reduced",
         "precopy-snap-full": "rimraf build/resources/snap/full",
@@ -31,7 +31,16 @@
         "postcopy-snap-reduced": "rimraf build/resources/snap/reduced/files/gui.js && rimraf build/resources/snap/reduced/files/package.json",
 
         "precopy-nw": "rimraf build/resources/nw",
-        "copy-nw": "copyfiles -u 1 \"nw/**/*\" \"build/resources/nw\""
+        "copy-nw": "copyfiles -u 1 \"nw/**/*\" \"build/resources/nw\"",
+
+        "precopy-icons": "rimraf build/resources/icons",
+        "copy-icons": "copyfiles -u 1 \"icons/**/*\" \"build/resources/icons\"",
+
+        "precopy-conf": "rimraf build/resources/conf",
+        "copy-conf": "copyfiles -u 1 \"binary_conf/**/*\" \"build/resources/conf\"",
+
+        "precreate-conf-file": "rimraf build/snapp_conf.json",
+        "create-conf-file": "echo { \"port\": 80, \"uploadFileSizeLimit\": 100000000, \"compressStaticFiles\": true } >> build/snapp_conf.json"
     },
 
     "engines": {

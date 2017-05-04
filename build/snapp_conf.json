@@ -1,5 +1,0 @@
-{
-    "port": 80,
-    "uploadFileSizeLimit": 100000000,
-    "compressStaticFiles":  true
-}
