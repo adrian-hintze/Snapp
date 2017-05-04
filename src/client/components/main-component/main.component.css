@@ -15,9 +15,21 @@
 	text-align: center;
 }
 
+.links-wrapper {
+    padding-top: 10px;
+    overflow: hidden;
+}
+
+.links-wrapper > div {
+    width: 50%;
+    float: left;
+}
+
+.wiki-wrapper {
+    padding-left: 25px;
+}
+
 .snapp-about-wrapper {
-	width: 100%;
-	padding-top: 10px;
 	text-align: right;
 }
 
