@@ -1,10 +1,5 @@
 ﻿.vs/
 node_modules/
-build/logs/
-build/snapp/
-build/upload/
-build/WebContent/
-build/resources/snap/
-build/resources/nw/
+build/
 Snapp.njsproj
 tsconfig.json
