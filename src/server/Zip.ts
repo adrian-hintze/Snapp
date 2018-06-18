@@ -27,7 +27,7 @@ export default class Zip {
         return this;
     }
 
-    public append(contents: NodeBuffer | string, options: any): this {
+    public append(contents: Buffer | string, options: any): this {
         this.zip.append(contents, options);
         return this;
     }
@@ -37,7 +37,7 @@ export default class Zip {
     }
 
     public getStream(): NodeJS.ReadableStream {
-        return this.zip.;
+        return <NodeJS.ReadableStream>this.zip;
     } 
 
     private zip: Archiver;
