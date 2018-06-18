@@ -1,28 +1,22 @@
 {
     "name": "snapp",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "description": "Snapp!",
-
     "author": {
         "name": "Adrian Hintze",
         "email": "hintze.adrian@gmail.com",
         "url": "https://github.com/Rydion/"
     },
-
     "private": true,
-
     "scripts": {
         "run": "node build/snapp/Snapp.js",
-
         "prebuild": "rimraf build/logs && rimraf build/upload",
         "build": "npm run build-server && npm run build-client && npm run copy-resources && npm run create-conf-file",
         "prebuild-server": "rimraf build/snapp",
         "build-server": "tsc -p server-tsconfig.json",
         "prebuild-client": "rimraf build/WebContent",
         "build-client": "webpack --progress --profile",
-
         "copy-resources": "npm run copy-snap && npm run copy-nw && npm run copy-icons && npm run copy-conf",
-
         "copy-snap": "npm run copy-snap-full && npm run copy-snap-reduced",
         "precopy-snap-full": "rimraf build/resources/snap/full",
         "copy-snap-full": "copyfiles -u 2 \"node_modules/snap-4-snapp-full/**/*\" \"build/resources/snap/full/files\" && copyfiles -u 2 \"node_modules/snap-4-snapp-full/gui.js\" \"build/resources/snap/full/gui\"",
@@ -30,99 +24,77 @@
         "precopy-snap-reduced": "rimraf build/resources/snap/reduced",
         "copy-snap-reduced": "rimraf build/resources/snap/reduced && copyfiles -u 2 \"node_modules/snap-4-snapp-reduced/**/*\" \"build/resources/snap/reduced/files\" && copyfiles -u 2 \"node_modules/snap-4-snapp-reduced/gui.js\" \"build/resources/snap/reduced/gui\"",
         "postcopy-snap-reduced": "rimraf build/resources/snap/reduced/files/gui.js && rimraf build/resources/snap/reduced/files/package.json",
-
         "precopy-nw": "rimraf build/resources/nw",
         "copy-nw": "copyfiles -u 1 \"nw/**/*\" \"build/resources/nw\"",
-
         "precopy-icons": "rimraf build/resources/icons",
         "copy-icons": "copyfiles -u 1 \"icons/**/*\" \"build/resources/icons\"",
-
         "precopy-conf": "rimraf build/resources/conf",
         "copy-conf": "copyfiles -u 1 \"binary_conf/**/*\" \"build/resources/conf\"",
-
         "precreate-conf-file": "rimraf build/snapp_conf.json",
         "create-conf-file": "echo { \"port\": 80, \"uploadFileSizeLimit\": 100000000, \"compressStaticFiles\": true } >> build/snapp_conf.json"
     },
-
     "engines": {
-        "node": ">=7.9.0",
-        "npm": ">=4.5.0"
+        "node": ">=10.4.1",
+        "npm": ">=6.1.0"
     },
-
     "dependencies": {
-        "express": "4.15.2",
-        "body-parser": "1.17.1",
-        "multer": "1.3.0",
-        "compression": "1.6.2",
-
-        "sax": "1.2.2",
-
-        "archiver": "1.3.0",
-
-        "winston": "2.3.1",
-        "winston-daily-rotate-file": "1.4.6",
-
+        "archiver": "2.1.1",
+        "body-parser": "1.18.3",
+        "compression": "1.7.2",
+        "express": "4.16.3",
         "mkdirp": "0.5.1",
-
-        "stream-to-array": "2.3.0"
+        "multer": "1.3.0",
+        "sax": "1.2.4",
+        "stream-to-array": "2.3.0",
+        "winston": "3.0.0",
+        "winston-daily-rotate-file": "3.2.1"
     },
-
     "devDependencies": {
-        "typescript": "2.3.2",
-
-        "@types/body-parser": "1.16.3",
-        "@types/compression": "0.0.33",
-        "@types/express": "4.0.35",
-        "@types/file-saver": "0.0.1",
-        "@types/mime": "0.0.29",
-        "@types/mkdirp": "0.3.29",
-        "@types/multer": "0.0.33",
-        "@types/node": "7.0.16",
+        "@angular/animations": "6.0.5",
+        "@angular/common": "6.0.5",
+        "@angular/compiler": "6.0.5",
+        "@angular/core": "6.0.5",
+        "@angular/forms": "6.0.5",
+        "@angular/http": "6.0.5",
+        "@angular/platform-browser": "6.0.5",
+        "@angular/platform-browser-dynamic": "6.0.5",
+        "@angular/router": "6.0.5",
+        "@types/body-parser": "1.17.0",
+        "@types/compression": "0.0.36",
+        "@types/express": "4.16.0",
+        "@types/file-saver": "1.3.0",
+        "@types/mime": "2.0.0",
+        "@types/mkdirp": "0.5.2",
+        "@types/multer": "1.3.7",
+        "@types/node": "10.3.3",
         "@types/sax": "1.0.0",
-        "@types/stream-to-array": "0.0.28",
-
-        "concurrently": "3.4.0",
-        "rimraf": "2.6.1",
-        "copyfiles": "1.2.0",
-
-        "webpack": "2.5.0",
-        "webpack-merge": "4.1.0",
-
+        "@types/stream-to-array": "2.3.0",
+        "angular2-busy": "2.0.4",
         "angular2-template-loader": "0.6.2",
-        "awesome-typescript-loader": "3.1.3",
-        "css-loader": "0.28.1",
-        "file-loader": "0.11.1",
-        "html-loader": "0.4.5",
+        "awesome-typescript-loader": "5.1.0",
+        "bootstrap": "4.1.1",
+        "concurrently": "3.5.1",
+        "copyfiles": "2.0.0",
+        "core-js": "2.5.7",
+        "css-loader": "0.28.11",
+        "extract-text-webpack-plugin": "3.0.2",
+        "file-loader": "1.1.11",
+        "file-saver": "1.3.8",
+        "html-loader": "0.5.5",
+        "html-webpack-plugin": "3.2.0",
+        "ngx-modialog": "5.0.1",
         "null-loader": "0.1.1",
         "raw-loader": "0.5.1",
-        "style-loader": "0.17.0",
-        "to-string-loader": "1.1.5",
-
-        "extract-text-webpack-plugin": "2.1.0",
-        "html-webpack-plugin": "2.28.0",
-
-        "@angular/animations": "4.1.1",
-        "@angular/common": "4.1.1",
-        "@angular/compiler": "4.1.1",
-        "@angular/core": "4.1.1",
-        "@angular/forms": "4.1.1",
-        "@angular/http": "4.1.1",
-        "@angular/platform-browser": "4.1.1",
-        "@angular/platform-browser-dynamic": "4.1.1",
-        "@angular/router": "4.1.1",
-
-        "core-js": "2.4.1",
-        "rxjs": "5.3.1",
-        "zone.js": "0.8.10",
-
-        "angular2-busy": "2.0.4",
-        "angular2-modal": "2.0.3",
-
-        "file-saver": "1.3.3",
-
-        "bootstrap": "3.3.7",
-
+        "rimraf": "2.6.2",
+        "rxjs": "6.2.1",
         "snap-4-snapp-full": "git+https://git@github.com/Rydion/Snap-4-Snapp.git#full-v2.0.0",
-        "snap-4-snapp-reduced": "git+https://git@github.com/Rydion/Snap-4-Snapp.git#reduced-v2.0.0"
+        "snap-4-snapp-reduced": "git+https://git@github.com/Rydion/Snap-4-Snapp.git#reduced-v2.0.0",
+        "style-loader": "0.21.0",
+        "to-string-loader": "1.1.5",
+        "typescript": "2.9.2",
+        "webpack": "4.12.0",
+        "webpack-cli": "3.0.8",
+        "webpack-merge": "4.1.3",
+        "zone.js": "0.8.26"
     }
 }

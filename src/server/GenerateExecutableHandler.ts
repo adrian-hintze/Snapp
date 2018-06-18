@@ -6,8 +6,6 @@
  *
  */
 
-'use strict';
-
 import * as path from 'path';
 
 import streamToArray = require('stream-to-array');
@@ -88,7 +86,7 @@ interface ExecGenerationRequestParams {
     useCompleteSnap: boolean;
 }
 
-function validateFilename(filename: string): Promise<undefined> {
+function validateFilename(filename: string): Promise<void> {
     if (validationUtils.validateString(filename, false)) {
         return Promise.reject({ message: 'validateFilename1' });
     }
@@ -96,7 +94,7 @@ function validateFilename(filename: string): Promise<undefined> {
     return Promise.resolve();
 }
 
-function validateFileContents(fileContents: string): Promise<undefined> {
+function validateFileContents(fileContents: string): Promise<void> {
     if (validationUtils.validateString(fileContents, false)) {
         return Promise.reject({ message: 'validateFileContents1' });
     }
@@ -136,7 +134,7 @@ function validateFileContents(fileContents: string): Promise<undefined> {
     return returnPromise;
 }
 
-function validateOs(os: string): Promise<undefined> {
+function validateOs(os: string): Promise<void> {
     const validOsValues: Array<string> = ['mac32', 'mac64', 'lin32', 'lin64', 'win32', 'win64'];
     if (validationUtils.validateString(os, false, validOsValues)) {
         return Promise.reject({ message: 'validateOs1' });
@@ -145,7 +143,7 @@ function validateOs(os: string): Promise<undefined> {
     return Promise.resolve();
 }
 
-function validateResolution(resolution: string): Promise<undefined> {
+function validateResolution(resolution: string): Promise<void> {
     if (validationUtils.validateString(resolution, false)) {
         return Promise.reject({ message: 'validateResolution1' });
     }
@@ -159,7 +157,7 @@ function validateResolution(resolution: string): Promise<undefined> {
     }
 }
 
-function validateUseCompleteSnap(useCompleteSnap: boolean): Promise<undefined> {
+function validateUseCompleteSnap(useCompleteSnap: boolean): Promise<void> {
     if (validationUtils.validateBoolean(useCompleteSnap)) {
         return Promise.reject({ message: 'validateUseCompleteSnap1' });
     }
@@ -167,7 +165,7 @@ function validateUseCompleteSnap(useCompleteSnap: boolean): Promise<undefined> {
     return Promise.resolve();
 }
 
-function validateParams({ filename, project, os, resolution, useCompleteSnap }: ExecGenerationRequestParams): Promise<undefined> {
+function validateParams({ filename, project, os, resolution, useCompleteSnap }: ExecGenerationRequestParams): Promise<void> {
     const validationPromises = [
         validateFilename(filename),
         validateFileContents(project),
@@ -211,7 +209,7 @@ function buildGui(gui: string, project: string, os: string, projectName: string)
     return result + `IDE_Morph.prototype.snapproject = '${project}';`
 }
 
-function buildProjectPackage(projectPackage: Zip, project: string, os: string, projectName: string, resolution: Resolution, useCompleteSnap: boolean): Promise<undefined> {
+function buildProjectPackage(projectPackage: Zip, project: string, os: string, projectName: string, resolution: Resolution, useCompleteSnap: boolean): Promise<void> {
     const version: string = useCompleteSnap ? 'full' : 'reduced';
 
     projectPackage.append(buildPackageJson(os, projectName, resolution), { name: 'package.json' });
@@ -227,7 +225,7 @@ function buildProjectPackage(projectPackage: Zip, project: string, os: string, p
     });
 }
 
-function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Promise<undefined> {
+function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Promise<void> {
     switch (os) {
         case 'mac64':
         case 'mac32': {
@@ -257,7 +255,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'lib'), rootDir);
             finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.png'), { name: path.join(rootDir, 'lambda.png') });
 
-            const readFilesPromises: Array<Promise<undefined>> = [
+            const readFilesPromises: Array<Promise<void>> = [
                 fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', 'linux', 'launcher.sh'))
                 .then((launcherTemplate: string) => {
                     const launcher: string = launcherTemplate.replace('<filename>', filename);

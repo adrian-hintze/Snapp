@@ -6,8 +6,6 @@
  *
  */
 
-'use strict';
-
 global.rootDir = __dirname;
 
 import * as path from 'path';
@@ -112,7 +110,7 @@ snapp
     generateExecutable(projectPath, body)
     .then((zip) => {
         const attachmentFilename = `${filename}.zip`;
-        const mimeType = mime.lookup(attachmentFilename);
+        const mimeType: string = <string>mime.getType(attachmentFilename);
 
         response.setHeader('Content-disposition', `attachment; filename=${attachmentFilename}`);
         response.setHeader('Content-type', mimeType);

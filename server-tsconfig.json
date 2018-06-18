@@ -1,16 +1,17 @@
 {
     "compilerOptions": {
-        "target": "es2016",
+        "target": "ES2016",
         "module": "commonjs",
         "moduleResolution": "node",
+
         "sourceMap": true,
         "outDir": "./build/snapp",
         "newLine": "LF",
-        "removeComments": false,
 
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "lib": [ "es2016", "dom" ],
+
         "strict": true,
         "suppressImplicitAnyIndexErrors": true,
         "noUnusedLocals": true,

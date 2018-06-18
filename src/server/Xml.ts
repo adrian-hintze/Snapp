@@ -6,8 +6,6 @@
  *
  */
 
-'use strict';
-
 import { parser as createSaxParser, SAXParser, Tag, QualifiedTag } from 'sax';
 
 export default class SaxParser {

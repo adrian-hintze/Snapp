@@ -6,8 +6,6 @@
  *
  */
 
-'use strict';
-
 import * as fs from 'fs';
 
 import * as mkdirp from 'mkdirp';

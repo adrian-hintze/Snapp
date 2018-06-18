@@ -6,14 +6,12 @@
  *
  */
 
-'use strict';
-
 import { create as getNewArchiver, Archiver } from 'archiver';
 
 const defaultHighWaterMark = 100000000; // TODO -normal- Why does this value work and lower ones not?
 
 export default class Zip {
-    public constructor(onError: Function, onFinish: Function) {
+    public constructor(onError: (...args: any[]) => void, onFinish: (...args: any[]) => void) {
         this.zip = getNewArchiver('zip', { highWaterMark: defaultHighWaterMark });
         this.zip.on('error', onError);
         this.zip.on('finish', onFinish);
@@ -39,7 +37,7 @@ export default class Zip {
     }
 
     public getStream(): NodeJS.ReadableStream {
-        return this.zip;
+        return this.zip.;
     } 
 
     private zip: Archiver;

@@ -6,8 +6,6 @@
  *
  */
 
-'use strict';
-
 interface ValidationError {
     // TODO -normal- Have like validation error codes or something
 }

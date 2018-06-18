@@ -8,8 +8,6 @@
 
 declare var winstonDailyRotator: any; // Ugly hack, make a d.ts file for winston-daily-rotate-file
 
-'use strict';
-
 import * as path from 'path';
 
 import * as winston from 'winston';
