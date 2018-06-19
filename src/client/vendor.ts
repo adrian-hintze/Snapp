@@ -1,4 +1,4 @@
-﻿// Angular
+// Angular
 import '@angular/common';
 import '@angular/core';
 import '@angular/forms';
@@ -12,7 +12,7 @@ import 'rxjs';
 
 // npm
 import 'angular2-busy';
-import 'angular2-modal';
+import 'ngx-modialog';
 import 'file-saver';
 
 // CSS

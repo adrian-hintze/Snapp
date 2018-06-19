@@ -1,4 +1,4 @@
-﻿/**
+/**
  * about.component.ts
  *
  * Created on: 2016-11-01
@@ -8,7 +8,7 @@
 
 import { Component } from '@angular/core';
 
-import { Modal } from 'angular2-modal/plugins/bootstrap';
+import { Modal } from 'ngx-modialog/plugins/bootstrap';
 
 @Component({
     selector: 'snapp-about',

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * main.module.ts
  *
  * Created on: 2016-11-01
@@ -14,8 +14,8 @@ import { HttpModule } from '@angular/http';
 
 import { BusyModule } from 'angular2-busy';
 
-import { ModalModule } from 'angular2-modal';
-import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+import { ModalModule } from 'ngx-modialog';
+import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
 
 import MainComponent from '../components/main-component/main.component';
 import SnapProjectSubmitFormComponent from '../components/snap-project-submit-form-component/snap-project-submit-form.component';
