@@ -17,10 +17,9 @@ import Resolution from './Resolution';
 import * as fileSystemUtils from './utils/FileSystem';
 import * as validationUtils from './utils/Validation';
 
-import logModule from './log/Log';
+import { logger } from './log/Log';
 
 const moduleName: string = path.basename(__filename);
-const log = logModule();
 const resourcesDir: string = path.join(global.rootDir, '..', 'resources');
 const unixExecutablePermissions: number = 0o0755;
 const macToolbarCode: string =
@@ -220,7 +219,7 @@ function buildProjectPackage(projectPackage: Zip, project: string, os: string, p
         projectPackage.append(buildGui(gui, project, os, projectName), { name: 'gui.js' });
     })
     .catch((error: NodeJS.ErrnoException) => {
-        log.error({ moduleName, message: 'Unable to read gui file.', meta: { version: version, errorCode: error.code } });
+        logger.error({ moduleName, message: 'Unable to read gui file.', meta: { version: version, errorCode: error.code } });
         throw error;
     });
 }
@@ -244,7 +243,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
                 finalPackage.append(plist, { name: path.join(rootDir, 'Contents', 'Info.plist') });
             })
             .catch((error: NodeJS.ErrnoException) => {
-                log.error({ moduleName, message: 'Unable to read mac Info.plist.', meta: { os, errorCode: error.code } });
+                logger.error({ moduleName, message: 'Unable to read mac Info.plist.', meta: { os, errorCode: error.code } });
                 throw error;
             });
         }
@@ -262,7 +261,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
                     finalPackage.append(launcher, { name: path.join(rootDir, 'launcher.sh'), mode: unixExecutablePermissions });
                 })
                 .catch((error: NodeJS.ErrnoException) => {
-                    log.error({ moduleName, message: 'Unable to read linux launcher.sh.', meta: { os, errorCode: error.code } });
+                    logger.error({ moduleName, message: 'Unable to read linux launcher.sh.', meta: { os, errorCode: error.code } });
                     throw error;
                 }),
                 fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', 'linux', 'app.desktop'))
@@ -271,7 +270,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
                     finalPackage.append(launcher, { name: `${filename}.desktop`, mode: unixExecutablePermissions });
                 })
                 .catch((error: NodeJS.ErrnoException) => {
-                    log.error({ moduleName, message: 'Unable to read linux app.desktop.', meta: { os, errorCode: error.code } });
+                    logger.error({ moduleName, message: 'Unable to read linux app.desktop.', meta: { os, errorCode: error.code } });
                     throw error;
                 })
             ];
@@ -283,7 +282,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'lib'), filename);
             return Promise.resolve();
         default:
-            log.error({ moduleName, message: 'Invalid os.', meta: { os } });
+            logger.error({ moduleName, message: 'Invalid os.', meta: { os } });
             return Promise.reject(new Error('Invalid os.'));
     }
 }
@@ -319,7 +318,7 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<NodeJS.Read
         return new Promise<NodeJS.ReadableStream>((resolve, reject) => {
             const finalPackage: Zip = new Zip(
                 (error: any) => reject(error),
-                () => log.info({ moduleName, message: 'Final package finished.' })
+                () => logger.info({ moduleName, message: 'Final package finished.' })
             );
 
             const nwPackage: Zip = new Zip((error: any) => reject(error), () => {
@@ -355,12 +354,12 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<NodeJS.Read
                             break;
                         }
                         default:
-                            log.error({ moduleName, message: 'Invalid os.', meta: { os } });
+                            logger.error({ moduleName, message: 'Invalid os.', meta: { os } });
                             reject(new Error('Invalid os.'));
                     }
                 })
                 .catch((error: Error) => {
-                    log.error({ moduleName, message: 'Error arraying nwPackage.', meta: { error: log.destructureError(error) } });
+                    logger.error({ moduleName, message: 'Error arraying nwPackage.', error});
                     reject(error);
                 });
             });

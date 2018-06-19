@@ -19,13 +19,12 @@ import generateExecutable from './GenerateExecutableHandler';
 
 import * as fileSystemUtils from './utils/FileSystem';
 
-import logModule from './log/Log';
+import { logger } from './log/Log';
 
 
 global.conf = require(path.join(global.rootDir, '..', 'snapp_conf.json'));
 
 
-const log = logModule({  });
 const moduleName: string = path.basename(__filename);
 const defaultPort: number = 80;
 const port: number = global.conf.port || defaultPort;
@@ -66,7 +65,7 @@ const snapProjectUpload = upload.single('project');
 const snapProjectUploadMiddleware = function (request: express.Request, response: express.Response, next: express.NextFunction) {
     snapProjectUpload(request, response, (error) => {
         if (error) {
-            log.error({ moduleName, message: 'Error ocurred while uploading project xml.', meta: { error: log.destructureError(error) } });
+            logger.error({ moduleName, message: 'Error ocurred while uploading project xml.', error });
             const { code } = error;
             switch (error.code) {
                 case 'LIMIT_FILE_SIZE':             response.status(413).json({ code, fileSizeLimit }); break;
@@ -118,12 +117,12 @@ snapp
         zip.pipe(response);
     })
     .catch((error: NodeJS.ErrnoException | any) => {
-        log.error({ moduleName, message: 'Error ocurred while generating executable.', meta: { error: log.destructureError(error) } });
+        logger.error({ moduleName, message: 'Error ocurred while generating executable.', error });
         const { code } = error;
         response.status(error.status || 500).json({ code });
     })
     .then(() => fileSystemUtils.rmDir(projectPath))
-    .catch(error => log.error({ moduleName, message: 'Unable to delete the project file.', meta: { projectPath, error: log.destructureError(error) } }));
+    .catch(error => logger.error({ moduleName, message: 'Unable to delete the project file.', error, meta: { projectPath } }));
 })
 
-.listen(port, () => log.info({ moduleName, message: `Snapp listening on port ${port}.` })); 
+.listen(port, () => logger.info({ moduleName, message: `Snapp listening on port ${port}.` })); 

@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-//const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const helpers = require('./helpers.js');
 
@@ -42,9 +41,9 @@ module.exports = {
             }]
         }, {
             test: /\.css$/,
-            /*exclude: [
+            exclude: [
                 helpers.root('src', 'client')
-            ],*/
+            ],
             use: [{
                 loader: MiniCssExtractPlugin.loader
             }, {
@@ -53,7 +52,7 @@ module.exports = {
                     minimize: true
                 }
             }]
-        }/*, {
+        }, {
             test: /\.css$/,
             include: [
                 helpers.root('src', 'client')
@@ -61,7 +60,7 @@ module.exports = {
             use: [{
                 loader: 'raw-loader'
             }]
-        }*/]
+        }]
     },
 
     optimization: {
@@ -71,10 +70,6 @@ module.exports = {
     },
 
     plugins: [
-        /*
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['app', 'vendor', 'polyfills']
-        }),*/
         new HtmlWebpackPlugin({
             template: helpers.root('src', 'client', 'app.html'),
             filename: 'snapp.html',

@@ -1,115 +1,108 @@
 /**
  * Log.ts
  *
- * Created on: 2016-28-09
+ * Created on: 2018-06-19
  *     Author: Adrian Hintze @Rydion
  *
  */
 
-declare var winstonDailyRotator: any; // Ugly hack, make a d.ts file for winston-daily-rotate-file
-
 import * as path from 'path';
 
 import * as winston from 'winston';
-import * as winstonDailyRotator from 'winston-daily-rotate-file';
 
-import * as fileSystemUtils from '../utils/FileSystem';
+import { makeDirSync } from '../utils/FileSystem';
 
+const WinstonDailyRotateFile = require('winston-daily-rotate-file');
 const defaultPath = path.join(global.rootDir, '..', 'logs', 'node');
-const defaultLocale = 'es-ES';
-let logLocale = defaultLocale;
 
-function timeStamper() {
-    return new Date().toLocaleString(logLocale);
-}
 
-function formatter({level, timestamp, message, meta}: winston.FileFormatterOptions) {
-    // <LEVEL> [Date] - message
-    // {meta}
-    return '<' + level.toUpperCase() + '> [' + timestamp() + '] - ' + message +
-           (meta && Object.keys(meta).length ? '\n' + JSON.stringify(meta) : '');
-}
-
-interface LogParameters {
+export interface LogParameters {
+    message?: string;
     moduleName: string;
-    message: string;
+    error?: Error;
     functionName?: string;
     meta?: any;
 }
 
-function formatLogMessage({moduleName, functionName, message}: LogParameters): string {
-    const separator = '::';
-    let result = moduleName + separator;
-    result += functionName ? functionName + separator : '';
-    result += message;
-    return result;
+function isProduction(): boolean {
+    return process.env.NODE_ENV === 'production';
 }
 
-type LogFunction = (params: LogParameters) => void;
+export class Logger {
+    static fromLogConf(conf: any): Logger {
+        const { path: logPath } = conf;
 
-interface LogFunctions {
-    debug: LogFunction;
-    info: LogFunction;
-    warn: LogFunction;
-    error: LogFunction;
-    destructureError: (error: any) => { message: string, stack: string };
-}
+        try {
+            makeDirSync(logPath);
+        }
+        catch (error) {
+            throw new Error(`Unable to create log directory: ${logPath}.`);
+        }
 
-const logFunctions: LogFunctions = {
-    debug: (params: LogParameters) => winston.debug(formatLogMessage(params), params.meta || { }),
-    info: (params: LogParameters) => winston.info(formatLogMessage(params), params.meta || { }),
-    warn: (params: LogParameters) => winston.warn(formatLogMessage(params), params.meta || { }),
-    error: (params: LogParameters) => winston.error(formatLogMessage(params), params.meta || { }),
-    destructureError: (error: any) => ({ message: error.message, stack: error.stack })
-};
-
-interface LogInitParameters {
-    path?: string;
-    locale?: string;
-}
-
-export default function (params?: LogInitParameters): LogFunctions {
-    if (!params) {
-        return logFunctions;
-    }
-
-    const { path: logPath = defaultPath, locale = defaultLocale } = params;
-
-    logLocale = locale;
-
-    try {
-        fileSystemUtils.makeDirSync(logPath);
-    }
-    catch (error) {
-        console.error(`Unable to create logs directory: ${logPath}.`);
-        process.exit(1);
-    }
-
-    winston.remove(winston.transports.Console);
-
-    if (process.env.NODE_ENV !== 'production') {
-        winston.add(winston.transports.Console, {
-            formatter,
-            timestamp: timeStamper,
-            level: 'silly',
-            handleExceptions: false,
-            exitOnError: true
+        const dailyRotateFileTransport: any = new WinstonDailyRotateFile({
+            filename: 'snapp.%DATE%.log',
+            datePattern: 'YYYY-MM-DD',
+            dirname: logPath,
+            zippedArchive: false,
+            maxFiles: '365d'
         });
+
+        const productionFormat = winston.format.printf((info) => {
+            return `<${info.level.toUpperCase()}> [${info.timestamp}] - ${info.message} ${(info.meta && Object.keys(info.meta).length ? '\n' + JSON.stringify(info.meta) : '')}`;
+        });
+
+        const logger: winston.Logger = winston.createLogger({
+            level: isProduction ? 'info' : 'silly',
+            format: winston.format.combine(
+                winston.format.timestamp(),
+                productionFormat
+            ),
+            transports: [
+                dailyRotateFileTransport
+            ]
+        });
+
+        if (!isProduction()) {
+            logger.add(new winston.transports.Console({
+                format: winston.format.simple()
+            }));
+        }
+
+        return new Logger(logger);
     }
 
-    winston.add(winstonDailyRotator, {
-        formatter,
-        name: 'SnappProductionLog',
-        datePattern: '.yyyy-MM-dd.log',
-        filename: path.join(logPath, 'nt_log'),
-        maxsize: 100000000, // 100 MB file size limit, in bytes - 100000000
-        maxFiles: 10, // 10 files per day (overwrite the first one if it reaches the limit)
-        timestamp: timeStamper,
-        json: false, // needs to be set to false for the formatter to be used
-        level: 'info',
-        handleExceptions: false,
-        exitOnError: true
-    });
+    debug(params: LogParameters): void {
+        this._logger.debug(this._formatLogMessage(params), params.meta ? { meta: params.meta } : null);
+    }
 
-    return logFunctions;
-};
+    info(params: LogParameters): void {
+        this._logger.info(this._formatLogMessage(params), params.meta ? { meta: params.meta } : null);
+    }
+
+    warn(params: LogParameters): void {
+        this._logger.warn(this._formatLogMessage(params), params.meta ? { meta: params.meta } : null);
+    }
+
+    error(params: LogParameters): void {
+        this._logger.error(this._formatLogMessage(params), params.meta ? { meta: params.meta } : null);
+    }
+
+    private constructor(private _logger: winston.Logger) {
+
+    }
+
+    private _formatLogMessage({ error, functionName, message, moduleName }: LogParameters): string {
+        const separator: string = '::';
+        let result: string = moduleName;
+        result += functionName ? (separator + functionName) : '';
+        result += message ? (' - ' + message) : '';
+        if (error) {
+            result += '\nError information:\n';
+            result += error.message ? `\tMessage: ${error.message}` : '';
+            result += error.stack ? `\n\t${error.stack}` : '';
+        }
+        return result;
+    }
+}
+
+export const logger: Logger = Logger.fromLogConf({ path: defaultPath });

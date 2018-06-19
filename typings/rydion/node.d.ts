@@ -1,4 +1,4 @@
-﻿declare namespace NodeJS {
+declare namespace NodeJS {
     export interface SnappGlobalConf {
         port?: number;
         uploadFileSizeLimit?: number;

@@ -1,17 +1,17 @@
-﻿import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
 
 import MainModule from './modules/main.module';
 
 import './app.css';
 
-if (process.env.ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     enableProdMode();
 }
 
 platformBrowserDynamic()
 .bootstrapModule(MainModule)
 .catch((error: Error) => {
-    console.log(error);
+    console.error(error);
     alert('Unable to load Snapp!');
 });
