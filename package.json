@@ -1,7 +1,7 @@
 {
     "name": "snapp",
     "version": "3.0.0",
-    "description": "Snapp!",
+    "description": "Snapp! transforms you Snap! projects into standalone executables.",
     "author": {
         "name": "Adrian Hintze",
         "email": "hintze.adrian@gmail.com",
@@ -92,8 +92,8 @@
         "rimraf": "2.6.2",
         "rxjs": "6.2.1",
         "rxjs-compat": "6.2.1",
-        "snap-4-snapp-full": "git+https://git@github.com/Rydion/Snap-4-Snapp.git#full-v2.0.0",
-        "snap-4-snapp-reduced": "git+https://git@github.com/Rydion/Snap-4-Snapp.git#reduced-v2.0.0",
+        "snap-4-snapp-full": "git+https://git@github.com/Rydion/Snap-4-Snapp.git#full-v3.0.0",
+        "snap-4-snapp-reduced": "git+https://git@github.com/Rydion/Snap-4-Snapp.git#reduced-v3.0.0",
         "style-loader": "0.21.0",
         "to-string-loader": "1.1.5",
         "typescript": "2.9.2",

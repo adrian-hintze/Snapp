@@ -35,7 +35,11 @@ export default class AboutComponent {
 			<br><br>
 			If you have any suggestions or find any issues with the application open a new <a href="https://github.com/Rydion/Snapp/issues/" target="_blank" class="linked-institution">GitHub issue</a> or contact the author at:<br><b>hintze.adrian AT gmail DOT com</b>.
             <br><br>
-            v2.0.0
+            Snapp version: 3.0.0
+            <br>
+            Snap version: 4.1.2.7
+            <br>
+            Last updated: 2018-06-20
         `)
         .open();
     }
