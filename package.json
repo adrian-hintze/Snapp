@@ -26,7 +26,7 @@
         "postcopy-snap-reduced": "rimraf build/resources/snap/reduced/files/gui.js && rimraf build/resources/snap/reduced/files/package.json",
         "precopy-nw": "rimraf build/resources/nw",
         "copy-nw": "copyfiles -u 1 \"nw/**/*\" \"build/resources/nw\"",
-        "postcopy-nw": "rimraf build/resources/nw/mac64/Contents/Versions/68.0.3440.106/nwjs Framework.framework/Versions/A/nwjs Framework.zip",
+        "postcopy-nw": "rimraf \"build/resources/nw/mac64/Contents/Versions/68.0.3440.106/nwjs Framework.framework/Versions/A/nwjs Framework.zip\"",
         "precopy-icons": "rimraf build/resources/icons",
         "copy-icons": "copyfiles -u 1 \"icons/**/*\" \"build/resources/icons\"",
         "precopy-conf": "rimraf build/resources/conf",
