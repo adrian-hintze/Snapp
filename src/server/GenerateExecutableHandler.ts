@@ -134,7 +134,7 @@ function validateFileContents(fileContents: string): Promise<void> {
 }
 
 function validateOs(os: string): Promise<void> {
-    const validOsValues: Array<string> = ['mac32', 'mac64', 'lin32', 'lin64', 'win32', 'win64'];
+    const validOsValues: Array<string> = ['mac64', 'lin32', 'lin64', 'win32', 'win64'];
     if (validationUtils.validateString(os, false, validOsValues)) {
         return Promise.reject({ message: 'validateOs1' });
     }
@@ -177,7 +177,7 @@ function validateParams({ filename, project, os, resolution, useCompleteSnap }: 
 }
 
 function needsNodeMode(os: string): boolean {
-    return os === 'mac32' || os === 'mac64' || os === 'win32' || os === 'win64';
+    return os === 'mac64' || os === 'win32' || os === 'win64';
 }
 
 function buildPackageJson(os: string, projectName: string, resolution: Resolution): string {
@@ -199,7 +199,7 @@ function buildPackageJson(os: string, projectName: string, resolution: Resolutio
 
 function buildGui(gui: string, project: string, os: string, projectName: string): string {
     let result: string = gui + '\n';
-    if (os === 'mac32' || os === 'mac64') {
+    if (os === 'mac64') {
         result += macToolbarCode.replace('<project_name>', projectName) + '\n';
     }
     if (os === 'win32' || os === 'win64') {
@@ -226,15 +226,12 @@ function buildProjectPackage(projectPackage: Zip, project: string, os: string, p
 
 function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Promise<void> {
     switch (os) {
-        case 'mac64':
-        case 'mac32': {
+        case 'mac64': {
             const rootDir: string = `${filename}.app`;
 
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'Contents'), path.join(rootDir, 'Contents'));
             finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs'), { name: path.join(rootDir, 'Contents', 'MacOS', 'nwjs'), mode: unixExecutablePermissions });
-            finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs Helper'), { name: path.join(rootDir, 'Contents', 'Frameworks', 'nwjs Helper.app', 'Contents', 'MacOS', 'nwjs Helper'), mode: unixExecutablePermissions });
-            finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs Helper EH'), { name: path.join(rootDir, 'Contents', 'Frameworks', 'nwjs Helper EH.app', 'Contents', 'MacOS', 'nwjs Helper EH'), mode: unixExecutablePermissions });
-            finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs Helper NP'), { name: path.join(rootDir, 'Contents', 'Frameworks', 'nwjs Helper NP.app', 'Contents', 'MacOS', 'nwjs Helper NP'), mode: unixExecutablePermissions });
+            finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs Helper'), { name: path.join(rootDir, 'Contents', 'Versions', '68.0.3440.106', 'nwjs Helper.app', 'Contents', 'MacOS', 'nwjs Helper'), mode: unixExecutablePermissions });
             finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.icns'), { name: path.join(rootDir, 'Contents', 'Resources', 'nw.icns') });
 
             return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'Info.plist'))
@@ -327,7 +324,6 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<NodeJS.Read
                     const buffer = Buffer.concat(parts);
                     switch (os) {
                         case 'mac64':
-                        case 'mac32':
                             finalPackage
                             .append(buffer, { name: path.join(`${filename}.app`, 'Contents', 'Resources', 'app.nw'), mode: unixExecutablePermissions })
                             .finalize();

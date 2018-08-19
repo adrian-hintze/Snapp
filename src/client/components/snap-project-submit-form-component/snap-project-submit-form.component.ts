@@ -1,4 +1,4 @@
-﻿/**
+/**
  * snap-project-submit-form.component.ts
  *
  * Created on: 2016-11-01
@@ -60,14 +60,14 @@ export default class SnapProjectSubmitFormComponent {
         this.formData.os = detectOs();
     }
 
-    public onSelectFile(event: any): void {
+    onSelectFile(event: any): void {
         const input: HTMLInputElement = event.target;
         if (input && input.files) {
             this.formData.project = input.files.item(0);
         }
     }
 
-    public onSubmit(): void {
+    onSubmit(): void {
         const formData: FormData = new FormData();
         formData.append('project', this.formData.project);
         formData.append('resolution', this.formData.resolution);
@@ -119,16 +119,15 @@ export default class SnapProjectSubmitFormComponent {
         .catch(error => console.log(error));
     }
 
-    public resolutions: Array<string> = ['1280x960', '1152x864', '1024x768', '800x600', '600x450'];
-    public operatingSystems: Array<SelectOption> = [
+    resolutions: Array<string> = ['1280x960', '1152x864', '1024x768', '800x600', '600x450'];
+    operatingSystems: Array<SelectOption> = [
         { label: 'Windows 64 bits', value: 'win64' },
         { label: 'OS X 64 bits', value: 'mac64' },
         { label: 'Linux 64 bits', value: 'lin64' },
         { label: 'Windows 32 bits', value: 'win32' },
-        { label: 'OS X 32 bits', value: 'mac32' },
         { label: 'Linux 32 bits', value: 'lin32' }
     ];
 
-    public formData: SnapProjectSubmitFormData;
-    public busy: Promise<any>;
+    formData: SnapProjectSubmitFormData;
+    busy: Promise<any>;
 }
