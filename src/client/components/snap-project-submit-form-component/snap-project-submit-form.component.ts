@@ -47,6 +47,11 @@ export default class SnapProjectSubmitFormComponent {
                 osName = 'lin';
             }
 
+            // Dropped support for OS X 32 bit
+            if (osName === 'mac') {
+                return 'mac64';
+            }
+
             // Try to detect if it's a 64 or 32 bit machine
             // Most of the time this doesn't work so well
             const is64bit =
