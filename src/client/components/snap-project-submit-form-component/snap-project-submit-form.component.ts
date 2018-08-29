@@ -31,12 +31,12 @@ export default class SnapProjectSubmitFormComponent {
     constructor() {
         this.formData = {
             project: null,
-            resolution: '1024x768',
-            os: 'win64',
+            resolution: this.resolutions[2],
+            os: this.operatingSystems[0].value,
             useCompleteSnap: false
         };
 
-        // TODO -normal- Move to a service
+        // TODO Move to a service
         function detectOs() {
             // Detect operating system
             let osName = 'win';
@@ -56,8 +56,8 @@ export default class SnapProjectSubmitFormComponent {
             // Most of the time this doesn't work so well
             const is64bit =
                 navigator.platform === 'Win64' || navigator.platform === 'Linux x86_64' || // If this are set just trust them
-                navigator.appVersion.indexOf('WOW64') > -1 || navigator.appVersion.indexOf('x86_64') > -1 || // In case the fields above aren't set correctly
-                navigator.userAgent.indexOf('WOW64') > -1 || navigator.userAgent.indexOf('x86_64') > -1; // Firefox's appVersion field is kinda lacking
+                navigator.appVersion.indexOf('WOW64') > -1 || navigator.appVersion.indexOf('Win64') !== -1 || navigator.appVersion.indexOf('x86_64') > -1 || // In case the fields above aren't set correctly
+                navigator.userAgent.indexOf('WOW64') !== -1 || navigator.userAgent.indexOf('Win64') !== -1 || navigator.userAgent.indexOf('x86_64') !== -1; // Firefox's appVersion field is kinda lacking
 
             return osName + (is64bit ? '64' : '32');
         }
@@ -74,7 +74,7 @@ export default class SnapProjectSubmitFormComponent {
 
     onSubmit(): void {
         const formData: FormData = new FormData();
-        formData.append('project', this.formData.project);
+        formData.append('project', <File>this.formData.project);
         formData.append('resolution', this.formData.resolution);
         formData.append('os', this.formData.os);
         formData.append('useCompleteSnap', this.formData.useCompleteSnap.toString());
@@ -127,12 +127,12 @@ export default class SnapProjectSubmitFormComponent {
     resolutions: Array<string> = ['1280x960', '1152x864', '1024x768', '800x600', '600x450'];
     operatingSystems: Array<SelectOption> = [
         { label: 'Windows 64 bits', value: 'win64' },
+        { label: 'Windows 32 bits', value: 'win32' },
         { label: 'OS X 64 bits', value: 'mac64' },
         { label: 'Linux 64 bits', value: 'lin64' },
-        { label: 'Windows 32 bits', value: 'win32' },
         { label: 'Linux 32 bits', value: 'lin32' }
     ];
 
     formData: SnapProjectSubmitFormData;
-    busy: Promise<any>;
+    busy: Promise<any> = Promise.resolve();
 }
