@@ -40,7 +40,14 @@
         "download-nw-win64": "download --extract --strip 1 --out build/resources/nw/win64/lib/ https://dl.nwjs.io/v0.32.4/nwjs-v0.32.4-win-x64.zip",
         "postdownload-nw-win64": "rimraf build/resources/nw/win64/lib/nw.exe && copyfiles -u 3 nw/win64/exe/nw.exe build/resources/nw/win64/exe/",
         "predownload-nw-mac64": "rimraf build/resources/nw/mac64",
-        "download-nw-mac64": "download --extract --strip 2 --out build/resources/nw/mac64/ https://dl.nwjs.io/v0.32.4/nwjs-v0.32.4-osx-x64.zip"
+        "download-nw-mac64": "download --extract --strip 2 --out build/resources/nw/mac64/ https://dl.nwjs.io/v0.32.4/nwjs-v0.32.4-osx-x64.zip",
+        "download-nw-lin": "npm run download-nw-lin32 && npm run download-nw-lin64",
+        "predownload-nw-lin32": "rimraf build/resources/nw/lin32",
+        "download-nw-lin32": "download --extract --strip 1 --out build/resources/nw/lin32/lib/ https://dl.nwjs.io/v0.32.4/nwjs-v0.32.4-linux-ia32.tar.gz",
+        "postdownload-nw-lin32": "move-cli build/resources/nw/lin32/lib/nw build/resources/nw/lin32/bin/nw --mkdirp",
+        "predownload-nw-lin64": "rimraf build/resources/nw/lin64",
+        "download-nw-lin64": "download --extract --strip 1 --out build/resources/nw/lin64/lib/ https://dl.nwjs.io/v0.32.4/nwjs-v0.32.4-linux-x64.tar.gz",
+        "postdownload-nw-lin64": "move-cli build/resources/nw/lin64/lib/nw build/resources/nw/lin64/bin/nw --mkdirp"
     },
     "engines": {
         "node": ">=10.4.1",
