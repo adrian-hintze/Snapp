@@ -230,9 +230,11 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
             const rootDir: string = `${filename}.app`;
 
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'Contents'), path.join(rootDir, 'Contents'));
+            /*
             finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs'), { name: path.join(rootDir, 'Contents', 'MacOS', 'nwjs'), mode: unixExecutablePermissions });
             finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs Helper'), { name: path.join(rootDir, 'Contents', 'Versions', '68.0.3440.106', 'nwjs Helper.app', 'Contents', 'MacOS', 'nwjs Helper'), mode: unixExecutablePermissions });
             finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs Framework'), { name: path.join(rootDir, 'Contents', 'Versions', '68.0.3440.106', 'nwjs Framework.framework', 'Versions', 'A', 'nwjs Framework'), mode: unixExecutablePermissions });
+            */
             finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.icns'), { name: path.join(rootDir, 'Contents', 'Resources', 'nw.icns') });
 
             return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'Info.plist'))
@@ -273,7 +275,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
                 })
             ];
 
-            return Promise.all(readFilesPromises).then(() => { return; });
+            return Promise.all(readFilesPromises).then(() => { });
         }
         case 'win64':
         case 'win32':
