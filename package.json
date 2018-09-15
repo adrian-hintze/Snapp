@@ -9,8 +9,8 @@
     },
     "private": true,
     "scripts": {
-        "preprepare-release": "rimraf build",
-        "prepare-release": "npm run copy-resources && npm run build",
+        "prerelease": "rimraf build",
+        "release": "npm run copy-resources && npm run build",
         "run": "node build/snapp/Snapp.js",
         "full-setup": "npm run copy-resources && npm run download-nw && npm run build",
         "prebuild": "rimraf build/logs && rimraf build/upload",
