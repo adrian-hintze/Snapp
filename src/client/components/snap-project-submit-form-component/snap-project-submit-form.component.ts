@@ -87,7 +87,7 @@ export default class SnapProjectSubmitFormComponent {
 
             if (status === 413) {
                 if (!errorResponse) {
-                    alert(unknownErrorResponse);
+                    alert(`Sorry, but your project is too big to be processed by this server.`);
                     return;
                 }
 
@@ -128,7 +128,7 @@ export default class SnapProjectSubmitFormComponent {
     operatingSystems: Array<SelectOption> = [
         { label: 'Windows 64 bits', value: 'win64' },
         { label: 'Windows 32 bits', value: 'win32' },
-        { label: 'OS X 64 bits', value: 'mac64' },
+        { label: 'macOS 64 bits', value: 'mac64' },
         { label: 'Linux 64 bits', value: 'lin64' },
         { label: 'Linux 32 bits', value: 'lin32' }
     ];
