@@ -29,7 +29,7 @@ const moduleName: string = path.basename(__filename);
 const defaultPort: number = 80;
 const port: number = global.conf.port || defaultPort;
 const uploadFolder: string = path.join(__dirname, '..', 'upload', 'projects');
-const defaultFileSizeLimit: number = 10000000; // 10 MB
+const defaultFileSizeLimit: number = 10000000; // bytes - 10 MB
 const fileSizeLimit: number = global.conf.uploadFileSizeLimit || defaultFileSizeLimit; // bytes
 const compressStaticFilesDefault: boolean = true;
 const compressStaticFiles: boolean = typeof global.conf.compressStaticFiles === 'boolean' ? global.conf.compressStaticFiles : compressStaticFilesDefault;
@@ -87,7 +87,12 @@ if (compressStaticFiles) {
 
 snapp
 
-.use(bodyParser.json())
+.use(bodyParser.json({ limit: `${fileSizeLimit/1000000}mb` }))
+.use(bodyParser.urlencoded({
+    limit: `${fileSizeLimit/1000000}mb`,
+    extended: true,
+    parameterLimit: 50000
+}))
 
 .use('/', express.static(path.join(global.rootDir, '..', 'WebContent')))
 

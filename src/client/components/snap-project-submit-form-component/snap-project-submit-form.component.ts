@@ -92,7 +92,7 @@ export default class SnapProjectSubmitFormComponent {
                 }
 
                 const { fileSizeLimit } = errorResponse;
-                alert(`Sorry, but this online version of Snapp! only accepts projects up to ${fileSizeLimit / 1000000} MB.`);
+                alert(`Sorry, but this online version of Snapp! only accepts projects up to ${fileSizeLimit/1000000} MB.`);
             }
             else if (status === 500) {
                 alert('Whoops! Something went wrong server-side. Please try again later. If the problem persists open a new issue on GitHub.');
