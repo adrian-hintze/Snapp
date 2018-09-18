@@ -56,21 +56,20 @@ const upload = multer({
             return callback(error, false);
         }
 
-        const error: any = null; // Workaround for an error in @Types/multer
-        callback(error, true);
+        callback(null, true);
     }
 });
 
 const snapProjectUpload = upload.single('project');
-const snapProjectUploadMiddleware = function (request: express.Request, response: express.Response, next: express.NextFunction) {
+const snapProjectUploadMiddleware = (request: express.Request, response: express.Response, next: express.NextFunction) => {
     snapProjectUpload(request, response, (error) => {
         if (error) {
             logger.error({ moduleName, message: 'Error ocurred while uploading project xml.', error });
             const { code } = error;
             switch (error.code) {
-                case 'LIMIT_FILE_SIZE':             response.status(413).json({ code, fileSizeLimit }); break;
-                case 'REJECTED_FILE_EXTENSION':     response.status(400).json({ code }); break;
-                default:                            response.status(500).json({ code });
+                case 'LIMIT_FILE_SIZE':         response.status(413).json({ code, fileSizeLimit }); break;
+                case 'REJECTED_FILE_EXTENSION': response.status(400).json({ code }); break;
+                default:                        response.status(500).json({ code });
             }
             return;
         }
@@ -86,13 +85,6 @@ if (compressStaticFiles) {
 }
 
 snapp
-
-.use(bodyParser.json({ limit: `${fileSizeLimit/1000000}mb` }))
-.use(bodyParser.urlencoded({
-    limit: `${fileSizeLimit/1000000}mb`,
-    extended: true,
-    parameterLimit: 50000
-}))
 
 .use('/', express.static(path.join(global.rootDir, '..', 'WebContent')))
 

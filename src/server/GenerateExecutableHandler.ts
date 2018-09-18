@@ -85,6 +85,24 @@ interface ExecGenerationRequestParams {
     useCompleteSnap: boolean;
 }
 
+interface PackageJsonContentsWindowProperty {
+    icon: string;
+    title: string;
+    toolbar: boolean;
+    resizable: boolean;
+    width: number;
+    height: number;
+}
+
+interface PackageJsonContents {
+    name: string;
+    main: string;
+    nodejs: boolean;
+    'single-instance': boolean;
+    product_string?: string;
+    window: PackageJsonContentsWindowProperty;
+}
+
 function validateFilename(filename: string): Promise<void> {
     if (validationUtils.validateString(filename, false)) {
         return Promise.reject({ message: 'validateFilename1' });
@@ -181,7 +199,7 @@ function needsNodeMode(os: string): boolean {
 }
 
 function buildPackageJson(os: string, projectName: string, resolution: Resolution): string {
-    return JSON.stringify({
+    const contents: PackageJsonContents = {
         name: 'snapapp',
         main: 'snap.html',
         nodejs: needsNodeMode(os),
@@ -194,7 +212,11 @@ function buildPackageJson(os: string, projectName: string, resolution: Resolutio
             width: resolution.getWidth(),
             height: resolution.getHeight()
         }
-    });
+    };
+    if (os === 'mac64') {
+        contents.product_string = projectName;
+    }
+    return JSON.stringify(contents);
 }
 
 function buildGui(gui: string, project: string, os: string, projectName: string): string {
@@ -230,20 +252,22 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
             const rootDir: string = `${filename}.app`;
 
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'Contents'), path.join(rootDir, 'Contents'));
-            /*
-            finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs'), { name: path.join(rootDir, 'Contents', 'MacOS', 'nwjs'), mode: unixExecutablePermissions });
-            finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs Helper'), { name: path.join(rootDir, 'Contents', 'Versions', '68.0.3440.106', 'nwjs Helper.app', 'Contents', 'MacOS', 'nwjs Helper'), mode: unixExecutablePermissions });
-            finalPackage.file(path.join(resourcesDir, 'nw', os, 'bin', 'nwjs Framework'), { name: path.join(rootDir, 'Contents', 'Versions', '68.0.3440.106', 'nwjs Framework.framework', 'Versions', 'A', 'nwjs Framework'), mode: unixExecutablePermissions });
-            */
             finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.icns'), { name: path.join(rootDir, 'Contents', 'Resources', 'nw.icns') });
 
             return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'Info.plist'))
             .then((plistTemplate) => {
-                const plist = plistTemplate.replace('<filename>', filename).replace('<short_filename>', filename.length < 16 ? filename : 'Snapp!');
+                const plist = plistTemplate.replace('{{filename}}', filename).replace('{{short_filename}}', filename.length < 16 ? filename : 'Snapp!');
                 finalPackage.append(plist, { name: path.join(rootDir, 'Contents', 'Info.plist') });
             })
+            .then(() => {
+                return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'InfoPlist.strings'));
+            })
+            .then((infoplistTemplate) => {
+                const infoplist = infoplistTemplate.replace('{{filename}}', filename).replace('{{short_filename}}', filename.length < 16 ? filename : 'Snapp!');
+                finalPackage.append(infoplist, { name: path.join(rootDir, 'Contents', 'Resources', 'en.lproj', 'InfoPlist.strings') });
+            })
             .catch((error: NodeJS.ErrnoException) => {
-                logger.error({ moduleName, message: 'Unable to read mac Info.plist.', meta: { os, errorCode: error.code } });
+                logger.error({ moduleName, message: 'Unable to read mac conf files.', meta: { os, errorCode: error.code } });
                 throw error;
             });
         }
