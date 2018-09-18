@@ -10,7 +10,6 @@ global.rootDir = __dirname;
 
 import * as path from 'path';
 import * as express from 'express';
-import * as bodyParser from 'body-parser';
 import * as multer from 'multer';
 import * as mime from 'mime';
 import * as compression from 'compression';
