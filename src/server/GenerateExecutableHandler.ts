@@ -213,9 +213,11 @@ function buildPackageJson(os: string, projectName: string, resolution: Resolutio
             height: resolution.getHeight()
         }
     };
+    /*
     if (os === 'mac64') {
         contents.product_string = projectName;
     }
+    */
     return JSON.stringify(contents);
 }
 
