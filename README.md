@@ -6,6 +6,6 @@ Snapp! turns [Snap!](http://snap.berkeley.edu/) projects into standalone executa
   
 Check out the [wiki](https://github.com/Rydion/Snapp/wiki/) for documentation and FAQs.
 
-## Demo
+## Live versions
 
-Try it at <http://snapp.citilab.eu/>
+<http://snapp.citilab.eu/>
