@@ -4,6 +4,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const helpers = require('./helpers.js');
 
 module.exports = {
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        }
+    },
+
     entry: {
         polyfills: './src/client/polyfills.ts',
         vendor: './src/client/vendor.ts',
@@ -47,10 +53,7 @@ module.exports = {
             use: [{
                 loader: MiniCssExtractPlugin.loader
             }, {
-                loader: 'css-loader',
-                options: {
-                    minimize: true
-                }
+                loader: 'css-loader'
             }]
         }, {
             test: /\.css$/,
@@ -61,12 +64,6 @@ module.exports = {
                 loader: 'raw-loader'
             }]
         }]
-    },
-
-    optimization: {
-        splitChunks: {
-            chunks: 'all'
-        }
     },
 
     plugins: [

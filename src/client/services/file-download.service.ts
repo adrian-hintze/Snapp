@@ -2,7 +2,7 @@
  * file-download.service.ts
  *
  * Created on: 2016-11-01
- *     Author: Adrian Hintze @Rydion
+ *     Author: Adrian Hintze
  *
  */
 
@@ -17,7 +17,7 @@ export interface FileDownloadServiceResponse {
 }
 
 function arrayBufferToString(arrayBuffer: ArrayBuffer): string {
-    return String.fromCharCode.apply(null, new Uint8Array(arrayBuffer));
+    return String.fromCharCode.apply(null, <any>(new Uint8Array(arrayBuffer)));
 }
 
 @Injectable()

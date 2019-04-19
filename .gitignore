@@ -1,6 +1,5 @@
 .vs/
 node_modules/
 build/
-nw/mac64/Contents/Versions/68.0.3440.106/nwjs Framework.framework/Versions/A/nwjs Framework
 *.njsproj
 tsconfig.json
