@@ -2,7 +2,7 @@
  * FileSystem.ts
  *
  * Created on: 2016-09-28
- *     Author: Adrian Hintze @Rydion
+ *     Author: Adrian Hintze
  *
  */
 
@@ -12,7 +12,7 @@ import * as mkdirp from 'mkdirp';
 
 export function isDir(path: string): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-        fs.stat(path, (error: NodeJS.ErrnoException, stat: fs.Stats) => {
+        fs.stat(path, (error: NodeJS.ErrnoException | null, stat: fs.Stats) => {
             if (error) {
                 reject(error);
                 return;
@@ -80,7 +80,7 @@ export function makeDirSync(path: string): void {
 
 export function readFile(path: string): Promise<Buffer> {
     return new Promise<Buffer>((resolve, reject) => {
-        fs.readFile(path, (error: NodeJS.ErrnoException, buffer: Buffer) => {
+        fs.readFile(path, (error: NodeJS.ErrnoException | null, buffer: Buffer) => {
             if (error) {
                 reject(error);
                 return;
@@ -97,7 +97,7 @@ export function readFileSync(path: string): Buffer {
 
 export function readTextFile(path: string, encoding: string = 'utf8'): Promise<string> {
     return new Promise<string>((resolve, reject) => {
-        fs.readFile(path, encoding, (error: NodeJS.ErrnoException, text: string) => {
+        fs.readFile(path, encoding, (error: NodeJS.ErrnoException | null, text: string) => {
             if (error) {
                 reject(error);
                 return;
@@ -114,7 +114,7 @@ export function readTextFileSync(path: string, encoding: string = 'utf8'): strin
 
 export function readDir(path: string): Promise<string[]> {
     return new Promise<string[]>((resolve, reject) => {
-        fs.readdir(path, (error: NodeJS.ErrnoException, contents: string[]) => {
+        fs.readdir(path, (error: NodeJS.ErrnoException | null, contents: string[]) => {
             if (error) {
                 reject(error);
                 return;
@@ -131,7 +131,7 @@ export function readDirSync(path: string): string[] {
 
 export function rmDir(path: string): Promise<undefined> {
     return new Promise<undefined>((resolve, reject) => {
-        fs.unlink(path, (error: NodeJS.ErrnoException) => {
+        fs.unlink(path, (error: NodeJS.ErrnoException | null) => {
             if (error) {
                 reject(error);
                 return;

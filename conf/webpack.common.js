@@ -1,19 +1,12 @@
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const helpers = require('./helpers.js');
 
 module.exports = {
-    optimization: {
-        splitChunks: {
-            chunks: 'all'
-        }
-    },
-
     entry: {
-        polyfills: './src/client/polyfills.ts',
-        vendor: './src/client/vendor.ts',
-        app: './src/client/app.ts'
+        polyfills: helpers.root('src', 'client', 'polyfills.ts'),
+        vendor: helpers.root('src', 'client', 'vendor.ts'),
+        main: helpers.root('src', 'client', 'app.ts')
     },
 
     resolve: {
@@ -31,7 +24,7 @@ module.exports = {
             }, {
                 loader: 'angular2-template-loader'
             }],
-            exclude: [/\.(spec|e2e)\.ts$/]
+            exclude: [/\.(spec|e2e)\.ts$/, /node_modules/]
         }, {
             test: /\.html$/,
             use: [{
@@ -47,21 +40,19 @@ module.exports = {
             }]
         }, {
             test: /\.css$/,
-            exclude: [
-                helpers.root('src', 'client')
-            ],
+            include: [helpers.root('src', 'client')],
+                use: [{
+                    loader: 'to-string-loader'
+                }, {
+                    loader: 'css-loader'
+                }]
+        }, {
+            test: /\.css$/,
+            exclude: [helpers.root('src', 'client')],
             use: [{
                 loader: MiniCssExtractPlugin.loader
             }, {
                 loader: 'css-loader'
-            }]
-        }, {
-            test: /\.css$/,
-            include: [
-                helpers.root('src', 'client')
-            ],
-            use: [{
-                loader: 'raw-loader'
             }]
         }]
     },
@@ -71,6 +62,21 @@ module.exports = {
             template: helpers.root('src', 'client', 'app.html'),
             filename: 'snapp.html',
             favicon: helpers.root('src', 'client', 'favicon.ico')
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].[hash].css',
+            chunkFilename: '[id].[hash].css'
         })
-    ]
+    ],
+
+    output: {
+        path: helpers.root('build', 'WebContent'),
+        publicPath: '/',
+        filename: '[name].[hash].js',
+        chunkFilename: '[id].[hash].chunk.js'
+    },
+
+    optimization: {
+        noEmitOnErrors: true
+    }
 };

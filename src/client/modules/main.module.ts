@@ -21,6 +21,8 @@ import MainComponent from '../components/main-component/main.component';
 import SnapProjectSubmitFormComponent from '../components/snap-project-submit-form-component/snap-project-submit-form.component';
 import AboutComponent from '../components/about-component/about.component';
 
+import { FileDownloadService } from '../services/file-download.service';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -35,6 +37,9 @@ import AboutComponent from '../components/about-component/about.component';
         MainComponent,
         SnapProjectSubmitFormComponent,
         AboutComponent
+    ],
+    providers: [
+        FileDownloadService
     ],
     bootstrap: [
         MainComponent
