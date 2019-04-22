@@ -2,13 +2,13 @@
  * Zip.ts
  *
  * Created on: 2016-09-26
- *     Author: Adrian Hintze @Rydion
+ *     Author: Adrian Hintze
  *
  */
 
 import { create as getNewArchiver, Archiver } from 'archiver';
 
-const defaultHighWaterMark = 100000000; // TODO -normal- Why does this value work and lower ones not?
+const defaultHighWaterMark = 100000000; // TODO Why does this value work and lower ones not?
 
 export default class Zip {
     public constructor(onError: (...args: any[]) => void, onFinish: (...args: any[]) => void) {

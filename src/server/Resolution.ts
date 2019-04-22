@@ -2,11 +2,9 @@
  * Resolution.ts
  *
  * Created on: 2017-04-25
- *     Author: Adrian Hintze @Rydion
+ *     Author: Adrian Hintze
  *
  */
-
-'use strict';
 
 export default class Resolution {
     public static fromString(resolution: string) {

@@ -2,7 +2,7 @@
  * Log.ts
  *
  * Created on: 2018-06-19
- *     Author: Adrian Hintze @Rydion
+ *     Author: Adrian Hintze
  *
  */
 

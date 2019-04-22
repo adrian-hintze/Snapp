@@ -2,7 +2,7 @@
  * Validation.ts
  *
  * Created on: 2016-09-27
- *     Author: Adrian Hintze @Rydion
+ *     Author: Adrian Hintze
  *
  */
 

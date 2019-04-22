@@ -2,7 +2,7 @@
  * Xml.ts
  *
  * Created on: 2016-09-26
- *     Author: Adrian Hintze @Rydion
+ *     Author: Adrian Hintze
  *
  */
 
