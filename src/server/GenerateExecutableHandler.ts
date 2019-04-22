@@ -2,7 +2,7 @@
  * GenerateExecutableHandler.ts
  *
  * Created on: 2016-09-25
- *     Author: Adrian Hintze @Rydion
+ *     Author: Adrian Hintze
  *
  */
 

@@ -2,7 +2,7 @@
  * main.module.ts
  *
  * Created on: 2016-11-01
- *     Author: Adrian Hintze @Rydion
+ *     Author: Adrian Hintze
  *
  */
 
