@@ -240,7 +240,7 @@ function buildProjectPackage(projectPackage: Zip, project: string, os: string, p
 
     return fileSystemUtils.readTextFile(path.join(resourcesDir, 'snap', version, 'gui', 'gui.js'))
     .then((gui) => {
-        projectPackage.append(buildGui(gui, project, os, projectName), { name: 'gui.js' });
+        projectPackage.append(buildGui(gui, project, os, projectName), { name: path.join('src', 'gui.js') });
     })
     .catch((error: NodeJS.ErrnoException) => {
         logger.error({ moduleName, message: 'Unable to read gui file.', meta: { version: version, errorCode: error.code } });
