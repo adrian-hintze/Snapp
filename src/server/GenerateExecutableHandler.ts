@@ -212,7 +212,7 @@ function buildPackageJson(os: string, projectName: string, resolution: Resolutio
 
 function buildGui(gui: string, project: string, os: string, projectName: string): string {
     let result: string = gui + '\n';
-    if (os === 'mac64') {
+    if (false && os === 'mac64') {
         result += macToolbarCode.replace('<project_name>', projectName) + '\n';
     }
     if (os === 'win32' || os === 'win64') {
