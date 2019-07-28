@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>nwjs</string>
+	<string>{{filename}}</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -273,13 +273,13 @@
 	<key>CFBundleExecutable</key>
 	<string>nwjs</string>
 	<key>CFBundleIconFile</key>
-	<string>app.icns</string>
+	<string>lambda.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>io.nwjs.nwjs</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>nwjs</string>
+	<string>{{short_filename}}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
