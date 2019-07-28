@@ -24,37 +24,34 @@ const resourcesDir: string = path.join(global.rootDir, '..', 'resources');
 const unixExecutablePermissions: number = 0o0755;
 const macToolbarCode: string =
 `
-var win = nw.Window.get();
+var nwWin = nw.Window.get();
 var menu = new nw.Menu({ type: 'menubar' });
 menu.createMacBuiltin('<project_name>', {
     hideEdit: true,
     hideWindow: true
 });
-win.menu = menu;
-var close = {
-    key: 'Ctrl+q',
-    active: function () { win.close(); }
-};
-var closeWindow = {
-    key: 'Ctrl+w',
-    active: function () { win.close(); }
-};
-var minimize = {
-    key: 'Ctrl+m',
-    active: function () { win.minimize(); }
-};
-var closeShortcut = new nw.Shortcut(close);
-var closeWindowShortcut = new nw.Shortcut(closeWindow);
-var minimizeShortcut = new nw.Shortcut(minimize);
+nwWin.menu = menu;
+var closeShortcut = new nw.Shortcut({
+    key: 'Command+Q',
+    active: function () { nwWin.close(); }
+});
+var closeWindowShortcut = new nw.Shortcut({
+    key: 'Command+W',
+    active: function () { nwWin.close(); }
+});
+var minimizeShortcut = new nw.Shortcut({
+    key: 'Command+M',
+    active: function () { nwWin.minimize(); }
+});
 nw.App.registerGlobalHotKey(closeShortcut);
 nw.App.registerGlobalHotKey(closeWindowShortcut);
 nw.App.registerGlobalHotKey(minimizeShortcut);
-win.on('focus', function () {
+nwWin.on('focus', function () {
     nw.App.registerGlobalHotKey(closeShortcut);
     nw.App.registerGlobalHotKey(closeWindowShortcut);
     nw.App.registerGlobalHotKey(minimizeShortcut);
 });
-win.on('blur', function () {
+nwWin.on('blur', function () {
     nw.App.unregisterGlobalHotKey(closeShortcut);
     nw.App.unregisterGlobalHotKey(closeWindowShortcut);
     nw.App.unregisterGlobalHotKey(minimizeShortcut);
