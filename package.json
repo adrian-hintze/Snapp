@@ -48,6 +48,7 @@
         "download-nw-mac": "npm run download-nw-mac64",
         "predownload-nw-mac64": "rimraf build/resources/nw/mac64",
         "download-nw-mac64": "download --extract --strip 2 --out build/resources/nw/mac64/ https://dl.nwjs.io/v0.38.4/nwjs-v0.38.4-osx-x64.zip",
+        "postdownload-nw-mac64": "rimraf build/resources/nw/mac64/credits.html",
         "download-nw-lin": "npm run download-nw-lin32 && npm run download-nw-lin64",
         "predownload-nw-lin32": "rimraf build/resources/nw/lin32",
         "download-nw-lin32": "download --extract --strip 1 --out build/resources/nw/lin32/lib/ https://dl.nwjs.io/v0.38.4/nwjs-v0.38.4-linux-ia32.tar.gz",

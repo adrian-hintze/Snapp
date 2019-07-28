@@ -25,12 +25,12 @@ const unixExecutablePermissions: number = 0o0755;
 const macToolbarCode: string =
 `
 var nwWin = nw.Window.get();
-var menu = new nw.Menu({ type: 'menubar' });
-menu.createMacBuiltin('<project_name>', {
+var nwMenu = new nw.Menu({ type: 'menubar' });
+nwMenu.createMacBuiltin('{{project_name}}', {
     hideEdit: true,
     hideWindow: true
 });
-nwWin.menu = menu;
+nwWin.menu = nwMenu;
 var closeShortcut = new nw.Shortcut({
     key: 'Command+Q',
     active: function () { nwWin.close(); }
@@ -212,8 +212,8 @@ function buildPackageJson(os: string, projectName: string, resolution: Resolutio
 
 function buildGui(gui: string, project: string, os: string, projectName: string): string {
     let result: string = gui + '\n';
-    if (false && os === 'mac64') {
-        result += macToolbarCode.replace('<project_name>', projectName) + '\n';
+    if (os === 'mac64') {
+        result += macToolbarCode.replace('{{project_name}}', projectName) + '\n';
     }
     if (os === 'win32' || os === 'win64') {
         result += winFullscreenCode + '\n';
@@ -244,7 +244,8 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
 
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'Contents'), path.join(rootDir, 'Contents'));
             finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.icns'), { name: path.join(rootDir, 'Contents', 'Resources', 'nw.icns') });
-
+            return Promise.resolve();
+            /*
             return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'Info.plist'))
             .then((plistTemplate) => {
                 const plist = plistTemplate.replace('{{filename}}', filename).replace('{{short_filename}}', filename.length < 16 ? filename : 'Snapp!');
@@ -260,7 +261,7 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
             .catch((error: NodeJS.ErrnoException) => {
                 logger.error({ moduleName, message: 'Unable to read mac conf files.', meta: { os, errorCode: error.code } });
                 throw error;
-            });
+            });*/
         }
         case 'lin64':
         case 'lin32': {
