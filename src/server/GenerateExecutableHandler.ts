@@ -24,9 +24,8 @@ const resourcesDir: string = path.join(global.rootDir, '..', 'resources');
 const unixExecutablePermissions: number = 0o0755;
 const macToolbarCode: string =
 `
-var gui = require('nw.gui');
-var win = gui.Window.get();
-var menu = new gui.Menu({ type: 'menubar' });
+var win = nw.Window.get();
+var menu = new nw.Menu({ type: 'menubar' });
 menu.createMacBuiltin('<project_name>', {
     hideEdit: true,
     hideWindow: true
@@ -44,32 +43,31 @@ var minimize = {
     key: 'Ctrl+m',
     active: function () { win.minimize(); }
 };
-var closeShortcut = new gui.Shortcut(close);
-var closeWindowShortcut = new gui.Shortcut(closeWindow);
-var minimizeShortcut = new gui.Shortcut(minimize);
-gui.App.registerGlobalHotKey(closeShortcut);
-gui.App.registerGlobalHotKey(closeWindowShortcut);
-gui.App.registerGlobalHotKey(minimizeShortcut);
+var closeShortcut = new nw.Shortcut(close);
+var closeWindowShortcut = new nw.Shortcut(closeWindow);
+var minimizeShortcut = new nw.Shortcut(minimize);
+nw.App.registerGlobalHotKey(closeShortcut);
+nw.App.registerGlobalHotKey(closeWindowShortcut);
+nw.App.registerGlobalHotKey(minimizeShortcut);
 win.on('focus', function () {
-    gui.App.registerGlobalHotKey(closeShortcut);
-    gui.App.registerGlobalHotKey(closeWindowShortcut);
-    gui.App.registerGlobalHotKey(minimizeShortcut);
+    nw.App.registerGlobalHotKey(closeShortcut);
+    nw.App.registerGlobalHotKey(closeWindowShortcut);
+    nw.App.registerGlobalHotKey(minimizeShortcut);
 });
 win.on('blur', function () {
-    gui.App.unregisterGlobalHotKey(closeShortcut);
-    gui.App.unregisterGlobalHotKey(closeWindowShortcut);
-    gui.App.unregisterGlobalHotKey(minimizeShortcut);
+    nw.App.unregisterGlobalHotKey(closeShortcut);
+    nw.App.unregisterGlobalHotKey(closeWindowShortcut);
+    nw.App.unregisterGlobalHotKey(minimizeShortcut);
 });
 `;
 const winFullscreenCode: string =
 `
-var gui = require('nw.gui');
-var win = gui.Window.get();
-var fullscreenShortcut = new gui.Shortcut({
+var nwWin = nw.Window.get();
+var fullscreenShortcut = new nw.Shortcut({
     key: 'F11',
-    active: function () { win.toggleFullscreen(); }
+    active: function () { nwWin.toggleFullscreen(); }
 });
-gui.App.registerGlobalHotKey(fullscreenShortcut);
+nw.App.registerGlobalHotKey(fullscreenShortcut);
 `;
 
 interface ErrorFeedback {
@@ -88,7 +86,6 @@ interface ExecGenerationRequestParams {
 interface PackageJsonContentsWindowProperty {
     icon: string;
     title: string;
-    toolbar: boolean;
     resizable: boolean;
     width: number;
     height: number;
@@ -98,7 +95,7 @@ interface PackageJsonContents {
     name: string;
     main: string;
     nodejs: boolean;
-    'single-instance': boolean;
+    'node-remote': string;
     product_string?: string;
     window: PackageJsonContentsWindowProperty;
 }
@@ -194,20 +191,15 @@ function validateParams({ filename, project, os, resolution, useCompleteSnap }: 
     return Promise.all(validationPromises).then(() => { return; });
 }
 
-function needsNodeMode(os: string): boolean {
-    return os === 'mac64' || os === 'win32' || os === 'win64';
-}
-
 function buildPackageJson(os: string, projectName: string, resolution: Resolution): string {
     const contents: PackageJsonContents = {
         name: 'snapapp',
         main: 'snap.html',
-        nodejs: needsNodeMode(os),
-        'single-instance': true,
+        nodejs: true,
+        'node-remote': '<all_urls>',
         window: {
             icon: 'lambda.png',
             title: projectName,
-            toolbar: false,
             resizable: true,
             width: resolution.getWidth(),
             height: resolution.getHeight()

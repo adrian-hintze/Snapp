@@ -2,7 +2,7 @@
  * about.component.ts
  *
  * Created on: 2016-11-01
- *     Author: Adrian Hintze @Rydion
+ *     Author: Adrian Hintze
  *
  */
 
@@ -37,9 +37,9 @@ export default class AboutComponent {
             <br><br>
             Snapp version: 4.1.0
             <br>
-            Snap version: 4.1.2.7
+            Snap version: 5.0.8
             <br>
-            Last updated: 2019-XX-xx
+            Last updated: 2019-07-28
         `)
         .open();
     }
