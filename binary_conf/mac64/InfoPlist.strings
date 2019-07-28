@@ -1,4 +1,0 @@
-CFBundleDisplayName = "{{filename}}";
-CFBundleGetInfoString = "nwjs 68.0.3440.106, Copyright 2018 The Chromium Authors, NW.js contributors, Node.js. All rights reserved.";
-CFBundleName = "{{short_filename}}";
-NSHumanReadableCopyright = "Copyright 2018 The Chromium Authors, NW.js contributors, Node.js. All rights reserved.";

@@ -243,14 +243,14 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
             const rootDir: string = `${filename}.app`;
 
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'Contents'), path.join(rootDir, 'Contents'));
-            finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.icns'), { name: path.join(rootDir, 'Contents', 'Resources', 'nw.icns') });
-            return Promise.resolve();
-            /*
+            finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.icns'), { name: path.join(rootDir, 'Contents', 'Resources', 'lambda.icns') });
+            
             return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'Info.plist'))
             .then((plistTemplate) => {
-                const plist = plistTemplate.replace('{{filename}}', filename).replace('{{short_filename}}', filename.length < 16 ? filename : 'Snapp!');
+                const plist = plistTemplate.replace('{{filename}}', filename).replace('{{short_filename}}', filename.length < 16 ? filename : 'Snapp');
                 finalPackage.append(plist, { name: path.join(rootDir, 'Contents', 'Info.plist') });
             })
+            /*
             .then(() => {
                 return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'InfoPlist.strings'));
             })
@@ -258,10 +258,11 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
                 const infoplist = infoplistTemplate.replace('{{filename}}', filename).replace('{{short_filename}}', filename.length < 16 ? filename : 'Snapp!');
                 finalPackage.append(infoplist, { name: path.join(rootDir, 'Contents', 'Resources', 'en.lproj', 'InfoPlist.strings') });
             })
+            */
             .catch((error: NodeJS.ErrnoException) => {
                 logger.error({ moduleName, message: 'Unable to read mac conf files.', meta: { os, errorCode: error.code } });
                 throw error;
-            });*/
+            });
         }
         case 'lin64':
         case 'lin32': {
