@@ -273,7 +273,7 @@
 	<key>CFBundleExecutable</key>
 	<string>nwjs</string>
 	<key>CFBundleIconFile</key>
-	<string>app.icns</string>
+	<string>lambda.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>io.nwjs.nwjs</string>
 	<key>CFBundleInfoDictionaryVersion</key>
