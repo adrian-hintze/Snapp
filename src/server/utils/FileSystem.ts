@@ -52,24 +52,13 @@ export function dirExistsSync(path: string): boolean {
     }
 }
 
-export function makeDir(path: string): Promise<undefined> {
-    return dirExists(path)
-    .then((exists: boolean) => {
-        if (exists) {
-            return;
-        }
+export async function makeDir(path: string): Promise<undefined> {
+    if (await dirExists(path)) {
+        return;
+    }
 
-        return new Promise<undefined>((resolve, reject) => {
-            mkdirp(path, (error: any) => {
-                if (error) {
-                    reject(error);
-                    return;
-                }
-
-                resolve();
-            });
-        });
-    });
+    await mkdirp(path);
+    return;
 }
 
 export function makeDirSync(path: string): void {
