@@ -87,7 +87,7 @@ export default class SnapProjectSubmitFormComponent {
 
             if (status === 413) {
                 if (!errorResponse) {
-                    alert(`Sorry, but your project is too big to be processed by this server.`);
+                    alert('Sorry, but your project is too big to be processed by this server.');
                     return;
                 }
 
@@ -95,7 +95,7 @@ export default class SnapProjectSubmitFormComponent {
                 alert(`Sorry, but this online version of Snapp! only accepts projects up to ${fileSizeLimit/1000000} MB.`);
             }
             else if (status === 500) {
-                alert('Whoops! Something went wrong server-side. Please try again later. If the problem persists open a new issue on GitHub.');
+                alert('Whoops! Something went wrong server-side. Please try again later. If the problem persists open a new GitHub issue (link in about section).');
             }
             else if (status === 400) {
                 if (!errorResponse) {
@@ -106,7 +106,7 @@ export default class SnapProjectSubmitFormComponent {
                 const { code } = errorResponse;
                 switch (code) {
                     case 'REJECTED_FILE_EXTENSION':
-                        alert('Please upload only XML files (myproject.xml). Other file types will not be processed.');
+                        alert('Please upload only XML files (e.g. myproject.xml). Other file types will not be processed.');
                         break;
                     case 'XML_PROPERTY_MISSING':
                     case 'XML_VALIDATION_ERROR':
