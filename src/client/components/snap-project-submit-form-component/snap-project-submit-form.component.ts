@@ -126,11 +126,12 @@ export default class SnapProjectSubmitFormComponent {
 
     resolutions: Array<string> = ['1280x960', '1152x864', '1024x768', '800x600', '600x450'];
     operatingSystems: Array<SelectOption> = [
+        { label: 'macOS 64 bits', value: 'mac64' },
         { label: 'Windows 64 bits', value: 'win64' },
         { label: 'Windows 32 bits', value: 'win32' },
-        { label: 'macOS 64 bits', value: 'mac64' },
-        { label: 'Linux 64 bits', value: 'lin64' },
-        { label: 'Linux 32 bits', value: 'lin32' }
+        // Hide Linux options until they can be supported again
+        //{ label: 'Linux 64 bits', value: 'lin64' },
+        //{ label: 'Linux 32 bits', value: 'lin32' }
     ];
 
     formData: SnapProjectSubmitFormData;
