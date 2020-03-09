@@ -75,6 +75,7 @@ interface ErrorFeedback {
 interface ExecGenerationRequestParams {
     filename: string;
     project: string;
+    projectName: string;
     os: string;
     resolution: string;
     useCompleteSnap: boolean;
@@ -105,15 +106,18 @@ function validateFilename(filename: string): Promise<void> {
     return Promise.resolve();
 }
 
-function validateFileContents(fileContents: string): Promise<void> {
+function validateFileContentsAndReturnProjectName(fileContents: string): Promise<string> {
     if (validationUtils.validateString(fileContents, false)) {
-        return Promise.reject({ message: 'validateFileContents1' });
+        return Promise.reject({
+            message: 'Cannot process an empty project.',
+            code: 'XML_VALIDATION_ERROR'
+        });
     }
 
-    let hasProjectName: boolean = false;
+    let projectName: string = '';
     const saxParser: SaxParser = new SaxParser();
 
-    const returnPromise = new Promise<undefined>((resolve, reject) => {
+    const returnPromise = new Promise<string>((resolve, reject) => {
         saxParser.onError((error) => reject({
             message: error.message,
             code: 'XML_VALIDATION_ERROR'
@@ -123,12 +127,12 @@ function validateFileContents(fileContents: string): Promise<void> {
             const mainTagName = 'project';
             if (tag.name === mainTagName) {
                 const nameAttributeName = 'name';
-                hasProjectName = !!tag.attributes[nameAttributeName];
+                projectName = <string>tag.attributes[nameAttributeName];
             }
         });
 
         saxParser.onEnd(() => {
-            if (!hasProjectName) {
+            if (!projectName) {
                 reject({
                     message: 'Unable to find the project name.',
                     code: 'XML_PROPERTY_MISSING'
@@ -136,8 +140,8 @@ function validateFileContents(fileContents: string): Promise<void> {
                 return;
             }
 
-            resolve();
-        });  
+            resolve(projectName);
+        });
     });
 
     saxParser.parse(fileContents);
@@ -176,16 +180,16 @@ function validateUseCompleteSnap(useCompleteSnap: boolean): Promise<void> {
     return Promise.resolve();
 }
 
-function validateParams({ filename, project, os, resolution, useCompleteSnap }: ExecGenerationRequestParams): Promise<void> {
+async function validateParamsAndRetrieveProjectName({ filename, project, os, resolution, useCompleteSnap }: ExecGenerationRequestParams): Promise<string> {
     const validationPromises = [
         validateFilename(filename),
-        validateFileContents(project),
         validateOs(os),
         validateResolution(resolution),
         validateUseCompleteSnap(useCompleteSnap)
     ];
 
-    return Promise.all(validationPromises).then(() => { return; });
+    await Promise.all(validationPromises);
+    return validateFileContentsAndReturnProjectName(project);
 }
 
 function buildPackageJson(os: string, projectName: string, resolution: Resolution): string {
@@ -202,11 +206,7 @@ function buildPackageJson(os: string, projectName: string, resolution: Resolutio
             height: resolution.getHeight()
         }
     };
-    /*
-    if (os === 'mac64') {
-        contents.product_string = projectName;
-    }
-    */
+
     return JSON.stringify(contents);
 }
 
@@ -302,115 +302,97 @@ function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Pro
     }
 }
 
-function getProjectName(fileContents: string): Promise<string> {
-    const saxParser: SaxParser = new SaxParser();
+function buildPackages(params: ExecGenerationRequestParams): Promise<NodeJS.ReadableStream> {
+    return new Promise<NodeJS.ReadableStream>((resolve, reject) => {
+        const finalPackage: Zip = new Zip(
+            (error: any) => reject(error),
+            () => logger.info({ moduleName, message: 'Final package finished.' })
+        );
 
-    const returnPromise = new Promise<string>((resolve, reject) => {
-        saxParser.onError(error => reject(error));
-
-        saxParser.onTag((tag: any) => {
-            const mainTagName = 'project';
-            if (tag.name === mainTagName) {
-                const nameAttributeName = 'name';
-                resolve(tag.attributes[nameAttributeName]);
-            }
+        const { filename, os } = params;
+        const nwPackage: Zip = new Zip((error: any) => reject(error), () => {
+            streamToArray(nwPackage.getStream())
+            .then((parts: Array<Buffer>) => {
+                const buffer = Buffer.concat(parts);
+                switch (os) {
+                    case 'mac64':
+                        finalPackage
+                        .append(buffer, { name: path.join(`${filename}.app`, 'Contents', 'Resources', 'app.nw'), mode: unixExecutablePermissions })
+                        .finalize();
+                        break;
+                    case 'lin64':
+                    case 'lin32':
+                        fileSystemUtils.readFile(path.join(resourcesDir, 'nw', os, 'bin', 'nw'))
+                        .then((file) => {
+                            finalPackage
+                            .append(Buffer.concat([file, buffer]), { name: path.join(`${filename}.snapp`, filename), mode: unixExecutablePermissions })
+                            .finalize();
+                        })
+                        .catch((error: NodeJS.ErrnoException) => reject(error));
+                        break;
+                    case 'win64':
+                    case 'win32': {
+                        fileSystemUtils.readFile(path.join(resourcesDir, 'nw', os, 'exe', 'nw.exe'))
+                        .then((file) => {
+                            finalPackage
+                            .append(Buffer.concat([file, buffer]), { name: path.join(filename, `${filename}.exe`) })
+                            .finalize();
+                        })
+                        .catch((error: NodeJS.ErrnoException) => reject(error));
+                        break;
+                    }
+                    default:
+                        logger.error({ moduleName, message: 'Invalid os.', meta: { os } });
+                        reject(new Error('Invalid os.'));
+                }
+            })
+            .catch((error: Error) => {
+                logger.error({ moduleName, message: 'Error arraying nwPackage.', error});
+                reject(error);
+            });
         });
 
-        saxParser.onEnd(() => resolve());
-    });
-
-    saxParser.parse(fileContents);
-
-    return returnPromise;
-}
-
-function buildPackages(params: ExecGenerationRequestParams): Promise<NodeJS.ReadableStream> {
-    const { project, os, resolution: res, useCompleteSnap, filename } = params;
-    const resolution: Resolution = Resolution.fromString(res);
-
-    return getProjectName(project)
-    .then((projectName) => {
-        return new Promise<NodeJS.ReadableStream>((resolve, reject) => {
-            const finalPackage: Zip = new Zip(
-                (error: any) => reject(error),
-                () => logger.info({ moduleName, message: 'Final package finished.' })
-            );
-
-            const nwPackage: Zip = new Zip((error: any) => reject(error), () => {
-                streamToArray(nwPackage.getStream())
-                .then((parts: Array<Buffer>) => {
-                    const buffer = Buffer.concat(parts);
-                    switch (os) {
-                        case 'mac64':
-                            finalPackage
-                            .append(buffer, { name: path.join(`${filename}.app`, 'Contents', 'Resources', 'app.nw'), mode: unixExecutablePermissions })
-                            .finalize();
-                            break;
-                        case 'lin64':
-                        case 'lin32':
-                            fileSystemUtils.readFile(path.join(resourcesDir, 'nw', os, 'bin', 'nw'))
-                            .then((file) => {
-                                finalPackage
-                                .append(Buffer.concat([file, buffer]), { name: path.join(`${filename}.snapp`, filename), mode: unixExecutablePermissions })
-                                .finalize();
-                            })
-                            .catch((error: NodeJS.ErrnoException) => reject(error));
-                            break;
-                        case 'win64':
-                        case 'win32': {
-                            fileSystemUtils.readFile(path.join(resourcesDir, 'nw', os, 'exe', 'nw.exe'))
-                            .then((file) => {
-                                finalPackage
-                                .append(Buffer.concat([file, buffer]), { name: path.join(filename, `${filename}.exe`) })
-                                .finalize();
-                            })
-                            .catch((error: NodeJS.ErrnoException) => reject(error));
-                            break;
-                        }
-                        default:
-                            logger.error({ moduleName, message: 'Invalid os.', meta: { os } });
-                            reject(new Error('Invalid os.'));
-                    }
-                })
-                .catch((error: Error) => {
-                    logger.error({ moduleName, message: 'Error arraying nwPackage.', error});
-                    reject(error);
-                });
-            });
-
-            buildProjectPackage(nwPackage, project, os, projectName, resolution, useCompleteSnap)
+        const resolution: Resolution = Resolution.fromString(params.resolution);
+        buildProjectPackage(nwPackage, params.project, os, params.projectName, resolution, params.useCompleteSnap)
             .then(() => buildFinalPackage(finalPackage, os, filename))
             .then(() => {
                 nwPackage.finalize();
                 resolve(finalPackage.getStream());
             })
             .catch(error => reject(error));
-        });
     });
 }
 
 function loadProject(projectPath: string): Promise<string> {
     return fileSystemUtils
-    .readTextFile(projectPath)
-    .then((project) => project.replace(/\r?\n|\r/g, '').replace(/'/g, "\\'")); // Remove end of line and escape single quotes
+        .readTextFile(projectPath)
+        .then((project) => project.replace(/\r?\n|\r/g, '').replace(/'/g, "\\'")); // Remove end of line and escape single quotes
 }
 
-export default function handleExecGeneration(projectPath: string, params: ExecGenerationRequestParams): Promise<NodeJS.ReadableStream> {
-    return loadProject(projectPath)
-    .then((project: string) => {
-        params.project = project;
-    })
-    .then(() => {
-        return validateParams(params)
-        .catch((validationError: ErrorFeedback) => {
-            const { message = '', code = '' } = validationError;
-            const errorMessage = `Error validating parameters: ${message}.`;
-            throw {
-                code,
-                error: new Error(errorMessage),
-                status: 400
-            };
-        });
-    })
-    .then(() => buildPackages(params));
+export default async function handleExecGeneration(projectPath: string, params: ExecGenerationRequestParams): Promise<NodeJS.ReadableStream> {
+    try {
+        params.project = await loadProject(projectPath);
+    }
+    catch (e) {
+        throw {
+            code: '',
+            error: new Error('Error reading project file.'),
+            status: 500
+        };
+    }
+
+    try {
+        params.projectName = await validateParamsAndRetrieveProjectName(params);
+    }
+    catch (validationError) {
+        const { message = '', code = '' } = <ErrorFeedback>validationError;
+        const errorMessage = `Error validating parameters: ${message}.`;
+        throw {
+            code,
+            error: new Error(errorMessage),
+            status: 400
+        };
+    }
+
+    return await buildPackages(params);
 }

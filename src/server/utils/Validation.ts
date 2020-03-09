@@ -7,7 +7,7 @@
  */
 
 interface ValidationError {
-    // TODO -normal- Have like validation error codes or something
+    // TODO Implement validation error codes or similar
 }
 
 export function validateString(parameter: string, canBeEmpty: boolean, validValues?: Array<string>): ValidationError | undefined {
