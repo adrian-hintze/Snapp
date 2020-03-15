@@ -26,7 +26,7 @@ const macToolbarCode: string =
 `
 var nwWin = nw.Window.get();
 var nwMenu = new nw.Menu({ type: 'menubar' });
-nwMenu.createMacBuiltin('{{project_name}}', {
+nwMenu.createMacBuiltin('{{projectName}}', {
     hideEdit: true,
     hideWindow: true
 });
@@ -150,7 +150,7 @@ function validateFileContentsAndReturnProjectName(fileContents: string): Promise
 }
 
 function validateOs(os: string): Promise<void> {
-    const validOsValues: Array<string> = ['mac64', 'lin32', 'lin64', 'win32', 'win64'];
+    const validOsValues: Array<string> = ['mac64', 'win32', 'win64'];
     if (validationUtils.validateString(os, false, validOsValues)) {
         return Promise.reject({ message: 'validateOs1' });
     }
@@ -213,7 +213,7 @@ function buildPackageJson(os: string, projectName: string, resolution: Resolutio
 function buildGui(gui: string, project: string, os: string, projectName: string): string {
     let result: string = gui + '\n';
     if (os === 'mac64') {
-        result += macToolbarCode.replace('{{project_name}}', projectName) + '\n';
+        result += macToolbarCode.replace('{{projectName}}', projectName) + '\n';
     }
     if (os === 'win32' || os === 'win64') {
         result += winFullscreenCode + '\n';
@@ -222,76 +222,45 @@ function buildGui(gui: string, project: string, os: string, projectName: string)
 }
 
 function buildProjectPackage(projectPackage: Zip, project: string, os: string, projectName: string, resolution: Resolution, useCompleteSnap: boolean): Promise<void> {
-    const version: string = useCompleteSnap ? 'full' : 'reduced';
+    const snappFlavour: string = useCompleteSnap ? 'full' : 'reduced';
 
     projectPackage.append(buildPackageJson(os, projectName, resolution), { name: 'package.json' });
-    projectPackage.directory(path.join(resourcesDir, 'snap', version, 'files'), '');
+    projectPackage.directory(path.join(resourcesDir, 'snap', snappFlavour, 'files'), '');
 
-    return fileSystemUtils.readTextFile(path.join(resourcesDir, 'snap', version, 'gui', 'gui.js'))
+    return fileSystemUtils.readTextFile(path.join(resourcesDir, 'snap', snappFlavour, 'gui', 'gui.js'))
     .then((gui) => {
         projectPackage.append(buildGui(gui, project, os, projectName), { name: path.join('src', 'gui.js') });
     })
     .catch((error: NodeJS.ErrnoException) => {
-        logger.error({ moduleName, message: 'Unable to read gui file.', meta: { version: version, errorCode: error.code } });
+        logger.error({ moduleName, message: 'Unable to read gui file.', meta: { version: snappFlavour, errorCode: error.code } });
         throw error;
     });
 }
 
 function buildFinalPackage(finalPackage: Zip, os: string, filename: string): Promise<void> {
     switch (os) {
-        case 'mac64': {
+        case 'mac64':
             const rootDir: string = `${filename}.app`;
 
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'Contents'), path.join(rootDir, 'Contents'));
             finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.icns'), { name: path.join(rootDir, 'Contents', 'Resources', 'lambda.icns') });
             
-            return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'Info.plist'))
+            return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'Contents', 'Info.plist'))
             .then((plistTemplate) => {
-                const plist = plistTemplate.replace('{{filename}}', filename).replace('{{short_filename}}', filename.length < 16 ? filename : 'Snapp');
+                const plist = plistTemplate.replace('{{CFBundleDisplayName}}', filename).replace('{{CFBundleName}}', filename.length < 16 ? filename : 'Snapp');
                 finalPackage.append(plist, { name: path.join(rootDir, 'Contents', 'Info.plist') });
             })
             .then(() => {
-                return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'InfoPlist.strings'));
+                return fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', os, 'Contents', 'Resources', 'en.lproj', 'InfoPlist.strings'));
             })
-            .then((infoplistTemplate) => {
-                const infoplist = infoplistTemplate.replace('{{filename}}', filename).replace('{{short_filename}}', filename.length < 16 ? filename : 'Snapp');
+            .then((stringsTemplate) => {
+                const infoplist = stringsTemplate.replace('{{CFBundleDisplayName}}', filename).replace('{{CFBundleName}}', filename.length < 16 ? filename : 'Snapp');
                 finalPackage.append(infoplist, { name: path.join(rootDir, 'Contents', 'Resources', 'en.lproj', 'InfoPlist.strings') });
             })
             .catch((error: NodeJS.ErrnoException) => {
                 logger.error({ moduleName, message: 'Unable to read mac conf files.', meta: { os, errorCode: error.code } });
                 throw error;
             });
-        }
-        case 'lin64':
-        case 'lin32': {
-            const rootDir: string = `${filename}.snapp`;
-
-            finalPackage.directory(path.join(resourcesDir, 'nw', os, 'lib'), rootDir);
-            finalPackage.file(path.join(resourcesDir, 'icons', 'lambda.png'), { name: path.join(rootDir, 'lambda.png') });
-
-            const readFilesPromises: Array<Promise<void>> = [
-                fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', 'linux', 'launcher.sh'))
-                .then((launcherTemplate: string) => {
-                    const launcher: string = launcherTemplate.replace('<filename>', filename);
-                    finalPackage.append(launcher, { name: path.join(rootDir, 'launcher.sh'), mode: unixExecutablePermissions });
-                })
-                .catch((error: NodeJS.ErrnoException) => {
-                    logger.error({ moduleName, message: 'Unable to read linux launcher.sh.', meta: { os, errorCode: error.code } });
-                    throw error;
-                }),
-                fileSystemUtils.readTextFile(path.join(resourcesDir, 'conf', 'linux', 'app.desktop'))
-                .then((launcherTemplate: string) => {
-                    const launcher: string = launcherTemplate.replace('<filename>', filename);
-                    finalPackage.append(launcher, { name: `${filename}.desktop`, mode: unixExecutablePermissions });
-                })
-                .catch((error: NodeJS.ErrnoException) => {
-                    logger.error({ moduleName, message: 'Unable to read linux app.desktop.', meta: { os, errorCode: error.code } });
-                    throw error;
-                })
-            ];
-
-            return Promise.all(readFilesPromises).then(() => { });
-        }
         case 'win64':
         case 'win32':
             finalPackage.directory(path.join(resourcesDir, 'nw', os, 'lib'), filename);
@@ -319,16 +288,6 @@ function buildPackages(params: ExecGenerationRequestParams): Promise<NodeJS.Read
                         finalPackage
                         .append(buffer, { name: path.join(`${filename}.app`, 'Contents', 'Resources', 'app.nw'), mode: unixExecutablePermissions })
                         .finalize();
-                        break;
-                    case 'lin64':
-                    case 'lin32':
-                        fileSystemUtils.readFile(path.join(resourcesDir, 'nw', os, 'bin', 'nw'))
-                        .then((file) => {
-                            finalPackage
-                            .append(Buffer.concat([file, buffer]), { name: path.join(`${filename}.snapp`, filename), mode: unixExecutablePermissions })
-                            .finalize();
-                        })
-                        .catch((error: NodeJS.ErrnoException) => reject(error));
                         break;
                     case 'win64':
                     case 'win32': {
