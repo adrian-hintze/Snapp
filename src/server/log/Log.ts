@@ -52,7 +52,7 @@ export class Logger {
         });
 
         const logger: winston.Logger = winston.createLogger({
-            level: isProduction ? 'info' : 'silly',
+            level: isProduction() ? 'info' : 'silly',
             format: winston.format.combine(
                 winston.format.timestamp(),
                 productionFormat

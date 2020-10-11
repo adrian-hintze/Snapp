@@ -8,7 +8,7 @@
 
 import { Component } from '@angular/core';
 
-import { Modal } from 'ngx-modialog/plugins/bootstrap';
+import { Modal } from 'ngx-modialog-7/plugins/bootstrap';
 
 @Component({
     selector: 'snapp-about',

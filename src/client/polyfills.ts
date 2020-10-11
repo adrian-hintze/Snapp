@@ -15,3 +15,11 @@ import 'core-js/es/reflect';
 import 'core-js/proposals/reflect-metadata';
 
 import 'zone.js/dist/zone';
+
+// workaround for deprecated libraries (ngx-modialog-7)
+declare module "@angular/core" {
+    interface ModuleWithProviders<T = any> {
+        ngModule: Type<T>;
+        providers?: Provider[];
+    }
+}

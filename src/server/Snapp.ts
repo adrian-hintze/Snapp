@@ -61,7 +61,7 @@ const upload = multer({
 
 const snapProjectUpload = upload.single('project');
 const snapProjectUploadMiddleware = (request: express.Request, response: express.Response, next: express.NextFunction) => {
-    snapProjectUpload(request, response, (error) => {
+    snapProjectUpload(request, response, (error: any) => {
         if (error) {
             logger.error({ moduleName, message: 'Error ocurred while uploading project xml.', error });
             const { code } = error;

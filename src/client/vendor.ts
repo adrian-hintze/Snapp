@@ -10,10 +10,10 @@ import '@angular/router';
 import 'rxjs';
 
 // npm
-import 'angular2-busy';
-import 'ngx-modialog';
+import 'qs-angular2-busy';
+import 'ngx-modialog-7';
 import 'file-saver';
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.css';
-import 'angular2-busy/build/style/busy.css';
+import 'qs-angular2-busy/styles/busy.css';

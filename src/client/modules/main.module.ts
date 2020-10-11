@@ -12,10 +12,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { BusyModule } from 'angular2-busy';
+import { QsAngular2BusyModule } from 'qs-angular2-busy';
 
-import { ModalModule } from 'ngx-modialog';
-import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
+import { ModalModule } from 'ngx-modialog-7';
+import { BootstrapModalModule } from 'ngx-modialog-7/plugins/bootstrap';
 
 import MainComponent from '../components/main-component/main.component';
 import SnapProjectSubmitFormComponent from '../components/snap-project-submit-form-component/snap-project-submit-form.component';
@@ -29,7 +29,7 @@ import { FileDownloadService } from '../services/file-download.service';
         BrowserAnimationsModule,
         FormsModule,
         HttpClientModule,
-        BusyModule,
+        QsAngular2BusyModule,
         ModalModule.forRoot(),
         BootstrapModalModule
     ],
