@@ -35,11 +35,11 @@ export default class AboutComponent {
 			<br><br>
 			If you have any suggestions or find any issues with the application open a new <a href="https://github.com/adrian-hintze/Snapp/issues/" target="_blank" class="linked-institution">GitHub issue</a> or contact the author at:<br><b>hintze.adrian AT gmail DOT com</b>.
             <br><br>
-            Snapp version: 4.1.0
+            Snapp version: 6.2.1
             <br>
             Snap version: 5.1.0
             <br>
-            Last updated: 2019-09-01
+            Last updated: 2020-10-11
         `)
         .open();
     }
