@@ -25,7 +25,7 @@
         "precopy-win-exe": "rimraf build/resources/nw/win32/exe/nw.exe && rimraf build/resources/nw/win64/exe/nw.exe",
         "copy-win-exe": "copyfiles -u 3 nw/win32/0.44.4/nw.exe build/resources/nw/win32/exe/ && copyfiles -u 3 nw/win64/0.44.4/nw.exe build/resources/nw/win64/exe/",
         "precopy-nw-resources-mac": "rimraf build/resources/conf/mac64/",
-        "copy-nw-resources-mac": "copyfiles -u 3 nw/mac64/0.44.4/**/* build/resources/conf/mac64/",
+        "copy-nw-resources-mac": "copyfiles -u 3 \"nw/mac64/0.44.4/**/*\" build/resources/conf/mac64/",
         "copy-snap": "npm run copy-snap-full && npm run copy-snap-reduced",
         "precopy-snap-full": "rimraf build/resources/snap/full",
         "copy-snap-full": "copyfiles -u 2 \"node_modules/snap-4-snapp-full/**/*\" \"build/resources/snap/full/files\" && copyfiles -u 3 \"node_modules/snap-4-snapp-full/src/gui.js\" \"build/resources/snap/full/gui\"",
