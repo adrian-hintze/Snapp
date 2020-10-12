@@ -37,9 +37,9 @@ export default class AboutComponent {
             <br><br>
             Snapp version: 6.2.1
             <br>
-            Snap version: 5.1.0
+            Snap version: 6.0.0
             <br>
-            Last updated: 2020-10-11
+            Last updated: 2020-10-12
         `)
         .open();
     }
