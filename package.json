@@ -59,7 +59,7 @@
         "body-parser": "1.19.0",
         "compression": "1.7.4",
         "download-cli": "1.1.1",
-        "express": "4.17.1",
+        "express": "4.17.3",
         "mkdirp": "1.0.4",
         "mime": "2.4.6",
         "move-cli": "1.2.1",
